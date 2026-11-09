@@ -702,3 +702,62 @@ papers:
     tags: [物理一致性, 可测量, 视频基准, 多领域]
     note: 40 个可测量物理任务、8 个视频模型、1280 段视频。最高的 Seedance 总分 57.76。合成参考视频上，测量模块的物理分为 97.53。输入是起始画面和提示词。
     note_en: "Includes 40 measurable physics tasks, 8 video models, and 1280 videos. Seedance achieves the highest overall score at 57.76. On synthetic reference videos, the measurement module's physics score is 97.53. Inputs are an initial frame and a prompt."
+
+  - title: Controllable Crowd Generation through World-Model Planning
+    short: Ctrl-CWM
+    org: Yonsei University / GIST
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.09438'
+      project: https://jungyu0413.github.io/Ctrl-CWM
+    features:
+      action: true
+      closedloop: true
+    tags:
+    - 人群仿真
+    - 想象规划
+    - 运行时控制
+    note: 从真实行人视频学习运动动力学，再冻结编码器，在想象轨迹上训练 actor 和 critic。规划器结合用户代价逐步选择行人位移，运行中可新增避让或吸引目标，无需重训；评测面向人群轨迹生成，未验证驾驶策略。
+    note_en: Learns human-motion dynamics from real pedestrian videos, freezes the encoder, and trains an actor and critic on imagined trajectories. A planner combines user costs to select pedestrian displacements step by step, allowing new avoidance or attraction objectives at runtime without retraining. Evaluation concerns crowd-trajectory generation, without validating a driving policy.
+
+  - title: 'SPW-Nav: A Streaming Panoramic World Model for Language-Guided Navigation'
+    short: SPW-Nav
+    org: Alaya Lab / 北京大学 / 东京科学大学
+    org_en: Alaya Lab / Peking University / Institute of Science Tokyo
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.08941'
+      project: https://alaya-lab.github.io/SPW-Nav/
+    features:
+      action: true
+      realtime: true
+      longhorizon: true
+    tags:
+    - 全景世界模型
+    - 语言导航
+    - 相机控制
+    - 流式生成
+    note: 将当前生成全景中的语言指令转成相机运动，球面旋转重采样与平移生成解耦，结合位姿对齐条件和多时程记忆支持中途切换指令。从单张全景连续生成一分钟 2048×1024 视频；八张 H200 上生成速度 26.6 FPS，输出播放帧率为 16 FPS。SPW-NavSet 含 233 小时全景视频。
+    note_en: Converts language instructions grounded in the current generated panorama into camera motion, decoupling spherical rotation resampling from translation generation. Pose-aligned conditioning and multi-term memory support instruction switching during streaming. From one panorama, it generates a continuous minute of 2048 x 1024 video at 26.6 FPS on eight H200 GPUs, with a 16 FPS playback rate. SPW-NavSet contains 233 hours of panoramic video.
+
+  - title: 'STRIKE: Learning Visual State Transitions for Physical World Modeling'
+    short: STRIKE
+    org: Applied Intuition / 南加州大学 / 加州大学伯克利分校
+    org_en: Applied Intuition / University of Southern California / University of California, Berkeley
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.09514'
+    features: {}
+    tags:
+    - 视觉状态转移
+    - 事件条件
+    - 物理视频
+    - 分层生成
+    note: 从视频提取事件对齐的状态对，学习按局部事件描述和时间间隔预测下一视觉状态，再以递归预测的状态和时间戳引导稠密视频生成。CogVideoX-5B 版本在 Physics-IQ Verified 得分由 30.5 升至 41.9；交互通过文本事件表达，未验证动作轨迹控制或闭环机器人执行。
+    note_en: Learns next visual states conditioned on local event descriptions and elapsed time from event-aligned video state pairs, then guides dense video generation with recursively predicted states and timestamps. The CogVideoX-5B version raises the Physics-IQ Verified score from 30.5 to 41.9. Interactions are expressed as textual events; action-trajectory control and closed-loop robot execution are not validated.

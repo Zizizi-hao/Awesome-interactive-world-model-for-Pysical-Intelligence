@@ -10,7 +10,7 @@ meta:
   title: "Awesome Interactive World Models"
   subtitle: "面向自动驾驶与具身智能的可交互世界模型"
   subtitle_en: "Interactive world models for autonomous driving and embodied AI"
-  updated: "2026-10-08"  # 增删论文时改这一行；不要用 git 提交日，否则 CI 会和同一次 commit 打架
+  updated: "2026-11-09"  # 增删论文时改这一行；不要用 git 提交日，否则 CI 会和同一次 commit 打架
   description: >
     世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象；
     可交互世界模型进一步支持以动作 (action) 为条件的生成与控制，
