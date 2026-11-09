@@ -1737,3 +1737,18 @@ papers:
     tags: [未来可供性, RGB深度联合预测, 规划辅助监督, VLA]
     note: 共享 VLM 联合预测未来 RGB、深度、可行驶区与碰撞关键区以辅助轨迹学习；不加 RL 的 NAVSIM 消融中，PDMS 从仅动作的 88.1 升至 89.6。未来预测分支仅在训练期使用，未验证动作条件反事实预测或完整闭环驾驶。
     note_en: A shared VLM jointly predicts future RGB, depth, drivable regions, and collision-critical regions to support trajectory learning. In NAVSIM ablations without RL, PDMS rises from the action-only model's 88.1 to 89.6. Future-prediction branches are used only during training; action-conditioned counterfactual prediction and full closed-loop driving are not validated.
+
+  - title: 'ManeuverFlow: Maneuver Hypothesis Generation with Future Evidence for Trajectory Evaluation and Refinement in End-to-End Autonomous Driving'
+    short: ManeuverFlow
+    org: 重庆大学 / 吉利汽车研究院
+    org_en: Chongqing University / Geely Automotive Research Institute
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.13409'
+      code: https://github.com/wyh-autonomy/maneuverflow
+    features: {closedloop: true}
+    tags: [共享未来BEV, 机动候选, 轨迹打分, Frenet修正]
+    note: 一次预测所有候选共用的未来 BEV，再沿轨迹读取当前与未来证据，为机动候选打分并作 Frenet 修正。NAVSIM v1 匹配完整流程消融中，加入未来分支使 PDMS 从 90.03 升至 90.58；另有 WorldEngine 闭环评测。未来场不随候选动作变化，未建模不同自车计划引起的交互响应。
+    note_en: Predicts one future BEV field shared by all candidates, queries current and future evidence along each trajectory, and uses it to score maneuver candidates and apply Frenet refinement. In a matched full-pipeline NAVSIM v1 ablation, adding the future branch raises PDMS from 90.03 to 90.58; WorldEngine also provides closed-loop evaluation. The future field is candidate-independent and does not model interactive responses to alternative ego plans.
