@@ -1792,3 +1792,18 @@ papers:
     tags: [运动寄存器, JEPA, 未来潜状态, 规划记忆]
     note: 在视频预训练中让运动条件寄存器承担密集预测，再将同一紧凑状态用于未来预测与规划。前相机匹配消融中，加入未来寄存器预测使 EPDMS 从 91.1 升至 91.8；未来动作只用于训练目标，推理仅读历史运动，并有 HUGSIM 闭环验证。
     note_en: Makes motion-conditioned registers carry dense prediction during video pretraining, then uses the same compact state for future prediction and planning. In matched front-camera ablations, adding future-register prediction raises EPDMS from 91.1 to 91.8. Future actions are used only for training targets; inference reads historical motion, with additional HUGSIM closed-loop validation.
+
+  - title: 'SafeDriveVLA: Navigation-Conditioned World Model Dreaming for Conflict-Aware End-to-End Autonomous Driving'
+    short: SafeDriveVLA
+    org: UC Irvine / UC San Diego / University of Cincinnati / National University of Singapore
+    year: 2026
+    venue: CoRL
+    category: driving
+    links:
+      arxiv: '2610.20609'
+      project: https://asguard-uci.github.io/SafeDriveVLA/
+      code: https://github.com/ASGuard-UCI/safedrive-vla
+    features: {action: true, closedloop: true}
+    tags: [导航条件想象, 冲突感知, 潜空间世界模型, 闭环驾驶]
+    note: 按导航命令的假设动作锚展开潜未来，再预测严格、谨慎或回退模式辅助驾驶。在已带模式预测的匹配消融中，加入世界模型使 CARLA-F 指令遵从率从 59.8% 升至 83.0%，但 B2D-C Driving Score 从 87.3 降至 85.9；动作锚尚未编码速度，想象结果也不提供形式安全保证。
+    note_en: Rolls out latent futures under hypothetical action anchors for navigation commands, then predicts strict, cautious, or fallback modes for driving. In a matched ablation that already predicts modes, adding the world model raises CARLA-F navigation compliance from 59.8% to 83.0%, while B2D-C Driving Score falls from 87.3 to 85.9. Action anchors do not yet encode speed, and imagined outcomes provide no formal safety guarantee.

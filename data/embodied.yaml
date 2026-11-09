@@ -2057,3 +2057,86 @@ papers:
     tags: [视觉子目标, 模型预测控制, 策略先验]
     note: 用视频子目标引导策略初始化的 CEM，并以动作条件 JEPA 世界模型滚动评价；UR5e 四任务成功 55/80（68.8%），去掉策略初始化为 44/80（55.0%）。除 Wan 与策略各用同批 40 示范外，世界模型另用约五小时随机交互；固定子目标时序限制失败恢复。
     note_en: Guides policy-initialized CEM with video subgoals and evaluates actions through a receding-horizon action-conditioned JEPA world model. Across four UR5e tasks it succeeds in 55/80 trials (68.8%), versus 44/80 (55.0%) without policy initialization. Wan and the policy each use the same 40 demonstrations, while the world model additionally uses roughly five hours of random interaction; fixed subgoal timing limits failure recovery.
+
+  - title: What Matters for World Modeling in Vision-Language-Action Models?
+    org: CASIA / UCAS / Alibaba Group / FiveAges
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19825'
+      project: https://dylanmqs.github.io/WM-in-VLAs/
+    features: {closedloop: true}
+    tags: [VLA, Latent Prediction, Controlled Study]
+    note: 统一对照四类未来特征预测与VLA融合；固定WM-MoT架构及当前帧输入后，未来监督将LIBERO-Plus成功率由73.6%升至76.2%；已验证实机闭环，但预测未以候选动作条件化。
+    note_en: A controlled study compares four ways to integrate future-feature prediction into VLAs; with the WM-MoT architecture and current-frame inputs fixed, future supervision raises LIBERO-Plus success from 73.6% to 76.2%; real-robot closed-loop control is evaluated, but prediction is not conditioned on candidate actions.
+
+  - title: 'MemWM: Associative Memory-Enhanced Latent World Models for Long-Horizon Planning'
+    short: MemWM
+    org: Shanghai Academy of AI for Science / Fudan University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19683'
+    features: {action: true, closedloop: true}
+    tags: [JEPA, Associative Memory, MPC]
+    note: 以内容寻址记忆和多样性约束增强动作条件JEPA并用于MPC；四项仿真任务三种子平均成功率89.9%（LeWM为85.8%），仍需动作标注，未验证实机或实时性。
+    note_en: Content-addressable memory and diversity regularization augment an action-conditioned JEPA for MPC; the three-seed mean success averaged over four simulated tasks is 89.9% versus LeWM's 85.8%, while training still requires action labels and neither real-robot operation nor real-time performance is evaluated.
+
+  - title: 'Back on Track: Deployment-time Policy Improvement via World Model Planning'
+    short: Back on Track
+    org: Stanford University / University of Southern California
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19579'
+      project: https://policy-improvement-wm.pages.dev/
+    features: {action: true, closedloop: true}
+    tags: [部署时纠偏, 潜空间动力学, 黑盒策略]
+    note: 以策略条件活性价值监测执行并引导潜空间世界模型的短时纠偏，在扰动 LIBERO-Goal 的 3,000 次配对试验中将 π0.5 成功率从 72.6% 提升至 81.5%；需策略与任务相关数据，模型误差仍会破坏原本成功的执行。
+    note_en: A policy-conditioned liveness value monitors execution and guides short corrective plans in a latent world model; across 3,000 paired trials on perturbed LIBERO-Goal, π0.5 success rises from 72.6% to 81.5%. Policy- and task-specific data are required, and model errors can still disrupt otherwise successful executions.
+
+  - title: Decoupled Drift-Diffusion World Models for Consistent Future Frame Prediction
+    short: D3WM
+    org: University of Michigan / NVIDIA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19212'
+      project: https://anton-arapin.github.io/d3wm-site/
+    features: {action: true}
+    tags: [动作条件预测, 空间不确定性, 门控扩散]
+    note: 联合学习动作条件的未来均值与空间不确定性，以方差门控扩散保留确定区域；在 BridgeData V2 离线 32 候选动作验证中，所选动作 MSE 为 0.022（IRASim 为 0.030），但每次仅预测单个终帧，尚未验证闭环任务成功率。
+    note_en: Jointly learns an action-conditioned future mean and spatial uncertainty, using variance-gated diffusion to preserve deterministic regions; in offline verification of 32 action candidates on BridgeData V2, selected-action MSE is 0.022 versus 0.030 for IRASim. Each query predicts only one terminal frame, and closed-loop task success is untested.
+
+  - title: Imagining Goals with Geometric Horizon Models for Policy Generalization
+    short: TD-Aug
+    org: Mila / Université de Montréal / Google DeepMind
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19129'
+      project: https://td-aug.github.io/
+      code: https://github.com/td-aug/td-aug
+    features: {action: true}
+    tags: [几何时域模型, 目标增强, 离线机器人学习]
+    note: TD-Aug 混合 MC 与 TD 训练几何时域流，给定状态和动作直接采样远期状态以增强 BC 目标；在 OGBench 三项使用 oracle 目标表示的操作拼接任务中，平均成功率由 13% 升至 52%（3 种子），尚未验证真实机器人或连续预测一致性。
+    note_en: TD-Aug combines MC and TD training of geometric-horizon flows to sample distant states directly from a given state and action for BC goal augmentation; across three OGBench manipulation stitching tasks with oracle goal representations, average success rises from 13% to 52% over three seeds, without validation on real robots or of continuous prediction consistency.
+
+  - title: 'Action Jets: Learning the Local Shape of the Action-conditioned Data Manifold'
+    short: Action Jets
+    org: University of Michigan
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.19007'
+      project: https://anton-arapin.github.io/action-jets-site/
+    features: {action: true}
+    tags: [局部动态模型, 三阶动作展开, 候选动作评估]
+    note: 从冻结生成器提取动作切线并学习三阶校正，随后用多项式批量评估动作后果。BridgeData V2 离线 32 候选动作验证中，动作 MSE 为 0.025，IRASim 为 0.030；零动作被约束为恒等映射，仅验证短时开环，第 3–4 步画质落后于 IRASim。
+    note_en: Extracts action tangents from a frozen generator and learns third-order corrections, then evaluates candidate action outcomes in batches with polynomials. In offline verification of 32 action candidates on BridgeData V2, action MSE is 0.025 versus 0.030 for IRASim. Zero action is constrained to the identity map; evaluation is short-horizon and open-loop, with worse image quality than IRASim at steps 3–4.

@@ -803,3 +803,31 @@ papers:
     tags: [Hamiltonian, 辛积分, JEPA, 相空间体积]
     note: 在位置–动量潜状态上学习动作条件哈密顿量，以 leapfrog 辛积分保证潜空间体积守恒。仅在视觉摆环境验证；15 TFLOPs/回合、重规划间隔 9 时，位置与速度联合目标成功率为 26%，三帧 LeWM 对照为 39%，结构保证尚未带来全面控制优势。
     note_en: Learns an action-conditioned Hamiltonian over position–momentum latents, using symplectic leapfrog integration to preserve latent phase-space volume. Validation is limited to visual pendulums. At 15 TFLOPs per episode and a replanning interval of 9, joint position-and-velocity goal success is 26%, versus 39% for a three-frame LeWM baseline; the structural guarantee does not establish uniformly better control.
+
+  - title: 'OneLA: Learning Many Worlds from Latent Actions'
+    short: OneLA
+    org: AMAP, Alibaba Group / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.20160'
+    features: {action: true}
+    tags: [Latent Action, Cross-domain, Video Generation]
+    note: 用正交字典从视频学习共享潜动作，并将原生命令映射到该接口驱动跨域视频预测；40次动作循环迁移中旋转误差较OLaF下降24.8%，结果限离线生成，未验证闭环控制。
+    note_en: An orthogonal dictionary learns shared latent actions from videos, while native commands are mapped to this interface for cross-domain video prediction; rotation error falls 24.8% versus OLaF over 40 action-transfer cycles, with results limited to offline generation and no closed-loop control evaluation.
+
+  - title: 'PAWA: Panoramic Action-conditioned World Modeling for Multiple Agents'
+    short: PAWA
+    org: Alaya Lab / Peking University / Institute of Science Tokyo
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.20240'
+      project: https://pawa.siki.moe/
+      code: https://github.com/yousiki/pawa-pipeline
+    features: {action: true}
+    tags: [多智能体, 全景世界模型, Minecraft]
+    note: PAWA 以射线对齐交叉注意力和二次相位玩家编码，按多玩家动作联合预测 POV 与全景；在 30 个双人 12 秒回合的同检查点消融中，启用跨视图注意力使 POV LPIPS 从 0.510 降至 0.465；模型仅测试至 16 人，长时滚动仍损失角色保真度。 公开代码为数据采集管线。
+    note_en: PAWA uses ray-aligned cross-attention and quadratic-phase player codes to jointly predict POV and panoramic video from multiple players’ actions; in a same-checkpoint ablation on 30 two-player, 12-second episodes, enabling cross-view attention lowers POV LPIPS from 0.510 to 0.465; the model is tested only up to 16 players and still loses co-player fidelity over long rollouts. Released code covers the data-collection pipeline.
