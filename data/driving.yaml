@@ -1708,3 +1708,32 @@ papers:
     tags: [显式几何, 直接时程, 深度预测, 相机运动]
     note: 直接预测指定时程的深度和三维几何，不递归滚画面。KITTI 长时程 AbsRel 从 Cosmos-3 的 21.2 到 17.4。DOMINO 全时程从 20.5 到 9.6，同数据训练的 VGGT-World 为 24.6。任意时程推理都是 0.11 秒。条件是预测出的相机运动，机器人动作条件留作后续。
     note_en: "Directly predicts depth and 3D geometry at a specified horizon, without recursively rolling out images. Long-horizon AbsRel on KITTI decreases from 21.2 for Cosmos-3 to 17.4. Across all horizons on DOMINO, it decreases from 20.5 to 9.6, compared with 24.6 for VGGT-World trained on the same data. Inference takes 0.11 seconds at any horizon. Conditioning uses predicted camera motion; robot-action conditioning is left for future work."
+
+  - title: 'PlanWAM: Planning-Shaped Future Representations for End-to-End Autonomous Driving'
+    short: PlanWAM
+    org: Southeast University / NIO / Nanyang Technological University / Tongji University
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.11382'
+      project: https://jinchan9.github.io/PlanWAM_project_page/
+      code: https://github.com/jinchan9/PlanWAM
+    features: {closedloop: true}
+    tags: [规划潜变量, 未来蒸馏, 历史压缩, 闭环驾驶]
+    note: 用规划损失塑造读取真实未来的训练期后验，再蒸馏给仅依赖历史的未来潜变量预测器，用于轨迹生成与筛选。零样本 HUGSIM 闭环 HD-Score 为 38.7；预测器不以候选动作作为条件，不能据此视为动作可控仿真器。
+    note_en: Shapes a training-only posterior that observes the real future with planning losses, then distills it into a history-only future-latent predictor for trajectory generation and selection. Zero-shot closed-loop HUGSIM HD-Score is 38.7. The predictor is not conditioned on candidate actions, so this does not establish an action-controllable simulator.
+
+  - title: 'AffordDrive3D: Affordance-Aware World-Action Modeling with Spatial Understanding'
+    short: AffordDrive3D
+    org: University of California, Los Angeles / NVIDIA / 42dot by Hyundai / University of Toronto
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.11060'
+      project: https://afforddrive3d.github.io/
+    features: {}
+    tags: [未来可供性, RGB深度联合预测, 规划辅助监督, VLA]
+    note: 共享 VLM 联合预测未来 RGB、深度、可行驶区与碰撞关键区以辅助轨迹学习；不加 RL 的 NAVSIM 消融中，PDMS 从仅动作的 88.1 升至 89.6。未来预测分支仅在训练期使用，未验证动作条件反事实预测或完整闭环驾驶。
+    note_en: A shared VLM jointly predicts future RGB, depth, drivable regions, and collision-critical regions to support trajectory learning. In NAVSIM ablations without RL, PDMS rises from the action-only model's 88.1 to 89.6. Future-prediction branches are used only during training; action-conditioned counterfactual prediction and full closed-loop driving are not validated.

@@ -1592,3 +1592,135 @@ papers:
     - 鲁棒控制
     note: 在 Residual-VAE 空间用动作条件世界模型探测动作扰动对应的局部未来变化，将一阶动作切向场蒸馏给世界动作模型，减少外观主导的监督；不做大规模具身预训练，LIBERO-Plus 按实例汇总成功率 87.8%，但相机和布局变化仍是弱项。
     note_en: Probes local future changes induced by action perturbations with an action-conditioned world model in Residual-VAE space, distilling first-order action tangent fields into a world action model to reduce appearance-dominated supervision. Without large-scale embodied pretraining, pooled success on LIBERO-Plus is 87.8%, while camera and layout shifts remain weaknesses.
+
+  - title: 'DreamTrue: Action-Faithful Robot World Model with Counterfactual Post-Training'
+    short: DreamTrue
+    org: NLPR, Institute of Automation, Chinese Academy of Sciences / Amap, Alibaba Group
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.12468'
+      project: https://brave-eai.github.io/DreamTrue/
+      code: https://github.com/brave-eai/DreamTrue
+    features: {action: true}
+    tags: [多视角动作条件, 几何标定, 反事实后训练, 交互缺陷奖励]
+    note: 将几何标定后的机器人动作轨迹渲染为多视角条件，并用人类缺陷标注训练奖励模型做反事实 RL 后训练。在 AgiBot 的 160 个反事实条件上，多数票交互缺陷率从未做 RL 的 48.12% 降至 6.25%；遮挡下仍可能生成或奖励视觉合理但物理错误的交互。
+    note_en: Renders geometrically calibrated robot action trajectories as multi-view conditions and uses a reward model trained on human defect annotations for counterfactual RL post-training. Across 160 AgiBot counterfactual conditions, majority-vote interaction defects fall from 48.12% without RL to 6.25%. Under occlusion, it may still generate or reward visually plausible but physically incorrect interactions.
+
+  - title: Diffusion-Steering-Based MPC with a JEPA World Action Model
+    short: LeWAM
+    org: NVIDIA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.12407'
+    features: {action: true, closedloop: true}
+    tags: [JEPA, 双向动力学, 世界动作模型, 噪声空间MPC]
+    note: 无解码器 JEPA 联合学习正向、逆向、后向动力学和策略，再在策略噪声空间搜索以减少 MPC 对模型误差的利用。六个带视觉干扰的仿真任务中，匹配模型规模与训练协议后策略表现接近纯流匹配策略；规划依赖演示提供目标，尚无真机验证。
+    note_en: A decoder-free JEPA jointly learns forward, inverse, and backward dynamics plus a policy, then searches in policy-noise space to reduce MPC exploitation of model errors. Across six simulated tasks with visual distractors, its policy approaches a pure flow-matching policy under matched model size and training protocol. Planning relies on demonstration-derived goals; real-robot validation is absent.
+
+  - title: 'LiteNWM: Efficient Latent World Models for Onboard Visual Navigation in the Wild'
+    short: LiteNWM
+    org: 南京大学 / 帝国理工学院 / Sony AI / 北京邮电大学
+    org_en: Nanjing University / Imperial College London / Sony AI / Beijing University of Posts and Telecommunications
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.12368'
+    features: {action: true, closedloop: true}
+    tags: [潜空间导航, 候选轨迹, 动作条件, 机载部署]
+    note: 共享视觉编码，一次预测候选动作在四个未来时刻的潜特征，再用相对打分器选择冻结策略的轨迹。三个场景、每方法共 30 次 Go2 真机试验中，成功率由 NoMaD 的 43.3% 提升至 83.3%；Jetson Orin 上规划调用均值 2.228 秒，未达到逐帧实时生成。
+    note_en: Shares visual encoding to jointly predict candidate-action latents at four future horizons, then uses relative scoring to select trajectories from a frozen policy. Across three scenes and 30 Go2 trials per method, success rises from NoMaD's 43.3% to 83.3%. Planning calls average 2.228 seconds on Jetson Orin; this is not frame-rate real-time generation.
+
+  - title: 'PLaW-VLA: Predictive Latent World Modeling for Vision-Language-Action Policies'
+    short: PLaW-VLA
+    org: Jilin University / Astribot / Harbin Institute of Technology, Shenzhen / The Hong Kong Polytechnic University / The University of Tokyo
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.12285'
+      project: https://rainyrobo.github.io/PLaW-VLA/
+    features: {closedloop: true}
+    tags: [预测潜表征, V-JEPA 2, 未来条件策略, VLA]
+    note: 由观测历史与语言预测 V-JEPA 2 空间中的未来状态，再用因果注意力让动作专家读取这些预测。去掉视频预训练、保持机器人训练数据与预算相同时，LIBERO-Plus 成功率为 69.05%，去掉世界建模为 65.49%。未来分支不以候选动作为输入，属于预测辅助的闭环策略。
+    note_en: Predicts future states in V-JEPA 2 space from observation history and language, then lets an action expert read those predictions through causal attention. Without video pretraining and with matched robot training data and budgets, LIBERO-Plus success is 69.05%, versus 65.49% without world modeling. The future branch does not take candidate actions as input; this is a prediction-assisted closed-loop policy.
+
+  - title: 'MiniWAM: Learning Compact Future Targets for Efficient World-Action Modeling'
+    short: MiniWAM
+    org: 新加坡国立大学 / 南洋理工大学 / A*STAR IAIC
+    org_en: National University of Singapore / Nanyang Technological University / A*STAR Institute of Advanced Intelligence and Computing
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.12194'
+      project: https://j1dan.github.io/MiniWAM/
+      code: https://github.com/J1dan/MiniWAM-release
+    features: {closedloop: true}
+    tags: [紧凑未来目标, 逆动力学, PRISM, 世界动作联合建模]
+    note: 先以逆动力学和特征重建把当前—未来转移压成 PRISM 表征，再联合预测该表征与机器人动作。相同 0.25B 世界动作架构和第二阶段训练下，DINOv3 版在固定 LIBERO-Plus-2K 子集的成功率由原生未来特征目标的 60.9% 升至 74.1%。仅有仿真评测，PRISM 仍需按下游设置单独学习。
+    note_en: First compresses current-to-future transitions into PRISM representations using inverse dynamics and feature reconstruction, then jointly predicts those representations and robot actions. With the same 0.25B world-action architecture and Stage-2 training, the DINOv3 variant improves success on the fixed LIBERO-Plus-2K subset from 60.9% with native future-feature targets to 74.1%. Evaluation is simulation-only, and PRISM is still learned separately for each downstream setting.
+
+  - title: 'Acting from Belief, Looking When Needed: A Bayesian Spatial World Model for Navigation under Intermittent Perception'
+    short: ALONE
+    org: 启元实验室 / 清华大学
+    org_en: Qiyuan Lab / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.11591'
+    features: {action: true, closedloop: true}
+    tags: [贝叶斯空间信念, 间歇感知, 主动观测, 无人机导航]
+    note: 先按已执行动作几何搬运空间信念，再学习补全与观测修正，并用可靠性图决定何时重新获取深度。室内 Lattice 环境的 10 次无人机试验全部完成 10 米导航，深度采集占决策步的 7.0%；仅验证静态环境，仍依赖视觉惯性里程计传播信念。
+    note_en: Geometrically transports spatial beliefs using executed actions, then learns completion and observation correction, using reliability maps to decide when to reacquire depth. All 10 drone trials in an indoor Lattice environment complete 10-meter navigation, acquiring depth on 7.0% of decision steps. Validation covers static environments only and still relies on visual-inertial odometry for belief propagation.
+
+  - title: 'Rewiring Semantics, Dynamics, and Control: A Simple yet Effective Action-Centric Tri-Stream Transformer'
+    short: ACT³
+    org: 南洋理工大学 / ACE Robotics
+    org_en: Nanyang Technological University / ACE Robotics
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.11416'
+    features: {closedloop: true}
+    tags: [三流Transformer, 预测视频上下文, 动作监督, 机器人操作]
+    note: 动作专家逐层读取独立的语义流和 Cosmos 未来预测流，并联合优化动作与视频预测。RoboCasa 24 项任务、三个评测种子下成功率为 71.2%，同流水线 π0.5 为 59.4%；保留预测监督但改用当前帧上下文时为 66.0%。未来生成只条件于当前图像和指令，不提供候选动作条件仿真。
+    note_en: An action expert reads separate semantic and Cosmos future-prediction streams at successive layers, with action and video-prediction objectives optimized together. Across 24 RoboCasa tasks and three evaluation seeds, success is 71.2%, versus 59.4% for π0.5 in the same pipeline; using current-frame context while retaining prediction supervision gives 66.0%. Future generation uses the current image and instruction, without simulating candidate-action consequences.
+
+  - title: World-Model Policy Arbiter for Goal-Conditioned Reinforcement Learning
+    short: WMPA
+    org: 多伦多大学 / Vector Institute
+    org_en: University of Toronto / Vector Institute
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.10932'
+      project: https://junwei0102.github.io/wmpa-webpage/
+      code: https://github.com/junwei0102/World-Model-Policy-Arbiter
+    features: {action: true, closedloop: true}
+    tags: [策略仲裁, 动力学集成, 目标条件价值, OGBench]
+    note: 在学习到的状态动力学里分别闭环展开六个冻结策略，用共享目标价值给未来打分，短暂执行获选策略后重新仲裁。OGBench 官方协议下，18 个状态输入数据集、三个策略库种子的宏平均成功率为 58%，逐数据集最佳单策略为 44%，12 个数据集显著提升。每个环境单独训练模型，尚未验证视觉输入，且不能产生策略库没有的行为。
+    note_en: Runs six frozen policies in a learned state-dynamics model, scores their imagined trajectories with a common goal-value function, and reselects after a short execution interval. Under the official OGBench protocol, macro-average success across 18 state-observation datasets and three policy-bank seeds is 58%, versus 44% for the best single policy per dataset, with significant gains on 12 datasets. Models are trained separately per environment; visual inputs remain untested, and arbitration cannot add behaviors absent from the policy bank.
+
+  - title: Cross-Embodiment Robot Foundation World Models with Latent Actions
+    short: LAC-WM
+    org: 斯坦福大学 / Meta FAIR Robotics
+    org_en: Stanford University / Meta FAIR Robotics
+    year: 2026
+    venue: ICML
+    category: embodied
+    links:
+      arxiv: '2610.10846'
+      project: https://lacwm.github.io/
+      code: https://github.com/qingh097/Latent_action_world_model
+    features: {action: true, closedloop: true}
+    tags: [跨本体, 潜动作, 运动解码, 候选动作筛选]
+    note: 逆动力学把人和机器人视觉转移编码到共享潜动作，运动解码辅助对齐；新本体用动作投影器接入前向预测，再筛选 VLA 候选动作。修改版 LIBERO 的五个未见任务、125 回合中，与显式动作基线共用 π0.5 和 20 个候选时，成功率从 82.4% 到 92.0%。预训练使用运动标签，尚无硬件验证。
+    note_en: Inverse dynamics maps human and robot visual transitions into shared latent actions, assisted by motion decoding. An action projector connects new embodiments to forward prediction for selecting VLA action candidates. On five unseen task variants of a modified LIBERO benchmark over 125 episodes, success rises from 82.4% with explicit-action conditioning to 92.0%, using the same π0.5 backbone and 20 candidates. Pretraining uses motion labels, and hardware validation remains future work.
