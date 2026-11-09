@@ -10,7 +10,7 @@
 
 世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象； 可交互世界模型进一步支持以动作 (action) 为条件的生成与控制， 为自动驾驶和具身智能提供数据引擎、神经仿真器与策略学习基础。 本仓库收录并整理该方向的代表性工作，按应用场景分类， 并标注每篇工作的交互能力维度。
 
-📊 共收录 **342** 篇工作 ｜ 最后更新：2026-11-09
+📊 共收录 **345** 篇工作 ｜ 最后更新：2026-11-09
 
 <p align="center">
   <img src="assets/interactive-world-model1.png" alt="交互式世界模型：智能体与世界模型的闭环交互" width="760">
@@ -31,8 +31,8 @@
 
 ## 目录
 
-- [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（130）
-- [具身智能 Embodied AI](#具身智能-embodied-ai)（154）
+- [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（131）
+- [具身智能 Embodied AI](#具身智能-embodied-ai)（156）
 - [通用 / 游戏 General / Game](#通用--游戏-general--game)（58）
 
 ## 自动驾驶 Autonomous Driving
@@ -112,6 +112,7 @@
 | **PLAN-S**: Bridging Planning with Latent Style Dynamics for Autonomous Driving World Models | arXiv (2026) | Xinhu Zheng 团队 | — | [论文](https://arxiv.org/abs/2606.06014) | 从潜表示解码风格条件四通道语义代价图，桥接潜世界模型与规划。 |
 | **Physics-Aware 3D Gaussian Editing for Driving Scene Generation** | arXiv (2026) | Rui Ma 团队 | — | [论文](https://arxiv.org/abs/2605.25373) | 单图驱动道路几何插入并耦合车辆动力学，实现物理感知的 3DGS 编辑。 |
 | **PlanWAM**: Planning-Shaped Future Representations for End-to-End Autonomous Driving | arXiv (2026) | Southeast University / NIO / Nanyang Technological University / Tongji University | 🔁 | [论文](https://arxiv.org/abs/2610.11382) \| [项目](https://jinchan9.github.io/PlanWAM_project_page/) \| [代码](https://github.com/jinchan9/PlanWAM) | 用规划损失塑造读取真实未来的训练期后验，再蒸馏给仅依赖历史的未来潜变量预测器，用于轨迹生成与筛选。零样本 HUGSIM 闭环 HD-Score 为 38.7；预测器不以候选动作作为条件，不能据此视为动作可控仿真器。 |
+| **ExecutionBridge**: Plans Are Not Executions: Adapting Frozen World-Model Planners to Controller-Induced Execution Shift | arXiv (2026) | Tsinghua University / DENSO | 🎮 | [论文](https://arxiv.org/abs/2610.22041) | 保持规划器、世界模型和奖励头冻结，用计划–执行轨迹对推断控制器特性并修正自车潜在展开。十个未见控制器上，NAVSIM PDMS 从 87.98 升至 88.59；冻结 WoTE 低于 80 的困难子集从 32.04 升至 46.13。直接替换成预测执行轨迹只提高 0.048，标准 NAVSIM 上 WoTE 从 88.2 到 88.8，评测仍是日志开环。 |
 | **Point as Skeleton: Accumulated Point Cloud Enhanced Autoregressive Generation for Closed-Loop AD Simulation** | arXiv (2026) | Junchi Yan 团队 | 🔁 | [论文](https://arxiv.org/abs/2607.06516) | 点云骨架条件 + Reset-and-Roll 扩散推理，实现状态更新式闭环驾驶视频生成。 |
 | **Proposal-Conditioned Latent Diffusion for Closed-Loop Traffic Scenario Generation** | arXiv (2026) | Steven Peters 团队 | 🔁 | [论文](https://arxiv.org/abs/2606.27123) | 实例中心上下文 + 多模态提案先验的条件扩散，测试时引导塑造安全关键行为。 |
 | **RS2AD-LiDAR**: End-to-End Autonomous Driving LiDAR Data Generation from Roadside Sensor Observations | arXiv (2026) | Keqiang Li 团队 | — | [论文](https://arxiv.org/abs/2605.23406) | 从路侧传感器观测生成端到端自动驾驶可用 LiDAR 数据。 |
@@ -186,6 +187,7 @@
 | **Dual-WM**: Beyond a Single Latent Space: A Dual-Latent World Model for Long-Horizon Planning | arXiv (2026) | 南京大学 / 上海交通大学 / 深圳先进技术研究院 / 深圳理工大学 | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2609.37644) \| [代码](https://github.com/DeLin1001/Dual-WM-Official) | 低层潜空间做细粒度动作转移，高层用学到的宏动作做长程子目标。五个目标条件视觉控制任务上，目标偏移 50 步时平均成功率从 75.9% 到 84.4%，100 步时从 61.4% 到 69.5%。偏移 100 步时相对 LeWM 高 30.8 个百分点。 |
 | **CF-JEPA**: Improving Robustness of JEPA World Models via Controllability Factorization | arXiv (2026) | 佐治亚理工学院 / 佐治亚理工研究院 | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.00727) | 把 JEPA 潜空间拆成可控和不可控两部分，规划只用可控部分。两个视觉干扰下，LeWM 在全部任务上坍缩；Reacher 上 SMWM 成功率 0.10，CF-JEPA 为 0.48。干扰再增加时，SMWM 的 PushT 和 TwoRoom 从 0.86、0.98 掉到 0.27、0.46，CF-JEPA 维持 0.57 和 0.82。 |
 | **CLAP**: Cross-Embodiment Video World Models are Zero-Shot Physical Simulators | arXiv (2026) | — | 🎮 | [论文](https://arxiv.org/abs/2608.27406) \| [项目](https://omni-clap.github.io) | 用末端位姿、语言指令与潜动作统一异构动作空间，以课程式跨本体训练先从无标注互联网视频学物理先验、再接地到真实动作空间做零样本部署，在 DROID 等环境逼近或超越单本体 SOTA，代码与模型全部开源。 |
+| **OneWM**: Can World and Action Modeling Benefit Each Other under Unified Causal Training? | arXiv (2026) | The University of Hong Kong / Shanghai Jiao Tong University / Tsinghua University / SII / University of Chinese Academy of Sciences / IAAI Team | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.21095) \| [项目](https://selen-suyue.github.io/OneWMNet) | 在同一因果架构里，用指定动作的视觉后果监督世界预测，并联合学习动作。相对屏蔽动作的 WAMmask，LIBERO-Plus 总成功率由 53.37% 升至 59.27%，RoboCasa365 由 28.32% 升至 36.68%；三真机任务各 15 次的平均成功率由 48.9% 升至 66.7%。策略部署时不生成未来视频，LIBERO 上 Fast-WAM 仍为 97.60%，OneWM 为 94.95%。 |
 | **CausalNav**: Reliability-Certified Causal World Models for Control under Physical-Parameter Shift | arXiv (2026) | Jun Shen 团队 | — | [论文](https://arxiv.org/abs/2608.07809) | 物理参数变化下可靠性认证的因果世界模型，用于导航控制。 |
 | **CausalWM**: Causal Chain-of-Thought Reasoning for Embodied World Model | arXiv (2026) | Aether AI | 🎮 | [论文](https://arxiv.org/abs/2609.23184) \| [项目](https://aetherlabsai.github.io/CausalWM/) \| [代码](https://github.com/AetherLabsAI/CausalWM) | 16B 具身视频世界模型先预测光流，再预测三维点图，最后预测未来画面，前一步结果固定为后一步的上下文。训练用了约 3.1 万小时具身数据。2026 年 9 月 11 日的 TriWorldBench 上，36 个已公开模型里以 66.04 排第一，比第二名高 0.50。 |
 | **CAG**: Completion Aware Guidance for World Action Models | arXiv (2026) | 首尔大学 / KAIST | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.01559) | 短块控制会让世界–动作模型反复选看起来合理的局部延续，把完成任务所需要的状态转移丢掉。CAG 是免训练的采样引导，骨干没有重训。RoboTwin 2.0 子集上成功率从 64% 到 70%，零样本仿真从 69% 到 75%，任务未完成的想象从 79% 降到 40%。 |
@@ -213,6 +215,7 @@
 | **DyMD**: Preserving Interaction Dynamics through Distribution Matching Distillation in Few-Step Video World Models | arXiv (2026) | 北京航空航天大学 / 京东未来研究院 | 🎮 | [论文](https://arxiv.org/abs/2609.31349) | 把 14B 机器人视频老师蒸馏成四步、1.3B 的学生，推理时不加额外模块。它按当前展开与示范视频的时间相似度调整重加噪，并给更难拟合的强运动样本加大评论器损失。相对普通分布匹配蒸馏，R-Bench 任务遵循高 9.6 个百分点，PAI-Bench-G 的 Domain 高 5.1；作为下游规划骨干，两个 WorldArena 任务的平均成功率从 16% 到 34%。 |
 | **EA-WM**: Event-Aware Generative World Model with Structured Kinematic-to-Visual Action Fields | arXiv (2026) | 中关村人工智能研究院 / 中国科学技术大学 / 复旦大学 | 🎮 | [论文](https://arxiv.org/abs/2605.06192) \| [代码](https://github.com/Shownx-c/EA-WM) | 在 Wan2.2 上生成机器人未来视频。动作经正运动学和相机投影画成画面里的骨架、夹爪、末端热图和姿态轴，再用帧差潜变量把门控到正在变化的区域。WorldArena 上 P3CScore 为 76.60，CogVideoX 为 71.08；轨迹准确度 0.430 对 0.353。换成数值动作后同一分数掉到 70.97。构建动作场需要机器人模型和相机标定。 |
 | **Ego2Act**: Evaluating Goal-Directed Manipulation in Egocentric Video Generation | arXiv (2026) | MBZUAI / 南洋理工大学 / 北卡罗来纳大学教堂山分校 | — | [论文](https://arxiv.org/abs/2610.01092) \| [项目](https://ego2act.github.io) \| [代码](https://github.com/ego2act/ego2act) | 110 个真实任务、2640 段视频。输入是起始画面和高层目标，平均要超过五步，人类成功执行的中位时长 20.4 秒。最高的 Seedance-2.0 总分只有 64.0。自动评判与人类共识的相关为 0.69，标注者之间的 ICC 为 0.86。常见失败是跳过或只做完部分步骤，后面的步骤因此缺少该有的状态。 |
+| **EgoJEPA**: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos | arXiv (2026) | MBZUAI / Shanghai Jiao Tong University / X Square Robot / Xense Robotics / Sun Yat-sen University | 🔁 | [论文](https://arxiv.org/abs/2610.20904) \| [项目](https://mengcaopku.github.io/EgoJEPA) | 用手部运动差条件化 JEPA 预测视觉后果，再联合流匹配未来视觉与潜动作，并用轻量适配器接到机器人。五任务、三本体、每任务 20 次的域外平均成功率为 74%，重定向基线为 65%，仅用机器人数据为 40%。部署时联合生成视觉和动作，未做指定机器人动作的反事实展开。 |
 | **FACT**: Failure-Aware Causal Training for World-Action Models | arXiv (2026) | Xiaolong Wang 团队 | — | [论文](https://arxiv.org/abs/2608.10232) | 失败感知因果训练，显式建模动作-后果因果关系以纠正世界模型的乐观偏差。 |
 | **FLEX-WAM**: Flexible Block-Causal World-Action Models for Long-Horizon Imagination and Planning | arXiv (2026) | NYU | 🎮 ⚡ 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.05483) | 用可 KV cache 的块因果骨干同时预测未来、生成动作并在想象中规划，支持变长上下文和逐帧或逐块的无限 rollout；以前向动力学弹性约束动作响应。可作为 MCTS 的联合提议器与仿真器解长时程 PushT 和 OGBench，同一检查点在双臂真机上兼作策略与结果预测。 |
 | **Flow-Skill WM**: Flow Policies as Actions of Skill-Level World Models: Learned and Symbolic Abstractions for Long-Horizon Planning | arXiv (2026) | TU Delft | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.04767) \| [项目](https://andreumatoses.github.io/research/flow-skill-wm) | 用在完整技能片段上训练的流匹配策略的输入作为技能级动作，一次技能执行对应世界模型的一步转移，从而不必手工编写技能词表。无标签的物体中心离散码在单技能上对齐符号标签，2 到 5 个技能的任务仍保留其约一半到四分之三的成功率。 |

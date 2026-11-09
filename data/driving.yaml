@@ -1807,3 +1807,16 @@ papers:
     tags: [导航条件想象, 冲突感知, 潜空间世界模型, 闭环驾驶]
     note: 按导航命令的假设动作锚展开潜未来，再预测严格、谨慎或回退模式辅助驾驶。在已带模式预测的匹配消融中，加入世界模型使 CARLA-F 指令遵从率从 59.8% 升至 83.0%，但 B2D-C Driving Score 从 87.3 降至 85.9；动作锚尚未编码速度，想象结果也不提供形式安全保证。
     note_en: Rolls out latent futures under hypothetical action anchors for navigation commands, then predicts strict, cautious, or fallback modes for driving. In a matched ablation that already predicts modes, adding the world model raises CARLA-F navigation compliance from 59.8% to 83.0%, while B2D-C Driving Score falls from 87.3 to 85.9. Action anchors do not yet encode speed, and imagined outcomes provide no formal safety guarantee.
+
+  - title: 'Plans Are Not Executions: Adapting Frozen World-Model Planners to Controller-Induced Execution Shift'
+    short: ExecutionBridge
+    org: Tsinghua University / DENSO
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.22041'
+    features: {action: true}
+    tags: [冻结世界模型, 控制器偏移, 潜变量修正, NAVSIM]
+    note: 保持规划器、世界模型和奖励头冻结，用计划–执行轨迹对推断控制器特性并修正自车潜在展开。十个未见控制器上，NAVSIM PDMS 从 87.98 升至 88.59；冻结 WoTE 低于 80 的困难子集从 32.04 升至 46.13。直接替换成预测执行轨迹只提高 0.048，标准 NAVSIM 上 WoTE 从 88.2 到 88.8，评测仍是日志开环。
+    note_en: Keeps the planner, world model, and reward head frozen, infers controller characteristics from planned–executed pairs, and corrects the ego latent rollout. Across ten unseen controllers, NAVSIM PDMS rises from 87.98 to 88.59; on the subset where frozen WoTE is below 80, it rises from 32.04 to 46.13. Substituting predicted execution trajectories improves PDMS by only 0.048. On standard NAVSIM, WoTE rises from 88.2 to 88.8, and evaluation remains log-based and open-loop.

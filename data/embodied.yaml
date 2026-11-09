@@ -2210,3 +2210,31 @@ papers:
     tags: [环境潜变量, 测试时优化, 动作选择]
     note: 在冻结的动作条件世界模型上，用测试时交互优化环境潜变量，再按预测后果选择并执行候选动作。仿真物理误差由 12.86 降至 4.80，动作成功率由 37.9% 升至 74.2%；四项真机任务的跟踪误差由 19.30 降至 10.85 像素，成功率由 26.5% 升至 70.8%。摘要中的 15.20 与 33.73% 把仿真和真机结果混在一起。
     note_en: Optimizes an environment latent from test-time interaction on a frozen action-conditioned world model, then selects and executes a candidate action from predicted outcomes. In simulation, physical error falls from 12.86 to 4.80 and action success rises from 37.9% to 74.2%; across four real-robot tasks, tracked-state error falls from 19.30 to 10.85 pixels and success rises from 26.5% to 70.8%. The abstract figures 15.20 and 33.73% pool simulation and real-robot results.
+
+  - title: Can World and Action Modeling Benefit Each Other under Unified Causal Training?
+    short: OneWM
+    org: The University of Hong Kong / Shanghai Jiao Tong University / Tsinghua University / SII / University of Chinese Academy of Sciences / IAAI Team
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.21095'
+      project: https://selen-suyue.github.io/OneWMNet
+    features: {action: true, closedloop: true}
+    tags: [因果联合训练, 指定动作预测, 世界动作互益]
+    note: 在同一因果架构里，用指定动作的视觉后果监督世界预测，并联合学习动作。相对屏蔽动作的 WAMmask，LIBERO-Plus 总成功率由 53.37% 升至 59.27%，RoboCasa365 由 28.32% 升至 36.68%；三真机任务各 15 次的平均成功率由 48.9% 升至 66.7%。策略部署时不生成未来视频，LIBERO 上 Fast-WAM 仍为 97.60%，OneWM 为 94.95%。
+    note_en: Within one causal architecture, supervises world prediction with the visual consequences of specified actions and jointly learns actions. Against action-masked WAMmask, overall success rises from 53.37% to 59.27% on LIBERO-Plus and from 28.32% to 36.68% on RoboCasa365. Across three real-robot tasks with 15 trials each, mean success rises from 48.9% to 66.7%. Policy deployment does not generate future video. On LIBERO, Fast-WAM remains at 97.60% while OneWM reaches 94.95%.
+
+  - title: 'EgoJEPA: Beyond Retargeting for Dexterous Manipulation from Egocentric Videos'
+    short: EgoJEPA
+    org: MBZUAI / Shanghai Jiao Tong University / X Square Robot / Xense Robotics / Sun Yat-sen University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.20904'
+      project: https://mengcaopku.github.io/EgoJEPA
+    features: {closedloop: true}
+    tags: [第一人称视频, 潜动作, 跨本体适配]
+    note: 用手部运动差条件化 JEPA 预测视觉后果，再联合流匹配未来视觉与潜动作，并用轻量适配器接到机器人。五任务、三本体、每任务 20 次的域外平均成功率为 74%，重定向基线为 65%，仅用机器人数据为 40%。部署时联合生成视觉和动作，未做指定机器人动作的反事实展开。
+    note_en: Conditions a JEPA on hand-motion differences to predict visual consequences, then jointly flow-matches future vision and latent actions before attaching lightweight robot adapters. Across five tasks, three embodiments, and 20 trials per task, out-of-domain success averages 74%, versus 65% for retargeting and 40% for robot-only training. Deployment jointly generates vision and actions, without counterfactual rollouts of specified robot actions.
