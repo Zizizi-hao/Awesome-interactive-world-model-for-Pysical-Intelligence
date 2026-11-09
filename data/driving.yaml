@@ -1752,3 +1752,43 @@ papers:
     tags: [共享未来BEV, 机动候选, 轨迹打分, Frenet修正]
     note: 一次预测所有候选共用的未来 BEV，再沿轨迹读取当前与未来证据，为机动候选打分并作 Frenet 修正。NAVSIM v1 匹配完整流程消融中，加入未来分支使 PDMS 从 90.03 升至 90.58；另有 WorldEngine 闭环评测。未来场不随候选动作变化，未建模不同自车计划引起的交互响应。
     note_en: Predicts one future BEV field shared by all candidates, queries current and future evidence along each trajectory, and uses it to score maneuver candidates and apply Frenet refinement. In a matched full-pipeline NAVSIM v1 ablation, adding the future branch raises PDMS from 90.03 to 90.58; WorldEngine also provides closed-loop evaluation. The future field is candidate-independent and does not model interactive responses to alternative ego plans.
+
+  - title: 'DriveWLA: Unifying Future Dynamics and Scene Semantics through World-Language-Action Modeling for Autonomous Driving'
+    short: DriveWLA
+    org: Huazhong University of Science and Technology / Yinwang Intelligent Technology Co. Ltd.
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.17903'
+    features: {closedloop: true}
+    tags: [三专家, 未来表征, 跨专家注意力, 闭环驾驶]
+    note: 以世界、语言和动作三专家联合学习未来特征与轨迹；强化学习前的同协议消融中，加入世界专家使 NAVSIM v1 PDMS 从 86.2 升至 90.8，并有 HUGSIM 闭环评测。未来分支不读取候选动作，Bench2Drive 转移结果仅为日志开环指标。
+    note_en: Jointly learns future features and trajectories with world, language, and action experts. Before RL, same-protocol ablations raise NAVSIM v1 PDMS from 86.2 to 90.8 by adding the world expert, with additional HUGSIM closed-loop evaluation. The future branch does not read candidate actions; transfer results on Bench2Drive use log-based open-loop metrics.
+
+  - title: 'OccWAM: Occupancy World-Action Models with Joint Scene-to-Ego Flow Matching'
+    short: OccWAM
+    org: Nanyang Technological University / Tongji University / A*STAR
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.17688'
+    features: {closedloop: true}
+    tags: [占据预测, 联合流匹配, 自车坐标, 世界动作耦合]
+    note: 两阶段联合生成未来占据与自车轨迹，先在场景坐标预测，再转到预测自车坐标共同细化。Bench2Drive 的阶段对照中，Driving Score 从 88.21 升至 90.45；nuScenes 占据指标使用历史三维占据输入，规划指标使用相机，不能视为同一视觉端到端设置。
+    note_en: 'Jointly generates future occupancy and ego trajectories in two stages: scene-coordinate prediction followed by joint refinement in predicted ego coordinates. On Bench2Drive, the stage comparison raises Driving Score from 88.21 to 90.45. nuScenes occupancy metrics use historical 3D occupancy while planning metrics use cameras, so they do not establish a single vision-only end-to-end setting.'
+
+  - title: 'MORE: Learning Motion-Oriented Registers for Driving World Models and Planning'
+    short: MORE
+    org: 武汉大学 / CowaRobot / 萨拉戈萨大学
+    org_en: Wuhan University / CowaRobot / University of Zaragoza
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.14871'
+    features: {closedloop: true}
+    tags: [运动寄存器, JEPA, 未来潜状态, 规划记忆]
+    note: 在视频预训练中让运动条件寄存器承担密集预测，再将同一紧凑状态用于未来预测与规划。前相机匹配消融中，加入未来寄存器预测使 EPDMS 从 91.1 升至 91.8；未来动作只用于训练目标，推理仅读历史运动，并有 HUGSIM 闭环验证。
+    note_en: Makes motion-conditioned registers carry dense prediction during video pretraining, then uses the same compact state for future prediction and planning. In matched front-camera ablations, adding future-register prediction raises EPDMS from 91.1 to 91.8. Future actions are used only for training targets; inference reads historical motion, with additional HUGSIM closed-loop validation.

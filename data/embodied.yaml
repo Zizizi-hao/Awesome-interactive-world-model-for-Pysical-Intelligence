@@ -1796,3 +1796,264 @@ papers:
     tags: [JEPA, 动作条件动力学, 流匹配, 视觉规划]
     note: 联合训练动作条件潜状态预测与动作流匹配，并用 SIGReg 稳定表征；十项模拟视觉目标规划平均成功率为 93.5%，对比 LeWM（CEM）的 50.9%；三项真机闭环任务平均成功率为 33.3%，仍按任务与机器人分别训练。
     note_en: Jointly trains action-conditioned latent-state prediction and action flow matching with SIGReg regularization; mean visual-goal planning success is 93.5% across ten simulated tasks versus 50.9% for LeWM (CEM), while mean closed-loop success across three physical-robot tasks is 33.3%; models are still trained separately per task and robot.
+
+  - title: 'DR-VLA: Learning Human-Like Quadruped Navigation from Egocentric Web Videos via Domain-Invariant Scene Representations'
+    short: DR-VLA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18373'
+    features: {}
+    tags: [人类视频迁移, 预测潜表征, 四足导航, 离线评测]
+    note: 用无动作标注的人类视频预训练未来语义、深度和关系表征，再联合训练导航动作专家。匹配训练的 EgoLynx-Robot 消融中，加入世界专家使 QNS 从 0.841 升至 0.884；评测依赖日志回放与伪闭环指标，尚未验证自主导航反馈执行。
+    note_en: Pretrains future semantic, depth, and relational representations on human videos without action labels, then jointly trains a navigation action expert. In matched EgoLynx-Robot ablations, adding the world expert raises QNS from 0.841 to 0.884. Evaluation relies on log replay and pseudo-closed-loop metrics; autonomous navigation with execution feedback remains unvalidated.
+
+  - title: 'LoopWAM: Closed-Loop Generalist Policy Improvement from Deployment Rollouts'
+    short: LoopWAM
+    org: Tsinghua University / Dexmal / Loopeva
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18873'
+      project: https://loop-wam.github.io/
+      code: https://github.com/loop-wam/LoopWAM
+    features: {closedloop: true}
+    tags: [world-action model, mixed-quality learning, deployment learning]
+    note: 以质量加权的并行视频–动作去噪吸收成功与失败部署经验；Table30-V2三轮采集及再训练将成功率从23.67%提高至43.33%，依赖质量标注与新增真机采集。
+    note_en: Quality-weighted parallel video–action denoising learns from successful and failed deployment experience; three collection-and-retraining rounds raise Table30-V2 success from 23.67% to 43.33%, requiring quality labels and additional real-robot collection.
+
+  - title: 'ForceWAM: Decoupling Future and Response Learning from Demo and Play Data for Contact-Rich Manipulation'
+    short: ForceWAM
+    org: Fudan University / Shanghai Jiao Tong University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18852'
+      project: https://force-wam.github.io/
+    features: {closedloop: true}
+    tags: [force prediction, inverse dynamics, contact-rich manipulation]
+    note: 联合预测视频与六轴力/力矩未来，以示范和play训练逆动力学并用实时力反馈修正动作；单臂四种接触条件报告85–95%成功率，但未来预测由任务条件驱动，并非可指定动作的仿真器。
+    note_en: Joint video and six-axis wrench prediction guides an inverse model trained on demonstrations and play, with live force feedback correcting actions; four contact conditions on one arm report 85–95% success, but future prediction is task-conditioned rather than a simulator driven by specified actions.
+
+  - title: 'WorldOracle: Benchmarking Action-Conditioned World Models against Real-World Executions'
+    short: WorldOracle
+    org: AgiBot / NVIDIA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18826'
+      project: https://worldoracle-benchmark.github.io/
+      code: https://github.com/WorldOracle-benchmark/WorldOracle
+    features: {}
+    tags: [benchmark, action-conditioned world models, real-world evaluation]
+    note: 用335次配对真实执行检验动作世界模型的物理结果及交互一致性；七模型实验中四项指标与人类偏好一致率为88.1–93.2%，但单次参考可能惩罚合理随机结果，跨具身适配预算也不匹配。
+    note_en: A benchmark uses 335 paired real executions to assess physical outcomes and interaction coherence in action-conditioned world models; across seven models, its four metrics agree with human preferences in 88.1–93.2% of comparisons, but a single reference can penalize plausible stochastic outcomes and adaptation budgets differ across embodiments.
+
+  - title: 'GreenWAM: A World Foundation Model for Robotics'
+    short: GreenWAM
+    org: Sber Robotics Center
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18774'
+      project: https://greenvla.github.io/GreenWAM/
+      code: https://github.com/greenvla/GreenWAM
+    features: {action: true, closedloop: true}
+    tags: [shared action space, robot foundation model, world-action model]
+    note: 以20个机器人家族的共享关节坐标联合训练世界预测与动作生成；同预算RoboTwin消融中保留世界模型训练使随机场景成功率提高8.0个百分点，各基准仍需单独后训练，真机仅验证单人形装袋任务。
+    note_en: Shared joint coordinates across 20 robot families support joint world prediction and action generation; a matched-budget RoboTwin ablation gains 8.0 percentage points in randomized success by retaining world-model training, while each benchmark needs separate post-training and real-robot validation covers one humanoid packing task.
+
+  - title: 'UniW(A)M: A Unified Mixture-of-Experts Framework for World and World-Action Models'
+    short: UniW(A)M
+    org: Tsinghua University / Manifold AI
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18697'
+    features: {action: true, closedloop: true}
+    tags: [mixture of experts, adaptive routing, world-action model]
+    note: 以共享和能力专家统一动作条件预测及四类动作接口，PAIR按chunk选择接口；三项OOD真机任务平均成功率由最强固定接口63.3%升至76.7%，路由每任务需500条目标域离线轨迹，且各任务仅20次测试。
+    note_en: Shared and capability experts unify action-conditioned prediction with four action interfaces, while PAIR selects an interface per chunk; average success on three OOD real-robot tasks rises from 63.3% for the best fixed interface to 76.7%, requiring 500 offline target-domain episodes per task for routing and only 20 evaluation trials per task.
+
+  - title: 'WAVE-0: Bridging VLA Policies and WAMs with Lightweight Latent Future Prediction'
+    short: WAVE-0
+    org: Shanghai Jiao Tong University / Baidu AI Cloud
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18568'
+      project: https://hmwang2002.github.io/release/wave0/
+      code: https://github.com/AutoLab-SAI-SJTU/WAVE-0
+    features: {action: true, closedloop: true}
+    tags: [latent dynamics, future-conditioned policy, counterfactual ranking]
+    note: 以真实动作和反事实排序训练257M潜在动力学，将预测未来作为VLA动作专家条件；三项真机任务各20次测试中平均成功率73.3%，π0.5为38.3%，真机结果来自逐任务训练而非长时世界仿真。
+    note_en: A 257M latent dynamics model trained with recorded actions and counterfactual ranking supplies predicted futures to a VLA action expert; on three real-robot tasks with 20 trials each, average success is 73.3% versus 38.3% for π0.5, using task-specific robot training rather than long-horizon world simulation.
+
+  - title: 'Thinker-WM: A Unified World Model with Shared Multimodal Representations for Embodied Intelligence'
+    short: Thinker-WM
+    org: UBTECH
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.18447'
+      project: https://thinkercosmos.ubtrobot.com/thinker-wm/
+      code: https://github.com/UBTECH-Robot/Thinker-WM
+    features: {action: true, closedloop: true}
+    tags: [multimodal dynamics, RGB-depth-action, world-action model]
+    note: RGB、深度与动作在共享动力学Transformer中联合演化；同权重加入记录动作条件使EWMBench的nDTW从0.7102升至0.8736，闭环控制证据限单项仿真任务，真机闭环与长rollout量化仍待验证。
+    note_en: RGB, depth and action evolve jointly in a shared dynamics Transformer; adding recorded-action conditioning with the same weights raises EWMBench nDTW from 0.7102 to 0.8736, while closed-loop control evidence is limited to one simulated task and real-robot closed-loop control and quantitative long-rollout validation remain open.
+
+  - title: 'WoVR+: World Model as Reliable Simulator for Versatile VLA Policy Optimization with RL'
+    short: WoVR+
+    org: CASIA / UCAS / XJTLU / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.17922'
+      project: https://youmo445.github.io/WoVR_Plus.github.io/
+    features: {action: true, closedloop: true}
+    tags: [多视角, 模型强化学习, VLA]
+    note: 以动作投影图、相机射线和分阶段想象训练多视角模拟器；六项真机任务每项20次配对评估中，成功率由39.2%升至55.8%；依赖人工阶段与数据支持的重置，长展开仍退化。
+    note_en: A multi-view simulator uses projected action maps, camera rays, and stage-local imagination; across six real-robot tasks with 20 matched trials each, success rises from 39.2% to 55.8%; it relies on predefined stages and data-supported resets, and long rollouts still degrade.
+
+  - title: 'From Pixels to Executable Physics: Behavior-Grounded World Models for Embodied Action Consequence Prediction'
+    short: DR-WM
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.17630'
+    features: {action: true}
+    tags: [物理混合模型, 机器人导航, 视频预测]
+    note: 用行为校准地形物理先验与Genesis驱动视频预测，再以生成观测更新地形；50个留出场景、三种子9.6秒展开中，末端ATE较冻结初图降7.7%；依赖接触模拟，反馈误差会累积。
+    note_en: Behavior-calibrated terrain priors and Genesis guide video prediction, whose generated observations update the terrain; over 9.6-second rollouts on 50 held-out scenes with three seeds, endpoint ATE falls 7.7% versus a frozen initial map; contact simulation and accumulating feedback errors remain limitations.
+
+  - title: 'UniLAP: A Unified Latent Action Policy for Cross-Embodiment Manipulation'
+    short: UniLAP
+    org: University of Pennsylvania / The Hong Kong Polytechnic University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.16969'
+      project: https://rayyoh.github.io/UniLAP/
+    features: {closedloop: true}
+    tags: [潜动作, 辅助动力学, 跨本体]
+    note: 以潜动作条件的DINO对应残差预测辅助连续潜策略；WidowX十个训练检查点中九个优于移除该辅助损失的版本；预测器仅用于训练，未验证从初帧连续展开的世界预测。
+    note_en: Latent-action-conditioned DINO correspondence-residual prediction supports a continuous latent policy; on WidowX, nine of ten training checkpoints outperform the variant without this auxiliary loss; the predictor is training-only, and world prediction rolled out continuously from the initial frame is untested.
+
+  - title: What Limits Cross-Task Generalization in World Action Models?
+    short: AoE / VITA
+    org: Renmin University of China / Meituan
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.16641'
+    features: {closedloop: true}
+    tags: [逆动力学, 可执行性, 视频监督]
+    note: 冻结相机空间逆动力学AoE，把生成未来的动作恢复误差反传给世界模型；LIBERO跨任务评测中WAN2.2未来的执行成功率由0.3%升至47.0%；依赖可见夹爪，尚无真机验证。
+    note_en: Frozen camera-space inverse dynamics, AoE, backpropagates action-recovery errors through generated futures to train world models; WAN2.2 future-video execution success rises from 0.3% to 47.0% in cross-task LIBERO evaluation; it relies on gripper visibility and lacks real-robot validation.
+
+  - title: Trust-Calibrated VLA Policy Post-Training with Evolving Imagination
+    short: MeRL
+    org: Sun Yat-sen University / CUHK-Shenzhen / Shanghai AI Laboratory / University of Oxford / USTC
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.16517'
+    features: {action: true, closedloop: true}
+    tags: [可信想象, 模型强化学习, VLA]
+    note: 在线更新动作条件视频模拟器，以可靠度调节想象比例、长度与回放权重；LIBERO-PRO三训练种子成功率79.7±0.7%，优于同协议WoVR的77.8±0.9%；真机仅两任务离线适配，深层信任估计变弱。
+    note_en: An online-updated action-conditioned video simulator uses reliability to schedule imagination ratio, horizon, and replay weights; over three training seeds on LIBERO-PRO, success is 79.7±0.7%, versus 77.8±0.9% for same-protocol WoVR; physical validation covers only two offline-adapted tasks, and trust estimation weakens with rollout depth.
+
+  - title: 'PINT: A Unified Model with Shared Predictive Intent for Robot Manipulation'
+    short: PINT
+    org: CASIA / UCAS / Zhongguancun Academy / Fudan University / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.16355'
+      project: https://zgca-hmi-lab.github.io/PINT/
+    features: {closedloop: true}
+    tags: [预测意图, 训练期世界建模, WAM]
+    note: 共享预测意图连接视频预测与动作专家；移除第一阶段未来视频损失后，RoboTwin Hard成功率由15.5%降至11.5%；默认推理只缓存当前帧视频特征，未来生成并非动作条件，真机OOD仍弱。
+    note_en: Shared predictive intent connects video prediction and an action expert; removing the stage-one future-video loss reduces RoboTwin Hard success from 15.5% to 11.5%; default inference caches only current-frame video features, future generation is not action-conditioned, and real-robot OOD performance remains weak.
+
+  - title: 'SurgCast: Action-Conditioned Future Skeletons for Controllable Surgical World Models'
+    short: SurgCast
+    org: CUHK / Shenzhen Loop Area Institute / Guangdong University of Technology
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.15645'
+      project: https://surgcast.netlify.app/
+    features: {action: true}
+    tags: [手术机器人, 结构预测, 视频生成]
+    note: 先从未来动作预测器械骨架，再以几何和运动学双路控制视频；SutureBot 教师 FVD 较直接动作基线降 37.6%，四步学生报告吞吐 10.36 FPS，完整端到端计时范围未明。仅给定动作窗口评测，持续闭环控制未验证。
+    note_en: Future actions predict instrument skeletons whose geometry and kinematics jointly control video. On SutureBot, teacher FVD falls 37.6% versus the direct-action baseline, and reported four-step student throughput is 10.36 FPS, with the full end-to-end timing scope unspecified. Evaluation uses supplied action windows; sustained closed-loop control remains unvalidated.
+
+  - title: 'StreamingWAM: Streaming World Action Modeling via Chunk-Wise Staircase Flow Matching'
+    short: StreamingWAM
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.15585'
+      project: https://renshaojie233.github.io/StreamingWAM/
+    features: {closedloop: true}
+    tags: [世界动作模型, 流式去噪, 动作连续性]
+    note: 以跨调用噪声阶梯、执行动作前缀和稠密视觉历史持续细化世界动作模型的动作缓冲；匹配训练预算且执行宽度 K=4 时，LIBERO-Plus 成功率从 61.03% 升至 79.36%。已做动态真机闭环，但仅验证 Fast-WAM 系列，对 RoboTwin 随机场景变化仍弱。
+    note_en: Continuously refines a world action model’s action buffer using a cross-call noise staircase, executed-action prefixes, and dense visual history. With matched training budgets and execution width K=4, LIBERO-Plus success rises from 61.03% to 79.36%. Dynamic real-robot closed-loop control is evaluated, but validation covers only the Fast-WAM family and generalization to randomized RoboTwin scenes remains weak.
+
+  - title: 'ProWorld: Multi-View World Model with Proprioceptive Feedback for Closed-Loop Policy Evaluation'
+    short: ProWorld
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.15294'
+      project: https://zijunwa.github.io/proworld/
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [策略评估, 多视角预测, 本体状态反馈]
+    note: 通过联合流匹配和共享时间视角编码，按动作生成多视角视频与本体状态并反馈冻结策略，以失败数据减少假成功；本地三策略、四任务的生成与真机成功率 Pearson/Spearman 相关为 0.95/0.94。该相关仅覆盖 12 个策略任务对，极长 rollout 仍有形变和漂移。
+    note_en: Uses joint flow matching and shared-time view encoding to generate action-conditioned multi-view video and proprioceptive state for feedback to frozen policies, with failure data reducing hallucinated successes. Generated and real success rates have Pearson/Spearman correlations of 0.95/0.94 across three local policies and four tasks. This covers only 12 policy–task pairs; exceptionally long rollouts still exhibit deformation and drift.
+
+  - title: Remembering What Matters for Long-Horizon Robotic World Models
+    short: ReCAP
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.14583'
+      project: https://alexander-wu.github.io/recap-project-page/
+    features: {action: true, longhorizon: true}
+    tags: [上下文调度, 长时序预测, 训练免调参]
+    note: 冻结自回归动作条件世界模型，保留初始场景锚点和最近完整视觉动作块并移除陈旧生成历史；200 对 BridgeV2 预测中 LPIPS 比 Full Context 低 63.3%。尚未验证闭环控制收益，且组件消融中锚点相对 Recent Only 的 LPIPS AUC 增益不显著。
+    note_en: Keeps autoregressive action-conditioned world models frozen, retaining the initial scene anchor and recent complete visual–action blocks while removing stale generated history. On 200 paired BridgeV2 predictions, LPIPS is 63.3% lower than Full Context. Closed-loop control benefits are untested, and the component ablation finds no significant LPIPS AUC gain from the anchor over Recent Only.
+
+  - title: 'PILOT: Guiding Long-Horizon World-Model Planning for Robot Manipulation with Visual Subgoals and Policy Priors'
+    short: PILOT
+    org: University of Minnesota
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.14335'
+      project: https://pilot-planner.github.io/
+    features: {action: true, closedloop: true}
+    tags: [视觉子目标, 模型预测控制, 策略先验]
+    note: 用视频子目标引导策略初始化的 CEM，并以动作条件 JEPA 世界模型滚动评价；UR5e 四任务成功 55/80（68.8%），去掉策略初始化为 44/80（55.0%）。除 Wan 与策略各用同批 40 示范外，世界模型另用约五小时随机交互；固定子目标时序限制失败恢复。
+    note_en: Guides policy-initialized CEM with video subgoals and evaluates actions through a receding-horizon action-conditioned JEPA world model. Across four UR5e tasks it succeeds in 55/80 trials (68.8%), versus 44/80 (55.0%) without policy initialization. Wan and the policy each use the same 40 demonstrations, while the world model additionally uses roughly five hours of random interaction; fixed subgoal timing limits failure recovery.

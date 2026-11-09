@@ -775,3 +775,31 @@ papers:
     tags: [多智能体, 第一人称, 姿态条件, 共享世界记忆]
     note: 将多主体第一人称视频联合去噪，把各主体身体与手部姿态投到每个目标视角，并共享历史环境记忆。在同骨干、数据和动作条件改编的多智能体对照中，真实视频基准的状态更新一致性为 0.466，MetaWorld 为 0.413。评测是给定姿态与相机轨迹的离线视频生成，未验证机器人策略闭环。
     note_en: Jointly denoises multiple egocentric streams, projects every agent's body and hand poses into each target view, and shares environmental history memory. With multi-agent baselines adapted to the same backbone, data, and action conditions, state-update consistency on the real-video benchmark is 0.466 versus MetaWorld's 0.413. Evaluation uses offline video generation conditioned on given poses and camera trajectories, without robot-policy closed-loop validation.
+
+  - title: 'LongForcing: Scaling Temporal Manifold Matching for Long-Horizon World Rollout'
+    short: LongForcing
+    org: 高德 / 清华大学
+    org_en: AMAP, Alibaba Group / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.18289'
+    features: {action: true, longhorizon: true}
+    tags: [长时蒸馏, 动作条件视频, 分布匹配, 漂移评测]
+    note: 用长窗口教师监督学生自身长展开，保持推理架构不变。固定 1.3B 骨干的第一人称 60 秒 WorldRoamBench 中，将监督窗口从约 5 秒扩到 20 秒，动作分从 64.39 升至 88.26；教师检查点也随窗口替换，24 小时展开仅为定性压力测试。
+    note_en: Supervises long student self-rollouts with an extended-window teacher while retaining the inference architecture. With a fixed 1.3B backbone on first-person 60-second WorldRoamBench rollouts, extending supervision from about 5 to 20 seconds raises action score from 64.39 to 88.26. Teacher checkpoints also change with the window; 24-hour rollouts are qualitative stress tests only.
+
+  - title: 'LeHami: Symplectic Latent Dynamics for World Models'
+    short: LeHami
+    org: New York University / Brown University / AMI Labs
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.15267'
+      code: https://github.com/rominay/LeHami
+    features: {action: true, closedloop: true}
+    tags: [Hamiltonian, 辛积分, JEPA, 相空间体积]
+    note: 在位置–动量潜状态上学习动作条件哈密顿量，以 leapfrog 辛积分保证潜空间体积守恒。仅在视觉摆环境验证；15 TFLOPs/回合、重规划间隔 9 时，位置与速度联合目标成功率为 26%，三帧 LeWM 对照为 39%，结构保证尚未带来全面控制优势。
+    note_en: Learns an action-conditioned Hamiltonian over position–momentum latents, using symplectic leapfrog integration to preserve latent phase-space volume. Validation is limited to visual pendulums. At 15 TFLOPs per episode and a replanning interval of 9, joint position-and-velocity goal success is 26%, versus 39% for a three-frame LeWM baseline; the structural guarantee does not establish uniformly better control.
