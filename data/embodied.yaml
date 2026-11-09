@@ -2140,3 +2140,73 @@ papers:
     tags: [局部动态模型, 三阶动作展开, 候选动作评估]
     note: 从冻结生成器提取动作切线并学习三阶校正，随后用多项式批量评估动作后果。BridgeData V2 离线 32 候选动作验证中，动作 MSE 为 0.025，IRASim 为 0.030；零动作被约束为恒等映射，仅验证短时开环，第 3–4 步画质落后于 IRASim。
     note_en: Extracts action tangents from a frozen generator and learns third-order corrections, then evaluates candidate action outcomes in batches with polynomials. In offline verification of 32 action candidates on BridgeData V2, action MSE is 0.025 versus 0.030 for IRASim. Zero action is constrained to the identity map; evaluation is short-horizon and open-loop, with worse image quality than IRASim at steps 3–4.
+
+  - title: 'MAIA: Anticipating Interaction Anomalies in Contact-Rich Manipulation via Multimodal World Models'
+    short: MAIA
+    org: Shanghai Jiao Tong University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.21686'
+      project: https://joringell.github.io/project/MAIA/
+    features: {action: true, closedloop: true}
+    tags: [接触异常, 视觉力预测, 候选动作选择]
+    note: 用动作条件视觉–力世界模型预测计划动作的交互后果，并在 8 个候选动作块中选择异常概率最低者。18 项接触任务各 30 次真机试验中，冻结 π0.5 的成功率由 52.6% 升至 61.5%；已见任务 bACC 为 0.765，新任务为 0.710。仅单一机器人与力传感配置，预测用于避错而非自主恢复。
+    note_en: An action-conditioned vision–force world model predicts the interaction consequences of planned actions and selects the lowest-anomaly chunk among 8 candidates. Across 18 contact tasks with 30 real-robot trials each, frozen π0.5 success rises from 52.6% to 61.5%; bACC is 0.765 on seen tasks and 0.710 on novel tasks. Evaluation uses one robot and force-sensing setup, and prediction avoids anomalies rather than recovering from them.
+
+  - title: 'TS-WAM: Temporal Latent Actions and World-Action Coupling for Vision-Language Robot Control'
+    short: TS-WAM
+    org: Hong Kong University of Science and Technology (Guangzhou)
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.21922'
+    features: {closedloop: true}
+    tags: [潜动作, 未来特征, 异构视频]
+    note: 由当前观测推断潜动作并预测未来视觉特征变化，再以此条件化动作专家；去掉该未来特征后，LIBERO 平均成功率下降 3.0 个百分点，LIBERO-Plus 由 75.7% 降至 70.8%。Franka 与 RevoTron 四任务各 20 次的分布内平均成功率为 72.5%，π0.5 为 55.0%。未来分支接收推断出的潜动作，不是外部候选动作。
+    note_en: Infers a latent action from the current observation, predicts the future visual-feature change, and conditions the action expert on it. Removing that future feature lowers mean LIBERO success by 3.0 points and LIBERO-Plus from 75.7% to 70.8%. On four Franka and RevoTron tasks with 20 trials each, in-distribution success averages 72.5% versus 55.0% for π0.5. The future branch receives an inferred latent action rather than an external candidate action.
+
+  - title: 'VeriVLA: Adaptive Test-Time Verification for Flow-Based VLAs with Latent World Models'
+    short: VeriVLA
+    org: The University of Hong Kong
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.21985'
+      project: https://shirley430316.github.io/projects/verivla/
+    features: {action: true, closedloop: true}
+    tags: [测试时验证, JEPA, 动作块排序]
+    note: 动作条件 JEPA 预测未来潜状态与任务进度，对触发后的 10 个动作块排序。三真机任务各 50 次的平均完成分由 50.8% 升至 65.5%；去掉视觉预测损失后降至 55.2%。RTX 4090 上每次触发增加 326 ms，进度标签来自 Robometer。
+    note_en: An action-conditioned JEPA predicts future latent states and task progress to rank 10 action chunks after a trigger. Across three real-robot tasks with 50 trials each, mean completion score rises from 50.8% to 65.5%, and falls to 55.2% without the visual prediction loss. Each trigger adds 326 ms on an RTX 4090, and progress labels come from Robometer.
+
+  - title: 'PlayPolicy: Dexterity from Supervised Play'
+    short: PlayPolicy
+    org: Amazon Frontier AI & Robotics / University of Maryland
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.22340'
+      project: https://play-policy.github.io/
+    features: {action: true, closedloop: true}
+    tags: [自主玩耍, 模型预测控制, 灵巧操作]
+    note: 用自主玩耍数据训练动作条件世界模型，并由玩耍策略提出候选、模型预测控制择优执行。仿真重定向在 0.4/0.6/0.8 rad 阈值的成功率为 72.7/91.4/96.1%，后见行为克隆为 25.8/53.9/71.9%（128 次远目标试验）；真机为 68.6/90.0/97.1%，与仿真相差不超过 4.1 个百分点。RTX 5090 上单次重规划中位耗时 134 ms，代码尚未发布。
+    note_en: An action-conditioned world model is trained on autonomous play and used for model-predictive control over play-policy proposals. Simulated reorientation succeeds on 72.7/91.4/96.1% of 128 distant-goal trials at 0.4/0.6/0.8 rad, versus 25.8/53.9/71.9% for hindsight behavior cloning; real-robot rates are 68.6/90.0/97.1%, within 4.1 points of simulation. Median replanning takes 134 ms on an RTX 5090, and code is not yet released.
+
+  - title: 'T2-z: Test-Time Optimization of Environment Latents for Robotic World Models'
+    short: T2-z
+    org: Stanford University / Carnegie Mellon University / Toyota Research Institute / University of Southern California
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.22364'
+      project: https://t2-z-latent-optimization.github.io/
+      code: https://github.com/T2-z-latent-optimization/T2-z
+    features: {action: true, closedloop: true}
+    tags: [环境潜变量, 测试时优化, 动作选择]
+    note: 在冻结的动作条件世界模型上，用测试时交互优化环境潜变量，再按预测后果选择并执行候选动作。仿真物理误差由 12.86 降至 4.80，动作成功率由 37.9% 升至 74.2%；四项真机任务的跟踪误差由 19.30 降至 10.85 像素，成功率由 26.5% 升至 70.8%。摘要中的 15.20 与 33.73% 把仿真和真机结果混在一起。
+    note_en: Optimizes an environment latent from test-time interaction on a frozen action-conditioned world model, then selects and executes a candidate action from predicted outcomes. In simulation, physical error falls from 12.86 to 4.80 and action success rises from 37.9% to 74.2%; across four real-robot tasks, tracked-state error falls from 19.30 to 10.85 pixels and success rises from 26.5% to 70.8%. The abstract figures 15.20 and 33.73% pool simulation and real-robot results.
