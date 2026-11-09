@@ -1820,3 +1820,16 @@ papers:
     tags: [冻结世界模型, 控制器偏移, 潜变量修正, NAVSIM]
     note: 保持规划器、世界模型和奖励头冻结，用计划–执行轨迹对推断控制器特性并修正自车潜在展开。十个未见控制器上，NAVSIM PDMS 从 87.98 升至 88.59；冻结 WoTE 低于 80 的困难子集从 32.04 升至 46.13。直接替换成预测执行轨迹只提高 0.048，标准 NAVSIM 上 WoTE 从 88.2 到 88.8，评测仍是日志开环。
     note_en: Keeps the planner, world model, and reward head frozen, infers controller characteristics from planned–executed pairs, and corrects the ego latent rollout. Across ten unseen controllers, NAVSIM PDMS rises from 87.98 to 88.59; on the subset where frozen WoTE is below 80, it rises from 32.04 to 46.13. Substituting predicted execution trajectories improves PDMS by only 0.048. On standard NAVSIM, WoTE rises from 88.2 to 88.8, and evaluation remains log-based and open-loop.
+
+  - title: 'World Action Critic (WAC) Model: Joint Foresight and Criticism for Policy Learning'
+    short: WAC
+    org: Tsinghua University / Didi Autonomous Driving / SunRisingAI Lab
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.22825'
+    features: {action: true}
+    tags: [候选轨迹, 未来潜状态, 评论监督, NAVSIM]
+    note: 用候选轨迹条件化未来潜状态，并用评论损失把预测特征拉向动作评价。仅前相机的 NAVSIM-v1 PDMS 为 93.4。去掉 focal 后，完整模型为 93.3，去掉未来监督降到 93.0，阻断评论梯度降到 92.3。评测是日志开环，没有闭环驾驶。
+    note_en: Conditions future latent states on candidate trajectories and uses critic losses to shape predictive features for action evaluation. Front-camera NAVSIM-v1 PDMS is 93.4. Without focal weighting, the full model scores 93.3, removing future supervision lowers it to 93.0, and blocking critic gradients lowers it to 92.3. Evaluation is log-based and open-loop, with no closed-loop driving.

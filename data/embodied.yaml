@@ -2238,3 +2238,72 @@ papers:
     tags: [第一人称视频, 潜动作, 跨本体适配]
     note: 用手部运动差条件化 JEPA 预测视觉后果，再联合流匹配未来视觉与潜动作，并用轻量适配器接到机器人。五任务、三本体、每任务 20 次的域外平均成功率为 74%，重定向基线为 65%，仅用机器人数据为 40%。部署时联合生成视觉和动作，未做指定机器人动作的反事实展开。
     note_en: Conditions a JEPA on hand-motion differences to predict visual consequences, then jointly flow-matches future vision and latent actions before attaching lightweight robot adapters. Across five tasks, three embodiments, and 20 trials per task, out-of-domain success averages 74%, versus 65% for retargeting and 40% for robot-only training. Deployment jointly generates vision and actions, without counterfactual rollouts of specified robot actions.
+
+  - title: 'AWAM: Active Trajectory-Conditioned View Imagination for Robust Robot Manipulation'
+    short: AWAM
+    org: Fudan University / Shanghai Innovation Institute
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23396'
+    features: {closedloop: true}
+    tags: [虚拟相机, 几何条件想象, 感知记忆]
+    note: 用虚拟相机轨迹查询几何条件世界模型，把想象结果压成固定感知记忆，再与实时观测融合做闭环操作。LIBERO-Occ 去掉该记忆后，成功率从 75.9% 降到 64.4%。三真机任务共 85/90。想象的是观察轨迹，不是机器人动作后果，记忆在执行过程中不更新。
+    note_en: Queries a geometry-conditioned world model with a virtual camera trajectory, compresses the result into a fixed perceptual memory, and fuses it with live observations for closed-loop manipulation. Removing that memory lowers LIBERO-Occ success from 75.9% to 64.4%. Three real-robot tasks succeed in 85/90 trials. Imagination follows an observation trajectory rather than robot-action consequences, and the memory is not updated during execution.
+
+  - title: 'LAW: Unifying Language, Action, and World Modeling for Agentic Physical Intelligence'
+    short: LAW
+    org: Peking University / Beijing Innovation Center of Humanoid Robotics
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23334'
+      project: https://hey-cjj.github.io/LAW-project/
+      code: https://github.com/hey-cjj/LAW
+    features: {closedloop: true}
+    tags: [子任务进度, 视频动作联合, 价值融合]
+    note: 训练期联合预测视频和动作，推理时用价值专家融合动作块，不生成未来视频。50 个 RoboTwin 任务平均成功率为 94.21%，Fast-WAM 为 91.83%；三真机长程任务各 20 次平均 65%，π0.5 为 28.33%。匹配参数量下，共享专家把 MoTE 从 91.93% 提到 92.67%。
+    note_en: Jointly predicts video and actions during training, then fuses action chunks with a value expert at inference without generating future video. Average success across 50 RoboTwin tasks is 94.21%, versus 91.83% for Fast-WAM. Three long-horizon real-robot tasks average 65% over 20 trials each, versus 28.33% for π0.5. With matched parameter counts, the shared expert raises MoTE from 91.93% to 92.67%.
+
+  - title: 'ORD-WM: Learning Object-Centric Rigid Dynamics for 3D World Modeling in Robotic Manipulation'
+    short: ORD-WM
+    org: Harbin Institute of Technology, Shenzhen
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23156'
+      project: https://hitsz-wyy.github.io/ORD-WM/
+    features: {action: true, closedloop: true}
+    tags: [刚体动力学, SE3, 物体潜变量, 模型预测控制]
+    note: 按动作预测每个物体的 SE(3) 增量，并解析作用到几何潜变量上。相对在 LIBERO 上微调的 PointWorld，全程运动点误差从 225.68 mm 降到 37.60 mm，形状一致性 Chamfer 为 0。真机推动在 1024 个候选时成功率为 90%、位置误差 0.972 cm，表中未给出试验次数，且只覆盖刚体。
+    note_en: Predicts an action-conditioned SE(3) increment for each object and applies it analytically to a geometric latent. Against PointWorld fine-tuned on LIBERO, full-trajectory moving-point error falls from 225.68 mm to 37.60 mm, with shape-consistency Chamfer distance 0. Real pushing with 1,024 candidates reaches 90% success and 0.972 cm position error; the table does not state the trial count, and the model covers rigid bodies only.
+
+  - title: 'BeJEPA: A Goal-Conditioned Humanoid Behavior World Model via Unsupervised RL'
+    short: BeJEPA
+    org: Shanghai Jiao Tong University / Shanghai Innovation Institute / Zhejiang University / Tongji University / Fudan University / Lenovo Research
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23127'
+      project: https://ylyem9x.github.io/BeJEPA-project/
+    features: {action: true, closedloop: true}
+    tags: [人形, JEPA, 目标条件, 在线动作修正]
+    note: 用动作条件动态预测器预测下一状态嵌入，并在线修正动作。20 秒运动跟踪中，相对带世界位姿输入的 BFM-Zero，全局身体位置误差下降 61.7%。Unitree G1 上的扰动恢复和起身是定性演示。
+    note_en: An action-conditioned dynamic predictor forecasts the next state embedding and refines actions online. In 20-second motion tracking, global body-position error falls by 61.7% relative to BFM-Zero with world-pose inputs. Disturbance recovery and getting up on a Unitree G1 are qualitative demonstrations.
+
+  - title: 'Beyond Action Prediction: Learning Search-Free Planning in Latent Space'
+    short: HIJP
+    org: Nanjing University of Science and Technology / University of Oxford / Singapore University of Technology and Design / Adelaide University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23615'
+    features: {action: true, closedloop: true}
+    tags: [潜空间规划, 逆动力学, 无搜索, JEPA]
+    note: 目标条件逆模型与动作条件潜预测交替生成多步计划，测试时不做动作搜索。四项视觉控制、16 个难度组合、各 50 次的总成功率为 86.8%，比最强基线高 4.9 个百分点。去掉转移一致性后，12 个组合的平均成功率从 82.5% 降到 76.0%。只在仿真中验证，规划时程固定。
+    note_en: A goal-conditioned inverse model alternates with an action-conditioned latent predictor to build multi-step plans without test-time action search. Across four visual-control tasks, 16 difficulty combinations, and 50 episodes each, overall success is 86.8%, 4.9 points above the strongest baseline. Removing transition consistency lowers average success on 12 combinations from 82.5% to 76.0%. Evaluation is simulation-only, with a fixed planning horizon.
