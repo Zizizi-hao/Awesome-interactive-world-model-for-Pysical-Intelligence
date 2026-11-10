@@ -1914,3 +1914,17 @@ papers:
     tags: [未来BEV监督, 共享世界记忆, 无展开轨迹评分, 闭环驾驶]
     note: 训练期以未来 BEV 语义预测塑造共享记忆，部署时直接评分轨迹而不展开未来；同设定组合消融的 NAVSIM PDMS 从 88.9 升至 90.5，并在 Bench2Drive 用 PID 闭环评估。预测分支不以候选动作作条件且依赖语义监督，评分延迟不等于世界模型预测吞吐。
     note_en: Shapes shared memory through future BEV semantic prediction during training, then scores trajectories without future rollout; matched combined ablations raise NAVSIM PDMS from 88.9 to 90.5, with PID closed-loop evaluation on Bench2Drive. The prediction branch is not candidate-action-conditioned and requires semantic supervision; scoring latency does not establish world-model prediction throughput.
+
+  - title: 'Jev with Foresight: Safe Language-Guided Autonomous Driving via a Language World Model'
+    short: Jev-AD
+    org: Purdue University
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.05448'
+      project: https://ys-qu.github.io/jev-ad-website/
+    features: {action: true, closedloop: true}
+    tags: [语言条件决策, 动作条件动力学, 车辆轨迹预测, 交互回放]
+    note: 动作条件语言动力学预测 2 秒车辆轨迹并反馈决策；500 个合流 car-episodes 的碰撞率为 2.4%，无前瞻为 26.0%、恒速前瞻为 2.8%。NGSIM 交互回放中恒速为 1.8%，学习模型为 2.8%；仅真值状态仿真，无实车或安全保证。
+    note_en: Uses action-conditioned language dynamics to forecast 2-second vehicle trajectories for feedback decisions; across 500 merge car-episodes, collision rates are 2.4%, versus 26.0% without foresight and 2.8% with constant-velocity foresight. In interactive NGSIM replay, constant velocity reaches 1.8% versus 2.8% for the learned model; evidence is limited to ground-truth-state simulation, without vehicle tests or safety guarantees.

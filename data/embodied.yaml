@@ -3026,3 +3026,56 @@ papers:
     tags: [敏感性重加权, 编码器预测器接口, 既有动力学训练, MPC]
     note: 在既有动作条件 LeWM/DINO-WM 的编码器–预测器接口应用敏感性重加权，用于反馈规划；五训练种子的 LeWM Push-T 成功率从 92.8% 升至 95.6%，OGBench-Cube 仅从 76.4% 升至 76.8%。重加权强度仍需手调，未报告显著性检验，世界模型实验限于仿真。
     note_en: Applies sensitivity-based reweighting at the encoder–predictor interface of existing action-conditioned LeWM/DINO-WM models for feedback planning; across five training seeds, LeWM Push-T success rises from 92.8% to 95.6%, while OGBench-Cube rises only from 76.4% to 76.8%. Reweighting strength still requires manual tuning, significance tests are unreported, and world-model experiments are limited to simulation.
+
+  - title: 'Motion-guided Contrastive Regularization For Latent World Models'
+    short: MGC
+    org: Northeastern University / Qualcomm AI Research
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.06901'
+    features: {action: true, closedloop: true}
+    tags: [静态表征塌缩, 同回合对比, 光流软标签, 图像目标规划]
+    note: 以同回合对比和光流软标签缓解 LeWM 静态表征塌缩；LIBERO-Object 的 50 个图像目标对的位置匹配成功率从 14% 升至 54%，并非原 LIBERO 任务完成率。仅报告单评估种子，依赖静态背景，尚无实机或长时预测一致性验证。
+    note_en: Uses within-episode contrast and optical-flow soft targets to reduce static representation collapse in LeWM; position-matching success across 50 LIBERO-Object image-goal pairs rises from 14% to 54%, which is not native LIBERO task completion. Only one evaluation seed is reported, static backgrounds are assumed, and physical-robot control or long-rollout consistency is unvalidated.
+
+  - title: 'Detecting Silent Action-Interface Mismatch with Calibrated Relational World Models'
+    org: Yale University / Ant Group / Indiana University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.06653'
+    features: {action: true}
+    tags: [动作接口语义, 单步状态效果, 条件混合模型, 离线诊断]
+    note: 学习动作条件单步状态–效果关系，以离线检测接口语义错配；回溯匹配 2.5% 经验误报率时，LIBERO Spatial 的岭回归、联合混合、条件混合召回率分别为 46.1%、61.0%、65.7%。检出与定位存在权衡，不构成部署校准、命令修复或跨机器人安全保证。
+    note_en: Learns action-conditioned one-step state–effect relations for offline detection of interface-semantic mismatches; at retrospectively matched 2.5% empirical false-positive rate, LIBERO Spatial recall is 46.1% for ridge, 61.0% for a joint mixture, and 65.7% for its conditional. Detection trades off against localization, without establishing deployment calibration, command repair, or cross-robot safety guarantees.
+
+  - title: 'ReactWorld: Structuring Interaction Responses for Embodied Video Generation'
+    short: ReactWorld
+    org: Huawei Technologies Co., Ltd. / Tongji University / Zhejiang University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.06120'
+      project: https://metaengine-world.github.io/ReactWorld/
+    features: {}
+    tags: [指令条件视频预测, 交互响应字段, 零动态参考, 位移引导注意力]
+    note: 从初图与任务指令预测参与角色、局部响应强度和二维位移，再以零动态参考增量与时序注意力引导具身视频生成；同数据预算的 Video-FT 对照在 RBench 为 71.94，ReactWorld 为 77.51。仅验证短视频生成，未接入外部动作或策略闭环，二维响应与自动标注仍限制物理可靠性。
+    note_en: Predicts participant roles, local response strength, and 2D displacement from an initial image and task instruction, then guides embodied video generation through zero-dynamics-referenced increments and temporal attention; RBench scores rise from 71.94 for a matched Video-FT control to 77.51. Evidence covers short video generation without external action conditioning or policy feedback; 2D responses and automatic annotations limit physical reliability.
+
+  - title: 'Time-to-Goal: Learned Temporal Metrics for Long-Horizon Planning with JEPA World Models'
+    short: T2G
+    org: University of Electronic Science and Technology of China
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.05847'
+      code: https://github.com/yrluestc/T2G-JEPA
+    features: {action: true, closedloop: true}
+    tags: [时间排序代价, 冻结潜动力学, 目标度量学习, 反馈重规划]
+    note: 在冻结的动作条件 LeWM 上学习时间排序代价以改进反馈重规划，四模拟环境宏平均成功率从 32.7% 升至 63.0%；改进属于规划指标，Cube 同时缩短预测时域，不能将总增益全部归于度量，尚无实机或长时预测一致性验证。
+    note_en: Learns a temporal-ordering cost on frozen action-conditioned LeWM for feedback replanning, raising macro-average success across four simulated environments from 32.7% to 63.0%; this improves the planning metric, with a shorter horizon also used on Cube, so the total gain cannot be attributed solely to the metric. Physical-robot control and long-rollout consistency remain unvalidated.
