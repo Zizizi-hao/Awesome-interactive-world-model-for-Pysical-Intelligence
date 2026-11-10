@@ -1042,3 +1042,17 @@ papers:
     tags: [潜动力学诊断, rollout一致性, 状态充分性, 受控机制研究]
     note: 提出潜 rollout 一致性 LRC，结合状态探针、速度注入与可逆混合对照，检验三类动作条件潜世界模型；高控制回报仍可伴随 30 步 LRC 低于零。主实验每配置四个训练种子，但仅三种低维确定性环境；结果是受控反例，不能推广为所有世界模型均不学习动力学。
     note_en: Introduces latent rollout consistency (LRC), state probes, velocity injection and invertible-mixing controls to diagnose three action-conditioned latent world-model families. High control returns can coexist with negative 30-step LRC. Main experiments use four training seeds per setting but cover only three low-dimensional deterministic environments; these are controlled counterexamples, not evidence that all world models fail to learn dynamics.
+
+  - title: 'FutureWorld: A Plug-and-Play Causal Next-State Predictor for Interactive Video World Exploration'
+    short: FutureWorld
+    org: Zhejiang University / National University of Singapore / Zhejiang Lab / Bournemouth University / vivo BlueImage
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.39619'
+      project: https://guangyuankk.github.io/futureworld/
+    features: {action: true, longhorizon: true}
+    tags: [因果潜状态预测, 生成器调制, 动作条件视频, 历史误差抑制]
+    note: 用动作条件 C-NCP 预测下一潜视频块，并调制四个冻结生成器；60 秒 RealEstate10K 评测中，Matrix-Game 3.0 主体一致性从 0.7946 升至 0.8387。包含动作条件、预测方向与训练计划消融；A800 上 720P 每交互耗时从 6.677 增至 7.294 秒。未报告多训练种子或置信区间，长时证据限感知指标。
+    note_en: Uses action-conditioned C-NCP forecasts to modulate four frozen generators. On 60-second RealEstate10K evaluations, Matrix-Game 3.0 subject consistency rises from 0.7946 to 0.8387. Ablations test action conditioning, prediction direction and training schedules; 720P time per interaction on an A800 rises from 6.677 to 7.294 seconds. Multiple training seeds and confidence intervals are unreported; long-horizon evidence is perceptual.

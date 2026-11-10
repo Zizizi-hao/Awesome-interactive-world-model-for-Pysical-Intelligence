@@ -2783,3 +2783,57 @@ papers:
     tags: [未来几何监督, 三维基础模型, 预测辅助学习, 世界动作模型]
     note: 在可训练 VGGT-Omega 上以动作块终点的未来深度、点图及相机监督动作学习；同五轮训练下，RoboTwin 随机场景成功率由当前几何监督的 20.12% 升至 29.20%。几何预测仅作训练监督，不接受候选动作条件；预测指标限训练集诊断，真机每任务与设置仅十次，未报告多训练种子。
     note_en: Uses action-chunk-endpoint depth, point maps and cameras to supervise action learning in a trainable VGGT-Omega. At the same five-epoch budget, RoboTwin randomized-scene success rises from 20.12% with current-geometry supervision to 29.20%. Geometry prediction is training-only and is not conditioned on candidate actions. Prediction metrics are training-set diagnostics; real-robot tests use ten trials per task and setting, without multiple training seeds.
+
+  - title: 'HiFOR: Hierarchical Foresight with Action-Guided World Grounding for Vision-Language-Action Model'
+    short: HiFOR
+    org: Nanjing University of Science and Technology / National University of Singapore / Shenyang Institute of Automation, CAS / CUHK
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.40373'
+    features: {closedloop: true}
+    tags: [层级未来预测, 语义里程碑, 动作引导检索, 预测反馈控制]
+    note: 联合预测短期、里程碑和终点特征及短期机器人状态，以去噪动作表示检索未来信息并在执行后重预测；RoboTwin 递增消融从 40.35% 升至 49.40%，六项真机任务各五十次的平均成功率为 81.7%。预测不以外部动作为条件，未报告多训练种子或留出预测误差，长任务成功不等于长 rollout 一致性。
+    note_en: Predicts short-term, milestone and goal features alongside near-future robot states, retrieves them using denoising action representations, and refreshes predictions after execution. Cumulative RoboTwin ablations improve success from 40.35% to 49.40%; six real-robot tasks average 81.7% over fifty trials each. Prediction is not externally action-conditioned; multiple training seeds and held-out prediction errors are unreported, and long-task success does not establish coherent long rollouts.
+
+  - title: 'WorldFlow: Joint Video and 3D Motion Prediction via Large-Scale Pretraining'
+    short: WorldFlow
+    org: RoboScience / National University of Singapore
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.39278'
+      project: https://worldflow-rbs.github.io/
+    features: {}
+    tags: [联合视频与三维流, 指令条件预测, 查询点运动, 预测轨迹执行]
+    note: 联合生成指令条件视频与查询点三维运动；同骨干/数据对照中，SpatialCog ADE 比仅流模型低 55.9%，同执行管线的 36 次真机测试完成 24 次，μ₀ 为 4 次。预测用于一次性轨迹拟合，未验证机器人动作条件预测或反馈重规划；标注依赖自动跟踪，训练重复和误差区间未报告。
+    note_en: Jointly generates instruction-conditioned video and query-point 3D motion. With backbone and data matched, SpatialCog ADE is 55.9% lower than the flow-only variant; a shared execution pipeline completes 24/36 real-robot trials versus μ₀'s 4/36. Predictions guide one-shot trajectory fitting, without demonstrated robot-action-conditioned forecasting or feedback replanning. Labels rely on automated tracking; repeated training seeds and uncertainty intervals are unreported.
+
+  - title: 'Seeing and Imagining as One: Unified Video Generation and 4D Perception for Embodied World Modeling'
+    short: GenSight
+    org: RoboScience / Nanjing University / The Hong Kong Polytechnic University / National University of Singapore
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.39232'
+      project: https://gensight-rbs.github.io/
+    features: {}
+    tags: [未来视频预测, 联合四维感知, 多模态共享表征, 几何语义运动]
+    note: 用共享视频 DiT 联合生成 49 帧未来 RGB、深度、分割和流，并从已观察视频单步感知。RoboMIND 任务留出集 FVD 为 14.55，但原始流 EPE 为 7.089，高于 RynnWorld4D 的 4.936。未隔离域内训练与联合目标的贡献，训练重复未报告；没有机器人动作接口或控制闭环，单步感知不等于实时未来生成。
+    note_en: Uses a shared video DiT to generate 49-frame RGB futures, depth, segmentation and flow, and performs single-step perception on observed video. RoboMIND task-held-out FVD is 14.55, but raw flow EPE is 7.089 versus RynnWorld4D's 4.936. In-domain training and joint-objective contributions are not isolated, and repeated training seeds are unreported. There is no robot-action interface or control loop; single-step perception does not establish real-time future generation.
+
+  - title: Generating Critic-Guided Synthetic Experience in Latent World Models
+    short: CGSE
+    org: Imperial College London
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.39100'
+    features: {action: true}
+    tags: [评论引导经验, 局部潜转移, 离线策略学习, 世界模型作用消融]
+    note: 复用冻结动作条件 LeWM，精炼动作并生成局部转移以离线更新策略；同起点及额外更新的 cube-single 对照中，链式生成成功率为 90.9%，无世界模型精炼为 89.3%，额外收益的 95% 区间为 [-2.1,5.6] 个百分点。大部分收益来自动作精炼；仅三个仿真任务、三策略种子，长链漂移明显，部署不调用世界模型。
+    note_en: Uses a frozen action-conditioned LeWM to refine actions and generate local transitions for offline policy updates. In cube-single controls with matched starting checkpoints and extra updates, chaining succeeds in 90.9% versus 89.3% for refinement without a world model; the 95% interval on the additional gain is [-2.1,5.6] percentage points. Most gains come from action refinement. Evidence covers three simulated tasks and three policy seeds; long chains drift, and deployment does not call the world model.
