@@ -1901,3 +1901,16 @@ papers:
     tags: [多视角时序生成, WorldRec场景先验, 因果流式生成, PPO策略训练]
     note: 结合多视角时序生成与 WorldRec 2.0 场景先验，量化评估 211 帧未来生成，另支持动作条件预测和 PPO 闭环训练；1,000 个模拟场景中，E2E-WM-RL 碰撞率为 0.4%，ST-JEPA-E2E 为 1.2%。对照未隔离世界模型收益，潜帧计时也不等于完整视频实时吞吐。
     note_en: Combines multi-view temporal generation with WorldRec 2.0 scene priors, quantitatively evaluating 211-frame future generation and separately supporting action-conditioned prediction and PPO closed-loop training; across 1,000 simulated scenarios, E2E-WM-RL has a 0.4% collision rate versus 1.2% for ST-JEPA-E2E. The comparison does not isolate world-model gains, and latent-frame timing does not establish full-video real-time throughput.
+
+  - title: 'Trajectory Evaluation via Rollout-Free World Model for End-to-end Autonomous Driving'
+    short: RFWorld
+    org: Beihang University / Xiaomi EV
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.05072'
+    features: {closedloop: true}
+    tags: [未来BEV监督, 共享世界记忆, 无展开轨迹评分, 闭环驾驶]
+    note: 训练期以未来 BEV 语义预测塑造共享记忆，部署时直接评分轨迹而不展开未来；同设定组合消融的 NAVSIM PDMS 从 88.9 升至 90.5，并在 Bench2Drive 用 PID 闭环评估。预测分支不以候选动作作条件且依赖语义监督，评分延迟不等于世界模型预测吞吐。
+    note_en: Shapes shared memory through future BEV semantic prediction during training, then scores trajectories without future rollout; matched combined ablations raise NAVSIM PDMS from 88.9 to 90.5, with PID closed-loop evaluation on Bench2Drive. The prediction branch is not candidate-action-conditioned and requires semantic supervision; scoring latency does not establish world-model prediction throughput.

@@ -1122,3 +1122,17 @@ papers:
     tags: [有效时间记忆, 冻结生成器, 撤销状态恢复, 时间戳干预]
     note: 不重训生成器，按已执行动作日志修正记忆 token 的有效时间以处理撤销后的状态恢复；197 个留出片段在两个生成种子下合计 590 个返还步骤，FAR 当前状态准确率从 0.342 升至 0.585。依赖可识别恢复的动作日志和历史视角，缺对应视角时准确率仍不超过 0.10。
     note_en: Re-dates memory tokens from executed-action logs to handle state restoration after undos without retraining the generator. Across 197 held-out clips and two generation seeds totaling 590 reverted steps, FAR's current-state accuracy rises from 0.342 to 0.585. It requires logs that identify restorations and suitable historical views; accuracy remains at most 0.10 where the required view is absent.
+
+  - title: 'FlowBench: Counterfactual Imagination Training for Spatial Intelligence'
+    short: FlowBench
+    org: Stanford University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.03937'
+      code: https://github.com/liuyifan22/FlowBench
+    features: {action: true}
+    tags: [反事实空间预测, 物体运动条件, 光流与结果帧, 留出场景评测]
+    note: 提供指定物体运动与精确光流、结果帧配对的训练数据，并在新场景源上评估四类预测模型；固定解码下，Ψ-0.6 光流准确率从 52.1% 升至 61.7%，但结果帧指标未同步改善，想象后问答也未获益。仅覆盖单物体刚性平移，没有多步交互或控制验证。
+    note_en: Pairs specified object motions with exact flow and outcome frames, training four predictor families and evaluating on a new scene source. With decoding fixed, Ψ-0.6 flow accuracy rises from 52.1% to 61.7%, while outcome-frame quality does not improve and imagine-then-answer brings no benefit. Coverage is limited to single-object rigid translations, without multi-step interaction or control evaluation.

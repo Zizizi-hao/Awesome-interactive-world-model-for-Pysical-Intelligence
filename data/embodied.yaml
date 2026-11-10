@@ -2970,3 +2970,59 @@ papers:
     tags: [动作条件触觉预测, 流式触觉状态, 预测反思, 接触操作]
     note: 在 LeWM 上学习动作条件触觉潜动力学，并用预测反思精炼候选动作；28 个仿真任务中，在已有触觉状态的对照上，反思使 OOD 成功率从 15.9% 升至 20.7%。真机结果选取最佳检查点，推理加速只测随机权重动作专家，不是世界模型实时验证。
     note_en: Adapts LeWM into action-conditioned tactile latent dynamics and refines candidate actions through predictive reflection; across 28 simulated tasks, reflection raises OOD success from 15.9% to 20.7% over a control that already uses tactile states. Hardware results select the best checkpoint, and acceleration benchmarks use a randomly initialized action expert, without validating real-time world-model inference.
+
+  - title: 'Trusting Imagined Futures: Auditing Imagined Rewards for VLA Post-Training'
+    short: TIF
+    org: Beijing University of Posts and Telecommunications / ShiFang Technology Inc. / Institute of Automation CAS / Wuhan Electric Power Technical College
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.04873'
+    features: {action: true}
+    tags: [想象奖励审计, 动作条件视频, 离线轨迹筛选, 行为克隆]
+    note: 复用动作条件视频世界模型，以执行配对训练奖励风险审计并离线筛选真实轨迹用于行为克隆；等数据预算下 LIBERO 成功率从 73.25% 升至 76.25%，但未验证世界模型在线闭环，实机结果仅为录制视频筛选。
+    note_en: Reuses an action-conditioned video world model to learn reward-risk auditing from paired executions and select real trajectories offline for behavior cloning; improves LIBERO success from 73.25% to 76.25% at equal data budgets, but does not validate online world-model feedback, and robot results only evaluate recorded-video selection.
+
+  - title: 'PrimeSim: A Generalist World Model Simulator from Large-Scale Cross-Embodiment Demonstrations'
+    short: PrimeSim
+    org: PrimeBot Research / Southeast University / Shanghai Jiao Tong University / The Chinese University of Hong Kong / University of Chinese Academy of Sciences / Beihang University / Peking University / Shanghai Innovation Institute
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.04870'
+      project: https://primebottech.github.io/PrimeSim-website/
+      code: https://github.com/PrimebotTech/PrimeSim
+    features: {action: true, realtime: true, closedloop: true, longhorizon: true}
+    tags: [跨平台动作接口, 多视角因果生成, 分层KV记忆, 模型内策略优化]
+    note: 以统一动作接口和因果视频生成学习跨平台仿真，并在模型内用策略反馈训练 GRPO；十个留出 episode 评测覆盖 61–104.6 秒展开。单 A100-80GB、三视角 288×384 的四步短窗生成达到 10.12 时序 FPS，持续 KV 长序列为 7.63；质量基准采用不同配置，真机策略收益尚未验证。
+    note_en: Learns cross-platform simulation through a unified action interface and causal video generation, using in-model policy feedback for GRPO training; ten held-out episodes cover 61–104.6-second rollouts. Four-step short-window generation reaches 10.12 temporal FPS for three 288×384 views on one A100-80GB, versus 7.63 for continuous-KV long sequences; quality benchmarks use a different configuration, and real-robot policy gains remain unvalidated.
+
+  - title: 'Hybrid Particle-Voxel Dynamics for Multimodal 3D World Simulation'
+    short: 3D World Simulator
+    org: Columbia University / UC Berkeley / University of Michigan / NVIDIA / Analog Devices
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.04492'
+      project: https://jwang771.github.io/3dworldsimulator/
+      code: https://github.com/jwang771/3d-world-simulator
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [粒子体素表示, 三维潜动力学, 视触觉预测, 真机MPC]
+    note: 以粒子–体素表示和动作条件三维潜动力学联合预测视觉、几何与触觉；6 项 ALOHA 任务的 200 帧展开平均 PSNR 为 23.24 dB，Robot4DGen 为 20.59 dB，并支持策略反馈评估和真机 MPC。依赖固定工作区，留出物体的几何优势未转化为渲染优势，50 Hz 声明缺完整计时规格。
+    note_en: Jointly predicts vision, geometry, and touch using particle–voxel representations and action-conditioned 3D latent dynamics; 200-frame rollouts across 6 ALOHA tasks average 23.24 dB PSNR versus Robot4DGen's 20.59 dB, supporting policy-feedback evaluation and real-world MPC. It relies on a fixed workspace; held-out geometry gains do not extend to rendering, and the 50 Hz claim lacks a complete timing specification.
+
+  - title: 'Controlling Action-Head Co-Adaptation to VLM Representation Anisotropy'
+    short: AdaIE
+    org: University of California, Santa Barbara / XPeng
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.04006'
+    features: {action: true, closedloop: true}
+    tags: [敏感性重加权, 编码器预测器接口, 既有动力学训练, MPC]
+    note: 在既有动作条件 LeWM/DINO-WM 的编码器–预测器接口应用敏感性重加权，用于反馈规划；五训练种子的 LeWM Push-T 成功率从 92.8% 升至 95.6%，OGBench-Cube 仅从 76.4% 升至 76.8%。重加权强度仍需手调，未报告显著性检验，世界模型实验限于仿真。
+    note_en: Applies sensitivity-based reweighting at the encoder–predictor interface of existing action-conditioned LeWM/DINO-WM models for feedback planning; across five training seeds, LeWM Push-T success rises from 92.8% to 95.6%, while OGBench-Cube rises only from 76.4% to 76.8%. Reweighting strength still requires manual tuning, significance tests are unreported, and world-model experiments are limited to simulation.
