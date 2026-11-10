@@ -2392,3 +2392,117 @@ papers:
     tags: [特征蒸馏, 紧凑潜状态, 视觉规划, 模型预测控制]
     note: 仅在训练时蒸馏 DINO 特征来学习 192 维动作条件潜在动力学，推理时移除教师并通过 CEM 重规划；在四个仿真环境取得 84.7% 平均成功率，视觉扰动下的平均泛化仍弱于 DINO-WM。
     note_en: Uses DINO feature distillation only during training to learn 192-dimensional action-conditioned latent dynamics, discards the teacher at inference, and replans with CEM. It achieves 84.7% average success across four simulated environments, while average generalization under visual perturbations remains below DINO-WM.
+
+  - title: 'Physical Canvas: A Vision Tactile World Model For Robot Policy Evaluation And Learning'
+    short: PhysCanvas
+    org: CASIA / Anyverse Robotics / Open-Phoenix Team / National University of Singapore / Xi'an Jiaotong University / Beijing Institute of Technology
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.28613'
+      project: https://zebinx.github.io/PhysCanvas_HomePage/
+      code: https://github.com/OpenPhoenix-Team/PhysCanvas
+    features: {action: true, closedloop: true}
+    tags: [视触觉, 状态一致性, 策略评估, 世界模型强化学习]
+    note: 将视觉、触觉与任务状态统一到图像画布，以投影关节动作驱动预测，并通过一致性监督支持模型内闭环评估与 GRPO；四项真机任务中 π0.5 平均成功率由 59.1% 升至 70.8%，收益随任务变化。训练与 RL 后训练代码尚未完整发布。
+    note_en: Unifies vision, touch, and task state on an image canvas, predicts futures from projected joint actions, and uses consistency supervision for closed-loop evaluation and GRPO inside the model. Across four real-robot tasks, π0.5 mean success rises from 59.1% to 70.8%, with task-dependent gains. Training and RL post-training code is not fully released.
+
+  - title: Exploring Temporal Context-Aware Physical Grounding in Latent World Models
+    short: G-JEPA
+    org: The Hong Kong Polytechnic University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.28483'
+      code: https://github.com/myl11045/G-JEPA
+    features: {action: true, closedloop: true}
+    tags: [JEPA, 时序物理监督, S4D, 动作先验, 模型预测控制]
+    note: 以共享因果 S4D 模块监督观测和预测潜状态的物理信息，并混合扩散动作提案与 CEM 闭环搜索；PushT-Ada 成功率由 LeWM 的 56.90% 提升至 87.11%，主结果仅使用一个模型训练种子，尚无真机验证。
+    note_en: Uses shared causal S4D grounding for observed and predicted latents, combining diffusion action proposals with closed-loop CEM search. PushT-Ada success rises from LeWM's 56.90% to 87.11%; main results use one model-training seed, without real-robot validation.
+
+  - title: 'Slot-JEPA: Object-Structured Prediction Interfaces for Latent World Models'
+    short: Slot-JEPA
+    org: University of Chinese Academy of Sciences / ICT, CAS / Beijing Academy of Artificial Intelligence / IIE, CAS
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.28074'
+      code: https://github.com/KID-7391/Slot-JEPA
+    features: {action: true, closedloop: true}
+    tags: [物体结构, 转移记忆, 动态掩码, 最优传输, 视觉规划]
+    note: 将视觉表征分解为稳定槽与动态掩码，以转移记忆预测动作后果并用非平衡最优传输进行闭环规划；REALM-JEPA 仿真达到 93/108（86.1%）成功，依赖规划前探索初始化记忆，槽不保证单一物体身份。
+    note_en: Factorizes visual features into stable slots and dynamic masks, predicts action consequences with transition memory, and plans through unbalanced optimal transport. It succeeds in 93/108 REALM-JEPA simulation cases (86.1%), requiring exploratory memory initialization; slots need not preserve individual object identity.
+
+  - title: World Models with Configurable Perception
+    short: ConfigWM
+    org: East China Normal University / HKUST
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.27914'
+      project: https://configwm.github.io/
+    features: {action: true, closedloop: true}
+    tags: [任务条件感知, 抗干扰, 潜动力学, 模型预测控制]
+    note: 用任务查询过滤无关视觉动态，再学习动作条件潜动力学并闭环规划；干扰等级匹配的 Two-Room 平均成功率为 96.8%，DINOv2-WM 为 69.5%。依赖成对干扰/干净监督，真实数据实验仅评估感知表征。
+    note_en: Filters irrelevant visual dynamics with task queries before learning action-conditioned latent dynamics and planning in closed loop. Across matched distractor levels, average Two-Room success is 96.8%, versus DINOv2-WM's 69.5%. It requires paired distracted/clean supervision; real-data experiments evaluate perception only.
+
+  - title: 'LaLa-World: Scaling Latent World Models with Natural Language Actions'
+    short: LaLa-World
+    org: NAVER AI Lab / Georgia Institute of Technology / Brown University / Mila & Université de Montréal
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.27851'
+      project: https://june-page.github.io/lala-world/
+      code: https://github.com/junha1125/LaLa-World
+    features: {action: true, closedloop: true}
+    tags: [语言动作接口, 跨域潜动力学, JEPA, 模型预测控制]
+    note: 将异构数值动作及视觉变化统一成语言，学习跨域潜动力学并用于 CEM 重规划；五项仿真控制平均成功率为 72.1%，但 DROID 仅作离线动作评分，长时展开仍未充分验证。
+    note_en: Expresses heterogeneous numerical actions and visual changes in language to learn cross-domain latent dynamics for CEM replanning. Average success reaches 72.1% across five simulated control tasks, while DROID uses an offline action score and long-horizon rollouts remain insufficiently validated.
+
+  - title: Training Controllable World Models via Action Influence Maximization
+    short: AIM
+    org: Princeton University / Columbia University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.27387'
+      project: https://princeton-prism.github.io/action-influence-maximization/
+    features: {action: true}
+    tags: [动作影响, 主动数据采集, 动作可控性, 状态覆盖]
+    note: 用动作影响与状态覆盖奖励主动采集世界模型训练数据；在仿真 Push-T 的 BC 轨迹评估中，3000 条示范加 500 条主动轨迹可匹配 30 万专家轨迹的末端可控性，尚未验证真机或世界模型下游闭环控制。
+    note_en: Actively collects world-model training data using action-influence and state-coverage rewards. On BC rollouts in simulated Push-T, 3,000 demonstrations plus 500 active trajectories match the end-effector controllability of 300,000 expert trajectories; real robots and downstream closed-loop world-model control remain untested.
+
+  - title: Latent Projection for Latent Planning
+    short: LP2
+    org: Stony Brook University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.26979'
+      code: https://github.com/yjang43/lp2
+    features: {action: true, closedloop: true}
+    tags: [潜空间投影, 规划代价, 不确定性, 冻结世界模型]
+    note: 在冻结 LeWM 上拟合无动作条件的正规线性转移，将规划成本投影到低不确定性子空间，复用原动作条件预测器与重规划；困难 TwoRoom 成功率由 60.0% 升至 96.7%，收益主要集中二维导航，依赖高斯–马尔可夫近似。
+    note_en: Fits an action-free normal linear transition over frozen LeWM latents and projects planning costs onto low-uncertainty directions, retaining the existing action-conditioned predictor and replanning. Harder TwoRoom success rises from 60.0% to 96.7%; gains concentrate in 2D navigation and rely on a Gauss–Markov approximation.
+
+  - title: 'Beckmann World Models: Direct Terminal-Map Learning for One-Step Action-Conditioned Prediction'
+    short: BWM
+    org: UC Berkeley / Stanford University / Independent Researcher
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.26903'
+      project: https://abecid.com/beckmann-world-models/
+    features: {action: true, closedloop: true}
+    tags: [端点映射, 单步生成, 策略评估, 生成历史恢复]
+    note: 以端点监督和生成历史恢复训练动作条件单步预测器，无需预训练生成教师；PushT 策略均值 IoU 预测误差为 0.0100。实验仅单训练种子，规划增益的置信区间跨零；匹配干净训练窗口曝光量时，BWM 的 LPIPS 劣于基线。
+    note_en: Trains an action-conditioned one-step predictor with endpoint supervision and generated-history recovery, without a pretrained generative teacher. PushT policy-mean IoU prediction error is 0.0100. Experiments use one training seed, the planning-gain confidence interval crosses zero, and BWM has worse LPIPS than the baselines when clean-window exposure is matched.

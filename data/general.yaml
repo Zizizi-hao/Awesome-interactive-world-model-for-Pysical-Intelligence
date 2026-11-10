@@ -873,3 +873,45 @@ papers:
     tags: [JEPA, 物理时间序列, 视频预测表征, 跨域物理理解]
     note: 以对齐的物理时间序列辅助训练视频预测表征，在驾驶、机器人操作和人运动中验证未来状态与接触预测；可为交互模型提供物理表征基础，但当前仅视频输入，动作条件建模与真实控制仍是后续工作。
     note_en: Uses aligned physical time series to supervise predictive video representations, evaluating future-state and contact prediction across driving, robot manipulation, and human motion. It provides a physical representation foundation for interactive models, but currently takes video only; action-conditioned modeling and real control remain future work.
+
+  - title: 'Learning Computational Structure for Sample-Efficient Prediction'
+    short: LeWi
+    org: Georgia Institute of Technology / University of Cyprus
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.28555'
+    features: {action: true}
+    tags: [可学习连接, 样本效率, 状态动力学, 稀疏结构]
+    note: 以神经元低维嵌入联合学习连接与权重，按当前状态和动作预测状态增量；17 个仿真任务、16 个配对种子的 16 步开环评测中，在 16 项任务上较稠密网络改善样本效率。尚无闭环控制验证，稀疏连接仍以稠密计算实现。
+    note_en: Jointly learns connectivity and weights through low-dimensional neuron embeddings to predict state changes from the current state and action. In 16-step open-loop evaluation across 17 simulated tasks with 16 paired seeds, it improves sample efficiency over dense networks on 16 tasks. Closed-loop control is untested, and sparse connectivity is still computed densely.
+
+  - title: Learning the 4D World through Point Trajectory Forecasting
+    short: VPM
+    org: KAIST / ETH Zürich / Seoul National University / New York University / RLWRLD / Physics Sim Lab
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.28594'
+      project: https://rootyjeon.github.io/video-point-model/
+      code: https://github.com/rootyJeon/VPM
+    features: {closedloop: true}
+    tags: [多视图, 三维点轨迹, 几何一致性, 视频动作联合生成]
+    note: 联合预测多视图未来视频与持久三维点轨迹，以同预算消融验证点监督改善几何一致性和机器人动作学习；轨迹可经运动学转换用于定性滚动控制，但联合生成动作不等同于外部动作条件预测，且依赖标定相机。
+    note_en: Jointly forecasts multi-view video and persistent 3D point trajectories, with matched-budget ablations showing gains in geometric consistency and robot action learning. Forecast tracks support qualitative receding-horizon control through kinematic conversion, but joint action generation does not establish externally action-conditioned prediction, and calibrated cameras are required.
+
+  - title: 'OverSeer: Multi-Agent World Models Beyond What Agents See'
+    short: OverSeer
+    org: Meta AI / University of Oxford
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.28554'
+      project: https://runjiali-rl.github.io/OverSeer/
+    features: {action: true}
+    tags: [多智能体, 辅助视角, 残差压缩, 跨视角一致性]
+    note: 以固定辅助视角与 δ-VAE 联合预测多玩家动作条件视频；Minecraft 回到起点任务中，VLM 准确率由无辅助视角的 25.0% 提升至 60.2%，辅助视角 token 压缩 8 倍，但覆盖不足和快速场景变化仍限制一致性。
+    note_en: Jointly predicts multi-player action-conditioned videos with fixed auxiliary views and a δ-VAE. On Minecraft's return-to-start task, VLM accuracy rises from 25.0% without auxiliary views to 60.2%, while auxiliary tokens are compressed eightfold; limited coverage and rapid scene changes still constrain consistency.
