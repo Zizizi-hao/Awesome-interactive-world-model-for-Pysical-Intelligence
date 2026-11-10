@@ -2698,3 +2698,88 @@ papers:
     tags: [闭环策略评测, 失败诊断, 场景边界, 交互动力学]
     note: 以生成观测反馈策略，评估动作条件世界模型在 RoboTwin、LIBERO 和 G1 上的失败类型、阶段及仿真场景变化边界；七模型的成功率相关性未保证失败诊断一致性。冻结边界配对使用独立参考重估，但结果受适配器、执行时间表和观察性标签影响；公开资源主要为数据与文档。
     note_en: Feeds generated observations back to policies to evaluate action-conditioned world models on failure types, stages and simulated scene-change boundaries across RoboTwin, LIBERO and G1. Success-rate correlation across seven models does not ensure faithful failure diagnosis. Frozen boundary pairs use independent reference re-estimation, but results depend on adapters, rollout schedules and observational labels; public resources mainly provide data and documentation.
+
+  - title: 'PDRVLA: A Vision-Language-Action Model with Physical Dynamics Representations'
+    short: PDRVLA
+    org: Peking University / JD.com
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.37381'
+    features: {}
+    tags: [预测辅助表征, 未来特征监督, 视频模型蒸馏, VLA]
+    note: 以未来 RGB、深度和光流特征监督物理 token，冻结视频模型仅在训练时提供辅助；100 个留出 episode 上，平均归一化预测 MSE 从 0.6439 降至 0.6354，相对改善 1.32%，光流改善区间跨零。预测对照仅单训练种子，部署移除预测头，受控策略对照尚未证明世界模型监督的控制收益。
+    note_en: Supervises physical tokens with future RGB, depth and flow features, using a frozen video model only during training. Across 100 held-out episodes, mean normalized prediction MSE falls from 0.6439 to 0.6354, a 1.32% relative improvement; the flow-improvement interval includes zero. Prediction comparisons use one training seed, prediction heads are removed at deployment, and controlled policy comparisons have not established control gains from world-model supervision.
+
+  - title: 'GAWM: A Compact Latent World-Action Model for Multi-Task Robot Manipulation'
+    short: GAWM
+    org: Genisom AI
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.37091'
+      project: https://oucliuyang.github.io/gawm-homepage/
+      code: https://github.com/gaoxiang12/ga-wm
+    features: {closedloop: true}
+    tags: [任务条件预测, 双时距潜状态, 轻量世界动作模型, 预测反馈控制]
+    note: 以任务码预测双时距 DINOv3 潜状态并反馈动作解码器；低数据 LIBERO 比移除世界模型高 9.5 个百分点，但该消融同时删除多种特征损失。95.6% 主结果使用额外域内数据，扩展数据下增益区间跨零；真实单一目标瓶任务成功 46/50。预测不接受外部动作，训练种子重复未报告。
+    note_en: Predicts two-horizon DINOv3 latents from task codes and feeds them to the action decoder. Low-data LIBERO success exceeds the world-model-free variant by 9.5 percentage points, but that ablation also removes multiple feature losses. The 95.6% headline result uses extra in-domain data, and the gain interval under extended data includes zero. Real execution succeeds in 46/50 trials on one target-bottle task. Prediction is not externally action-conditioned; repeated training seeds are unreported.
+
+  - title: 'RynnWorld-Latent: A Cross-Embodiment World Model Conditioned on Universal Latent Actions'
+    short: RynnWorld-Latent
+    org: CUHK / Hong Kong Embodied AI Lab / Alibaba DAMO Academy / Hupan Lab
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.36791'
+      project: https://alibaba-damo-academy.github.io/RynnWorld-Latent.github.io/
+      code: https://github.com/alibaba-damo-academy/RynnWorld-Latent
+    features: {action: true, closedloop: true}
+    tags: [通用潜动作, 跨具身视频动力学, 帧对齐注入, 数字遥操作]
+    note: 复用 RynnLAM 的三维潜动作预训练视频动力学，再适配原生机器人控制；移除帧对齐注入后，Marvin-WUJI 留出预测 LPIPS 从 0.12 退至 0.18。数字遥操作以生成帧反馈人类，但伪动作与生成观测的物理一致性未保证；真机每任务仅 35 次，合成数据收益未隔离额外训练量。
+    note_en: Pretrains video dynamics with RynnLAM's 3D-grounded latent actions before adapting to native robot controls. Removing frame-aligned injection worsens held-out Marvin-WUJI prediction LPIPS from 0.12 to 0.18. Digital teleoperation feeds generated frames back to a human, but pseudo-actions and generated observations are not guaranteed physically consistent. Real-robot tests use 35 trials per task; synthetic-data gains do not isolate additional training.
+
+  - title: 'SWIM: Learning What Matters from Behaviors for JEPA World Models'
+    short: SWIM
+    org: Boston University / Unity Technologies
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.36662'
+    features: {action: true, closedloop: true}
+    tags: [行为加权, 状态监督, JEPA, 模型预测控制]
+    note: 用逆动力学从离线行为学习状态坐标权重，再校准动作条件 JEPA 的潜空间距离。五任务、两规划器及五个世界模型训练种子下，默认配置比均匀状态加权平均提高 0.9–1.0 个百分点；部署仍以图像反馈重规划。依赖训练期模拟器状态与行为覆盖，证据仅短程仿真。
+    note_en: Learns state-coordinate weights from offline inverse dynamics and uses them to calibrate action-conditioned JEPA latent distances. Across five tasks, two planners and five world-model training seeds, default variants improve success over uniform weighting by 0.9–1.0 percentage points; deployment replans from image feedback. Training requires simulator states and adequate behavioral coverage, with evidence limited to short-horizon simulation.
+
+  - title: 'Rollback: Experience Backtracking in World Models for Policy Improvement'
+    short: Rollback
+    org: AgiBot / Beihang University / National University of Singapore
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.36068'
+      project: https://rollback-wm.github.io/
+    features: {action: true, closedloop: true}
+    tags: [经验回退, 反事实分支, 世界模型适应, 策略改进]
+    note: 在既有 GE-Sim 2.0 中回退决策上下文，以树搜索比较动作分支，并用真实轨迹持续适应动力学；三项真机任务比同世界模型上的 RISE 重现提高 10.67/11.11/11.85 个百分点。实验使用 48 张 H200 和任务专用奖励，未报告独立训练种子；动力学误差改善包含适应过的轨迹，非留出泛化。
+    note_en: Restores decision contexts in existing GE-Sim 2.0, compares action branches through tree search, and continually adapts dynamics using real trajectories. It improves three real-robot tasks over a RISE reproduction using the same world model by 10.67/11.11/11.85 percentage points. Experiments use 48 H200 GPUs and task-specific rewards, without reported independent training seeds; fidelity gains include adapted trajectories rather than held-out generalization.
+
+  - title: 'E0.5: From Reconstructive to Future-Predictive 3D Foundations for Robotic World-Action Modeling'
+    short: E0.5
+    org: X-Era AI Lab
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.36011'
+      project: https://www.x-era.ai/e05/
+      code: https://github.com/X-EraAI/e05
+    features: {}
+    tags: [未来几何监督, 三维基础模型, 预测辅助学习, 世界动作模型]
+    note: 在可训练 VGGT-Omega 上以动作块终点的未来深度、点图及相机监督动作学习；同五轮训练下，RoboTwin 随机场景成功率由当前几何监督的 20.12% 升至 29.20%。几何预测仅作训练监督，不接受候选动作条件；预测指标限训练集诊断，真机每任务与设置仅十次，未报告多训练种子。
+    note_en: Uses action-chunk-endpoint depth, point maps and cameras to supervise action learning in a trainable VGGT-Omega. At the same five-epoch budget, RoboTwin randomized-scene success rises from 20.12% with current-geometry supervision to 29.20%. Geometry prediction is training-only and is not conditioned on candidate actions. Prediction metrics are training-set diagnostics; real-robot tests use ten trials per task and setting, without multiple training seeds.

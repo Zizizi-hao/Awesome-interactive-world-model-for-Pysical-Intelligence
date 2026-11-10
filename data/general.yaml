@@ -1029,3 +1029,16 @@ papers:
     tags: [上下文条件, 视角切换, 累计控制变换, 相机控制]
     note: 将视角、动作与相机控制统一为上下文 token，以 IT-RoPE 编码累计控制变换；5B 模型用 10 万导航片段与 500 条切换序列，导航均分 81.5、切换成功率 93.8%，含切换微调。同数据消融支持条件设计；默认双向生成，因果变体为 81.2/90.6%，长时证据仅定性，代码权重尚未发布。
     note_en: Unifies view, action and camera controls as context tokens, with IT-RoPE encoding accumulated control transitions. Trained on 100k navigation clips and 500 switching sequences, the 5B model scores 81.5 on navigation and 93.8% on switching, including switching fine-tuning. Matched-data ablations support the design. Generation is bidirectional by default; the causal variant scores 81.2/90.6%. Long-horizon evidence is qualitative; code and weights remain unreleased.
+
+  - title: Understanding the limits of latent world models
+    org: Helmholtz Munich / Munich Center for Machine Learning
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.37588'
+      project: https://worldmodels.science/analysis
+    features: {}
+    tags: [潜动力学诊断, rollout一致性, 状态充分性, 受控机制研究]
+    note: 提出潜 rollout 一致性 LRC，结合状态探针、速度注入与可逆混合对照，检验三类动作条件潜世界模型；高控制回报仍可伴随 30 步 LRC 低于零。主实验每配置四个训练种子，但仅三种低维确定性环境；结果是受控反例，不能推广为所有世界模型均不学习动力学。
+    note_en: Introduces latent rollout consistency (LRC), state probes, velocity injection and invertible-mixing controls to diagnose three action-conditioned latent world-model families. High control returns can coexist with negative 30-step LRC. Main experiments use four training seeds per setting but cover only three low-dimensional deterministic environments; these are controlled counterexamples, not evidence that all world models fail to learn dynamics.
