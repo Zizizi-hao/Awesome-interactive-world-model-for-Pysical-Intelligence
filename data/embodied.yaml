@@ -2548,3 +2548,57 @@ papers:
     tags: [上下文物理校准, 探索交互, 潜动力学, 模型预测控制]
     note: 将测试场景的探索交互压缩为物理描述 token，无需微调即可校准动作条件潜动力学；75 步上限的仿真 Push-T 中，DINO-WM 闭环成功率由 56.0% 升至 68.0%，但依赖先行交互与回合内物理恒定，尚无真机验证。
     note_en: Compresses exploratory interaction into a physics descriptor token to calibrate action-conditioned latent dynamics without fine-tuning. With a 75-step budget in simulated Push-T, DINO-WM closed-loop success rises from 56.0% to 68.0%; prior interaction and stationary episode physics are required, without real-robot validation.
+
+  - title: 'DiffDreamer: Coupling World Models with Differentiable Simulation for Agile Quadrotor Control'
+    short: DiffDreamer
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.31617'
+    features: {action: true, closedloop: true}
+    tags: [可微仿真, 潜在外部动力学, 四旋翼, 双路径策略优化]
+    note: 耦合动作条件潜在外部运动预测与可微四旋翼动力学，以双路径优化控制策略；仿真追踪距离误差为 0.381 m，Elastic Tracker 为 0.793 m。真机验证依赖已辨识动力学和外部动作捕捉，仅为概念验证。
+    note_en: Couples action-conditioned latent external-motion prediction with differentiable quadrotor dynamics for dual-path policy optimization. Simulated tracking distance error is 0.381 m versus Elastic Tracker's 0.793 m. Real flights are proof-of-concept tests requiring identified dynamics and external motion capture.
+
+  - title: Skeleton-Grounded Latent Action Model for Robot World Models
+    short: SkeLAM
+    org: Harbin Institute of Technology (Shenzhen) / Show Lab, National University of Singapore / Ping An Technology
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.31474'
+      project: https://aopolin-lv.github.io/SkeLAM/
+    features: {action: true}
+    tags: [骨架监督, 潜在动作, 跨模态交换, 动作适配]
+    note: 用骨架监督与跨模态交换将潜动作分为运动和残差分量，再经动作适配驱动视频预测；DROID 的 LPIPS 为 0.1310，DreamDojo 为 0.1473，但 AgiBot 收益不一致，策略评估仅为录制动作重放，尚无闭环验证。
+    note_en: Separates latent actions into skeleton-grounded kinematic and residual components through cross-modal swapping, then adapts robot actions for video prediction. DROID LPIPS is 0.1310 versus DreamDojo's 0.1473, but AgiBot gains are inconsistent; policy evaluation uses recorded-action replay without closed-loop validation.
+
+  - title: 'DRILL: Training World Models to Improve Policies, Not Predict Pixels'
+    short: DRILL
+    org: Tencent Hunyuan / Peking University
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2610.30814'
+    features: {action: true, closedloop: true}
+    tags: [策略效用, 双层优化, 元梯度, 想象策略训练]
+    note: 以想象 GRPO 更新后的模拟器回报训练动作条件世界模型；π0-3B 在五项仿真、五种子中较 WMPO 平均提高 13.1 个成功率百分点。IMG 每外循环额外使用 30 次模拟器 rollout，并增加计算和内存成本，尚无真机验证。
+    note_en: Trains action-conditioned world models for simulator return after imagined GRPO updates. Across five simulated benchmarks and five seeds, π0-3B improves mean success by 13.1 points over WMPO. IMG uses 30 additional simulator rollouts per outer step and extra compute and memory; real robots remain untested.
+
+  - title: 'DeXplicit: Making Physical State Explicit in Dexterous Manipulation World Models'
+    short: DeXplicit
+    org: Nanyang Technological University / UC Berkeley
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.30781'
+      project: https://dexplicit.github.io/
+      code: https://github.com/Abecid/DeXplicit
+    features: {action: true}
+    tags: [显式三维状态, 灵巧操作, 物体运动形变, 外观输送]
+    note: 先按手部轨迹预测物体的显式三维运动与形变，再输送外观并渲染未来视频；HOT3D 前 32 个未来状态的移动点误差由 PointWorld 的 90.47 mm 降至 54.34 mm。依赖度量几何与标定相机，OakInk2 全点误差仍较差，尚无闭环控制验证。
+    note_en: Predicts explicit 3D object motion and deformation from hand trajectories before transporting appearance and rendering video. HOT3D moved-point error over future states 1–32 falls from PointWorld's 90.47 mm to 54.34 mm. Metric geometry and calibrated cameras are required; OakInk2 all-point error worsens, and closed-loop control is untested.

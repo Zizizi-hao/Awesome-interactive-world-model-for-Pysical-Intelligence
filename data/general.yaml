@@ -945,3 +945,16 @@ papers:
     tags: [多智能体, 异构动作接口, 语义数值调制, 流式生成]
     note: 以主体空间门控和语义–数值动作接口统一游戏与机器人多主体控制；单 GPU 在 512×448 下报告 17.70 FPS，但未披露 GPU 型号。主定量评测仅 81 帧，蒸馏提高速度却损失部分机器人控制精度，尚无策略闭环验证。
     note_en: Unifies multi-agent game and robot control through agent-specific spatial gating and semantic–numerical action interfaces. It reports 17.70 FPS at 512×448 on one GPU without naming the GPU model. Quantitative evaluation covers 81 frames; distillation improves speed while reducing some robot-control accuracy, without closed-loop policy validation.
+
+  - title: 'Inside-JEPA: From Prediction to Relational Grounding in Latent World Models'
+    short: Inside-JEPA
+    org: Australian Institute for Machine Learning, Adelaide University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.31194'
+    features: {action: true}
+    tags: [关系表征, 逆动力学, 机制研究, 动作条件JEPA]
+    note: 在动作条件 JEPA 潜状态中加入实体对关系通道，以逆动力学监督关系表征；RH20T 留出任务的关系 AUROC 提升 0.081，但变化关系预测仅为 0.518。关系真值来自二维框谓词，规划仅为离线单步候选排序，尚无闭环执行。
+    note_en: Adds ordered-entity relational channels to action-conditioned JEPA latents and grounds them through inverse dynamics. Relational AUROC improves by 0.081 on held-out RH20T tasks, but changing-relation forecasts reach only 0.518. Relation targets are 2D-box predicates, and planning is offline one-step candidate ranking without closed-loop execution.
