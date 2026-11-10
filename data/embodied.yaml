@@ -2644,3 +2644,57 @@ papers:
     tags: [动力学辨识, 异常检测, 相机状态估计, 故障定位]
     note: 以状态–动作历史估计隐含动力学，并结合动作条件状态预测误差与潜参数偏移检测异常；240 条真机起重机轨迹、10 种子评测中，高噪相机状态估计下 AP 为 0.77，RWM 为 0.61。需正常运行参考分布，工况变化可能误报，尚无闭环干预验证。
     note_en: Infers latent dynamics from state–action history and detects anomalies using action-conditioned prediction errors and latent deviations. Across 240 real crane trajectories and 10 seeds, AP with noisy camera-based state estimates is 0.77 versus RWM's 0.61. A nominal reference distribution is required; operating-condition changes may trigger false alarms, and closed-loop intervention is untested.
+
+  - title: 'Adapt for Planning, Not just Prediction: Optimistic Test-Time World Model Adaptation'
+    short: OpTTA
+    org: Texas A&M University
+    year: 2026
+    venue: CoRL Workshop on Pretrain to Adapt
+    category: embodied
+    links:
+      arxiv: '2610.35636'
+      project: https://akshaymete.com/projects/optta
+      code: https://github.com/akshaymete/optta
+    features: {action: true, closedloop: true}
+    tags: [测试时适应, 乐观规划, 潜在动力学, 模型预测控制]
+    note: 在已有 JEPA 世界模型上，将已观测转移的预测损失与候选轨迹的乐观目标代价结合，闭环更新后重规划；八个仅更新预测器的偏移设置中，相对冻结模型平均提高 13.5 个百分点，预测损失适应为 6.9 个百分点。TwoRoom 无改善，适应增加规划开销。
+    note_en: Combines observed-transition prediction loss with an optimistic goal-reaching cost on candidate rollouts to adapt existing JEPA world models, then replans with feedback. Across eight shifted predictor-only settings, the average gain over frozen models is 13.5 percentage points versus 6.9 for prediction-only adaptation. TwoRoom does not improve, and adaptation adds planning cost.
+
+  - title: Video World Models Need Predictable Latents
+    short: Predictable Latents
+    org: New York University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.34663'
+      code: https://github.com/mattia-scardecchia/predictable-latents
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [可预测潜表示, 时序目标, 历史条件解码, 机器人策略评测]
+    note: 用时序表征目标与历史帧条件解码器训练动作条件视频世界模型；相同训练更新数下，分布外及最长 59 帧外推的像素/感知误差降低 15–24%，两步采样仍改善策略评测一致性。闭环策略评测仅一个训练种子，采样步数减少不代表实测实时吞吐。
+    note_en: Trains action-conditioned video world models with temporal representation objectives and a past-frame-conditioned decoder. At matched training-update counts, pixel and perceptual errors fall 15–24% out of distribution and in extrapolation up to 59 predicted frames, while two-step sampling improves policy-evaluation agreement. Closed-loop policy evaluation uses one training seed; fewer sampling steps do not establish real-time throughput.
+
+  - title: What Does World Modeling Actually Improve in Robot Action Learning?
+    org: Institute of Automation, CAS / University of Chinese Academy of Sciences / Central South University / Gengine
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.34593'
+    features: {}
+    tags: [预测辅助监督, 受控消融, 世界动作模型, 泛化诊断]
+    note: 固定架构、初始化、数据和训练步数的家族内对照中，未来视频监督使 FastWAM/OpenWAM 在 RoboTwin 熟悉干净任务上分别提升 24.38/72.91 个百分点。仅单训练种子的仿真，环境随机化下存在严重地板效应；训练期预测收益不证明鲁棒泛化或预测反馈控制。
+    note_en: With architecture, initialization, data and training steps fixed within each family, future-video supervision improves FastWAM/OpenWAM on familiar clean RoboTwin tasks by 24.38/72.91 percentage points. Evidence is limited to single-training-seed simulation, with severe floors under environmental randomization; training-time prediction gains do not establish robust generalization or prediction-feedback control.
+
+  - title: 'WorldFailBench: Do World Models Understand Policy Failures?'
+    short: WorldFailBench
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.33565'
+      project: https://github.com/DAXIAORobotics/WorldFailBench
+    features: {action: true, closedloop: true}
+    tags: [闭环策略评测, 失败诊断, 场景边界, 交互动力学]
+    note: 以生成观测反馈策略，评估动作条件世界模型在 RoboTwin、LIBERO 和 G1 上的失败类型、阶段及仿真场景变化边界；七模型的成功率相关性未保证失败诊断一致性。冻结边界配对使用独立参考重估，但结果受适配器、执行时间表和观察性标签影响；公开资源主要为数据与文档。
+    note_en: Feeds generated observations back to policies to evaluate action-conditioned world models on failure types, stages and simulated scene-change boundaries across RoboTwin, LIBERO and G1. Success-rate correlation across seven models does not ensure faithful failure diagnosis. Frozen boundary pairs use independent reference re-estimation, but results depend on adapters, rollout schedules and observational labels; public resources mainly provide data and documentation.

@@ -1833,3 +1833,17 @@ papers:
     tags: [候选轨迹, 未来潜状态, 评论监督, NAVSIM]
     note: 用候选轨迹条件化未来潜状态，并用评论损失把预测特征拉向动作评价。仅前相机的 NAVSIM-v1 PDMS 为 93.4。去掉 focal 后，完整模型为 93.3，去掉未来监督降到 93.0，阻断评论梯度降到 92.3。评测是日志开环，没有闭环驾驶。
     note_en: Conditions future latent states on candidate trajectories and uses critic losses to shape predictive features for action evaluation. Front-camera NAVSIM-v1 PDMS is 93.4. Without focal weighting, the full model scores 93.3, removing future supervision lowers it to 93.0, and blocking critic gradients lowers it to 92.3. Evaluation is log-based and open-loop, with no closed-loop driving.
+
+  - title: 'Dream to Assist: Intent-Conditioned World Models for Shared Vehicle Control'
+    short: Dream2Assist
+    org: Toyota Research Institute / Massachusetts Institute of Technology
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.34650'
+      project: https://dream2assist.github.io/extended/
+    features: {action: true, closedloop: true}
+    tags: [共享驾驶控制, 人类意图, RSSM, 模型强化学习]
+    note: 扩展带意图推断的 RSSM 及虚拟共同训练，用于人与辅助策略共享驾驶控制；城市双盲研究的完整记录会话中，意图条件策略碰撞率为 2.7%，无意图策略为 7.7%，但无辅助为 1.7%，主观评分无显著改善。三人实车平台测试仅支持迁移可行性。
+    note_en: Extends an intent-aware RSSM and fictitious co-play for shared driving control. In fully logged sessions of the double-blind urban study, collision rates are 2.7% with intent conditioning, 7.7% without it, and 1.7% unassisted, with no significant subjective-rating improvement. A three-person vehicle-platform test supports transfer feasibility only.

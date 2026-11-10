@@ -985,3 +985,47 @@ papers:
     tags: [统一动作接口, 时空坐标, 注意力数量校准, 跨域训练]
     note: 将力、相机、手部和机器人姿态统一为带语义及原生时空坐标的动作元素，并校准注意力中的数量偏差；相同样本曝光下，联合训练的力跟随分数由专用模型的 0.5436 升至 0.7630。评测限离线视频与动作估计器，尚无闭环控制验证。
     note_en: Represents forces, camera commands, and hand/robot poses as semantic action elements grounded in native spatiotemporal coordinates, with cardinality-calibrated attention. At matched sample exposure, joint training raises force-following score from 0.5436 for a dedicated model to 0.7630. Evaluation is offline and estimator-based, without closed-loop control.
+
+  - title: 'WMEval: Evaluating Interactive World Models Grounded on Physical Simulations'
+    short: WMEval
+    org: UC San Diego / Unity
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.33894'
+      project: https://snyhlx.github.io/wmeval-blog/
+      code: https://github.com/hao-ai-lab/WMEval
+    features: {}
+    tags: [交互世界模型评测, 动作匹配, 物理因果, 模拟器参考]
+    note: 在九个 Unity 场景中以匹配动作和模拟器状态检验交互世界模型；BeamDomino 完整因果链保留率为 Project Genie 3/15、Unity 13/15。属于评测框架，非新动力学模型；多数设置仅五次生成，感知误差与失效样本排除限制细粒度排名。
+    note_en: Evaluates interactive world models against matched actions and simulator states in nine Unity scenes. Project Genie preserves 3/15 complete BeamDomino causal chains versus Unity's 13/15. This is an evaluation framework rather than new dynamics; most settings use only five generations, and perception errors and invalid-sample exclusions limit fine-grained rankings.
+
+  - title: 'Mix Forcing: Causal Pre-Training via Mixture Attention for Interactive World Models'
+    short: Mix Forcing
+    org: HKUST / Robbyant
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.33589'
+      project: https://zelingao98.github.io/mixforcing/
+      code: https://github.com/robbyant/lingbot-world-v2
+    features: {action: true, longhorizon: true}
+    tags: [因果预训练, 混合注意力, 分块提示, 长时视频世界模型]
+    note: 混合教师强制与双向训练，对 14B 视频模型进行因果预训练并蒸馏为四步生成器，支持相机与分块文本控制。60 秒 SANA-WM-Bench simple/hard 画质为 74.8/74.7，一小时 rollout 分段平均为 67.3–71.6；长时证据限视觉指标，不保证几何记忆，未报告实测吞吐。
+    note_en: Mixes teacher forcing and bidirectional training for causal pretraining of a 14B video model, followed by four-step distillation with camera and chunk-wise text control. Quality is 74.8/74.7 on the 60-second simple/hard SANA-WM-Bench splits; interval means over one-hour rollouts range from 67.3 to 71.6. Long-horizon evidence concerns visual metrics, without guaranteed geometric memory or reported measured throughput.
+
+  - title: 'World-in-Context: Interactive Video World Modeling with In-Context Conditioning'
+    short: World-in-Context
+    org: Alibaba Token Hub, Alibaba Group
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.33169'
+      project: https://haroldchen19.github.io/WiC-site/
+    features: {action: true}
+    tags: [上下文条件, 视角切换, 累计控制变换, 相机控制]
+    note: 将视角、动作与相机控制统一为上下文 token，以 IT-RoPE 编码累计控制变换；5B 模型用 10 万导航片段与 500 条切换序列，导航均分 81.5、切换成功率 93.8%，含切换微调。同数据消融支持条件设计；默认双向生成，因果变体为 81.2/90.6%，长时证据仅定性，代码权重尚未发布。
+    note_en: Unifies view, action and camera controls as context tokens, with IT-RoPE encoding accumulated control transitions. Trained on 100k navigation clips and 500 switching sequences, the 5B model scores 81.5 on navigation and 93.8% on switching, including switching fine-tuning. Matched-data ablations support the design. Generation is bidirectional by default; the causal variant scores 81.2/90.6%. Long-horizon evidence is qualitative; code and weights remain unreleased.
