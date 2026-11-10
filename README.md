@@ -10,7 +10,7 @@
 
 世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象； 可交互世界模型进一步支持以动作 (action) 为条件的生成与控制， 为自动驾驶和具身智能提供数据引擎、神经仿真器与策略学习基础。 本仓库收录并整理该方向的代表性工作，按应用场景分类， 并标注每篇工作的交互能力维度。
 
-📊 共收录 **442** 篇工作 ｜ 最后更新：2026-11-11
+📊 共收录 **443** 篇工作 ｜ 最后更新：2026-11-11
 
 <p align="center">
   <img src="assets/interactive-world-model1.png" alt="交互式世界模型：智能体与世界模型的闭环交互" width="760">
@@ -32,7 +32,7 @@
 ## 目录
 
 - [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（140）
-- [具身智能 Embodied AI](#具身智能-embodied-ai)（221）
+- [具身智能 Embodied AI](#具身智能-embodied-ai)（222）
 - [通用 / 游戏 General / Game](#通用--游戏-general--game)（81）
 
 ## 自动驾驶 Autonomous Driving
@@ -363,6 +363,7 @@
 | **Token-World**: World Modeling in Vision-Language Model Token Space for Robot Manipulation | arXiv (2026) | 北京大学 / 南方科技大学 / 香港科技大学 / MUKA | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.00575) \| [项目](https://chuyaofu.github.io/Token-World/) | 在压缩后的视觉–语言模型 token 上做动作条件动力学，再映回策略用的表示，不先生成 RGB 再重新编码。闭环里，模拟成功率与参考环境的相关从 Ctrl-World 的 0.583 到 0.794。长程展开时特征保真和动作一致性下降更慢。代码将放出。 |
 | **TourPhysics**: Bringing Physics to World Models for Exploration and Manipulation from a Single Image | arXiv (2026) | 复旦 / TeleAI | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2609.04911) | 从单图与声明式物理配置在线初始化，把 PhysOmni 从有限物理视频扩展为可持久探索与操作：每步先由仿真器算出物理与相机轨迹再生成观测，仿真状态与几何在合成期间锁定，并用参考锚定外观记忆抑制长时重访漂移。 |
 | **Toward Unified Robot Learning: Bridging Representation, Vision-Language-Action, and World Models** | arXiv (2026) | Fujitsu / CMU | — | [论文](https://arxiv.org/abs/2609.03927) | 综述将机器人学习沿表征理解、VLA 执行、世界模型推理三条轴统一，分析组件如何交互以及割裂带来的不确定性、OOD、跨本体、长上下文与长程规划问题，并给出面向物理接地、概率化统一系统的方向。 |
+| **A²-MEAS**: Toward the Era of Agentic Embodied Intelligence | arXiv (2026) | Shanghai Jiao Tong University / Anyverse Dynamics | 🔁 | [论文](https://arxiv.org/abs/2611.09124) \| [项目](https://a2-meas.github.io/) \| [代码](https://github.com/AutoLab-SAI-SJTU/A2MEAS) | 以多视角潜在未来预测辅助动作策略，并接入观测反馈纠错；Selected12 组件对照加入世界模型后，Q-score 从 0.4846 升至 0.5183。无外部动作条件或长时 rollout 验证；公开版省略部分纠错与执行策略，其 BEHAVIOR Q-score 为 0.5287，不能等同论文完整系统的 0.6411。 |
 | **TrAct**: Bridging Robot Control and Visual Prediction with Visual Tracks | arXiv (2026) | Stanford | 🎮 🔁 | [论文](https://arxiv.org/abs/2608.24101) | 用视觉轨迹作为控制与预测的中间接口：VLAT 联合预测动作与轨迹，轨迹条件世界模型 rollout，再由视觉语言奖励模型选动作，仿真与真机成功率均高于动作条件世界模型。 |
 | **AIM**: Training Controllable World Models via Action Influence Maximization | arXiv (2026) | Princeton University / Columbia University | 🎮 | [论文](https://arxiv.org/abs/2610.27387) \| [项目](https://princeton-prism.github.io/action-influence-maximization/) | 用动作影响与状态覆盖奖励主动采集世界模型训练数据；在仿真 Push-T 的 BC 轨迹评估中，3000 条示范加 500 条主动轨迹可匹配 30 万专家轨迹的末端可控性，尚未验证真机或世界模型下游闭环控制。 |
 | **Tri-View Bench**: TriWorldBench: A Tri-View Consistency Perspective on Embodied World Models | arXiv (2026) | 北京大学 / 清华大学 / 上海人工智能实验室 | — | [论文](https://arxiv.org/abs/2609.26314) \| [代码](https://github.com/TriWorldBench/TriWorldBench) | 2026 年 9 月 23 日发布的头相机与左右腕相机一致性基准，评三路视频是否在描述同一次操作；与 CausalWM 所报的 9 月 11 日总分榜不是同一套评测。500 条回合、50 个 RoboTwin 2.0 双臂任务、19 项指标，汇总为 TWB-Score。 |

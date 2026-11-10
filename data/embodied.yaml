@@ -3134,3 +3134,18 @@ papers:
     tags: [动作锚点条件预测, 社交与语义动态, 偏好蒸馏, 虚拟人物导航]
     note: 将动作条件短期状态与语义预测蒸馏为 Unity 虚拟人物导航策略；相对去双世界模型变体，五场景平均无碰撞到达率从 37.3% 升至 77.4%，语义区域违规率从 19.5% 降至 4.0%。消融未完全隔离偏好训练作用；反馈控制仅在仿真验证，部署移除世界模型。
     note_en: Distills action-conditioned short-term state and semantic predictions into Unity virtual-character navigation; against the variant without both world models, five-scenario mean collision-free goal success rises from 37.3% to 77.4%, while semantic-region violations fall from 19.5% to 4.0%. The ablation does not fully isolate preference training; feedback control is simulation-only and world models are removed at deployment.
+
+  - title: 'Toward the Era of Agentic Embodied Intelligence'
+    short: A²-MEAS
+    org: Shanghai Jiao Tong University / Anyverse Dynamics
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.09124'
+      project: https://a2-meas.github.io/
+      code: https://github.com/AutoLab-SAI-SJTU/A2MEAS
+    features: {closedloop: true}
+    tags: [多视角潜在预测, 转移潜变量, 观测反馈控制, 诊断纠错接口]
+    note: 以多视角潜在未来预测辅助动作策略，并接入观测反馈纠错；Selected12 组件对照加入世界模型后，Q-score 从 0.4846 升至 0.5183。无外部动作条件或长时 rollout 验证；公开版省略部分纠错与执行策略，其 BEHAVIOR Q-score 为 0.5287，不能等同论文完整系统的 0.6411。
+    note_en: Uses multiview latent future prediction to guide an action policy with observation-feedback correction; adding the world model in a Selected12 component comparison raises Q-score from 0.4846 to 0.5183. External action conditioning and long rollouts are unvalidated; the release omits some correction and execution strategies and reports BEHAVIOR Q-score of 0.5287, distinct from the paper's full-system 0.6411.
