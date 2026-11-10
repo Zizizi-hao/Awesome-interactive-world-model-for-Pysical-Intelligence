@@ -1847,3 +1847,16 @@ papers:
     tags: [共享驾驶控制, 人类意图, RSSM, 模型强化学习]
     note: 扩展带意图推断的 RSSM 及虚拟共同训练，用于人与辅助策略共享驾驶控制；城市双盲研究的完整记录会话中，意图条件策略碰撞率为 2.7%，无意图策略为 7.7%，但无辅助为 1.7%，主观评分无显著改善。三人实车平台测试仅支持迁移可行性。
     note_en: Extends an intent-aware RSSM and fictitious co-play for shared driving control. In fully logged sessions of the double-blind urban study, collision rates are 2.7% with intent conditioning, 7.7% without it, and 1.7% unassisted, with no significant subjective-rating improvement. A three-person vehicle-platform test supports transfer feasibility only.
+
+  - title: 'Let LiDAR Decide Where to Look: Geometry-Measured Token Selection for Efficient Sparse Latent World Models'
+    short: GATS-WM
+    org: University of Ottawa
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2610.40935'
+    features: {action: true}
+    tags: [几何引导稀疏编码, 候选轨迹条件预测, 潜空间动力学, LiDAR]
+    note: 以 LiDAR 几何在视觉编码前筛选 token，并按候选自车轨迹预测未来特征与位移；保留 25% token 时，nuScenes 三秒平均 L2 从 0.573 m 降至 0.520 m，总计算量从 433 降至 66 GFLOPs。依赖 LiDAR，尚无实时或闭环验证。
+    note_en: Uses LiDAR geometry to select tokens before visual encoding and predicts future features and displacements conditioned on candidate ego trajectories; retaining 25% of tokens reduces nuScenes 3-second mean L2 from 0.573 m to 0.520 m and total compute from 433 to 66 GFLOPs. Requires LiDAR, with no real-time or closed-loop validation.

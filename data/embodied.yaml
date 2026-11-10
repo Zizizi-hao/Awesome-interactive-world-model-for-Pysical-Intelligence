@@ -2837,3 +2837,68 @@ papers:
     tags: [评论引导经验, 局部潜转移, 离线策略学习, 世界模型作用消融]
     note: 复用冻结动作条件 LeWM，精炼动作并生成局部转移以离线更新策略；同起点及额外更新的 cube-single 对照中，链式生成成功率为 90.9%，无世界模型精炼为 89.3%，额外收益的 95% 区间为 [-2.1,5.6] 个百分点。大部分收益来自动作精炼；仅三个仿真任务、三策略种子，长链漂移明显，部署不调用世界模型。
     note_en: Uses a frozen action-conditioned LeWM to refine actions and generate local transitions for offline policy updates. In cube-single controls with matched starting checkpoints and extra updates, chaining succeeds in 90.9% versus 89.3% for refinement without a world model; the 95% interval on the additional gain is [-2.1,5.6] percentage points. Most gains come from action refinement. Evidence covers three simulated tasks and three policy seeds; long chains drift, and deployment does not call the world model.
+
+  - title: Hierarchical World Models with Implicit Dynamics
+    short: ID-WM
+    org: New York University / Meta-FAIR / AMI Labs
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2610.42146'
+      project: https://id-wm.github.io/
+    features: {action: true, closedloop: true}
+    tags: [隐式高层动力学, 扩散子目标, 分层规划, CEM]
+    note: 分离扩散可达子目标与低层动作条件动力学，通过分层 CEM 闭环规划将随机目标 PushT 成功率从单层世界模型的 21% 提升至 77%，时间匹配单层对照为 28%。验证限于仿真；原文状态规划计时为单 L40S 每目标约 53 秒，未证明实时控制或长时生成一致性。
+    note_en: Separates diffusion-based reachable subgoals from low-level action-conditioned dynamics; hierarchical CEM closed-loop planning raises random-goal PushT success from 21% for a single-level world model to 77%, versus 28% for a time-matched single-level control. Validation is limited to simulation; reported state-based planning takes about 53 seconds per goal on one L40S, without demonstrated real-time control or long-rollout consistency.
+
+  - title: 'CausalWAM: Learning the Causes of Actions in World Action Models'
+    short: CausalWAM
+    org: University of Illinois Urbana-Champaign / UC San Diego
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.42096'
+    features: {closedloop: true}
+    tags: [联合视频与动作, 稀疏动作路由, 因果可识别性, 世界模型后训练]
+    note: 在 Cosmos 3 Nano 的联合视频–动作建模上加入稀疏动作相关路由，使 RoboCasa365 的 17 项任务平均闭环成功率从 24% 提升至 43%。默认保留稠密通路，因果保证限于块级可识别；联合输出未来与动作不等于外部动作条件预测。
+    note_en: Adds sparse action-relevance routing to Cosmos 3 Nano's joint video–action modeling, raising mean closed-loop success across 17 RoboCasa365 tasks from 24% to 43%. The default retains a dense pathway, and causal guarantees provide block-level identifiability; jointly outputting futures and actions does not establish prediction conditioned on externally supplied actions.
+
+  - title: Cross-Embodiment Motion Planning by Coupling Body-Agnostic World Model with Differentiable Ego-Dynamics
+    short: Hourglass
+    org: Nanyang Technological University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.41330'
+    features: {action: true, closedloop: true}
+    tags: [跨本体导航, 自运动条件深度预测, 可微本体动力学, 想象策略学习]
+    note: 将自运动条件深度世界模型与经系统辨识的可微本体动力学耦合，在想象中训练跨七种机器人的导航策略；命令通过本体动力学间接条件化预测。三分钟辨识后迁移到真实滑移转向机器人，但真机仅四次展示运行，受平地与训练体型覆盖限制。
+    note_en: Couples an ego-motion-conditioned depth world model with differentiable ego-dynamics fitted by system identification to train a navigation policy in imagination across seven robots; commands condition predictions indirectly through ego-dynamics. Transfers to a real skid-steer robot after three minutes of identification, but hardware evidence comprises only four demonstration runs and is limited by flat-ground assumptions and training body-size coverage.
+
+  - title: 'SPT-Flow: One Integration, Many Futures in Continuous-Time World Models'
+    short: SPT-Flow
+    org: CASIA / UCAS / Xi'an Jiaotong University / USTB / Zhongguancun Academy
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.41273'
+    features: {}
+    tags: [连续时间动力学, 轨迹潜变量, 自由积分监督, 机器人视频预测]
+    note: 在机器人操作预测中，以轨迹级潜变量和自由积分匹配扩展 ODEWorld；LIBERO 上等训练步数时，相较重训 ODEWorld，中点/终帧 best-of-10 PSNR 提升 2.0/2.4 dB，但多数收益来自 rollout 训练，尚无动作条件或下游控制验证。
+    note_en: Extends ODEWorld for robotic manipulation prediction with trajectory-level latents and free-running rollout matching; at equal training steps on LIBERO, midpoint/final best-of-10 PSNR improves by 2.0/2.4 dB over retrained ODEWorld, but rollout training accounts for most gains, with no action conditioning or downstream control evaluation.
+
+  - title: 'Dreams Are Cheaper Than Flights: Curated World-Model Data Improves Aerial Detection'
+    org: The Ohio State University
+    year: 2026
+    venue: CoRL Workshop (SRF)
+    category: embodied
+    links:
+      arxiv: '2610.41030'
+    features: {}
+    tags: [冻结视频世界模型, 无人机感知, 合成数据筛选, 数据引擎]
+    note: 复用 Cosmos-Predict1-7B 续写训练无人机视频，经人工筛选后增强检测数据；MMLA 留出视频的 mAP@50–95 从 0.845 升至 0.881，VisDrone 加入 75% 筛选池后从 0.138 升至 0.184。单次训练未隔离样本量、噪声和标注差异；仅为预测模型的数据引擎应用，无动作控制。
+    note_en: Reuses Cosmos-Predict1-7B to continue training drone videos and augments detection data after human curation; held-out MMLA mAP@50–95 rises from 0.845 to 0.881, and VisDrone from 0.138 to 0.184 when adding 75% of the curated pool. Single training runs do not separate data-volume, noise and annotation effects; this is a predictive-model data-engine application without action control.
