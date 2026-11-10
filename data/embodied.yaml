@@ -2307,3 +2307,88 @@ papers:
     tags: [潜空间规划, 逆动力学, 无搜索, JEPA]
     note: 目标条件逆模型与动作条件潜预测交替生成多步计划，测试时不做动作搜索。四项视觉控制、16 个难度组合、各 50 次的总成功率为 86.8%，比最强基线高 4.9 个百分点。去掉转移一致性后，12 个组合的平均成功率从 82.5% 降到 76.0%。只在仿真中验证，规划时程固定。
     note_en: A goal-conditioned inverse model alternates with an action-conditioned latent predictor to build multi-step plans without test-time action search. Across four visual-control tasks, 16 difficulty combinations, and 50 episodes each, overall success is 86.8%, 4.9 points above the strongest baseline. Removing transition consistency lowers average success on 12 combinations from 82.5% to 76.0%. Evaluation is simulation-only, with a fixed planning horizon.
+
+  - title: 'Ropedia W0: Scaling Loco-Manipulation World Models across Embodiments with Human Experience'
+    short: Ropedia W0
+    org: Nanyang Technological University / Ropedia / Duke University / UC San Diego / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.26855'
+      project: https://ropedia.github.io/ropedia-w0/
+      code: https://github.com/Ropedia/ropedia-w0
+    features: {action: true, realtime: true, closedloop: true, longhorizon: true}
+    tags: [跨本体, 移动操作, 人类视频, 骨架条件, 实时交互]
+    note: 以相机位姿与投影骨架统一人类和多种机器人移动操作，利用约 1 万小时人类与 3000 小时机器人视频训练；蒸馏后在单 GPU、640×480 下支持约 21 FPS 的分钟级交互，并验证策略评估与闭环规划。
+    note_en: Unifies human and cross-embodiment robotic loco-manipulation through camera poses and projected skeletons, trained on about 10k hours of human and 3k hours of robot video. Distillation enables minute-long interaction at about 21 FPS on a single GPU at 640×480, with policy evaluation and closed-loop planning demonstrated.
+
+  - title: 'PrismWAM: Decoupling State Representations in World Action Models'
+    short: PrismWAM
+    org: Tsinghua University / NVIDIA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.26564'
+      project: https://prism-wam.github.io/
+      code: https://github.com/THUSI-Lab/PrismWAM
+    features: {closedloop: true}
+    tags: [状态解耦, 深度预测, 世界动作模型, 闭环操作]
+    note: 将语义规划、深度空间中的物理演化预测与动作生成解耦，通过未来深度特征指导闭环操作，在五个仿真基准及真机任务中验证；未来状态并非以外部给定动作为条件。
+    note_en: Separates semantic planning, physical rollout in depth space, and action generation, using future-depth features for closed-loop manipulation validated on five simulation benchmarks and real robots. Future states are not conditioned on externally supplied actions.
+
+  - title: 'EmbodiedWorld-200K: Toward Embodied World Agents via Embodied-Planning Dataset and Interactive World Models'
+    short: EmbodiedWorld-200K
+    org: Tencent Hunyuan / CASIA / UCAS / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.25959'
+      project: https://xiaokunfeng.github.io/EmbodiedWorld-200K/
+      code: https://github.com/XiaokunFeng/EmbodiedWorld-200K
+    features: {action: true}
+    tags: [导航规划, 游戏数据, 世界模型策略训练, 偏好优化]
+    note: 从游戏视频构建 20 万余条导航规划样本，复用 LingBot-World-Fast 按候选动作生成视频并以 VQA 评分构造 DPO 偏好数据；验证限离线动作与轨迹指标，未证明在线重规划或真实机器人闭环。公开代码主要为数据构建与评测工具。
+    note_en: Builds over 200k navigation-planning samples from game videos and reuses LingBot-World-Fast to generate candidate-action rollouts, scored by VQA to form DPO preferences. Validation uses offline action and trajectory metrics, without demonstrated online replanning or real-robot closed-loop control. Public code mainly covers data construction and evaluation tools.
+
+  - title: 'Vector-Quantized World Model: Latent Feedback Motion Planning for Robot Manipulation'
+    short: VQ-WM
+    org: New York University / NVIDIA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.25600'
+    features: {action: true, closedloop: true}
+    tags: [向量量化, 可达性, 潜空间规划, 视觉反馈]
+    note: 以控制器首次到达时间构造可达性量化状态，在离散动作条件动力学上搜索长程子目标，再由视觉反馈控制器执行；在真机四盘汉诺塔与仿真操作任务验证组合泛化，实验中每回合只规划一次。
+    note_en: Uses controller first-passage times to quantize reachable states, searches long-horizon subgoals through discrete action-conditioned dynamics, and executes them with visual feedback. Compositional generalization is tested on a real four-disk Tower of Hanoi and simulated manipulation tasks, with planning performed once per episode in the experiments.
+
+  - title: 'ACTS: Learning Visuo-Tactile World Models from Human Physical Interaction'
+    short: ACTS
+    org: MIT / University of Washington / Harvard University / UC Berkeley / Stanford University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.24285'
+      project: https://acts-anon.github.io/
+    features: {action: true}
+    tags: [视触觉, 人类交互, 力条件, 跨本体迁移]
+    note: 从 4.9 小时、三个物体的人类触觉交互数据学习以运动和力变化为条件的视触觉预测，无需微调迁移至机器人遥操作记录；接触变化可迁移，但视觉预测仍不稳定，尚未验证闭环规划。
+    note_en: Learns motion- and force-change-conditioned visual-tactile prediction from 4.9 hours of human tactile interaction with three objects and transfers without fine-tuning to recorded robot teleoperation. Contact changes transfer, but visual predictions remain unreliable and closed-loop planning is untested.
+
+  - title: 'Pretrained Features as Teachers, Not States: Compact Latent World Models for Visual Planning'
+    short: Anchor-WM
+    org: TU Delft
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.23984'
+    features: {action: true, closedloop: true}
+    tags: [特征蒸馏, 紧凑潜状态, 视觉规划, 模型预测控制]
+    note: 仅在训练时蒸馏 DINO 特征来学习 192 维动作条件潜在动力学，推理时移除教师并通过 CEM 重规划；在四个仿真环境取得 84.7% 平均成功率，视觉扰动下的平均泛化仍弱于 DINO-WM。
+    note_en: Uses DINO feature distillation only during training to learn 192-dimensional action-conditioned latent dynamics, discards the teacher at inference, and replans with CEM. It achieves 84.7% average success across four simulated environments, while average generalization under visual perturbations remains below DINO-WM.

@@ -831,3 +831,45 @@ papers:
     tags: [多智能体, 全景世界模型, Minecraft]
     note: PAWA 以射线对齐交叉注意力和二次相位玩家编码，按多玩家动作联合预测 POV 与全景；在 30 个双人 12 秒回合的同检查点消融中，启用跨视图注意力使 POV LPIPS 从 0.510 降至 0.465；模型仅测试至 16 人，长时滚动仍损失角色保真度。 公开代码为数据采集管线。
     note_en: PAWA uses ray-aligned cross-attention and quadratic-phase player codes to jointly predict POV and panoramic video from multiple players’ actions; in a same-checkpoint ablation on 30 two-player, 12-second episodes, enabling cross-view attention lowers POV LPIPS from 0.510 to 0.465; the model is tested only up to 16 players and still loses co-player fidelity over long rollouts. Released code covers the data-collection pipeline.
+
+  - title: 'ActionRoPE: Action as Coordinates for Spatially Consistent Control in Planar-Camera Game World Models'
+    short: ActionRoPE
+    org: Tencent / National University of Singapore / Nanyang Technological University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.25861'
+      project: https://teawhite.cn/ActionRoPE/
+    features: {action: true}
+    tags: [动作坐标, RoPE, 平面相机, 回访一致性]
+    note: 将动作引起的平面相机位移写入世界坐标 RoPE，并以坐标条件噪声调度稳定已观测区域；在俯视游戏中较最强基线降低 66% 的回访漂移，控制接口不新增参数，但依赖近似平面平移假设。
+    note_en: Encodes action-induced planar camera displacement in world-coordinate RoPE and stabilizes observed regions with coordinate-conditioned noise scheduling. It reduces revisit drift by 66% versus the strongest baseline in top-down games; the control interface adds no parameters but assumes approximately planar translation.
+
+  - title: 'Frechet Forcing: Training Long-Horizon Streaming World Models from Short Clips'
+    short: Frechet Forcing
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.25666'
+      project: https://zhao-yian.github.io/Frechet_Forcing/
+      code: https://github.com/zhao-yian/Frechet_Forcing
+    features: {action: true, longhorizon: true}
+    tags: [流式世界模型, 长时生成, Fréchet约束, 动作条件]
+    note: 用生成锚定与真实数据的 Fréchet 统计约束微调流式世界模型，从 381 帧短片训练扩展到超过 4000 帧的机器人动作或相机条件生成；长时程仍可能出现局部伪影与场景漂移，尚无策略闭环验证。
+    note_en: Fine-tunes streaming world models with generative anchoring and real-data Fréchet statistics, extending training on 381-frame clips to robot-action- or camera-conditioned generation beyond 4,000 frames. Local artifacts and scene drift can persist over long horizons, and closed-loop policy control is untested.
+
+  - title: 'Time-JEPA: Grounding Video World Models with Physical Time Series'
+    short: Time-JEPA
+    org: Shanghai AI Laboratory / Harbin Institute of Technology / Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.23982'
+      code: https://github.com/OpenTSLab/Time-JEPA
+    features: {}
+    tags: [JEPA, 物理时间序列, 视频预测表征, 跨域物理理解]
+    note: 以对齐的物理时间序列辅助训练视频预测表征，在驾驶、机器人操作和人运动中验证未来状态与接触预测；可为交互模型提供物理表征基础，但当前仅视频输入，动作条件建模与真实控制仍是后续工作。
+    note_en: Uses aligned physical time series to supervise predictive video representations, evaluating future-state and contact prediction across driving, robot manipulation, and human motion. It provides a physical representation foundation for interactive models, but currently takes video only; action-conditioned modeling and real control remain future work.
