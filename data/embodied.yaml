@@ -3079,3 +3079,58 @@ papers:
     tags: [时间排序代价, 冻结潜动力学, 目标度量学习, 反馈重规划]
     note: 在冻结的动作条件 LeWM 上学习时间排序代价以改进反馈重规划，四模拟环境宏平均成功率从 32.7% 升至 63.0%；改进属于规划指标，Cube 同时缩短预测时域，不能将总增益全部归于度量，尚无实机或长时预测一致性验证。
     note_en: Learns a temporal-ordering cost on frozen action-conditioned LeWM for feedback replanning, raising macro-average success across four simulated environments from 32.7% to 63.0%; this improves the planning metric, with a shorter horizon also used on Cube, so the total gain cannot be attributed solely to the metric. Physical-robot control and long-rollout consistency remain unvalidated.
+
+  - title: 'Learning Robotic World Models with Semantic and Visual Feedback'
+    short: RoboImagine
+    org: Carnegie Mellon University / The City College of New York / Nanyang Technological University / University of Wisconsin–Madison / University of California, Merced
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.07850'
+      code: https://github.com/Alexander-wu/RoboImagine
+    features: {action: true}
+    tags: [候选未来比较, 语义与视觉反馈, 自回归模型后训练, 有界历史]
+    note: 用多样候选搜索和语义/视觉反馈后训练动作条件自回归模型；RT-1 同初始化、500 次额外更新的 PSNR 从继续 SFT 的 21.31 升至 22.57 dB，但训练成本为 28.15 对 1.06 GPU 小时。BridgeV2 独立报告集未见收益；证据限离线预测，无机器人闭环验证。
+    note_en: Post-trains an action-conditioned autoregressive model using diverse candidate search and semantic/visual feedback; with shared initialization and 500 additional updates on RT-1, PSNR rises from continued SFT's 21.31 to 22.57 dB, but training costs 28.15 versus 1.06 GPU-hours. The separate BridgeV2 reporting cohort shows no gain; evidence is limited to offline prediction without robot closed-loop validation.
+
+  - title: 'GPWM: Modeling the World as 3D Particle Motion'
+    short: GPWM
+    org: Carnegie Mellon University / Toyota Research Institute
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.08338'
+      project: https://robertren1122.github.io/gpwm/
+    features: {action: true, longhorizon: true}
+    tags: [多材料粒子动态, 刚体变换, 生成交互先验, 噪声空间规划]
+    note: 预测给定执行器运动下的多材料三维粒子动态，并搜索生成交互先验以规划操作；20 条留出衣物轨迹的 898 帧展开中，专用模型平均对称 Chamfer 为 10.0 mm，PointWorld 为 10.6 mm。依赖完整跟踪三维状态，操作计划仅在仿真开环执行，未验证反馈重规划或实时预测。
+    note_en: Predicts multimaterial 3D particle dynamics under prescribed actuator motion and searches a generative interaction prior for manipulation plans; across 898-frame rollouts on 20 held-out garment trajectories, the specialist achieves 10.0 mm mean symmetric Chamfer distance versus 10.6 mm for PointWorld. Requires complete tracked 3D state; plans execute open-loop in simulation, without validated feedback replanning or real-time prediction.
+
+  - title: 'La-JEPA: Compact Robot Policies with Latent World Modeling'
+    short: La-JEPA
+    org: Huawei Technologies Ltd. / University of Toronto / McGill University / Mila
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.08156'
+      project: https://georgexue.com/projects/la-jepa/
+    features: {closedloop: true}
+    tags: [训练期未来监督, 预训练潜表征, 紧凑世界动作策略, 观测反馈执行]
+    note: 在预训练 V-JEPA 特征上从零训练双 Transformer，以训练期未来监督改善策略；原数据流程的三训练种子 LIBERO-Plus 对照从 74.35% 升至 76.47%，Franka 四任务成功 70/80 次。未来预测不受外部动作条件，部署仅生成动作；策略时延不代表世界模型吞吐，实机证据限单平台。
+    note_en: Trains two Transformers from scratch in pretrained V-JEPA features, improving policies with training-time future supervision; a matched three-training-seed LIBERO-Plus comparison in the original data pipeline rises from 74.35% to 76.47%, with 70/80 successes across four Franka tasks. Future prediction is not externally action-conditioned and is removed at deployment; policy latency does not establish world-model throughput, and physical evidence covers one platform.
+
+  - title: 'Seeing Beyond the Next Step: World-Model-Guided Human-Like Navigation in Multi-Agent Scenes'
+    org: Korea University / NC AI
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2611.07730'
+      project: https://seoneun.github.io/-NeurIPS-2026-Seeing-Beyond-the-Next-Step/
+    features: {action: true, closedloop: true}
+    tags: [动作锚点条件预测, 社交与语义动态, 偏好蒸馏, 虚拟人物导航]
+    note: 将动作条件短期状态与语义预测蒸馏为 Unity 虚拟人物导航策略；相对去双世界模型变体，五场景平均无碰撞到达率从 37.3% 升至 77.4%，语义区域违规率从 19.5% 降至 4.0%。消融未完全隔离偏好训练作用；反馈控制仅在仿真验证，部署移除世界模型。
+    note_en: Distills action-conditioned short-term state and semantic predictions into Unity virtual-character navigation; against the variant without both world models, five-scenario mean collision-free goal success rises from 37.3% to 77.4%, while semantic-region violations fall from 19.5% to 4.0%. The ablation does not fully isolate preference training; feedback control is simulation-only and world models are removed at deployment.

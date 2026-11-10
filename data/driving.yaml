@@ -1928,3 +1928,16 @@ papers:
     tags: [语言条件决策, 动作条件动力学, 车辆轨迹预测, 交互回放]
     note: 动作条件语言动力学预测 2 秒车辆轨迹并反馈决策；500 个合流 car-episodes 的碰撞率为 2.4%，无前瞻为 26.0%、恒速前瞻为 2.8%。NGSIM 交互回放中恒速为 1.8%，学习模型为 2.8%；仅真值状态仿真，无实车或安全保证。
     note_en: Uses action-conditioned language dynamics to forecast 2-second vehicle trajectories for feedback decisions; across 500 merge car-episodes, collision rates are 2.4%, versus 26.0% without foresight and 2.8% with constant-velocity foresight. In interactive NGSIM replay, constant velocity reaches 1.8% versus 2.8% for the learned model; evidence is limited to ground-truth-state simulation, without vehicle tests or safety guarantees.
+
+  - title: 'GuidedWAM: Training-Free Energy Guidance for World Action Models in Autonomous Driving'
+    short: GuidedWAM
+    org: Technical University of Munich
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.07912'
+    features: {}
+    tags: [冻结世界动作模型, 采样时能量引导, 可行驶区域约束, 开放环伪仿真]
+    note: 在冻结 WAM 的动作采样器中加入解析能量引导；NAVSIM v2 hard-split 上，SimWAM EPDMS 从 37.8 升至 39.6（引导为三采样种子均值）。属于既有世界模型的规划应用；仅开放环伪仿真，碰撞分数无一致改善，也不提供安全保证。
+    note_en: Adds analytic energy guidance to frozen WAM action samplers; SimWAM EPDMS rises from 37.8 to 39.6 on NAVSIM v2 hard-split, with guided results averaged over three sampler seeds. This is a planning application of existing world models; evaluation is limited to open-loop pseudo-simulation, collision scores show no consistent improvement, and safety is not guaranteed.
