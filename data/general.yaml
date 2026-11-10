@@ -958,3 +958,30 @@ papers:
     tags: [关系表征, 逆动力学, 机制研究, 动作条件JEPA]
     note: 在动作条件 JEPA 潜状态中加入实体对关系通道，以逆动力学监督关系表征；RH20T 留出任务的关系 AUROC 提升 0.081，但变化关系预测仅为 0.518。关系真值来自二维框谓词，规划仅为离线单步候选排序，尚无闭环执行。
     note_en: Adds ordered-entity relational channels to action-conditioned JEPA latents and grounds them through inverse dynamics. Relational AUROC improves by 0.081 on held-out RH20T tasks, but changing-relation forecasts reach only 0.518. Relation targets are 2D-box predicates, and planning is offline one-step candidate ranking without closed-loop execution.
+
+  - title: Interpreting Physics in Video Encoders using Multi-Object Interaction Videos
+    org: Caltech
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.31983'
+    features: {}
+    tags: [物理预测诊断, 关系物理, 视频表征, 跨几何探针]
+    note: 用运动学对照、置换校正与跨场景探针诊断冻结视频表征，并检验 V-JEPA2 自身未来预测；在 95% 场景中，其对能量创造比能量耗散结局更惊异，但摩擦读出跨几何失败。仅两编码器与简单合成场景，未验证动作控制或规划效用。
+    note_en: Diagnoses frozen video representations with kinematic controls, permutation correction, transfer probes, and V-JEPA2's native forecasts. Energy-creating outcomes are more surprising than energy-losing outcomes in 95% of scenes, but friction readouts fail across geometries. Evidence covers two encoders and simple synthetic scenes, without action-control or planning validation.
+
+  - title: 'UniAction: Unified Action Conditioning for World Models'
+    short: UniAction
+    org: Stanford University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.32977'
+      project: https://uniaction.github.io/
+      code: https://github.com/KBRASK/UniAction
+    features: {action: true}
+    tags: [统一动作接口, 时空坐标, 注意力数量校准, 跨域训练]
+    note: 将力、相机、手部和机器人姿态统一为带语义及原生时空坐标的动作元素，并校准注意力中的数量偏差；相同样本曝光下，联合训练的力跟随分数由专用模型的 0.5436 升至 0.7630。评测限离线视频与动作估计器，尚无闭环控制验证。
+    note_en: Represents forces, camera commands, and hand/robot poses as semantic action elements grounded in native spatiotemporal coordinates, with cardinality-calibrated attention. At matched sample exposure, joint training raises force-following score from 0.5436 for a dedicated model to 0.7630. Evaluation is offline and estimator-based, without closed-loop control.

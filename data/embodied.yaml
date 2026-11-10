@@ -2602,3 +2602,45 @@ papers:
     tags: [显式三维状态, 灵巧操作, 物体运动形变, 外观输送]
     note: 先按手部轨迹预测物体的显式三维运动与形变，再输送外观并渲染未来视频；HOT3D 前 32 个未来状态的移动点误差由 PointWorld 的 90.47 mm 降至 54.34 mm。依赖度量几何与标定相机，OakInk2 全点误差仍较差，尚无闭环控制验证。
     note_en: Predicts explicit 3D object motion and deformation from hand trajectories before transporting appearance and rendering video. HOT3D moved-point error over future states 1–32 falls from PointWorld's 90.47 mm to 54.34 mm. Metric geometry and calibrated cameras are required; OakInk2 all-point error worsens, and closed-loop control is untested.
+
+  - title: 'See What I Need, Dream What I Want: A Navigation Foundation Model on a Self-Constructed Representation Space'
+    short: RepresentNav
+    org: Peking University / University College London / DataCanvas
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.31762'
+      project: https://wang-yinxi.github.io/representnav/
+    features: {closedloop: true}
+    tags: [导航表征, 未来潜状态, 预测监督, 视觉先验融合]
+    note: 融合多层视觉先验构建导航表征，并在行动前预测未来潜状态；同骨干点目标消融中，碰撞率由无预测监督的 15.90% 降至 13.45%。预测不以外部动作为条件，真机仅定性展示，主结果未报告多训练种子不确定性。
+    note_en: Constructs navigation representations from multilayer visual priors and predicts future latents before acting. In matched point-goal ablations, collision rate falls from 15.90% without predictive supervision to 13.45%. Prediction is not externally action-conditioned; real-robot results are qualitative, and multi-training-seed uncertainty is unreported.
+
+  - title: 'ACWM-RM: A Reference-Free Reward Model from Complementary Mismatch Preferences'
+    short: ACWM-RM
+    org: Fudan University / Meituan
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.32222'
+    features: {action: true}
+    tags: [无参考奖励, 错配偏好, 前向动力学, 世界模型后训练]
+    note: 以动作/视频错配偏好训练无参考奖励，结合动作条件前向预测微调 DreamDojo-2B；AgiBot 留出集 nDTW×100 从 14.84 升至 16.41，但物理一致性整体评分从 4.00 降至 3.93。仅单个 RL 训练种子，尚无机器人闭环验证。
+    note_en: Trains a reference-free reward from action/video mismatches and action-conditioned forward prediction to fine-tune DreamDojo-2B. Held-out AgiBot nDTW×100 rises from 14.84 to 16.41, but the overall physical-consistency score falls from 4.00 to 3.93. Only one RL-training seed is evaluated, without robot closed-loop validation.
+
+  - title: 'Adaptive World-Models for Anomaly Recognition (AWARE): A Framework for Robot Dynamics Prediction and Introspection'
+    short: AWARE
+    org: Imperial College London
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.32742'
+      project: https://adaptive-intelligent-robotics.github.io/aware/
+      code: https://github.com/adaptive-intelligent-robotics/aware
+    features: {action: true}
+    tags: [动力学辨识, 异常检测, 相机状态估计, 故障定位]
+    note: 以状态–动作历史估计隐含动力学，并结合动作条件状态预测误差与潜参数偏移检测异常；240 条真机起重机轨迹、10 种子评测中，高噪相机状态估计下 AP 为 0.77，RWM 为 0.61。需正常运行参考分布，工况变化可能误报，尚无闭环干预验证。
+    note_en: Infers latent dynamics from state–action history and detects anomalies using action-conditioned prediction errors and latent deviations. Across 240 real crane trajectories and 10 seeds, AP with noisy camera-based state estimates is 0.77 versus RWM's 0.61. A nominal reference distribution is required; operating-condition changes may trigger false alarms, and closed-loop intervention is untested.
