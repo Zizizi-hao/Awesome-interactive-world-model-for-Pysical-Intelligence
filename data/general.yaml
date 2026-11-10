@@ -915,3 +915,33 @@ papers:
     tags: [多智能体, 辅助视角, 残差压缩, 跨视角一致性]
     note: 以固定辅助视角与 δ-VAE 联合预测多玩家动作条件视频；Minecraft 回到起点任务中，VLM 准确率由无辅助视角的 25.0% 提升至 60.2%，辅助视角 token 压缩 8 倍，但覆盖不足和快速场景变化仍限制一致性。
     note_en: Jointly predicts multi-player action-conditioned videos with fixed auxiliary views and a δ-VAE. On Minecraft's return-to-start task, VLM accuracy rises from 25.0% without auxiliary views to 60.2%, while auxiliary tokens are compressed eightfold; limited coverage and rapid scene changes still constrain consistency.
+
+  - title: Rethinking Video Autoencoders for Interactive World Models
+    short: CADRE
+    org: Kyutai / LIGM, ENPC, IP Paris, CNRS, UGE / UC Berkeley
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.30129'
+      project: https://kyutai.org/blog/2026-10-22-cadre/
+      code: https://github.com/kyutai-labs/cadre-autoencoders-and-world-models
+      demo: https://cadre-wm.kyutai.org/
+    features: {action: true, realtime: true, longhorizon: true}
+    tags: [因果视频压缩, 扩散自编码器, 交互延迟, 动作保真度]
+    note: 以四环境的同架构动作条件世界模型比较因果视频压缩；单 H100、288×512 下，2×32×32 单步解码配置支持 20 FPS 显示和 185 ms 动作延迟，并量化评测固定相机机器人操作的 64 秒展开。压缩选择依赖相机运动，各环境分别训练，尚未验证策略规划收益。
+    note_en: Compares causal video compression through matched world-model architectures across four environments. On one H100 at 288×512, the 2×32×32 configuration with one-step decoding supports a 20 FPS display and 185 ms action latency; 64-second fixed-camera robot-manipulation rollouts are evaluated quantitatively. Compression depends on camera motion, models are trained per environment, and policy-planning benefits remain untested.
+
+  - title: 'LiveAct: Towards Real-Time Multi-Agent World Models with Heterogeneous Action Interfaces'
+    short: LiveAct
+    org: Tsinghua University / Kling Team / HKUST / Peking University / University of Science and Technology of China
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2610.29408'
+      project: https://liveact-ai.github.io/
+    features: {action: true, realtime: true}
+    tags: [多智能体, 异构动作接口, 语义数值调制, 流式生成]
+    note: 以主体空间门控和语义–数值动作接口统一游戏与机器人多主体控制；单 GPU 在 512×448 下报告 17.70 FPS，但未披露 GPU 型号。主定量评测仅 81 帧，蒸馏提高速度却损失部分机器人控制精度，尚无策略闭环验证。
+    note_en: Unifies multi-agent game and robot control through agent-specific spatial gating and semantic–numerical action interfaces. It reports 17.70 FPS at 512×448 on one GPU without naming the GPU model. Quantitative evaluation covers 81 frames; distillation improves speed while reducing some robot-control accuracy, without closed-loop policy validation.

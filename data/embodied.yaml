@@ -2506,3 +2506,45 @@ papers:
     tags: [端点映射, 单步生成, 策略评估, 生成历史恢复]
     note: 以端点监督和生成历史恢复训练动作条件单步预测器，无需预训练生成教师；PushT 策略均值 IoU 预测误差为 0.0100。实验仅单训练种子，规划增益的置信区间跨零；匹配干净训练窗口曝光量时，BWM 的 LPIPS 劣于基线。
     note_en: Trains an action-conditioned one-step predictor with endpoint supervision and generated-history recovery, without a pretrained generative teacher. PushT policy-mean IoU prediction error is 0.0100. Experiments use one training seed, the planning-gain confidence interval crosses zero, and BWM has worse LPIPS than the baselines when clean-window exposure is matched.
+
+  - title: Agentic World Action Models
+    short: AW-0
+    org: UC Berkeley / NVIDIA / University of Pennsylvania
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.30136'
+      project: https://agentic-wam.github.io/
+      code: https://github.com/ZhuoyangLiu2005/agentic-wam
+    features: {closedloop: true}
+    tags: [技能代码, 世界动作模型, 联合生成, 混合执行]
+    note: 联合去噪技能代码、未来视频与动作，并在代码或动作块执行后重新观察；八项真机任务的平均 rubric 得分为 71.1%，并非二值成功率。RoboTwin 视觉随机化成功率为 20.6%，低于 π0.5 的 27.7%；视频预测不以外部动作为条件。
+    note_en: Jointly denoises skill programs, future video, and actions, reobserving after program or action-chunk execution. Its average rubric score across eight real-robot tasks is 71.1%, rather than binary success. RoboTwin visual-randomization success is 20.6%, below π0.5's 27.7%; video prediction is not externally action-conditioned.
+
+  - title: 'Causal world models under physical parameter shifts'
+    org: The City College of New York
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.29088'
+    features: {action: true}
+    tags: [质量仿射动力学, 参数外推, 已知控制器, 因果依赖]
+    note: 将已知连杆质量显式接入质量仿射动力学，并结合已知 PD 控制和学习残差；CausalWorld 的 150 步质量外推中，时间平均关节 R² 中位数由固定质量输入对照的 0.609 升至 0.727。预测仅 0.6 秒，依赖已知质量与控制器，尚无真机或下游闭环验证。
+    note_en: Combines mass-affine dynamics, known PD control, and learned residuals. In 150-step CausalWorld mass extrapolation, median time-averaged joint R² rises from 0.609 for the fixed-mass-input control to 0.727. The forecast spans only 0.6 seconds and assumes known masses and controller dynamics; real robots and downstream closed-loop control are untested.
+
+  - title: 'PhysiCalWorld: In-Context Physics Calibration for World Models'
+    short: PhysiCalWorld
+    org: University of Michigan
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2610.30125'
+      project: https://physical-world.github.io/
+      code: https://github.com/physical-world/physical-world-release
+    features: {action: true, closedloop: true}
+    tags: [上下文物理校准, 探索交互, 潜动力学, 模型预测控制]
+    note: 将测试场景的探索交互压缩为物理描述 token，无需微调即可校准动作条件潜动力学；75 步上限的仿真 Push-T 中，DINO-WM 闭环成功率由 56.0% 升至 68.0%，但依赖先行交互与回合内物理恒定，尚无真机验证。
+    note_en: Compresses exploratory interaction into a physics descriptor token to calibrate action-conditioned latent dynamics without fine-tuning. With a 75-step budget in simulated Push-T, DINO-WM closed-loop success rises from 56.0% to 68.0%; prior interaction and stationary episode physics are required, without real-robot validation.
