@@ -2902,3 +2902,71 @@ papers:
     tags: [冻结视频世界模型, 无人机感知, 合成数据筛选, 数据引擎]
     note: 复用 Cosmos-Predict1-7B 续写训练无人机视频，经人工筛选后增强检测数据；MMLA 留出视频的 mAP@50–95 从 0.845 升至 0.881，VisDrone 加入 75% 筛选池后从 0.138 升至 0.184。单次训练未隔离样本量、噪声和标注差异；仅为预测模型的数据引擎应用，无动作控制。
     note_en: Reuses Cosmos-Predict1-7B to continue training drone videos and augments detection data after human curation; held-out MMLA mAP@50–95 rises from 0.845 to 0.881, and VisDrone from 0.138 to 0.184 when adding 75% of the curated pool. Single training runs do not separate data-volume, noise and annotation effects; this is a predictive-model data-engine application without action control.
+
+  - title: "Right Ranking, Wrong Scale: Reproducing the Robotic World Model's Dynamics Model and Testing the Uncertainty of Its Follow-up"
+    org: Independent Researcher
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.02699'
+    features: {action: true}
+    tags: [RWM复现, 不确定性校准, 逐成员滚动, 动力学诊断]
+    note: 复现 RWM 动作条件动力学并审计 RWM-U 不确定性；100 步时发布检查点的一倍标准差覆盖率仅 4.6%，逐成员滚动升至 33%，但仅测单机器人、步态和数据集，未验证策略收益。
+    note_en: Reproduces RWM's action-conditioned dynamics and audits RWM-U uncertainty; at 100 steps, the released checkpoint's one-sigma coverage is only 4.6%, rising to 33% with member-wise rollouts, but evaluation covers one robot, gait, and dataset without policy-benefit validation.
+
+  - title: 'Beyond Ensemble Disagreement: Predictive STL Monitoring of RL Locomotion under Distribution Shift'
+    org: Sindh Madressatul Islam University / Shah Abdul Latif University / University of Camerino / Institute of Biophysics CNR / University of Mirpurkhas
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.02218'
+      code: https://github.com/lakhanqurban/stl-monitor-rl
+    features: {action: true, closedloop: true}
+    tags: [STL监测, 动力学集成, 策略反馈预测, 分布偏移诊断]
+    note: 用动作条件世界模型和冻结 PPO 的预测内反馈滚动评估 STL 安全监测；集成分歧不能可靠预测误差或违规，HalfCheetah 上当前状态基线与预测鲁棒度的 AUROC 相差不足 0.03。证据限于两个模拟环境，未验证监测器干预收益或安全保证。
+    note_en: Evaluates STL safety monitoring using action-conditioned world models and in-model feedback rollouts of frozen PPO policies; ensemble disagreement does not reliably predict errors or violations, while on HalfCheetah current-state AUROC is within 0.03 of predicted robustness. Evidence is limited to two simulated environments, without validated monitor-intervention benefits or safety guarantees.
+
+  - title: 'OpenNWM: A Generalist Navigation World Model with Latent Action Pretraining'
+    short: OpenNWM
+    org: CASIA / UCAS / HKUST (Guangzhou) / UC Berkeley / Tongji University / Waytous
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.01844'
+      project: https://openspace-lab.github.io/OpenNWM/
+      code: https://github.com/OpenSpace-Lab/OpenNWM
+    features: {action: true}
+    tags: [导航视频预训练, 连续潜动作, 位姿条件预测, 离线视觉规划]
+    note: 利用异构无动作导航视频学习潜动作，再以真实位姿动作适配未来观测预测，在 Office-Go2 将 ATE 从 NWM 的 3.03 降至 2.89；现有证据以短时预测和离线规划为主，真实闭环部署尚未验证。
+    note_en: Learns latent actions from heterogeneous action-free navigation videos, then adapts future-observation prediction to physical pose actions, reducing Office-Go2 ATE from NWM's 3.03 to 2.89; evidence centers on short-horizon prediction and offline planning, with real closed-loop deployment unvalidated.
+
+  - title: 'SCOUT: Planning under Occlusion via Object-Centric World Model Rollouts'
+    short: SCOUT
+    org: George Mason University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.01600'
+    features: {action: true, closedloop: true}
+    tags: [遮挡操作, 对象槽位动力学, LLM候选动作, MCTS]
+    note: 学习对象位移与动作有效性，以 LLM 候选和 MCTS 规划遮挡货架操作；每原语重新观察使仿真平均成功率从 80.8% 升至 86.3%，Spot 真机完成 12/20 次。依赖离散原语和隐场景重建，不建模对象旋转，主搜索仅两步。
+    note_en: Learns object displacements and action validity, using LLM proposals and MCTS for occluded shelf manipulation; re-observation after each primitive raises mean simulated success from 80.8% to 86.3%, with 12/20 trials completed on a real Spot robot. Depends on discrete primitives and hidden-scene reconstruction, omits object rotation, and uses two-step search by default.
+
+  - title: 'TacMind: Benchmarking and Modeling Tactile Interaction States for Robotic Manipulation'
+    short: TacMind
+    org: Shanghai Jiao Tong University / HKUST (Guangzhou) / Harbin Institute of Technology / Daimon Robotics / Fudan University / Nanjing University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.00455'
+      project: https://tacmind-bench.github.io/
+      code: https://github.com/Tacmind-Bench/TacMind
+    features: {action: true, closedloop: true}
+    tags: [动作条件触觉预测, 流式触觉状态, 预测反思, 接触操作]
+    note: 在 LeWM 上学习动作条件触觉潜动力学，并用预测反思精炼候选动作；28 个仿真任务中，在已有触觉状态的对照上，反思使 OOD 成功率从 15.9% 升至 20.7%。真机结果选取最佳检查点，推理加速只测随机权重动作专家，不是世界模型实时验证。
+    note_en: Adapts LeWM into action-conditioned tactile latent dynamics and refines candidate actions through predictive reflection; across 28 simulated tasks, reflection raises OOD success from 15.9% to 20.7% over a control that already uses tactile states. Hardware results select the best checkpoint, and acceleration benchmarks use a randomly initialized action expert, without validating real-time world-model inference.

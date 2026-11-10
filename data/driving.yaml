@@ -1860,3 +1860,44 @@ papers:
     tags: [几何引导稀疏编码, 候选轨迹条件预测, 潜空间动力学, LiDAR]
     note: 以 LiDAR 几何在视觉编码前筛选 token，并按候选自车轨迹预测未来特征与位移；保留 25% token 时，nuScenes 三秒平均 L2 从 0.573 m 降至 0.520 m，总计算量从 433 降至 66 GFLOPs。依赖 LiDAR，尚无实时或闭环验证。
     note_en: Uses LiDAR geometry to select tokens before visual encoding and predicts future features and displacements conditioned on candidate ego trajectories; retaining 25% of tokens reduces nuScenes 3-second mean L2 from 0.573 m to 0.520 m and total compute from 433 to 66 GFLOPs. Requires LiDAR, with no real-time or closed-loop validation.
+
+  - title: 'INTERACT: Learning Interaction-Aware World Dynamics from Driving Videos for Autonomous Driving'
+    short: INTERACT
+    org: Nanyang Technological University / Tongji University
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.02526'
+    features: {}
+    tags: [槽位动力学, 潜在自车动作, 自监督驾驶视频, 两阶段伪仿真]
+    note: 从无标注驾驶视频学习槽位和潜在自车动作条件动态，并将未来槽位监督迁移到轨迹规划；同设定消融的 NAVSIM PDMS 从 90.9 提升至 92.2。潜动作未验证外部指定控制接口，NAVSIM-v2 两阶段伪仿真也不建立观测反馈闭环驾驶。
+    note_en: Learns slots and latent ego-action-conditioned dynamics from unlabeled driving videos, transferring future-slot supervision to trajectory planning; matched ablations raise NAVSIM PDMS from 90.9 to 92.2. Latent actions lack a validated externally specified control interface, and NAVSIM-v2 two-stage pseudo-simulation does not establish observation-feedback closed-loop driving.
+
+  - title: 'X-World 1.6: Building Controllable Virtual Cities with World Models'
+    short: X-World 1.6
+    org: XPeng
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.00596'
+      project: https://xworld16.github.io/
+    features: {action: true, closedloop: true}
+    tags: [七视角驾驶仿真, 参考场景控制, 交通信号条件, Connected Self Forcing]
+    note: 通过参考场景控制、交通信号条件和 Connected Self Forcing 改进七视角动作条件驾驶仿真，支持策略反馈闭环；配对测试中 19% 的失败行为复现得到改善、3.6% 退步，长遮挡后的场景记忆仍有限。不同参考模态采用分别训练的变体。
+    note_en: Improves seven-view action-conditioned driving simulation with reference-scene control, traffic-signal conditioning, and Connected Self Forcing, supporting policy-feedback loops; paired tests improve failure-behavior reproduction in 19% of cases and regress in 3.6%, while scene memory after prolonged occlusion remains limited. Different reference modalities use separately trained variants.
+
+  - title: 'Xiaomi Auto World Model 2.0: Causal World Models for Real-World Driving and Embodied Intelligence'
+    short: Xiaomi Auto World Model 2.0
+    org: Xiaomi Auto
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.01677'
+      project: https://xiaomiautoworldmodel.github.io/CausalWorldModel/
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [多视角时序生成, WorldRec场景先验, 因果流式生成, PPO策略训练]
+    note: 结合多视角时序生成与 WorldRec 2.0 场景先验，量化评估 211 帧未来生成，另支持动作条件预测和 PPO 闭环训练；1,000 个模拟场景中，E2E-WM-RL 碰撞率为 0.4%，ST-JEPA-E2E 为 1.2%。对照未隔离世界模型收益，潜帧计时也不等于完整视频实时吞吐。
+    note_en: Combines multi-view temporal generation with WorldRec 2.0 scene priors, quantitatively evaluating 211-frame future generation and separately supporting action-conditioned prediction and PPO closed-loop training; across 1,000 simulated scenarios, E2E-WM-RL has a 0.4% collision rate versus 1.2% for ST-JEPA-E2E. The comparison does not isolate world-model gains, and latent-frame timing does not establish full-video real-time throughput.

@@ -1056,3 +1056,69 @@ papers:
     tags: [因果潜状态预测, 生成器调制, 动作条件视频, 历史误差抑制]
     note: 用动作条件 C-NCP 预测下一潜视频块，并调制四个冻结生成器；60 秒 RealEstate10K 评测中，Matrix-Game 3.0 主体一致性从 0.7946 升至 0.8387。包含动作条件、预测方向与训练计划消融；A800 上 720P 每交互耗时从 6.677 增至 7.294 秒。未报告多训练种子或置信区间，长时证据限感知指标。
     note_en: Uses action-conditioned C-NCP forecasts to modulate four frozen generators. On 60-second RealEstate10K evaluations, Matrix-Game 3.0 subject consistency rises from 0.7946 to 0.8387. Ablations test action conditioning, prediction direction and training schedules; 720P time per interaction on an A800 rises from 6.677 to 7.294 seconds. Multiple training seeds and confidence intervals are unreported; long-horizon evidence is perceptual.
+
+  - title: 'Roz: A Taste Test for World Model Latents'
+    short: Roz
+    org: Pantheon
+    year: 2026
+    venue: NeurIPS Workshop (NEmo)
+    category: general
+    links:
+      arxiv: '2611.00612'
+    features: {}
+    tags: [物理属性探针, 潜变量诊断, 观察历史, 读出敏感性]
+    note: 以对比和连续测试诊断世界模型潜变量是否保留物理属性与历史信息，测试集共 1,734 个场景；结果受观察窗口、特征读出和距离函数影响，部分模型仅测子集及已观察视频特征，不能据此断言未来动力学普遍失效。
+    note_en: Uses contrastive and continuous tests in a 1,734-scenario suite to diagnose physical properties and historical information in world-model latents; results depend on observation windows, feature readouts, and distance functions. Some models are evaluated only on a subset and on observed-video features, which does not establish general failure of future dynamics.
+
+  - title: 'AgiWorld: An Agentic Video World Model for Building Persistent Worlds'
+    short: AgiWorld
+    org: The University of Texas at Austin / Adobe Research
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.02341'
+      project: https://bshfang.github.io/agiworld/
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [相机条件视频, 空间记忆, 观测反馈规划, 持久场景探索]
+    note: 训练相机条件视频生成与空间记忆，并由 agent 读取生成内容后修正布局和路线；60 秒评测中，双记忆组件使最后 10 秒深度重投影误差从 0.049 降至 0.031。主要面向静态场景的相机探索，agent 消融以定性证据为主，未报告实时吞吐。
+    note_en: Trains camera-conditioned video generation with spatial memory, while an agent revises layouts and routes from generated observations. On 60-second evaluations, the two memory components reduce final-10-second depth reprojection error from 0.049 to 0.031. Evidence mainly concerns camera exploration of static scenes; agent ablations are qualitative, and real-time throughput is unreported.
+
+  - title: 'When Does Latent Prediction Error Support Physical Surprise Claims in Video World Models?'
+    org: Technology School Electronic Systems (TUES) / Baba Tonka High School of Mathematics
+    year: 2026
+    venue: NeurIPS Workshop (WM-PAI)
+    category: general
+    links:
+      arxiv: '2611.01815'
+      project: https://3-ml.github.io/jepa-surprise/
+      code: https://github.com/3-ml/jepa-surprise
+    features: {}
+    tags: [预测误差诊断, 物理意外, 动作外观对照, 固定阈值评估]
+    note: 以动作、外观、静帧及交叉支撑对照诊断原生预测误差；V-JEPA2-G 在干净 Kubric 测试集上固定阈值的平衡准确率为 53.9%，却误报约 69% 合法事件。动作敏感和可读出的物理信息不保证误差代表物理意外；结论限被测模型与程序化场景，部分分析为事后分析。
+    note_en: Audits native prediction error using action, appearance, static-frame and crossed-support controls. On clean Kubric tests, V-JEPA2-G with a fixed threshold achieves 53.9% balanced accuracy while falsely flagging about 69% of lawful events. Action sensitivity and readable physical information do not ensure that error measures physical surprise; findings cover the tested models and procedural scenes, with some post-hoc analyses.
+
+  - title: 'Stand-In Effects and Pooling Amplification: Lessons from Biological World Models for Testing Action Effects'
+    org: Stanford University / University College London / Beijing Tongren Hospital, Capital Medical University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.01666'
+    features: {}
+    tags: [动作效应诊断, 条件随机化检验, 像素池化, Atari]
+    note: 研究动作替换诊断中的历史替代效应及像素池化失效，并用固定温度混合修复设计随机化检验；DIAMOND 三款 Atari 游戏中，有动作效应的 96 个单位全部检出，原池化为零。检出只证明动作影响观测，不验证反事实预测；证据限一步预测与强效应。
+    note_en: Studies historical stand-in effects in action-replacement diagnostics and failures of pixel-pooled tests, using a fixed tempering mixture to repair design-based randomization tests. Across three Atari games with DIAMOND, it detects all 96 action-effect units versus none for pooling. Rejection establishes effects on observations, not accurate counterfactual predictions; evidence covers one-step prediction and strong effects.
+
+  - title: 'Old Is Not False: Valid-Time Memory for Interactive Video World Models'
+    short: ReDate
+    org: HKUST / Beihang University / Monash University / Sun Yat-sen University / Renmin University of China
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.00758'
+    features: {}
+    tags: [有效时间记忆, 冻结生成器, 撤销状态恢复, 时间戳干预]
+    note: 不重训生成器，按已执行动作日志修正记忆 token 的有效时间以处理撤销后的状态恢复；197 个留出片段在两个生成种子下合计 590 个返还步骤，FAR 当前状态准确率从 0.342 升至 0.585。依赖可识别恢复的动作日志和历史视角，缺对应视角时准确率仍不超过 0.10。
+    note_en: Re-dates memory tokens from executed-action logs to handle state restoration after undos without retraining the generator. Across 197 held-out clips and two generation seeds totaling 590 reverted steps, FAR's current-state accuracy rises from 0.342 to 0.585. It requires logs that identify restorations and suitable historical views; accuracy remains at most 0.10 where the required view is absent.
