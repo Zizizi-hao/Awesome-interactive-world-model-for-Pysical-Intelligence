@@ -1,1 +1,22 @@
-{}
+{
+  "cs.AI": {
+    "last_observed": "2026-11-11",
+    "pending": []
+  },
+  "cs.CV": {
+    "last_observed": "2026-11-11",
+    "pending": []
+  },
+  "cs.GR": {
+    "last_observed": "2026-11-11",
+    "pending": []
+  },
+  "cs.LG": {
+    "last_observed": "2026-11-11",
+    "pending": []
+  },
+  "cs.RO": {
+    "last_observed": "2026-11-11",
+    "pending": []
+  }
+}
