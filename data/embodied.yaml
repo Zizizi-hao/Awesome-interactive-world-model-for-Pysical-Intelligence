@@ -3149,3 +3149,161 @@ papers:
     tags: [多视角潜在预测, 转移潜变量, 观测反馈控制, 诊断纠错接口]
     note: 以多视角潜在未来预测辅助动作策略，并接入观测反馈纠错；Selected12 组件对照加入世界模型后，Q-score 从 0.4846 升至 0.5183。无外部动作条件或长时 rollout 验证；公开版省略部分纠错与执行策略，其 BEHAVIOR Q-score 为 0.5287，不能等同论文完整系统的 0.6411。
     note_en: Uses multiview latent future prediction to guide an action policy with observation-feedback correction; adding the world model in a Selected12 component comparison raises Q-score from 0.4846 to 0.5183. External action conditioning and long rollouts are unvalidated; the release omits some correction and execution strategies and reports BEHAVIOR Q-score of 0.5287, distinct from the paper's full-system 0.6411.
+
+  - title: 'K-PWM: Control-Oriented Structured Bilinear World Models under Partial Observation'
+    short: K-PWM
+    org: The Ohio State University / West Virginia University / Cornell University
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2611.11521'
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [Koopman 双线性动力学, 部分观测, 概率状态估计, MPPI]
+    note: 从每任务 15 条轨迹学习动作条件双线性潜动力学，以 EKF 信念反馈驱动 MPPI；部分观测 HalfCheetah 的 12 秒预测 RMSE 为 0.048，MTS3 为 0.14。四种机器人模型仅在 MuJoCo 中跟踪验证；高斯近似可能失真，未约束潜动力学稳定性，未验证实机迁移。
+    note_en: Learns action-conditioned bilinear latent dynamics from 15 trajectories per task and drives MPPI with EKF belief feedback; 12-second prediction RMSE on partially observed HalfCheetah is 0.048 versus 0.14 for MTS3. Tracking with four robot models is validated only in MuJoCo; Gaussian approximations can fail, latent stability is unconstrained, and hardware transfer is untested.
+
+  - title: 'ForeAct: Geometry-Guided Action Learning from World Representations'
+    short: ForeAct
+    org: The Hong Kong University of Science and Technology (Guangzhou) / JD Explore Academy
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11500'
+      code: https://github.com/Bulrush666/ForeAct
+    features: {closedloop: true}
+    tags: [世界模型表征复用, 下一帧深度监督, 单次前向策略, 观测反馈执行]
+    note: 复用预训练视频世界模型为策略骨干，以下一帧相对深度辅助训练；LIBERO 组件对照由 action-only 的 94.3% 升至 96.6%，真实执行成功 67/90 次。部署移除深度读出且不生成未来；不是外部动作条件模拟器，168ms 是整套策略延迟，不代表世界模型吞吐。
+    note_en: Reuses a pretrained video world model as a policy backbone with auxiliary next-frame relative-depth supervision; a LIBERO component comparison rises from 94.3% for action-only to 96.6%, with 67/90 successful physical trials. Deployment removes the depth readout and generates no futures; this is not an externally action-conditioned simulator, and 168ms measures total policy latency rather than world-model throughput.
+
+  - title: 'ObjectWorld: Scaling Object-Centric World Models with A Large-Scale 3D Full-Object Flow Dataset'
+    short: ObjectWorld
+    org: National University of Singapore / NUS Guangzhou Research Translation and Innovation Institute / RoboScience
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11085'
+      project: https://nus-lins-lab.github.io/ObjectWorld/
+    features: {}
+    tags: [完整物体流, 遮挡几何, 任务条件预测, 轨迹执行接口]
+    note: 从初始 RGBD 与任务预测完整物体表面三维轨迹，再优化接触轨迹用于操作；全帧 EPE 为 6.22cm，ObjectForesight 为 10.24cm。1210.1 小时为总库，主训练采用 454.5 小时仿真与 288.7 小时 Golden 真实子集；不输入控制动作，未核实反馈重规划，局部接触依赖刚性近似。
+    note_en: Predicts full-object surface trajectories from initial RGBD and a task, then optimizes contact trajectories for manipulation; all-frame EPE is 6.22cm versus 10.24cm for ObjectForesight. The full collection contains 1210.1 hours, while main training uses 454.5 simulated hours and a 288.7-hour Golden real subset; control actions are not inputs, feedback replanning is unverified, and local contact uses a rigidity approximation.
+
+  - title: 'Dynamics-Informed Action Learning for Goal-Conditioned Latent Planning'
+    short: DIAL
+    org: Huazhong University of Science and Technology / Tencent ARC Lab
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.10660'
+    features: {action: true, closedloop: true}
+    tags: [前向逆向动力学, 递归训练, CEM 初始化, 视觉目标规划]
+    note: 联合训练动作条件前向潜动力学及逆动力学头，以自身递归预测对齐训练，并用逆模型初始化 CEM；50 步目标偏移下同搜索预算的四环境宏平均成功率为 78%，LeWM 为 63%。每执行 25 个环境步观察并重规划；逆模型精度有限、依赖搜索修正，目标偏移不等于长期预测证据，尚无实机验证。
+    note_en: Jointly trains an action-conditioned forward latent model and an inverse-dynamics head, aligns training with its own recursive predictions, and initializes CEM with the inverse model; at a 50-step goal offset under matched search budgets, macro success across four environments is 78% versus 63% for LeWM. It observes and replans every 25 environment steps; inverse predictions are inaccurate and depend on search refinement, goal offset does not establish long-rollout accuracy, and physical-robot validation is absent.
+
+  - title: 'DexForesight: Grounding Dexterous Policies with Implicit Spatial Foresight'
+    short: DexForesight
+    org: Sharpa Robotics / SJTU–Sharpa Joint Lab for Embodied AI / The Chinese University of Hong Kong / Fudan University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11166'
+      project: https://dexforesight.github.io/
+    features: {action: true, closedloop: true}
+    tags: [动作条件空间预测, 手部三维流, 动态表征迁移, 灵巧操作]
+    note: 用示范动作条件预测手部三维流和视觉特征变化，再将冻结世界模型的查询表征迁移至反馈策略；11 项 DexJoCo 任务成功率由基策略的 49.4% 升至 60.5%。部署移除世界模型、深度与手几何编码器；真实证据仅三任务各 20 次，不支持在线想象规划、世界模型实时性或长期 rollout 声明。
+    note_en: Predicts 3D hand flow and visual feature changes conditioned on demonstration actions, then transfers frozen world-model query representations into a feedback policy; success across 11 DexJoCo tasks rises from 49.4% for the base policy to 60.5%. Deployment removes the world model, depth, and hand-geometry encoders; physical evidence covers only three tasks with 20 trials each and does not establish online imagination planning, world-model real-time throughput, or long rollouts.
+
+  - title: 'QCC-WM: Linking Macro-State Dynamics and Visual Generation via Quotient Causal Construction'
+    short: QCC-WM
+    org: University of Electronic Science and Technology of China / University of Glasgow / Huzhou Maternity & Child Health Care Hospital
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.12353'
+    features: {action: true}
+    tags: [探头位姿条件, 超声观测预测, 宏状态动力学, 空间误差修正]
+    note: 学习六维探头位姿变化条件的超声宏状态动力学，以运动传输和空间误差修正生成未来观测；US-VLA 四步 ROI-MSE 从 Direct 的 0.02046 降至 0.01861。物理交互证据限离线预测，16 步仅约 0.533 秒；生成内部回读不构成环境闭环，未验证机器人导航或临床收益。
+    note_en: Learns ultrasound macro-state dynamics conditioned on six-dimensional probe pose changes, using motion transport and spatial error correction to generate future observations; four-step US-VLA ROI-MSE falls from 0.02046 for Direct to 0.01861. Physical-interaction evidence is limited to offline prediction, with 16 steps spanning only about 0.533 seconds; internal generative readback is not an environment feedback loop, and robotic navigation or clinical benefit is unvalidated.
+
+  - title: 'Σ-LeWM: Learning World Models via S-Information for Robot Control'
+    short: Σ-LeWM
+    org: Vrije Universiteit Amsterdam
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.12732'
+      project: https://zuxinrui.github.io/sigma-lewm/
+      code: https://github.com/zuxinrui/sigma-lewm
+    features: {action: true, closedloop: true}
+    tags: [S-Information, 前向后向与逆动力学, 多步训练, 潜空间 MPC]
+    note: 为 LeWM 的动作条件潜动力学增加后向及逆动力学训练约束，并用于观测反馈 MPC；Scene 成功率为 80.7%，LeWM 为 57.7%，匹配多步训练基线为 53.6%，覆盖三训练种子。后向及逆向头不参与部署，机器人任务均为仿真；CEM 求解耗时和较长规划窗不能证明世界模型实时吞吐或长期预测一致性。
+    note_en: Adds backward and inverse dynamics training constraints to LeWM's action-conditioned latent dynamics and uses them in observation-feedback MPC; Scene success is 80.7%, versus 57.7% for LeWM and 53.6% for a matched multistep-training baseline, across three training seeds. Backward and inverse heads are discarded at deployment, and robot tasks are simulated; CEM solve times and longer planning windows do not establish real-time world-model throughput or long-rollout consistency.
+
+  - title: 'Library of Hands: Fix the Hands, Not the World Model'
+    short: Library of Hands
+    org: University of the West of England / University of Oxford / Imperial College London / University of Exeter / University of Cambridge
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.12678'
+    features: {action: true, closedloop: true}
+    tags: [冻结世界模型, 动作接口校准, 输入映射记忆, 反馈规划]
+    note: 通过冻结动作条件世界模型反演实际动作，估计并记忆控制指令映射，再经映射执行反馈 CEM；三仿真任务的锁定测试成功率由 28.6% 升至 62.3%，不改变接口时由 78.1% 变为 77.5%。贡献是接口适配而非新动力学；实机数据预训练模型仍只在仿真中评估，摩擦及重心改变时平均收益为负。
+    note_en: Inverts a frozen action-conditioned world model to estimate applied actions, learns and remembers command maps, and plans through them with feedback CEM; locked tests across three simulated tasks improve from 28.6% to 62.3%, while unchanged interfaces move from 78.1% to 77.5%. The contribution is interface adaptation rather than new dynamics; models pretrained on real robot data are still evaluated in simulation, and average gains are negative under friction and center-of-mass changes.
+
+  - title: 'How Many Candidates Does a One-Step World Model Need? A Random-Codebook Account of Nearest-of-m Training on Frozen DINO Tokens'
+    org: Chungbuk National University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11887'
+      code: https://github.com/thddydgnl/nearest-of-m-world-models
+    features: {action: true, realtime: true, closedloop: true}
+    tags: [随机码本分析, 单步随机动力学, 分布覆盖, 规划负结果]
+    note: 分析动作条件 nearest-of-m 随机预测的覆盖与记忆偏差；16 候选的覆盖率为 0.93，50 次网络评估的 flow matching 为 0.79。RTX A5000 上，8M 模型从预计算的 224px 图像 DINO token 预测为 3.3ms，对照 107ms，均不含编码；PushT 完整 MPC 仍约 4 秒/步。逐步 rollout 训练改善预测误差，却未提升规划成功率，BAIR 的连续高维未来分布仍欠分散。
+    note_en: Analyzes coverage and memorization bias in action-conditioned nearest-of-m stochastic prediction; 16 candidates achieve 0.93 coverage versus 0.79 for flow matching with 50 network evaluations. On an RTX A5000, an 8M model predicts from precomputed DINO tokens of 224px images in 3.3ms versus 107ms, excluding encoding; full PushT MPC still takes about 4 seconds per step. Per-step rollout training improves prediction error without improving planning success, while continuous high-dimensional BAIR futures remain under-dispersed.
+
+  - title: 'Planners Exploit Deterministic Error: Dithered Low-Bit World Models'
+    org: Chungbuk National University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11780'
+    features: {action: true, closedloop: true}
+    tags: [世界模型量化, 规划器误差利用, 共享随机抖动, 闭环鲁棒性]
+    note: 复用动作条件世界模型，发现规划会利用确定性量化误差；每次优化迭代刷新且候选共享的抖动在受影响 MetaWorld 19/19 配置恢复至少一半成功率损失，中位恢复 95%。TD-MPC2 分支有反馈控制，DINO-WM 分支仅开环；DMC 仅 5/12 配置达该恢复门槛，部分反而受损，W8A4 世界模型耗时仍为 BF16 的 1.07–1.52 倍，无真实机器人验证。
+    note_en: Reuses action-conditioned world models and shows planners exploiting deterministic quantization error; dither refreshed per optimization iteration and shared across candidates recovers at least half the success loss in 19/19 affected MetaWorld cells, with 95% median recovery. The TD-MPC2 branch uses feedback control while the DINO-WM branch is open-loop; only 5/12 DMC cells reach that recovery threshold and some regress, W8A4 world-model time remains 1.07–1.52 times BF16, and physical-robot validation is absent.
+
+  - title: 'Action Representation for Spatial Generalization in Robot World Models'
+    org: University of Washington
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11869'
+    features: {action: true}
+    tags: [表面相对动作, 动作后果预测, 空间泛化, 合成削皮评估]
+    note: 在合成削皮中学习点几何与刀具路径到单次动作后果的映射；五配对训练种子下，表面相对动作将 normalized regret 从世界坐标的 0.653 降至 0.226。标签来自几何去除规则，非真实材料动力学；12mm 参考原点噪声使 regret 升至 0.568，未验证力、断裂、黏附、观测反馈或实机部署。
+    note_en: Learns a mapping from point geometry and blade paths to single-stroke consequences in synthetic peeling; across five paired training seeds, surface-relative actions reduce normalized regret from 0.653 for world coordinates to 0.226. Labels come from geometric removal rules rather than real material dynamics; 12mm reference-origin noise raises regret to 0.568, and force, fracture, adhesion, observation feedback, and physical deployment are untested.
+
+  - title: 'An Evaluation of Tabular Foundation Models as Training-Free World Models'
+    org: Hitachi America, Ltd.
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.11921'
+    features: {action: true}
+    tags: [TabPFN, 上下文动力学回归, 低数据评估, 预测与规划差距]
+    note: 将预训练 TabPFN 用于状态和动作条件的下一状态回归，评估少量交互数据下的动力学先验；20 条上下文的 20 步预测不优于状态不变基线，更长上下文改善误差。未做规划或反馈控制，完整数据训练模型在多数系统更优；潜空间版本需另训编码器，不能称免训练，Hopper 单步约 3 秒。
+    note_en: Uses pretrained TabPFN for next-state regression conditioned on states and actions, evaluating dynamics priors with limited interaction data; 20-step rollouts with 20 context transitions do not beat persistence, while longer contexts improve errors. Planning and feedback control are not evaluated, fully trained models remain better on most systems, the latent variant requires a separately trained encoder and is not training-free, and one Hopper prediction takes about 3 seconds.

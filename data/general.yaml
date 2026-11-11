@@ -1150,3 +1150,30 @@ papers:
     tags: [学习式游戏动力学, 三维持久状态, 神经渲染分离, 局部世界扩展]
     note: 分离动作条件三维状态预测与神经渲染；10 模拟分钟展开的 RGB 动作识别准确率为 82.1–85.6%，M4 Pro 在 160×120、四步渲染下达 6.19 FPS、161.2ms 后端延迟。视觉评分排除故障/恢复片段，局部范围外实体暂停，设计对照未匹配训练预算。
     note_en: Separates action-conditioned 3D state prediction from neural rendering; RGB action-recognition accuracy reaches 82.1–85.6% over 10 simulated minutes, with 6.19 FPS and 161.2ms backend latency on M4 Pro at 160×120 using four rendering steps. Visual scores exclude failure/recovery clips, entities outside the local region are suspended, and design comparisons do not match training budgets.
+
+  - title: 'WanderBench: Can World Models Explore Dynamic Worlds from Video?'
+    short: WanderBench / WanderLand
+    org: Huazhong University of Science and Technology
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.12557'
+    features: {action: true}
+    tags: [动态视频世界评估, 相机动作条件, 源事件同步, 重访一致性]
+    note: 在 745 个源视频上评估相机动作条件的世界探索，并以免训练 WanderLand 重建冻结模型的时刻对齐条件；InSpatio-World 1.5 的源动态保真分数提升 8.3 分，五骨干的重访一致性提升 2.4–4.8 分。依赖源视频及模型几何接口，证据限视角交互，未验证物体动作响应、反馈控制或普遍长期一致性。
+    note_en: Evaluates camera-action-conditioned world exploration on 745 source videos and uses training-free WanderLand to rebuild time-aligned conditioning for frozen models; source-dynamics fidelity improves by 8.3 points for InSpatio-World 1.5, while revisit consistency improves by 2.4–4.8 points across five backbones. It requires source video and model geometry interfaces; evidence covers viewpoint interaction rather than object-action responses, feedback control, or general long-rollout consistency.
+
+  - title: 'Tiresias: Towards Language-Conditioned World Models'
+    short: Tiresias
+    org: University of Washington / National University of Singapore / Microsoft Research / Carnegie Mellon University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.10392'
+      code: https://github.com/UWMILab/Tiresias
+    features: {action: true}
+    tags: [语言条件规划, 轨迹条件世界模型, 选择性想象, 跨域离线评估]
+    note: 用动作轨迹条件 Wan2.2 世界模型想象语言策略的候选后果，再融合轨迹与视频评分；val seen 相同八个随机候选的对照中，离线 SR 从仅轨迹评分的 0.30 升至 0.39。基准整合四域 15 数据集，未验证环境反馈控制或实机部署；合理视频仍可偏离真实未来，筛选收益受候选覆盖限制。
+    note_en: Uses an action-trajectory-conditioned Wan2.2 world model to imagine candidates from a language policy, then fuses trajectory and video scores; with the same eight random candidates on val seen, offline SR rises from 0.30 for trajectory-only ranking to 0.39. The benchmark integrates 15 datasets across four domains, without environment-feedback control or physical deployment; plausible videos can diverge from true futures, and selection gains depend on candidate coverage.

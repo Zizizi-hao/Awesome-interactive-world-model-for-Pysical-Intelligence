@@ -1941,3 +1941,16 @@ papers:
     tags: [冻结世界动作模型, 采样时能量引导, 可行驶区域约束, 开放环伪仿真]
     note: 在冻结 WAM 的动作采样器中加入解析能量引导；NAVSIM v2 hard-split 上，SimWAM EPDMS 从 37.8 升至 39.6（引导为三采样种子均值）。属于既有世界模型的规划应用；仅开放环伪仿真，碰撞分数无一致改善，也不提供安全保证。
     note_en: Adds analytic energy guidance to frozen WAM action samplers; SimWAM EPDMS rises from 37.8 to 39.6 on NAVSIM v2 hard-split, with guided results averaged over three sampler seeds. This is a planning application of existing world models; evaluation is limited to open-loop pseudo-simulation, collision scores show no consistent improvement, and safety is not guaranteed.
+
+  - title: 'Breaking survivorship bias in driving world models'
+    org: University of Wisconsin–Madison
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.11516'
+      project: https://zihaosheng.github.io/NWM/
+    features: {action: true}
+    tags: [幸存者偏差, 事故视频训练, 轨迹条件生成, 安全关键预测]
+    note: 混合日常与真实事故视频训练轨迹条件世界模型，以边界框损失约束控制；100 个事故场景中碰撞前 0.5 秒的碰撞召回为 86%，Vista 为 9%。200 个刻意筛选的 NAVSIM 策略分歧场景中，所选轨迹平均 PDMS 为 0.783，对照 0.637；实车数据仅离线候选比较，未验证闭环驾驶，也未单独隔离事故数据的因果收益。
+    note_en: Trains a trajectory-conditioned world model on routine and real accident videos with a bounding-box control loss; collision recall 0.5 seconds before impact across 100 accident scenes is 86%, versus 9% for Vista. Across 200 deliberately selected NAVSIM policy-disagreement scenes, selected trajectories average 0.783 PDMS versus 0.637; vehicle data support only offline candidate comparisons, with no closed-loop driving or isolated causal benefit from accident data.
