@@ -3,15 +3,14 @@
 # 召回太多噪音时收紧 queries 关键词；漏报时放宽
 # =====================================================================
 
-lookback_days: 7            # 每次扫描回溯的天数（每日运行 + 去重，窗口留余量）
-max_results_per_query: 100  # 每个 query 最多拉取的条目数
-delay_seconds: 5            # 相邻请求间隔（arXiv API 限速要求，留足余量降低 429）
-retry_attempts: 3           # 每组 API 总尝试次数；耗尽临时错误重试后停止其余 API 查询
+backfill_page_size: 100     # 手动 API 补扫每页条目数
+backfill_max_pages: 3       # 每组查询的页数上限，超限后缩短补扫区间
+delay_seconds: 5            # Atom 与搜索 API 共用请求间隔
+retry_attempts: 3           # 每个请求的总尝试次数
 timeout_seconds: 60
-rss_fallback: true          # 失败时读取一次最新一期公告；始终标为扫描不完整
 abstract_chars: 400         # Issue 中摘要截断长度
 
-# 仅保留主分类在列表内的论文（空列表 = 不限制）
+# 日常逐分类请求 Atom，补扫时也按交叉分类匹配。
 category_filter: [cs.CV, cs.RO, cs.LG, cs.AI, cs.GR]
 
 queries:
@@ -19,7 +18,7 @@ queries:
     search: >-
       (all:"world model" OR all:"world models") AND
       (all:"autonomous driving" OR all:"self-driving" OR all:"driving scene" OR all:"end-to-end driving")
-    # RSS 只在标题+摘要匹配：组内 OR，组间 AND；与 API all: 检索不完全等价。
+    # 日常按标题和摘要匹配，组内 OR、组间 AND。search 用于手动 API 补扫。
     feed_keywords:
       - ["world model", "world models"]
       - ["autonomous driving", "self-driving", "driving scene", "end-to-end driving"]

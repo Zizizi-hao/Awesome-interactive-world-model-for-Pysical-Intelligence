@@ -4,6 +4,16 @@ on:
   schedule:
     - cron: "0 16 * * *"   # UTC 16:00 = 北京时间 00:00（GitHub cron 可能有延迟）
   workflow_dispatch:
+    inputs:
+      backfill_from:
+        description: API 补扫起始提交日期（UTC，YYYY-MM-DD）
+        type: string
+      backfill_to:
+        description: API 补扫结束提交日期（UTC，YYYY-MM-DD）
+        type: string
+      reviewed_dates:
+        description: 已人工核查的公告日期（YYYY-MM-DD，空格分隔）
+        type: string
 
 permissions:
   contents: write
@@ -25,31 +35,77 @@ jobs:
       - run: pip install pyyaml
       - name: Fetch arXiv candidates
         id: fetch
+        env:
+          BACKFILL_FROM: ${{ inputs.backfill_from }}
+          BACKFILL_TO: ${{ inputs.backfill_to }}
+          REVIEWED_DATES: ${{ inputs.reviewed_dates }}
         run: |
           git log -1 --format='Running commit: %H'
-          python3 -u scripts/fetch_arxiv.py
+          args=()
+          if [[ -n "$BACKFILL_FROM" || -n "$BACKFILL_TO" ]]; then
+            args+=(--backfill-from "$BACKFILL_FROM" --backfill-to "$BACKFILL_TO")
+          fi
+          read -r -a dates <<< "$REVIEWED_DATES"
+          for date in "${dates[@]}"; do
+            args+=(--reviewed-date "$date")
+          done
+          python3 -u scripts/fetch_arxiv.py "${args[@]}"
+      - name: Archive Atom snapshots
+        if: steps.fetch.outputs.snapshot != ''
+        uses: actions/upload-artifact@v7
+        with:
+          name: arxiv-atom-snapshot-${{ github.run_attempt }}
+          path: ${{ steps.fetch.outputs.snapshot }}
+          retention-days: 90
+          if-no-files-found: error
       - name: Create issue with candidates
+        id: publish
         if: steps.fetch.outputs.has_new == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          REPORT: ${{ steps.fetch.outputs.report }}
+          BATCH: ${{ steps.fetch.outputs.batch }}
         run: |
           gh label create "new-papers" --color "1D76DB" --description "arXiv 新论文候选" 2>/dev/null || true
-          gh issue create \
-            --title "arXiv 候选论文更新 $(date +%F)" \
-            --label "new-papers" \
-            --body-file "${{ steps.fetch.outputs.report }}"
-      - name: Commit seen ids
-        if: steps.fetch.outputs.has_new == 'true'
+          issue=$(gh issue list --label new-papers --state all --limit 30 --json url,body \
+            --jq "[.[] | select((.body // \"\") | startswith(\"<!-- arxiv-scan:$BATCH -->\")) | .url][0] // empty")
+          if [[ -z "$issue" ]]; then
+            issue=$(gh issue create --title "arXiv 候选论文更新 $(date +%F)" --label new-papers --body-file "$REPORT")
+          fi
+          echo "issue=$issue" >> "$GITHUB_OUTPUT"
+      - name: Commit scan state
+        id: persist
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/seen_arxiv_ids.txt
+          git add data/seen_arxiv_ids.txt data/arxiv_scan_coverage.json
           if ! git diff --cached --quiet; then
-            git commit -m "chore: update seen arxiv ids"
+            git commit -m "chore: update arXiv scan state"
+            git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
-      - name: Report incomplete scan
-        if: always() && steps.fetch.outputs.scan_status == 'partial'
+      - name: Report publication outcome
+        if: always()
+        env:
+          SCAN: ${{ steps.fetch.outputs.scan_status }}
+          COUNT: ${{ steps.fetch.outputs.candidate_count }}
+          ISSUE: ${{ steps.publish.outputs.issue }}
+          PUBLISH: ${{ steps.publish.outcome }}
+          PERSIST: ${{ steps.persist.outcome }}
         run: |
-          echo "::error::扫描不完整。失败组与 RSS 覆盖限制见运行摘要；候选发布状态见前面的步骤。"
-          exit 1
+          if [[ "$SCAN" == partial ]]; then
+            echo "::warning::公告覆盖有待核查项，详情见运行摘要。"
+          fi
+          {
+            echo
+            if [[ -n "$ISSUE" ]]; then
+              echo "- 候选发布 · $COUNT 篇，$ISSUE"
+            elif [[ "$PUBLISH" == failure ]]; then
+              echo "- 候选发布失败 · $COUNT 篇待发布。"
+            elif [[ "$COUNT" == 0 && "$SCAN" != failed ]]; then
+              echo "- 候选发布 · 本轮已获取的结果中没有新候选。"
+            else
+              echo "- 候选发布 · 本轮未发布。"
+            fi
+            echo "- 扫描状态保存 · $PERSIST"
+          } >> "$GITHUB_STEP_SUMMARY"

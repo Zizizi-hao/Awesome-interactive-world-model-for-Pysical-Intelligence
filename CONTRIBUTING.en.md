@@ -59,20 +59,23 @@ Months are taken from arXiv IDs, with the cutoff month determined by `meta.updat
 
 ## Maintaining the automatic scan
 
-Configuration is in `scripts/arxiv_config.yaml`. After retries for a temporary API failure are exhausted, the scanner stops further API requests and tries the official daily Atom feed once. All requests share pacing and `Retry-After` cooldowns. If the server requests a wait longer than 300 seconds, the scan stops making requests for that run.
+The daily scan reads each configured arXiv category's Atom feed in turn. A feed at the 2,000-entry cap is flagged as incomplete. The scanner matches `feed_keywords` locally against full titles and abstracts, using OR within groups and AND between groups, and includes cross-listings. Requests run serially at least five seconds apart and respect `Retry-After`. [Scan configuration](scripts/arxiv_config.yaml) · [arXiv feeds](https://info.arxiv.org/help/rss.html) · [Rate limits](https://info.arxiv.org/help/api/tou.html#rate-limits)
 
-Runs are classified as complete success, partial scan, or total failure. Only a complete scan with zero candidates reports "No new candidate papers." The feed covers only the latest announcement, so it cannot fill a seven-day window. Matching uses `feed_keywords` against titles and abstracts, categories include cross-listings, and feed dates in the report are announcement dates.
+Each run uploads the valid raw category XML files in an `arxiv-atom-snapshot-${{ github.run_attempt }}` artifact for 90 days. Coverage is stored separately for each category, starts with its first valid nonempty snapshot, and tracks possible gaps on Monday through Friday in US Eastern time. Empty or stale feeds leave the coverage date unchanged. Holidays may also appear as gaps to review. [Coverage state](data/arxiv_scan_coverage.json) · [Atom date fields](https://info.arxiv.org/help/atom_specifications.html#atom-entry-elements)
 
-For a partial scan, the workflow first tries to publish the candidates it obtained. After the Issue is created successfully, it commits the reported IDs, then marks the run as failed. If there are no candidates, the run summary still explains the coverage gap. A total failure does not update reported IDs.
+The run summary reports scan coverage and publication outcomes separately. The workflow can publish candidates from a partial scan. A total fetch failure or a failure to archive snapshots, publish candidates, or save scan state marks the run as failed.
 
-When changing search terms, update both `search` and `feed_keywords` (OR within groups, AND between groups). Validate with:
+Use `--dry-run` to preview results without writing scan state. Use `--replay PATH` to replay saved raw Atom XML offline in read-only mode. Repeat the flag to replay snapshots from multiple categories together. When changing keywords, keep `feed_keywords` and the `search` conditions for manual API backfills in sync. Run the tests and replay a snapshot to verify changes.
 
 ```bash
 python3 -m unittest discover -s tests
+python3 -u scripts/fetch_arxiv.py --replay /path/to/atom.xml
 python3 -u scripts/fetch_arxiv.py --dry-run
 ```
 
-After pushing an update, start a new run via **Actions → Daily arXiv scan → Run workflow → main**. Re-running an old job uses its original commit; the fetch step prints the actual commit hash.
+For a manual backfill, supply both `--backfill-from YYYY-MM-DD` and `--backfill-to YYYY-MM-DD`. The paginated API uses UTC submission dates, includes both endpoints, and covers at most 14 days. A Monday announcement may include submissions from the preceding Thursday and Friday, so choose the submission window accordingly. Announcement gaps still require independent review after backfill. Use `--reviewed-date YYYY-MM-DD` after independently checking all pending categories for that date or confirming a holiday. The flag applies to every pending category on that date. Repeat it for multiple dates. [arXiv announcement schedule](https://info.arxiv.org/help/availability.html#announcement-schedule)
+
+After pushing an update, start a new run via **Actions → Daily arXiv scan → Run workflow → main**. For manual backfill, fill in `backfill_from` and `backfill_to`. Enter reviewed dates in `reviewed_dates`, separated by spaces. Re-running an old job uses its original commit. The fetch step prints the actual commit hash.
 
 ## Inclusion criteria
 

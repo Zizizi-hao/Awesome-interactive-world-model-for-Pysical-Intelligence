@@ -47,48 +47,33 @@ class MainTests(unittest.TestCase):
         self.addCleanup(self.stack.close)
         self.temp = Path(self.stack.enter_context(tempfile.TemporaryDirectory()))
         self.config_path = self.temp / "config.yaml"
+        self.coverage_path = self.temp / "coverage.json"
         self.output_path = self.temp / "output.txt"
         self.summary_path = self.temp / "summary.md"
         self.cfg = {
-            "lookback_days": 7,
-            "retry_attempts": 3,
-            "timeout_seconds": 60,
-            "delay_seconds": 5,
-            "rss_fallback": True,
             "category_filter": ["cs.CV", "cs.RO"],
-            "queries": [
-                {
-                    "name": name,
-                    "search": "all:" + keyword,
-                    "feed_keywords": [["world model"], [keyword]],
-                }
-                for name, keyword in [
-                    ("Driving", "driving"),
-                    ("Robotics", "robot"),
-                    ("Interactive", "interactive"),
-                ]
-            ],
+            "queries": [{"name": "Robotics", "search": "all:robot",
+                         "feed_keywords": [["world model"], ["robot", "robots"]]}],
         }
         self.stack.enter_context(patch.object(fetch, "CONFIG_FILE", self.config_path))
+        self.stack.enter_context(patch.object(fetch, "COVERAGE_FILE", self.coverage_path))
         self.stack.enter_context(patch.dict(os.environ, {
             "GITHUB_OUTPUT": str(self.output_path),
             "GITHUB_STEP_SUMMARY": str(self.summary_path),
         }))
-        self.stack.enter_context(patch.object(fetch.tempfile, "gettempdir", return_value=str(self.temp)))
-        self.stack.enter_context(patch.object(fetch.time, "sleep"))
-        self.stack.enter_context(patch.object(fetch.urllib.request, "urlopen", side_effect=AssertionError("Offline test attempted an HTTP request")))
+        original_mkdtemp = tempfile.mkdtemp
+        self.stack.enter_context(patch.object(fetch.tempfile, "mkdtemp", side_effect=lambda **kw: original_mkdtemp(dir=self.temp, **kw)))
         self.existing = self.stack.enter_context(patch.object(fetch, "existing_arxiv_ids", return_value=set()))
         self.seen = self.stack.enter_context(patch.object(fetch, "load_seen", return_value=set()))
         self.append_seen = self.stack.enter_context(patch.object(fetch, "append_seen"))
-        self.api = self.stack.enter_context(patch.object(fetch, "fetch_query", return_value=b"api"))
+        self.api = self.stack.enter_context(patch.object(fetch, "fetch_query", side_effect=AssertionError("Daily scan used search API")))
         self.feed = self.stack.enter_context(patch.object(fetch, "fetch_url", return_value=b"feed"))
-        self.parse_api = self.stack.enter_context(patch.object(fetch, "parse_entries", return_value=[]))
         self.parse_feed = self.stack.enter_context(patch.object(fetch, "parse_feed", return_value=[]))
 
-    def run_main(self, dry_run=False):
+    def run_main(self, *args):
         self.config_path.write_text(fetch.yaml.safe_dump(self.cfg), encoding="utf-8")
         stdout = io.StringIO()
-        with patch.object(sys, "argv", ["fetch_arxiv.py"] + (["--dry-run"] if dry_run else [])), contextlib.redirect_stdout(stdout):
+        with patch.object(sys, "argv", ["fetch_arxiv.py", *args]), contextlib.redirect_stdout(stdout):
             try:
                 fetch.main()
             except SystemExit as exc:
@@ -100,95 +85,120 @@ class MainTests(unittest.TestCase):
     def output(self):
         return dict(line.split("=", 1) for line in self.output_path.read_text(encoding="utf-8").splitlines())
 
-    def test_successful_empty_scan_is_success(self):
-        code, _ = self.run_main()
-        self.assertEqual(code, 0)
-        self.assertEqual(self.api.call_count, 3)
-        self.assertEqual(self.output()["scan_status"], "success")
-        self.assertEqual(self.output()["has_new"], "false")
-        self.assertTrue(self.summary_path.is_file())
-        self.feed.assert_not_called()
-        self.append_seen.assert_not_called()
+    def candidate(self, arxiv_id="2609.00001", **changes):
+        result = paper(arxiv_id, published="", announced="2026-09-14", primary_category="",
+                       categories=["cs.CV", "cs.RO"], date_label="公告日期")
+        result.update(changes)
+        return result
 
-    def test_total_failure_is_not_reported_as_no_new_papers(self):
-        self.api.side_effect = TimeoutError("API timed out")
-        self.feed.side_effect = http_error(429)
-        code, stdout = self.run_main()
-        self.assertEqual(code, 1)
-        self.assertEqual(self.output()["scan_status"], "failed")
-        self.assertEqual(self.output()["has_new"], "false")
-        self.assertNotIn("没有新候选论文", stdout)
-        self.assertTrue(self.summary_path.is_file())
-        self.append_seen.assert_not_called()
-
-    def test_partial_api_success_keeps_candidates(self):
-        self.cfg["rss_fallback"] = False
-        self.api.side_effect = [b"api", http_error(400), b"api"]
-        self.parse_api.side_effect = [[paper()], []]
-        code, _ = self.run_main()
-        self.assertEqual(code, 0)
-        self.assertEqual(self.output()["scan_status"], "partial")
-        self.assertEqual(self.output()["has_new"], "true")
-        self.append_seen.assert_called_once()
-        self.assertEqual(set(self.append_seen.call_args.args[0]), {"2609.00001"})
-        self.feed.assert_not_called()
-
-    def test_deferred_request_also_stops_fallback(self):
-        self.api.side_effect = fetch.RequestDeferred("Long server cooldown")
-        code, _ = self.run_main()
-        self.assertEqual(code, 1)
-        self.assertEqual(self.output()["scan_status"], "failed")
-        self.api.assert_called_once()
-        self.feed.assert_not_called()
-        self.append_seen.assert_not_called()
-
-    def test_rate_limit_stops_api_queries_and_fetches_feed_once(self):
-        self.api.side_effect = http_error(429)
+    def test_daily_uses_only_atom_and_deduplicates_categories_and_seen_ids(self):
         self.existing.return_value = {"2609.00002"}
         self.seen.return_value = {"2609.00003"}
-        candidate = paper(published="", announced=datetime.date.today().isoformat(),
-                          primary_category="", categories=["cs.LG", "cs.CV"], date_label="公告日期")
-        self.parse_feed.return_value = [
-            candidate, candidate,
-            dict(candidate, id="2609.00002"), dict(candidate, id="2609.00003"),
-        ]
+        self.parse_feed.return_value = [self.candidate(), self.candidate("2609.00002"), self.candidate("2609.00003")]
         code, _ = self.run_main()
         self.assertEqual(code, 0)
-        self.api.assert_called_once()
-        self.feed.assert_called_once()
-        self.assertTrue(self.feed.call_args.args[0].startswith("https://rss.arxiv.org/atom/"))
-        self.assertEqual(self.feed.call_args.kwargs["retries"], 1)
-        self.assertEqual(self.output()["scan_status"], "partial")
-        self.assertEqual(self.output()["has_new"], "true")
-        self.append_seen.assert_called_once()
-        self.assertEqual(set(self.append_seen.call_args.args[0]), {"2609.00001"})
-        report = Path(self.output()["report"]).read_text(encoding="utf-8")
+        self.api.assert_not_called()
+        self.assertEqual([call.args[0] for call in self.feed.call_args_list],
+                         [fetch.FEED_URL + "cs.CV", fetch.FEED_URL + "cs.RO"])
+        out = self.output()
+        self.assertEqual(out["scan_status"], "success")
+        self.assertEqual(out["candidate_count"], "1")
+        self.assertEqual(set(p.name for p in Path(out["snapshot"]).iterdir()), {"cs.CV.xml", "cs.RO.xml"})
+        self.assertEqual(fetch.read_coverage(self.coverage_path)["cs.CV"]["last_observed"], "2026-09-14")
+        self.append_seen.assert_called_once_with({"2609.00001"})
+        report = Path(out["report"]).read_text(encoding="utf-8")
         self.assertEqual(report.count("https://arxiv.org/abs/2609.00001"), 1)
         self.assertIn("公告日期", report)
+        self.assertTrue(report.startswith(f"<!-- arxiv-scan:{out['batch']} -->"))
 
-    def test_empty_feed_still_reports_incomplete_scan(self):
-        self.api.side_effect = http_error(429)
+    def test_partial_atom_scan_keeps_successful_candidates_and_coverage(self):
+        self.feed.side_effect = [b"feed", http_error(429)]
+        self.parse_feed.return_value = [self.candidate(categories=["cs.CV"])]
+        code, _ = self.run_main()
+        self.assertEqual(code, 0)
+        self.assertEqual(self.output()["scan_status"], "partial")
+        self.assertEqual(self.output()["has_new"], "true")
+        self.assertEqual(set(fetch.read_coverage(self.coverage_path)), {"cs.CV"})
+        self.assertIn("HTTP Error 429", self.summary_path.read_text(encoding="utf-8"))
+
+    def test_total_failure_does_not_advance_state_or_publish(self):
+        self.feed.side_effect = fetch.RequestDeferred("Long server cooldown")
+        code, _ = self.run_main()
+        self.assertEqual(code, 1)
+        self.assertEqual(self.output()["scan_status"], "failed")
+        self.assertEqual(self.output()["has_new"], "false")
+        self.feed.assert_called_once()
+        self.api.assert_not_called()
+        self.append_seen.assert_not_called()
+        self.assertFalse(self.coverage_path.exists())
+
+    def test_empty_atom_is_partial_and_preserves_last_observed(self):
+        old_state = fetch.update_coverage({}, ["cs.CV"], ["2026-09-11"])
+        fetch.write_coverage(self.coverage_path, old_state)
+        code, _ = self.run_main()
+        self.assertEqual(code, 0)
+        self.assertEqual(self.output()["scan_status"], "partial")
+        self.assertEqual(fetch.read_coverage(self.coverage_path), old_state)
+        self.append_seen.assert_not_called()
+
+    def test_missing_announcement_is_saved_even_without_new_candidates(self):
+        fetch.write_coverage(self.coverage_path, fetch.update_coverage({}, ["cs.CV"], ["2026-09-14"]))
+        self.seen.return_value = {"2609.00001"}
+        self.parse_feed.return_value = [self.candidate(announced="2026-09-16")]
         code, _ = self.run_main()
         self.assertEqual(code, 0)
         self.assertEqual(self.output()["scan_status"], "partial")
         self.assertEqual(self.output()["has_new"], "false")
-        summary = self.summary_path.read_text(encoding="utf-8")
-        self.assertTrue(any(label in summary for label in ("RSS", "Atom", "备用")))
-        self.assertIn("7", summary)
+        state = fetch.read_coverage(self.coverage_path)
+        self.assertEqual(fetch.pending_dates(state, ["cs.CV"]), ["2026-09-15"])
+        self.assertEqual(fetch.pending_dates(state, ["cs.RO"]), [])
         self.append_seen.assert_not_called()
 
-    def test_dry_run_does_not_write_state_or_github_files(self):
-        for outcome in ("success", "empty", "failed"):
-            with self.subTest(outcome=outcome):
-                self.api.side_effect = TimeoutError("offline") if outcome == "failed" else None
-                self.feed.side_effect = TimeoutError("offline") if outcome == "failed" else None
-                self.parse_api.return_value = [paper()] if outcome == "success" else []
-                code, _ = self.run_main(dry_run=True)
-                self.assertEqual(code, 1 if outcome == "failed" else 0)
+    def test_replay_and_dry_run_do_not_write_state(self):
+        self.parse_feed.return_value = [self.candidate()]
+        snapshot = self.temp / "saved.xml"
+        snapshot.write_bytes(b"saved")
+        for args in (("--dry-run",), ("--replay", str(snapshot))):
+            with self.subTest(args=args):
+                self.feed.reset_mock()
+                code, report = self.run_main(*args)
+                self.assertEqual(code, 0)
+                self.assertIn("https://arxiv.org/abs/2609.00001", report)
+                if args[0] == "--replay":
+                    self.feed.assert_not_called()
                 self.append_seen.assert_not_called()
+                self.assertFalse(self.coverage_path.exists())
                 self.assertFalse(self.output_path.exists())
                 self.assertFalse(self.summary_path.exists())
-                self.assertFalse((self.temp / "arxiv_report.md").exists())
+
+    def test_backfill_uses_submission_dates_without_resolving_atom_gaps(self):
+        old_state = fetch.update_coverage({}, ["cs.CV"], ["2026-09-14", "2026-09-16"])
+        fetch.write_coverage(self.coverage_path, old_state)
+        with patch.object(fetch, "fetch_backfill", return_value=[paper()]) as backfill:
+            code, _ = self.run_main("--backfill-from", "2026-09-11", "--backfill-to", "2026-09-15")
+        self.assertEqual(code, 0)
+        self.feed.assert_not_called()
+        self.assertEqual(backfill.call_args.args[1:3], (datetime.date(2026, 9, 11), datetime.date(2026, 9, 15)))
+        self.assertEqual(fetch.read_coverage(self.coverage_path), old_state)
+        self.assertEqual(self.output()["scan_status"], "partial")
+
+    def test_reviewed_date_resolves_only_a_confirmed_gap(self):
+        fetch.write_coverage(self.coverage_path, fetch.update_coverage({}, ["cs.CV"], ["2026-09-14", "2026-09-16"]))
+        self.parse_feed.return_value = [self.candidate(announced="2026-09-16")]
+        code, _ = self.run_main("--reviewed-date", "2026-09-15")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.output()["scan_status"], "success")
+        self.assertEqual(fetch.pending_dates(fetch.read_coverage(self.coverage_path), ["cs.CV"]), [])
+
+    def test_backfill_406_does_not_repeat_other_searches(self):
+        self.cfg["queries"].append(dict(self.cfg["queries"][0], name="Driving"))
+        self.api.side_effect = http_error(406)
+        code, _ = self.run_main("--backfill-from", "2026-09-11", "--backfill-to", "2026-09-15")
+        self.assertEqual(code, 1)
+        self.api.assert_called_once()
+        self.feed.assert_not_called()
+        self.assertEqual(self.output()["scan_status"], "failed")
+        self.assertFalse(self.coverage_path.exists())
 
 
 class FetchUrlTests(unittest.TestCase):

@@ -60,20 +60,23 @@ python scripts/generate_monthly_chart.py
 
 ## 自动扫描维护
 
-配置位于 `scripts/arxiv_config.yaml`。API 临时故障耗尽重试后会停止后续 API 请求，并尝试一次官方每日 Atom 订阅源；所有请求共享间隔和 `Retry-After` 冷却时间。服务端要求等待超过 300 秒时，本轮停止请求。
+每日扫描逐个抓取配置中的 arXiv Atom 分类订阅源。达到 2,000 条上限的分类会标为覆盖不完整。扫描器在本地用 `feed_keywords` 匹配完整标题和摘要，组内为 OR、组间为 AND，分类筛选包含交叉分类。请求串行发送，间隔至少 5 秒，并遵守 `Retry-After`。[检索配置](scripts/arxiv_config.yaml) · [arXiv 订阅说明](https://info.arxiv.org/help/rss.html) · [限流规则](https://info.arxiv.org/help/api/tou.html#rate-limits)
 
-运行状态分为完整成功、扫描不完整、全部失败。只有完整成功且零候选时才显示“没有新候选论文”。RSS 仅覆盖最新一期公告，无法补齐 7 天窗口；它按标题和摘要中的 `feed_keywords` 匹配，分类包含交叉分类，报告中的日期为公告日期。
+每次运行将有效分类的原始 XML 上传为 `arxiv-atom-snapshot-${{ github.run_attempt }}` artifact，保留 90 天。覆盖记录按分类分别保存，从每个分类的首份有效非空快照开始，跟踪美国东部时间周一至周五的潜在缺期。空订阅或过期订阅不会推进覆盖日期。节假日也可能列为待核查项。[覆盖记录](data/arxiv_scan_coverage.json) · [Atom 日期定义](https://info.arxiv.org/help/atom_specifications.html#atom-entry-elements)
 
-扫描不完整时，工作流先尝试发布已获取的候选，并在 Issue 创建成功后提交已报告 ID，最后将运行标为失败。无候选时也会在运行摘要说明覆盖缺口。全部失败时不更新已报告 ID。
+运行摘要分别展示扫描覆盖和发布结果。覆盖有待核查项时，工作流仍会发布已取得的有效候选。抓取全部失败、快照归档失败、候选发布失败或扫描状态保存失败时，运行标为失败。
 
-修改检索词时，同步调整 `search` 与 `feed_keywords`（组内 OR、组间 AND）。验证命令：
+用 `--dry-run` 预览结果，预览不会写入状态。用 `--replay PATH` 只读回放已保存的原始 Atom XML，可重复传入该参数以一起回放多个分类快照。修改关键词时，保持 `feed_keywords` 和手动 API 补扫使用的 `search` 条件同步。可以运行测试并回放快照来验证改动。
 
 ```bash
 python3 -m unittest discover -s tests
+python3 -u scripts/fetch_arxiv.py --replay /path/to/atom.xml
 python3 -u scripts/fetch_arxiv.py --dry-run
 ```
 
-更新推送后，通过 **Actions → Daily arXiv scan → Run workflow → main** 新建运行。Re-run 旧任务仍使用旧提交；抓取步骤会打印实际提交号。
+手动补扫同时传入 `--backfill-from YYYY-MM-DD` 和 `--backfill-to YYYY-MM-DD`。分页按 UTC 提交日期检索，包含首尾两天，最多 14 天。周一公告可能包含上周四、周五提交的论文，选补扫区间时要覆盖相应的提交期。补扫结束后，公告缺口仍需独立核查。独立核对某日所有待核查分类或确认该日休刊后，可用 `--reviewed-date YYYY-MM-DD` 确认该日期。该参数作用于同一天所有待核查分类，可重复传入以复核多天。[arXiv 公告时程](https://info.arxiv.org/help/availability.html#announcement-schedule)
+
+更新推送后，通过 **Actions → Daily arXiv scan → Run workflow → main** 新建运行。手动补查填写 `backfill_from` 和 `backfill_to`，复核日期填写 `reviewed_dates`，多天用空格分隔。重新运行旧任务仍使用原提交，抓取步骤会打印实际提交号。
 
 ## 收录标准
 

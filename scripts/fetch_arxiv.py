@@ -1,15 +1,9 @@
 #!/usr/bin/env python3
-"""按 scripts/arxiv_config.yaml 抓取 arXiv 近期论文并报告新候选。
-
-已收录（data/*.yaml 中的 arxiv id）与已报告（data/seen_arxiv_ids.txt）的论文会被跳过。
-
-Usage:
-    python3 scripts/fetch_arxiv.py            # 正常运行，更新 data/seen_arxiv_ids.txt
-    python3 scripts/fetch_arxiv.py --dry-run  # 仅打印候选，不更新状态文件
-"""
+"""Read the latest arXiv Atom announcements, or search a bounded backfill window."""
 
 import argparse
 import datetime
+import hashlib
 import http.client
 import os
 import random
@@ -24,6 +18,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from email.utils import parsedate_to_datetime
 
+from arxiv_backfill import fetch_backfill
+from arxiv_coverage import mark_reviewed, pending_dates, read_coverage, update_coverage, write_coverage
 from arxiv_feed import matches_query, parse_feed
 
 try:
@@ -38,13 +34,13 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_FILE = Path(__file__).resolve().parent / "arxiv_config.yaml"
 DATA_FILE = ROOT / "data.yaml"
 SEEN_FILE = ROOT / "data" / "seen_arxiv_ids.txt"
+COVERAGE_FILE = ROOT / "data" / "arxiv_scan_coverage.json"
 
-ATOM = "{http://www.w3.org/2005/Atom}"
-ARXIV_NS = "{http://arxiv.org/schemas/atom}"
 API_URL = "https://export.arxiv.org/api/query"
 FEED_URL = "https://rss.arxiv.org/atom/"
-USER_AGENT = "awesome-interactive-world-models/1.0 (https://github.com/Zizizi-hao/Awesome-interactive-world-model-for-AD)"
+USER_AGENT = "awesome-interactive-world-models/1.0 (https://github.com/Zizizi-hao/Awesome-interactive-world-model-for-Pysical-Intelligence)"
 REQUEST_WAIT_BUDGET = 300
+MAX_BACKFILL_DAYS = 14
 _next_request_at = 0.0
 NETWORK_ERRORS = (urllib.error.URLError, TimeoutError, ConnectionError, http.client.HTTPException)
 
@@ -93,10 +89,10 @@ def fetch_url(url: str, retries: int = 3, timeout: int = 60, delay: float = 5) -
             _next_request_at = time.monotonic() + delay
             return result
         except NETWORK_ERRORS as error:
-            wait = delay
+            retry_after = retry_after_seconds(error.headers.get("Retry-After")) if isinstance(error, urllib.error.HTTPError) and error.headers else 0
+            wait = max(delay, retry_after)
             if is_transient(error):
-                retry_after = retry_after_seconds(error.headers.get("Retry-After")) if isinstance(error, urllib.error.HTTPError) and error.headers else 0
-                wait = max(delay, retry_after, min(90, 15 * 2 ** (attempt - 1))) + random.uniform(0, 3)
+                wait = max(wait, min(90, 15 * 2 ** (attempt - 1))) + random.uniform(0, 3)
             # 最后一次失败也保留冷却期，切换来源不能绕过 Retry-After。
             _next_request_at = time.monotonic() + wait
             if wait > REQUEST_WAIT_BUDGET:
@@ -110,38 +106,15 @@ def strip_version(arxiv_id: str) -> str:
     return re.sub(r"v\d+$", "", str(arxiv_id).strip())
 
 
-def fetch_query(search: str, max_results: int, retries: int = 3, timeout: int = 60, delay: float = 5) -> bytes:
+def fetch_query(search: str, max_results: int, retries: int = 3, timeout: int = 60, delay: float = 5, *, start: int = 0) -> bytes:
     params = urllib.parse.urlencode({
         "search_query": search,
-        "start": 0,
+        "start": start,
         "max_results": max_results,
         "sortBy": "submittedDate",
         "sortOrder": "descending",
     })
     return fetch_url(f"{API_URL}?{params}", retries=retries, timeout=timeout, delay=delay)
-
-def parse_entries(xml_bytes: bytes) -> list:
-    root = ET.fromstring(xml_bytes)
-    if root.tag != f"{ATOM}feed":
-        raise ValueError("arXiv API 返回的不是 Atom feed")
-    entries = []
-    for entry in root.findall(f"{ATOM}entry"):
-        entry_id = entry.findtext(f"{ATOM}id") or ""
-        if "/api/errors" in entry_id:
-            raise ValueError(entry.findtext(f"{ATOM}summary") or "arXiv API 返回错误 feed")
-        raw_id = entry_id.rsplit("/", 1)[-1]
-        if not raw_id:
-            continue
-        primary = entry.find(f"{ARXIV_NS}primary_category")
-        entries.append({
-            "id": strip_version(raw_id),
-            "title": re.sub(r"\s+", " ", entry.findtext(f"{ATOM}title") or "").strip(),
-            "abstract": re.sub(r"\s+", " ", entry.findtext(f"{ATOM}summary") or "").strip(),
-            "published": (entry.findtext(f"{ATOM}published") or "")[:10],
-            "authors": [a.findtext(f"{ATOM}name") or "" for a in entry.findall(f"{ATOM}author")],
-            "primary_category": primary.get("term") if primary is not None else "",
-        })
-    return entries
 
 
 def existing_arxiv_ids() -> set:
@@ -182,37 +155,22 @@ def format_authors(authors: list, limit: int = 6) -> str:
     return ", ".join(authors)
 
 
-def render_report(groups: dict, cfg: dict, failures: dict = None, sources: dict = None) -> str:
-    failures = failures or {}
-    sources = sources or {}
+def render_report(groups: dict, cfg: dict, coverage: list[str]) -> str:
     total = sum(len(v) for v in groups.values())
     max_chars = cfg.get("abstract_chars", 400)
-    query_count = len(cfg.get("queries") or groups)
-    api_count = sum(sources.get(name, "API") == "API" for name in groups)
-    lines = [f"API 检索完成 **{api_count}/{query_count}** 组，发现 **{total}** 篇新候选论文（由 `scripts/fetch_arxiv.py` 自动生成）。", ""]
-    if failures:
-        lines += ["> 扫描不完整，不能根据零候选判断没有新论文。", "", "未完成的 API 检索："]
-        lines += [f"- {name}：{error}" for name, error in failures.items()]
-        lines.append("")
-    if "RSS" in sources.values():
-        lines += [
-            f"> RSS 备用结果仅覆盖最新一期公告，未完成最近 {cfg.get('lookback_days', 7)} 天的完整检索。"
-            "匹配范围为标题和摘要，分类包含交叉分类，与 API 的 all 字段和主分类筛选不同。",
-            "",
-        ]
+    lines = [f"发现 **{total}** 篇新候选论文（由 `scripts/fetch_arxiv.py` 自动生成）。", "", *coverage, ""]
     for name, entries in groups.items():
         if not entries:
             continue
-        lines += [f"## {name}" + ("（RSS 备用结果）" if sources.get(name) == "RSS" else ""), ""]
+        lines += [f"## {name}", ""]
         for e in entries:
             abstract = e["abstract"]
             if len(abstract) > max_chars:
                 abstract = abstract[:max_chars] + "..."
             date_text = f"提交日期: {e['published']}"
-            category_text = f"主分类: {e['primary_category']}"
+            category_text = "分类（含交叉分类）: " + ", ".join(e["categories"])
             if e.get("date_label") == "公告日期":
                 date_text = f"公告日期: {e['announced']}"
-                category_text = "分类（含交叉分类）: " + ", ".join(e["categories"])
             lines += [
                 f"### {e['title']}",
                 f"- arXiv: https://arxiv.org/abs/{e['id']}",
@@ -229,124 +187,189 @@ def render_report(groups: dict, cfg: dict, failures: dict = None, sources: dict 
     return "\n".join(lines)
 
 
-def write_output(has_new: bool, report: Path = None, scan_status: str = "success") -> None:
-    out = os.environ.get("GITHUB_OUTPUT")
-    if not out:
-        return
-    with open(out, "a", encoding="utf-8") as f:
-        f.write(f"has_new={'true' if has_new else 'false'}\n")
-        f.write(f"scan_status={scan_status}\n")
-        if report:
-            f.write(f"report={report}\n")
+def scan_announcements(categories, options, state, snapshots):
+    entries, failures, empty = [], {}, []
+    for index, category in enumerate(categories):
+        try:
+            payload = fetch_url(FEED_URL + category, **options)
+            batch = parse_feed(payload)
+            if batch and any(category not in paper["categories"] for paper in batch):
+                raise ValueError("公告含不属于此分类的条目")
+        except (RequestDeferred, *NETWORK_ERRORS, ET.ParseError, ValueError) as error:
+            failures[category] = str(error)
+            if isinstance(error, RequestDeferred) or is_transient(error):
+                failures.update({pending: "订阅源暂不可用，本轮未请求" for pending in categories[index + 1:]})
+                break
+            continue
+        snapshots[category] = payload
+        if not batch:
+            empty.append(category)
+            continue
+        state = update_coverage(state, [category], {paper["announced"] for paper in batch})
+        entries.extend(batch)
+    return entries, state, failures, empty
+
+
+def scan_backfill(queries, start, end, cfg, options):
+    results, failures = {}, {}
+
+    def fetch_page(search, offset, size):
+        return fetch_query(search, size, start=offset, **options)
+
+    for index, query in enumerate(queries):
+        name = query["name"]
+        try:
+            results[name] = fetch_backfill(
+                query["search"], start, end, fetch_page,
+                page_size=cfg.get("backfill_page_size", 100),
+                max_pages=cfg.get("backfill_max_pages", 3),
+            )
+        except (RequestDeferred, *NETWORK_ERRORS, ET.ParseError, ValueError) as error:
+            failures[name] = str(error)
+            rejected = isinstance(error, urllib.error.HTTPError) and error.code == 406
+            if isinstance(error, RequestDeferred) or is_transient(error) or rejected:
+                failures.update({q["name"]: "搜索 API 暂不可用，本轮未请求" for q in queries[index + 1:]})
+                break
+    return results, failures
+
+
+def pick_candidates(results, categories):
+    blocked = existing_arxiv_ids() | load_seen()
+    reported = set()
+    groups = {}
+    for name, entries in results.items():
+        groups[name] = []
+        for paper in entries:
+            paper_id = paper["id"]
+            if paper_id in blocked or paper_id in reported:
+                continue
+            if categories and not set(categories).intersection(paper["categories"]):
+                continue
+            groups[name].append(paper)
+            reported.add(paper_id)
+    return groups, reported
+
+
+def date_arg(value):
+    try:
+        date = datetime.date.fromisoformat(value)
+        if date.isoformat() != value:
+            raise ValueError
+        return date
+    except ValueError:
+        raise argparse.ArgumentTypeError("日期须为 YYYY-MM-DD") from None
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="抓取 arXiv 新论文候选")
-    parser.add_argument("--dry-run", action="store_true", help="仅打印候选，不更新状态文件")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--dry-run", action="store_true", help="打印候选和覆盖情况，不写入状态")
+    parser.add_argument("--replay", type=Path, action="append", help="离线读取已保存的 Atom XML，可重复使用")
+    parser.add_argument("--backfill-from", type=date_arg, help="API 补扫起始提交日期（UTC，含当天）")
+    parser.add_argument("--backfill-to", type=date_arg, help="API 补扫结束提交日期（UTC，含当天）")
+    parser.add_argument("--reviewed-date", type=date_arg, action="append", default=[], help="已人工核对的待查公告日期，可重复使用")
     args = parser.parse_args()
+    start, end = args.backfill_from, args.backfill_to
+    if bool(start) != bool(end):
+        parser.error("补扫须同时提供 --backfill-from 和 --backfill-to")
+    if start and not 0 <= (end - start).days < MAX_BACKFILL_DAYS:
+        parser.error(f"补扫须按日期顺序且最多覆盖 {MAX_BACKFILL_DAYS} 天")
+    if args.replay and (start or args.reviewed_date):
+        parser.error("--replay 仅用于离线查看候选，不能与补扫或复审参数组合")
 
     cfg = yaml.safe_load(CONFIG_FILE.read_text(encoding="utf-8")) or {}
-    cutoff = (datetime.date.today() - datetime.timedelta(days=cfg.get("lookback_days", 7))).isoformat()
-    cat_filter = set(cfg.get("category_filter") or [])
-    max_results = cfg.get("max_results_per_query", 100)
-    delay = max(5, cfg.get("delay_seconds", 5))
-    retries = cfg.get("retry_attempts", 3)
-    timeout = cfg.get("timeout_seconds", 60)
+    categories = sorted(set(cfg.get("category_filter") or []))
     queries = cfg.get("queries") or []
-    if not queries:
-        sys.exit("未配置 queries，无法扫描。")
-
-    existing = existing_arxiv_ids()
-    seen = load_seen()
-    reported = set()
-    groups = {}
+    if not queries or (not categories and not (start or args.replay)):
+        parser.error("须配置 queries，日常扫描还需配置 category_filter")
+    if any(not re.fullmatch(r"[a-z-]+\.[A-Za-z]+", category) for category in categories):
+        parser.error("category_filter 须逐项指定分类，如 cs.RO")
+    options = {"retries": cfg.get("retry_attempts", 3), "timeout": cfg.get("timeout_seconds", 60),
+               "delay": cfg.get("delay_seconds", 5)}
+    state = read_coverage(COVERAGE_FILE)
+    reviewed = {date.isoformat() for date in args.reviewed_date}
+    if reviewed:
+        pending = {date for cat in categories for date in pending_dates(state, [cat])}
+        if unknown_dates := reviewed - pending:
+            parser.error("以下日期不在待核查记录中 " + "、".join(sorted(unknown_dates)))
+    snapshots = {}
+    empty = []
     failures = {}
-    sources = {}
-    deferred = False
+    if start:
+        results, failures = scan_backfill(queries, start, end, cfg, options)
+        valid = len(results)
+        coverage = [f"- API 补扫提交日期（UTC）**{start} 至 {end}**，完成 **{valid}/{len(queries)}** 组查询。",
+                    "- 提交日期与公告日期口径不同。请按实际公告核对历史缺期。"]
+    else:
+        if args.replay:
+            entries = []
+            valid = 0
+            for path in args.replay:
+                try:
+                    entries.extend(parse_feed(path.read_bytes()))
+                    valid += 1
+                except (OSError, ET.ParseError, ValueError) as error:
+                    failures[path.name] = str(error)
+            coverage = [f"- 离线重跑 **{valid}/{len(args.replay)}** 个 Atom 快照。"]
+        else:
+            entries, state, failures, empty = scan_announcements(categories, options, state, snapshots)
+            valid = len(snapshots)
+            coverage = [f"- Atom 公告抓取 **{valid}/{len(categories)}** 个分类。匹配使用标题、摘要及交叉分类。"]
+            if empty:
+                coverage.append("- 本次公告内容为空，待核查 " + "、".join(empty) + "。")
+        dates = sorted({paper["announced"] for paper in entries})
+        if dates:
+            coverage.append("- 本次获得公告日期 " + "、".join(dates) + "。")
+        results = {q["name"]: [paper for paper in entries if matches_query(paper, q)] for q in queries}
 
-    def pick(entries, *, feed=False):
-        picked = []
-        for e in entries:
-            date = e.get("announced", "") if feed else e["published"]
-            if date < cutoff:
-                continue
-            categories = set(e.get("categories") or []) if feed else {e["primary_category"]}
-            if cat_filter and not categories.intersection(cat_filter):
-                continue
-            if e["id"] in existing or e["id"] in seen or e["id"] in reported:
-                continue
-            picked.append(e)
-            reported.add(e["id"])
-        return picked
-
-    print(f"请求配置：每组最多尝试 {retries} 次，读取超时 {timeout}s，请求间隔至少 {delay}s。", flush=True)
-    for i, q in enumerate(queries):
-        print(f"检索: {q['name']} ...", flush=True)
-        try:
-            entries = parse_entries(fetch_query(q["search"], max_results, retries=retries, timeout=timeout, delay=delay))
-        except (RequestDeferred, *NETWORK_ERRORS, ET.ParseError, ValueError) as error:
-            print(f"  检索失败（{error}）", flush=True)
-            failures[q["name"]] = str(error)
-            deferred = isinstance(error, RequestDeferred)
-            if deferred or is_transient(error):
-                # 一组已耗尽重试，暂时停用该 API，避免对后续查询重复施压。
-                for pending in queries[i + 1:]:
-                    failures[pending["name"]] = "API 暂不可用，本轮停止后续 API 请求"
-                break
-            continue
-        picked = pick(entries)
-        groups[q["name"]] = picked
-        sources[q["name"]] = "API"
-        print(f"  命中 {len(entries)} 篇，新增候选 {len(picked)} 篇", flush=True)
-
-    if failures and cfg.get("rss_fallback", False) and not deferred:
-        print("尝试一次 RSS 备用来源（仅最新一期公告，无法补齐 7 天检索）。", flush=True)
-        try:
-            if not cat_filter:
-                raise ValueError("RSS 备用来源需要配置 category_filter")
-            url = FEED_URL + "+".join(sorted(cat_filter))
-            feed_entries = parse_feed(fetch_url(url, retries=1, timeout=timeout, delay=delay))
-            for q in queries:
-                if q["name"] not in failures:
-                    continue
-                # 先完成整组匹配，配置错误时不把未展示的条目加入 seen。
-                matched = [e for e in feed_entries if matches_query(e, q)]
-                groups[q["name"]] = pick(matched, feed=True)
-                sources[q["name"]] = "RSS"
-                print(f"  RSS {q['name']}：新增候选 {len(groups[q['name']])} 篇", flush=True)
-        except (RequestDeferred, *NETWORK_ERRORS, ET.ParseError, ValueError) as error:
-            print(f"  RSS 备用来源失败（{error}）", flush=True)
-            for name in failures:
-                if sources.get(name) != "RSS":
-                    failures[name] += f"；RSS 备用失败：{error}"
-
-    status = "failed" if not groups else "partial" if failures else "success"
-    report = render_report(groups, cfg, failures, sources)
-    if status == "failed":
-        print(f"::error::扫描失败：0/{len(queries)} 组获取到有效结果，无法判断是否有新论文。", flush=True)
-    elif status == "partial":
-        print("::warning::扫描不完整：部分 API 检索失败；详情见运行摘要。", flush=True)
-    elif not reported:
-        print("检索成功，没有新候选论文。", flush=True)
-    if args.dry_run:
-        print("\n" + report)
-        if status == "failed":
+    if reviewed and valid:
+        for category in categories:
+            state = mark_reviewed(state, [category], reviewed)
+        coverage.append("- 人工确认已核查公告日期 " + "、".join(sorted(reviewed)) + "。")
+    gaps = {cat: pending_dates(state, [cat]) for cat in categories}
+    observed = [f"{cat} {state[cat]['last_observed']}" for cat in categories if cat in state]
+    if observed:
+        coverage.append("- 各分类最近确认公告 " + "、".join(observed) + "。")
+    coverage.extend(f"- {cat} 可能缺失的公告日期 " + "、".join(dates) + "。" for cat, dates in gaps.items() if dates)
+    coverage.extend(f"- {name} 获取失败 · {error}" for name, error in failures.items())
+    status = "failed" if not valid else "partial" if failures or empty or any(gaps.values()) else "success"
+    labels = {"success": "本轮抓取成功", "partial": "部分覆盖，仍有待核查项", "failed": "本轮抓取失败"}
+    coverage.insert(0, f"**扫描覆盖 · {labels[status]}**")
+    groups, reported = pick_candidates(results, categories)
+    report = render_report(groups, cfg, coverage)
+    print(report, flush=True)
+    if args.dry_run or args.replay:
+        if not valid:
             raise SystemExit(1)
         return
 
-    summary = os.environ.get("GITHUB_STEP_SUMMARY")
-    if summary:
-        with open(summary, "a", encoding="utf-8") as f:
-            f.write(report + "\n")
-    report_path = None
-    if reported:
-        report_path = Path(tempfile.gettempdir()) / "arxiv_report.md"
-        report_path.write_text(report, encoding="utf-8")
-        # 工作流仅在 Issue 创建成功后才提交这个本地状态文件。
-        append_seen(reported)
-        print(f"\n共 {len(reported)} 篇新候选，报告已写入: {report_path}", flush=True)
-    write_output(has_new=bool(reported), report=report_path, scan_status=status)
-    if status == "failed":
+    if summary := os.environ.get("GITHUB_STEP_SUMMARY"):
+        with open(summary, "a", encoding="utf-8") as file:
+            file.write("\n".join(coverage) + f"\n- 新候选数 **{len(reported)}**。\n")
+    output = {"has_new": str(bool(reported)).lower(), "scan_status": status, "candidate_count": len(reported)}
+    if snapshots or reported:
+        directory = Path(tempfile.mkdtemp(prefix="arxiv-scan-"))
+        if snapshots:
+            snapshot_dir = directory / "atom"
+            snapshot_dir.mkdir()
+            for category, payload in snapshots.items():
+                (snapshot_dir / f"{category}.xml").write_bytes(payload)
+            output["snapshot"] = snapshot_dir
+            print(f"Atom 快照已保存到 {snapshot_dir}")
+        if reported:
+            report_path = directory / "arxiv_report.md"
+            batch = hashlib.sha256("\n".join(sorted(reported)).encode()).hexdigest()
+            report_path.write_text(f"<!-- arxiv-scan:{batch} -->\n{report}", encoding="utf-8")
+            output["report"] = report_path
+            output["batch"] = batch
+            append_seen(reported)
+            print(f"候选报告已保存到 {report_path}")
+    if valid:
+        write_coverage(COVERAGE_FILE, state)
+    if target := os.environ.get("GITHUB_OUTPUT"):
+        with open(target, "a", encoding="utf-8") as file:
+            for key, value in output.items():
+                file.write(f"{key}={value}\n")
+    if not valid:
         raise SystemExit(1)
 
 

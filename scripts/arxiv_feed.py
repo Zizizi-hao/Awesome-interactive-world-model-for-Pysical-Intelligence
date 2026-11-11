@@ -1,4 +1,4 @@
-"""Parse arXiv's daily Atom announcements for a limited search fallback.
+"""Parse arXiv's daily Atom announcements for local candidate matching.
 
 The daily feed covers the latest announcement only, not the API's lookback
 window. Its published timestamp is an announcement date, not submission time.
@@ -117,7 +117,7 @@ def matches_query(entry: dict, query_config: dict) -> bool:
     """
     groups = query_config.get("feed_keywords")
     if not isinstance(groups, list) or not groups:
-        raise ValueError("Each fallback query requires nonempty feed_keywords groups")
+        raise ValueError("Each Atom query requires nonempty feed_keywords groups")
     fields = [f" {_normalize(entry.get(key, ''))} " for key in ("title", "abstract")]
     for group in groups:
         if not isinstance(group, list) or not group:
