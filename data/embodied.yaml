@@ -3307,3 +3307,17 @@ papers:
     tags: [TabPFN, 上下文动力学回归, 低数据评估, 预测与规划差距]
     note: 将预训练 TabPFN 用于状态和动作条件的下一状态回归，评估少量交互数据下的动力学先验；20 条上下文的 20 步预测不优于状态不变基线，更长上下文改善误差。未做规划或反馈控制，完整数据训练模型在多数系统更优；潜空间版本需另训编码器，不能称免训练，Hopper 单步约 3 秒。
     note_en: Uses pretrained TabPFN for next-state regression conditioned on states and actions, evaluating dynamics priors with limited interaction data; 20-step rollouts with 20 context transitions do not beat persistence, while longer contexts improve errors. Planning and feedback control are not evaluated, fully trained models remain better on most systems, the latent variant requires a separately trained encoder and is not training-free, and one Hopper prediction takes about 3 seconds.
+
+  - title: 'LaST0.5: A Generalist World Action Model with Interaction-Centric Latent Reasoning'
+    short: LaST0.5
+    org: 北京大学 / 香港中文大学 / Simplexity Robotics
+    org_en: Peking University / The Chinese University of Hong Kong / Simplexity Robotics
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.14048'
+    features: {closedloop: true}
+    tags: [预测模型策略迁移, 交互潜表征, 自适应动作截断, 观测反馈]
+    note: 保留 Cosmos 未来视频预测目标，以运动和物体交互线索监督潜表征，并按预测进度截断动作、获取新观测重规划；10 项 RLBench 三次评估平均成功率为 88%，去掉自适应执行为 85%。未来预测不以外给动作作条件且仅含 12 帧，真机封箱最终成功率仍为 30%。
+    note_en: Retains Cosmos future-video prediction, supervises interaction latents with motion and object cues, and uses predicted progress to truncate actions and replan from fresh observations; across three evaluations on ten RLBench tasks, mean success is 88% versus 85% without adaptive execution. Future prediction is not conditioned on externally supplied actions and spans only 12 frames; final real-world box sealing succeeds in 30% of trials.

@@ -1954,3 +1954,18 @@ papers:
     tags: [幸存者偏差, 事故视频训练, 轨迹条件生成, 安全关键预测]
     note: 混合日常与真实事故视频训练轨迹条件世界模型，以边界框损失约束控制；100 个事故场景中碰撞前 0.5 秒的碰撞召回为 86%，Vista 为 9%。200 个刻意筛选的 NAVSIM 策略分歧场景中，所选轨迹平均 PDMS 为 0.783，对照 0.637；实车数据仅离线候选比较，未验证闭环驾驶，也未单独隔离事故数据的因果收益。
     note_en: Trains a trajectory-conditioned world model on routine and real accident videos with a bounding-box control loss; collision recall 0.5 seconds before impact across 100 accident scenes is 86%, versus 9% for Vista. Across 200 deliberately selected NAVSIM policy-disagreement scenes, selected trajectories average 0.783 PDMS versus 0.637; vehicle data support only offline candidate comparisons, with no closed-loop driving or isolated causal benefit from accident data.
+
+  - title: 'Distill to Think, Foresee to Act: Cognitive-Physical Reinforcement Learning for Autonomous Driving'
+    short: CoPhy
+    org: 南京理工大学 / 南京大学 / 上海交通大学 / 复旦大学
+    org_en: Nanjing University of Science and Technology / Nanjing University / Shanghai Jiao Tong University / Fudan University
+    year: 2026
+    venue: NeurIPS
+    category: driving
+    links:
+      arxiv: '2605.21139'
+      project: https://wuyang98.github.io/CoPhy/
+    features: {action: true}
+    tags: [认知蒸馏, 轨迹条件BEV预测, 双奖励强化学习, 开环驾驶评估]
+    note: 将 VLM 认知先验蒸馏到 BEV 编码器，以候选轨迹条件预测未来语义地图，并用物理与认知双奖励优化策略；NAVSIM v1 消融中 PDMS 从仅模仿学习的 88.9 升至 91.4。尚无反馈驾驶或实车验证，世界预测缺少量化指标，不能视为安全保证。
+    note_en: Distills VLM cognitive priors into a BEV encoder, predicts future semantic maps conditioned on candidate trajectories, and optimizes the policy with physical and cognitive rewards; NAVSIM v1 ablations raise PDMS from 88.9 with imitation learning alone to 91.4. Feedback-based driving and real-vehicle tests are unverified, world prediction lacks quantitative metrics, and the results do not establish safety guarantees.

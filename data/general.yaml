@@ -1177,3 +1177,31 @@ papers:
     tags: [语言条件规划, 轨迹条件世界模型, 选择性想象, 跨域离线评估]
     note: 用动作轨迹条件 Wan2.2 世界模型想象语言策略的候选后果，再融合轨迹与视频评分；val seen 相同八个随机候选的对照中，离线 SR 从仅轨迹评分的 0.30 升至 0.39。基准整合四域 15 数据集，未验证环境反馈控制或实机部署；合理视频仍可偏离真实未来，筛选收益受候选覆盖限制。
     note_en: Uses an action-trajectory-conditioned Wan2.2 world model to imagine candidates from a language policy, then fuses trajectory and video scores; with the same eight random candidates on val seen, offline SR rises from 0.30 for trajectory-only ranking to 0.39. The benchmark integrates 15 datasets across four domains, without environment-feedback control or physical deployment; plausible videos can diverge from true futures, and selection gains depend on candidate coverage.
+
+  - title: 'Building World Models from Intrinsic Motivation'
+    org: Carnegie Mellon University / University of Maryland, College Park
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.13113'
+      code: https://github.com/neuroagents-lab/ssrl-agent
+    features: {action: true, closedloop: true}
+    tags: [内在动机预训练, Dreamer, 表征策略比较, 跨任务适应]
+    note: 在 Dreamer 动作条件动力学和反馈策略学习中比较 24 种内在目标与三种表征策略，覆盖运动控制、操作和游戏；Craftax 中 NGU 经 5M 预训练交互后再进行 500K 任务交互得分为 15.8，同任务交互预算从零训练为 5.9。比较并非孤立损失消融，任务预算不含预训练成本；更多想象训练反而可能损害适应，无实机验证。
+    note_en: Compares 24 intrinsic objectives and three representation strategies using Dreamer's action-conditioned dynamics and feedback policy learning across locomotion, manipulation, and games; in Craftax, NGU uses 5M pretraining interactions followed by 500K task interactions to score 15.8 versus 5.9 from scratch at the same task-interaction budget. This is not an isolated loss ablation, and the task budget excludes pretraining costs; more imagination training can impair adaptation, and physical-robot validation is absent.
+
+  - title: 'OnlyAct: Extracting Action Representations from Foundation Models for World Models'
+    short: OnlyAct
+    org: University of Oxford
+    year: 2026
+    venue: NeurIPS
+    category: general
+    links:
+      arxiv: '2611.14420'
+      project: https://runjiali-rl.github.io/onlyact/
+      code: https://github.com/runjiali-rl/onlyact
+    features: {action: true}
+    tags: [无标签动作表征, 对比适配, V-JEPA 2, 跨域动作条件预测]
+    note: 对 V-JEPA 2 作无动作标签的对比适配，提取动作表征条件化 AdaWorld，覆盖机器人、导航、游戏与驾驶；LIBERO 动作迁移的光流方向余弦为 0.917，重训 DreamDojo 对照为 0.803。直接动作控制仍需少量标签，世界模型仅单训练种子且离线评估，未验证闭环或长期稳定性。
+    note_en: Contrastively adapts V-JEPA 2 without action labels to condition AdaWorld with action representations across robotics, navigation, games, and driving; LIBERO action-transfer optical-flow direction cosine is 0.917 versus 0.803 for a retrained DreamDojo baseline. Direct action control still needs a small labeled set; world models use one training seed and offline evaluation, without verified closed-loop or long-horizon robustness.

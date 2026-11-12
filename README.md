@@ -10,7 +10,7 @@
 
 世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象； 可交互世界模型进一步支持以动作 (action) 为条件的生成与控制， 为自动驾驶和具身智能提供数据引擎、神经仿真器与策略学习基础。 本仓库收录并整理该方向的代表性工作，按应用场景分类， 并标注每篇工作的交互能力维度。
 
-📊 共收录 **458** 篇工作 ｜ 最后更新：2026-11-11
+📊 共收录 **462** 篇工作 ｜ 最后更新：2026-11-12
 
 <p align="center">
   <img src="assets/interactive-world-model1.png" alt="交互式世界模型：智能体与世界模型的闭环交互" width="760">
@@ -31,9 +31,9 @@
 
 ## 目录
 
-- [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（141）
-- [具身智能 Embodied AI](#具身智能-embodied-ai)（234）
-- [通用 / 游戏 General / Game](#通用--游戏-general--game)（83）
+- [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（142）
+- [具身智能 Embodied AI](#具身智能-embodied-ai)（235）
+- [通用 / 游戏 General / Game](#通用--游戏-general--game)（85）
 
 ## 自动驾驶 Autonomous Driving
 
@@ -62,6 +62,7 @@
 | **DA-WAM: Decision-Aligned Future Latents for Driving World Models** | arXiv (2026) | HKUST Jun Ma 团队 | 🎮 | [论文](https://arxiv.org/abs/2608.19085) | 通过将轨迹与未来表征对齐，从而提高驾驶世界模型的性能。 |
 | **DLWM**: Dual Latent World Models enable Holistic Gaussian-centric Pre-training in Autonomous Driving | arXiv (2026) | Shaojie Shen 团队 | — | [论文](https://arxiv.org/abs/2604.00969) | 双潜世界模型（占据流 + 规划流）实现高斯中心式自动驾驶预训练。 |
 | **DecoupleGS**: Interactive 3D Gaussian Splatting for End-to-End Autonomous Driving Testing | arXiv (2026) | Haotian Shi 团队 | ⚡ 🔁 | [论文](https://arxiv.org/abs/2608.01761) | 解耦动静高斯泼溅，为端到端自动驾驶提供高保真实时闭环传感器仿真平台。 |
+| **CoPhy**: Distill to Think, Foresee to Act: Cognitive-Physical Reinforcement Learning for Autonomous Driving | NeurIPS (2026) | 南京理工大学 / 南京大学 / 上海交通大学 / 复旦大学 | 🎮 | [论文](https://arxiv.org/abs/2605.21139) \| [项目](https://wuyang98.github.io/CoPhy/) | 将 VLM 认知先验蒸馏到 BEV 编码器，以候选轨迹条件预测未来语义地图，并用物理与认知双奖励优化策略；NAVSIM v1 消融中 PDMS 从仅模仿学习的 88.9 升至 91.4。尚无反馈驾驶或实车验证，世界预测缺少量化指标，不能视为安全保证。 |
 | **Dream2Assist**: Dream to Assist: Intent-Conditioned World Models for Shared Vehicle Control | arXiv (2026) | Toyota Research Institute / Massachusetts Institute of Technology | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.34650) \| [项目](https://dream2assist.github.io/extended/) | 扩展带意图推断的 RSSM 及虚拟共同训练，用于人与辅助策略共享驾驶控制；城市双盲研究的完整记录会话中，意图条件策略碰撞率为 2.7%，无意图策略为 7.7%，但无辅助为 1.7%，主观评分无显著改善。三人实车平台测试仅支持迁移可行性。 |
 | **Dreamer-SAC**: Off-Policy Learning in Latent World Models for Sample-Efficient Autonomous Driving | arXiv (2026) | Xi Xiong 团队 | 🎮 | [论文](https://arxiv.org/abs/2608.10386) | 循环状态空间世界模型 + 离策略 SAC + n 步估计，提升自动驾驶样本效率。 |
 | **DriveCache**: Action-Aware Caching for Driving World Model Inference | arXiv (2026) | Jianchun Yang 团队 | 🎮 | [论文](https://arxiv.org/abs/2608.16354) | 针对扩散驾驶世界模型的动作感知 KV 缓存策略，在多步去噪中复用空间不变特征，显著提升生成吞吐量。 |
@@ -292,6 +293,7 @@
 | **LAW**: Unifying Language, Action, and World Modeling for Agentic Physical Intelligence | arXiv (2026) | Peking University / Beijing Innovation Center of Humanoid Robotics | 🔁 | [论文](https://arxiv.org/abs/2610.23334) \| [项目](https://hey-cjj.github.io/LAW-project/) \| [代码](https://github.com/hey-cjj/LAW) | 训练期联合预测视频和动作，推理时用价值专家融合动作块，不生成未来视频。50 个 RoboTwin 任务平均成功率为 94.21%，Fast-WAM 为 91.83%；三真机长程任务各 20 次平均 65%，π0.5 为 28.33%。匹配参数量下，共享专家把 MoTE 从 91.93% 提到 92.67%。 |
 | **La-JEPA**: Compact Robot Policies with Latent World Modeling | arXiv (2026) | Huawei Technologies Ltd. / University of Toronto / McGill University / Mila | 🔁 | [论文](https://arxiv.org/abs/2611.08156) \| [项目](https://georgexue.com/projects/la-jepa/) | 在预训练 V-JEPA 特征上从零训练双 Transformer，以训练期未来监督改善策略；原数据流程的三训练种子 LIBERO-Plus 对照从 74.35% 升至 76.47%，Franka 四任务成功 70/80 次。未来预测不受外部动作条件，部署仅生成动作；策略时延不代表世界模型吞吐，实机证据限单平台。 |
 | **LaLa-World**: Scaling Latent World Models with Natural Language Actions | arXiv (2026) | NAVER AI Lab / Georgia Institute of Technology / Brown University / Mila & Université de Montréal | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.27851) \| [项目](https://june-page.github.io/lala-world/) \| [代码](https://github.com/junha1125/LaLa-World) | 将异构数值动作及视觉变化统一成语言，学习跨域潜动力学并用于 CEM 重规划；五项仿真控制平均成功率为 72.1%，但 DROID 仅作离线动作评分，长时展开仍未充分验证。 |
+| **LaST0.5**: A Generalist World Action Model with Interaction-Centric Latent Reasoning | arXiv (2026) | 北京大学 / 香港中文大学 / Simplexity Robotics | 🔁 | [论文](https://arxiv.org/abs/2611.14048) | 保留 Cosmos 未来视频预测目标，以运动和物体交互线索监督潜表征，并按预测进度截断动作、获取新观测重规划；10 项 RLBench 三次评估平均成功率为 88%，去掉自适应执行为 85%。未来预测不以外给动作作条件且仅含 12 帧，真机封箱最终成功率仍为 30%。 |
 | **LP2**: Latent Projection for Latent Planning | arXiv (2026) | Stony Brook University | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.26979) \| [代码](https://github.com/yjang43/lp2) | 在冻结 LeWM 上拟合无动作条件的正规线性转移，将规划成本投影到低不确定性子空间，复用原动作条件预测器与重规划；困难 TwoRoom 成功率由 60.0% 升至 96.7%，收益主要集中二维导航，依赖高斯–马尔可夫近似。 |
 | **LeWAM (Fu et al.)**: LeWAM: End-to-End World and Action Modeling with JEPAs | arXiv (2026) | UC San Diego / ETH Zurich / University of British Columbia / Brown University | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.12818) \| [项目](https://le-wam.github.io/) \| [代码](https://github.com/MinghaoFu/lewam) | 联合训练动作条件潜状态预测与动作流匹配，并用 SIGReg 稳定表征；十项模拟视觉目标规划平均成功率为 93.5%，对比 LeWM（CEM）的 50.9%；三项真机闭环任务平均成功率为 33.3%，仍按任务与机器人分别训练。 |
 | **RoboImagine**: Learning Robotic World Models with Semantic and Visual Feedback | arXiv (2026) | Carnegie Mellon University / The City College of New York / Nanyang Technological University / University of Wisconsin–Madison / University of California, Merced | 🎮 | [论文](https://arxiv.org/abs/2611.07850) \| [代码](https://github.com/Alexander-wu/RoboImagine) | 用多样候选搜索和语义/视觉反馈后训练动作条件自回归模型；RT-1 同初始化、500 次额外更新的 PSNR 从继续 SFT 的 21.31 升至 22.57 dB，但训练成本为 28.15 对 1.06 GPU 小时。BridgeV2 独立报告集未见收益；证据限离线预测，无机器人闭环验证。 |
@@ -436,6 +438,7 @@
 | **Astronex-World**: Astronex-World 1.0: Real-Time Interactive World Model Foundation | arXiv (2026) | Astronex Robotics | 🎮 ⚡ 🔁 ⏳ | [论文](https://arxiv.org/abs/2609.20034) \| [代码](https://github.com/Astronex-Robotics/Astronex-World) | 从 Wan2.2-TI2V-5B 改出的 5B 可控视频底座。给定文字或第一帧，再按逐帧相机轨迹、64 维连续动作、本体编号，以及可插入 rollout 中途的文字事件预测后续画面。因果形态在单张 L20 上以 832×480、24 FPS 流式生成，动作接口留给驾驶和机器人数据后训练。 |
 | **InternalVCoT**: Beyond Visual CoT: Internalized Visual Thinking for Proactive Video Reasoning | arXiv (2026) | Xiaoyu Zhu 团队 | ⏳ | [论文](https://arxiv.org/abs/2608.15869) | 将显式视觉 CoT（生成中间推理图像）内化为隐式视觉预见，在保持空间/时序推理能力的同时大幅降低推理开销。 |
 | **EchoWM-Data**: Building Pretraining Data for World Models: An Unreal Engine-Based Pipeline for Action-Conditioned Video Generation | arXiv (2026) | Joy Future Academy | 🎮 | [论文](https://arxiv.org/abs/2609.03557) \| [项目](https://echo-team-joy-future-academy-jd.github.io/Echo-1.5-Page/wm/) | EchoWM 所用的 Unreal 合成数据产线：PIE 实时物理记录轨迹、MRQ 离线渲染两阶段解耦，200 卡集群产出五路同步 1080p/720p 视频及帧对齐动作、角色与相机位姿，累计数千小时动作条件预训练数据。 |
+| **Building World Models from Intrinsic Motivation** | arXiv (2026) | Carnegie Mellon University / University of Maryland, College Park | 🎮 🔁 | [论文](https://arxiv.org/abs/2611.13113) \| [代码](https://github.com/neuroagents-lab/ssrl-agent) | 在 Dreamer 动作条件动力学和反馈策略学习中比较 24 种内在目标与三种表征策略，覆盖运动控制、操作和游戏；Craftax 中 NGU 经 5M 预训练交互后再进行 500K 任务交互得分为 15.8，同任务交互预算从零训练为 5.9。比较并非孤立损失消融，任务预算不含预训练成本；更多想象训练反而可能损害适应，无实机验证。 |
 | **Ctrl-CWM**: Controllable Crowd Generation through World-Model Planning | arXiv (2026) | Yonsei University / GIST | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.09438) \| [项目](https://jungyu0413.github.io/Ctrl-CWM) | 从真实行人视频学习运动动力学，再冻结编码器，在想象轨迹上训练 actor 和 critic。规划器结合用户代价逐步选择行人位移，运行中可新增避让或吸引目标，无需重训；评测面向人群轨迹生成，未验证驾驶策略。 |
 | **DashVMC**: Real-Time Discrete World Model Control in Geometry Dash | arXiv (2026) | INSA Rouen | 🎮 🔁 | [论文](https://arxiv.org/abs/2609.40003) \| [项目](https://tariolle.github.io/dash-vmc/) \| [代码](https://github.com/Tariolle/dash-vmc) | 用大约 2.3 小时的 Geometry Dash 录屏学一个动作条件的离散格子世界模型，再只在冻结的模型展开里用 PPO 改控制器，不再碰实机。Stereo Madness 上，三个种子的存活帧数从行为克隆的 120.2、130.6、156.0 升到 280.1、280.4、308.8。留出的社区关卡从大约 100 帧升到 266.7 到 342.8。部署时不做画面生成，消费级 GPU 上采集到动作的循环是 60 Hz。动力学模型的视觉 token 准确率只有 29.58%。 |
 | **Diagnosing JEPA World Models with Action-Conditioned Predictive Consistency** | arXiv (2026) | Qi Tian 团队 | 🎮 | [论文](https://arxiv.org/abs/2608.12939) | 用动作条件预测一致性诊断 JEPA 世界模型的表示质量。 |
@@ -464,6 +467,7 @@
 | **ReDate**: Old Is Not False: Valid-Time Memory for Interactive Video World Models | arXiv (2026) | HKUST / Beihang University / Monash University / Sun Yat-sen University / Renmin University of China | — | [论文](https://arxiv.org/abs/2611.00758) | 不重训生成器，按已执行动作日志修正记忆 token 的有效时间以处理撤销后的状态恢复；197 个留出片段在两个生成种子下合计 590 个返还步骤，FAR 当前状态准确率从 0.342 升至 0.585。依赖可识别恢复的动作日志和历史视角，缺对应视角时准确率仍不超过 0.10。 |
 | **OneLA**: Learning Many Worlds from Latent Actions | arXiv (2026) | AMAP, Alibaba Group / Tsinghua University | 🎮 | [论文](https://arxiv.org/abs/2610.20160) | 用正交字典从视频学习共享潜动作，并将原生命令映射到该接口驱动跨域视频预测；40次动作循环迁移中旋转误差较OLaF下降24.8%，结果限离线生成，未验证闭环控制。 |
 | **OneWorld**: Learning Consistent Physics Across Actions in World Models | arXiv (2026) | 武汉大学 | 🎮 | [论文](https://arxiv.org/abs/2609.30946) | 让同一初始场景下、不同动作产生的未来共用一个潜在物理机制。机制解释器从每条动作–结果分支推断机制分布，再合成这些分支能否共用一种物理的证据，用来约束流训练和采样。推方块、推绳子、倒水三个环境里，跨干预的共享世界差距相对 ACWM-DiT 平均下降 84.3%，单条预测的 M-MSE 约好 7.7×10⁻⁴。代码将放出。 |
+| **OnlyAct**: Extracting Action Representations from Foundation Models for World Models | NeurIPS (2026) | University of Oxford | 🎮 | [论文](https://arxiv.org/abs/2611.14420) \| [项目](https://runjiali-rl.github.io/onlyact/) \| [代码](https://github.com/runjiali-rl/onlyact) | 对 V-JEPA 2 作无动作标签的对比适配，提取动作表征条件化 AdaWorld，覆盖机器人、导航、游戏与驾驶；LIBERO 动作迁移的光流方向余弦为 0.917，重训 DreamDojo 对照为 0.803。直接动作控制仍需少量标签，世界模型仅单训练种子且离线评估，未验证闭环或长期稳定性。 |
 | **OverSeer**: Multi-Agent World Models Beyond What Agents See | arXiv (2026) | Meta AI / University of Oxford | 🎮 | [论文](https://arxiv.org/abs/2610.28554) \| [项目](https://runjiali-rl.github.io/OverSeer/) | 以固定辅助视角与 δ-VAE 联合预测多玩家动作条件视频；Minecraft 回到起点任务中，VLM 准确率由无辅助视角的 25.0% 提升至 60.2%，辅助视角 token 压缩 8 倍，但覆盖不足和快速场景变化仍限制一致性。 |
 | **PAWA**: Panoramic Action-conditioned World Modeling for Multiple Agents | arXiv (2026) | Alaya Lab / Peking University / Institute of Science Tokyo | 🎮 | [论文](https://arxiv.org/abs/2610.20240) \| [项目](https://pawa.siki.moe/) \| [代码](https://github.com/yousiki/pawa-pipeline) | PAWA 以射线对齐交叉注意力和二次相位玩家编码，按多玩家动作联合预测 POV 与全景；在 30 个双人 12 秒回合的同检查点消融中，启用跨视图注意力使 POV LPIPS 从 0.510 降至 0.465；模型仅测试至 16 人，长时滚动仍损失角色保真度。 公开代码为数据采集管线。 |
 | **Persistent Computational State: A Session-Centric Runtime for Generative World Models** | arXiv (2026) | Zhen Lin 团队 | — | [论文](https://arxiv.org/abs/2607.21686) | 会话中心运行时支持分叉、回溯和重访视角，面向生成式世界模型的状态管理。 |
