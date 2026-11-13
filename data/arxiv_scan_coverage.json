@@ -1,22 +1,32 @@
 {
   "cs.AI": {
-    "last_observed": "2026-11-11",
-    "pending": []
+    "last_observed": "2026-11-13",
+    "pending": [
+      "2026-11-12"
+    ]
   },
   "cs.CV": {
-    "last_observed": "2026-11-11",
-    "pending": []
+    "last_observed": "2026-11-13",
+    "pending": [
+      "2026-11-12"
+    ]
   },
   "cs.GR": {
-    "last_observed": "2026-11-11",
-    "pending": []
+    "last_observed": "2026-11-13",
+    "pending": [
+      "2026-11-12"
+    ]
   },
   "cs.LG": {
-    "last_observed": "2026-11-11",
-    "pending": []
+    "last_observed": "2026-11-13",
+    "pending": [
+      "2026-11-12"
+    ]
   },
   "cs.RO": {
-    "last_observed": "2026-11-11",
-    "pending": []
+    "last_observed": "2026-11-13",
+    "pending": [
+      "2026-11-12"
+    ]
   }
 }
