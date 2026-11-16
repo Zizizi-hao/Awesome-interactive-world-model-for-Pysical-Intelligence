@@ -10,7 +10,7 @@
 
 世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象； 可交互世界模型进一步支持以动作 (action) 为条件的生成与控制， 为自动驾驶和具身智能提供数据引擎、神经仿真器与策略学习基础。 本仓库收录并整理该方向的代表性工作，按应用场景分类， 并标注每篇工作的交互能力维度。
 
-📊 共收录 **462** 篇工作 ｜ 最后更新：2026-11-12
+📊 共收录 **465** 篇工作 ｜ 最后更新：2026-11-16
 
 <p align="center">
   <img src="assets/interactive-world-model1.png" alt="交互式世界模型：智能体与世界模型的闭环交互" width="760">
@@ -32,8 +32,8 @@
 ## 目录
 
 - [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（142）
-- [具身智能 Embodied AI](#具身智能-embodied-ai)（235）
-- [通用 / 游戏 General / Game](#通用--游戏-general--game)（85）
+- [具身智能 Embodied AI](#具身智能-embodied-ai)（237）
+- [通用 / 游戏 General / Game](#通用--游戏-general--game)（86）
 
 ## 自动驾驶 Autonomous Driving
 
@@ -188,6 +188,7 @@
 | :--- | :--- | :--- | :---: | :--- | :--- |
 | **ACTS**: Learning Visuo-Tactile World Models from Human Physical Interaction | arXiv (2026) | MIT / University of Washington / Harvard University / UC Berkeley / Stanford University | 🎮 | [论文](https://arxiv.org/abs/2610.24285) \| [项目](https://acts-anon.github.io/) | 从 4.9 小时、三个物体的人类触觉交互数据学习以运动和力变化为条件的视触觉预测，无需微调迁移至机器人遥操作记录；接触变化可迁移，但视觉预测仍不稳定，尚未验证闭环规划。 |
 | **ACWM-RM**: A Reference-Free Reward Model from Complementary Mismatch Preferences | arXiv (2026) | Fudan University / Meituan | 🎮 | [论文](https://arxiv.org/abs/2610.32222) | 以动作/视频错配偏好训练无参考奖励，结合动作条件前向预测微调 DreamDojo-2B；AgiBot 留出集 nDTW×100 从 14.84 升至 16.41，但物理一致性整体评分从 4.00 降至 3.93。仅单个 RL 训练种子，尚无机器人闭环验证。 |
+| **AFTER**: A World Model with Adaptive Fast--Slow Timescales for Error-Driven Retention | arXiv (2026) | 同济大学 | 🎮 🔁 | [论文](https://arxiv.org/abs/2611.15215) | 预测误差驱动快慢双时标动力学校正，并重加权冻结专家以适应突发载荷或关节故障；五个仿真数据集上的多步状态预测误差较各自最强基线降低 16%–34%，并在关节故障任务中验证 CEM 闭环控制。 |
 | **AVL-JEPA**: Preventing Causal Dynamics Information Collapse in Joint Embedding Predictive Architecture World Models | arXiv (2026) | 中南大学 / 燕山大学 | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.03587) | JEPA 可以保住高维视觉信息，同时丢掉动作造成的物理变化。AVL 用已执行动作锚定动力学，再把受视觉干扰的潜预测对齐到干净预测，动作头保持冻结。高斯输入噪声下，PushT 成功率从 15.3% 到 81.5%，TwoRoom 从 65.7% 到 88.7%。干净的 OGBench Cube 从 73.2% 到 78.2%。 |
 | **AWAM**: Active Trajectory-Conditioned View Imagination for Robust Robot Manipulation | arXiv (2026) | Fudan University / Shanghai Innovation Institute | 🔁 | [论文](https://arxiv.org/abs/2610.23396) | 用虚拟相机轨迹查询几何条件世界模型，把想象结果压成固定感知记忆，再与实时观测融合做闭环操作。LIBERO-Occ 去掉该记忆后，成功率从 75.9% 降到 64.4%。三真机任务共 85/90。想象的是观察轨迹，不是机器人动作后果，记忆在执行过程中不更新。 |
 | **ALONE**: Acting from Belief, Looking When Needed: A Bayesian Spatial World Model for Navigation under Intermittent Perception | arXiv (2026) | 启元实验室 / 清华大学 | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.11591) | 先按已执行动作几何搬运空间信念，再学习补全与观测修正，并用可靠性图决定何时重新获取深度。室内 Lattice 环境的 10 次无人机试验全部完成 10 米导航，深度采集占决策步的 7.0%；仅验证静态环境，仍依赖视觉惯性里程计传播信念。 |
@@ -255,6 +256,7 @@
 | **G-JEPA**: Exploring Temporal Context-Aware Physical Grounding in Latent World Models | arXiv (2026) | The Hong Kong Polytechnic University | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.28483) \| [代码](https://github.com/myl11045/G-JEPA) | 以共享因果 S4D 模块监督观测和预测潜状态的物理信息，并混合扩散动作提案与 CEM 闭环搜索；PushT-Ada 成功率由 LeWM 的 56.90% 提升至 87.11%，主结果仅使用一个模型训练种子，尚无真机验证。 |
 | **FACT**: Failure-Aware Causal Training for World-Action Models | arXiv (2026) | Xiaolong Wang 团队 | — | [论文](https://arxiv.org/abs/2608.10232) | 失败感知因果训练，显式建模动作-后果因果关系以纠正世界模型的乐观偏差。 |
 | **FLEX-WAM**: Flexible Block-Causal World-Action Models for Long-Horizon Imagination and Planning | arXiv (2026) | NYU | 🎮 ⚡ 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.05483) | 用可 KV cache 的块因果骨干同时预测未来、生成动作并在想象中规划，支持变长上下文和逐帧或逐块的无限 rollout；以前向动力学弹性约束动作响应。可作为 MCTS 的联合提议器与仿真器解长时程 PushT 和 OGBench，同一检查点在双臂真机上兼作策略与结果预测。 |
+| **A²WM**: Fast Inference-Time Policy Refinement via Action-Affine World Models | arXiv (2026) | 清华大学 / 约翰斯·霍普金斯大学 | 🎮 ⚡ 🔁 | [论文](https://arxiv.org/abs/2611.15011) | 用动作仿射的多步几何预测和一次二次规划闭环修正冻结策略；四个仿真操作任务平均成功率从 27.2% 到 59.5%，每步额外修正耗时 3.8 毫秒，不含基础策略采样。评测种子亦用于开发。 |
 | **Flow-Skill WM**: Flow Policies as Actions of Skill-Level World Models: Learned and Symbolic Abstractions for Long-Horizon Planning | arXiv (2026) | TU Delft | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.04767) \| [项目](https://andreumatoses.github.io/research/flow-skill-wm) | 用在完整技能片段上训练的流匹配策略的输入作为技能级动作，一次技能执行对应世界模型的一步转移，从而不必手工编写技能词表。无标签的物体中心离散码在单技能上对齐符号标签，2 到 5 个技能的任务仍保留其约一半到四分之三的成功率。 |
 | **ForceWAM**: Decoupling Future and Response Learning from Demo and Play Data for Contact-Rich Manipulation | arXiv (2026) | Fudan University / Shanghai Jiao Tong University | 🔁 | [论文](https://arxiv.org/abs/2610.18852) \| [项目](https://force-wam.github.io/) | 联合预测视频与六轴力/力矩未来，以示范和play训练逆动力学并用实时力反馈修正动作；单臂四种接触条件报告85–95%成功率，但未来预测由任务条件驱动，并非可指定动作的仿真器。 |
 | **ForeAct**: Geometry-Guided Action Learning from World Representations | arXiv (2026) | The Hong Kong University of Science and Technology (Guangzhou) / JD Explore Academy | 🔁 | [论文](https://arxiv.org/abs/2611.11500) \| [代码](https://github.com/Bulrush666/ForeAct) | 复用预训练视频世界模型为策略骨干，以下一帧相对深度辅助训练；LIBERO 组件对照由 action-only 的 94.3% 升至 96.6%，真实执行成功 67/90 次。部署移除深度读出且不生成未来；不是外部动作条件模拟器，168ms 是整套策略延迟，不代表世界模型吞吐。 |
@@ -473,6 +475,7 @@
 | **Persistent Computational State: A Session-Centric Runtime for Generative World Models** | arXiv (2026) | Zhen Lin 团队 | — | [论文](https://arxiv.org/abs/2607.21686) | 会话中心运行时支持分叉、回溯和重访视角，面向生成式世界模型的状态管理。 |
 | **PlayGen2**: Learning Real-Time Playable Worlds with Explicit 3D State | arXiv (2026) | The Chinese University of Hong Kong / Wellington College / Tencent / Nanyang Technological University | 🎮 ⚡ ⏳ | [论文](https://arxiv.org/abs/2611.07867) \| [代码](https://github.com/MajorDavidZhang/PlayGen-2) | 分离动作条件三维状态预测与神经渲染；10 模拟分钟展开的 RGB 动作识别准确率为 82.1–85.6%，M4 Pro 在 160×120、四步渲染下达 6.19 FPS、161.2ms 后端延迟。视觉评分排除故障/恢复片段，局部范围外实体暂停，设计对照未匹配训练预算。 |
 | **PlayWorld**: Benchmarking World Models with Agent Players over Long-Horizon Objectives | arXiv (2026) | Hengshuang Zhao 团队 | — | [论文](https://arxiv.org/abs/2608.13552) | 用多模态 Agent Player 追求长程目标来评估世界模型的几何一致性与交互保真度。 |
+| **Prediction or Persistence? What Future-Prediction Scores Miss About World Models** | CoRL Workshop (2026) | Deccan AI | — | [论文](https://arxiv.org/abs/2611.15082) | 在 704 段家庭第一视角视频的 27,000 次未来检索试验中，对 5 个冻结世界模型加入同编码器、跳过预测器的持续性对照，区分编码器、近帧相似和预测器的贡献；结论限于被动视频诊断，未验证闭环控制收益。 |
 | **PWM**: Programmable World Model | arXiv (2026) | Alaya Lab | 🎮 ⏳ | [论文](https://arxiv.org/abs/2609.10540) \| [项目](https://alaya-lab.github.io/pwm) \| [代码](https://github.com/AlayaLab/pwm) | 把世界状态演化与视觉生成解耦：自然语言编译成可执行程序维护含屏外实体的全局状态，再经状态增强 3D OBB 条件化预训练视频模型做渲染；CombatStateBench 上计数/状态准确率 94%/98%，支持规则可编程、实体可控的长时可玩游戏。 |
 | **Qwen-RobotWorld**: A Joint World Model Integrating Driving, Navigation and Manipulation | arXiv (2026) | Alibaba Qwen | 🎮 | [论文](https://arxiv.org/abs/2606.17030) | 将语言作为统一动作接口，把视频世界模型扩展到自动驾驶、导航和机器人操作。 |
 | **R2M-Bench**: Evaluating Revisit Memory via Relative Consistency in Interactive Video World Models | arXiv (2026) | — | — | [论文](https://arxiv.org/abs/2608.27328) \| [代码](https://github.com/AMAP-ML/R2MBench) | 指出首访-重访帧的绝对相似度会被「慢动作捷径」迷惑，提出在同一 rollout 内用间隙匹配的非重访对与短程对做相对校准的 MemoryGain 与归一化记忆比 NMR，覆盖外观、场景/物体身份、局部几何与持久状态，评测 7 个动作条件视频世界模型且与人类一致性判断相关 ρ=0.547。 |

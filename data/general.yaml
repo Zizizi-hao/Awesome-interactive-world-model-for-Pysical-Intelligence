@@ -1205,3 +1205,15 @@ papers:
     tags: [无标签动作表征, 对比适配, V-JEPA 2, 跨域动作条件预测]
     note: 对 V-JEPA 2 作无动作标签的对比适配，提取动作表征条件化 AdaWorld，覆盖机器人、导航、游戏与驾驶；LIBERO 动作迁移的光流方向余弦为 0.917，重训 DreamDojo 对照为 0.803。直接动作控制仍需少量标签，世界模型仅单训练种子且离线评估，未验证闭环或长期稳定性。
     note_en: Contrastively adapts V-JEPA 2 without action labels to condition AdaWorld with action representations across robotics, navigation, games, and driving; LIBERO action-transfer optical-flow direction cosine is 0.917 versus 0.803 for a retrained DreamDojo baseline. Direct action control still needs a small labeled set; world models use one training seed and offline evaluation, without verified closed-loop or long-horizon robustness.
+
+  - title: "Prediction or Persistence? What Future-Prediction Scores Miss About World Models"
+    org: Deccan AI
+    year: 2026
+    venue: CoRL Workshop
+    category: general
+    links:
+      arxiv: "2611.15082"
+    features: {}
+    tags: [世界模型评测, 持续性基线, 潜空间预测]
+    note: 在 704 段家庭第一视角视频的 27,000 次未来检索试验中，对 5 个冻结世界模型加入同编码器、跳过预测器的持续性对照，区分编码器、近帧相似和预测器的贡献；结论限于被动视频诊断，未验证闭环控制收益。
+    note_en: "Adds a matched persistence control using the same encoder but skipping the predictor for 5 frozen world models on 27,000 future-retrieval trials from 704 household egocentric videos, separating encoder quality and temporal persistence from predictor contributions. The findings concern passive-video diagnosis; closed-loop control gains are not evaluated."

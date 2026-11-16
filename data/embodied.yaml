@@ -3321,3 +3321,31 @@ papers:
     tags: [预测模型策略迁移, 交互潜表征, 自适应动作截断, 观测反馈]
     note: 保留 Cosmos 未来视频预测目标，以运动和物体交互线索监督潜表征，并按预测进度截断动作、获取新观测重规划；10 项 RLBench 三次评估平均成功率为 88%，去掉自适应执行为 85%。未来预测不以外给动作作条件且仅含 12 帧，真机封箱最终成功率仍为 30%。
     note_en: Retains Cosmos future-video prediction, supervises interaction latents with motion and object cues, and uses predicted progress to truncate actions and replan from fresh observations; across three evaluations on ten RLBench tasks, mean success is 88% versus 85% without adaptive execution. Future prediction is not conditioned on externally supplied actions and spans only 12 frames; final real-world box sealing succeeds in 30% of trials.
+
+  - title: "AFTER: A World Model with Adaptive Fast--Slow Timescales for Error-Driven Retention"
+    short: AFTER
+    org: 同济大学
+    org_en: "Tongji University"
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: "2611.15215"
+    features: {action: true, closedloop: true}
+    tags: [动力学适应, 快慢记忆, 专家混合, 模型预测控制]
+    note: 预测误差驱动快慢双时标动力学校正，并重加权冻结专家以适应突发载荷或关节故障；五个仿真数据集上的多步状态预测误差较各自最强基线降低 16%–34%，并在关节故障任务中验证 CEM 闭环控制。
+    note_en: "Prediction errors drive fast and slow dynamics corrections and reweight frozen experts after payload changes or joint faults. Multi-step state prediction error falls by 16%–34% against the strongest baseline on each of five simulated datasets; CEM closed-loop control is also evaluated in a joint-failure task."
+
+  - title: "Fast Inference-Time Policy Refinement via Action-Affine World Models"
+    short: A²WM
+    org: 清华大学 / 约翰斯·霍普金斯大学
+    org_en: "Tsinghua University / Johns Hopkins University"
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: "2611.15011"
+    features: {action: true, realtime: true, closedloop: true}
+    tags: [动作仿射世界模型, 策略修正, 二次规划, 机器人操作]
+    note: 用动作仿射的多步几何预测和一次二次规划闭环修正冻结策略；四个仿真操作任务平均成功率从 27.2% 到 59.5%，每步额外修正耗时 3.8 毫秒，不含基础策略采样。评测种子亦用于开发。
+    note_en: "Action-affine multi-step geometry prediction and one quadratic program refine a frozen policy in closed loop. Mean success rises from 27.2% to 59.5% across four simulated manipulation tasks, with 3.8 ms of extra refinement per step, excluding base-policy sampling. Evaluation seeds were also used during development."
