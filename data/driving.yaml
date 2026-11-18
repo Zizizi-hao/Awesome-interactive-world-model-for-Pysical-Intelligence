@@ -1969,3 +1969,30 @@ papers:
     tags: [认知蒸馏, 轨迹条件BEV预测, 双奖励强化学习, 开环驾驶评估]
     note: 将 VLM 认知先验蒸馏到 BEV 编码器，以候选轨迹条件预测未来语义地图，并用物理与认知双奖励优化策略；NAVSIM v1 消融中 PDMS 从仅模仿学习的 88.9 升至 91.4。尚无反馈驾驶或实车验证，世界预测缺少量化指标，不能视为安全保证。
     note_en: Distills VLM cognitive priors into a BEV encoder, predicts future semantic maps conditioned on candidate trajectories, and optimizes the policy with physical and cognitive rewards; NAVSIM v1 ablations raise PDMS from 88.9 with imitation learning alone to 91.4. Feedback-based driving and real-vehicle tests are unverified, world prediction lacks quantitative metrics, and the results do not establish safety guarantees.
+
+  - title: 'SAFER: Navigating the Exploration-Exploitation Dilemma in World-Model-Based Planning for Autonomous Driving'
+    short: SAFER
+    org: Purdue University / University of Wisconsin–Madison
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.20107'
+      project: https://ys-qu.github.io/safer-website/
+    features: {action: true, closedloop: true}
+    tags: [动作条件潜动力学, 风险感知规划, 在线适配, CARLA]
+    note: 按加速度和转向预测 1.6 秒潜状态，将碰撞风险纳入 MPPI 代价，并根据仿真执行反馈重规划和适配模型。76 条 CARLA 路线、3 个种子下，驾驶分数从行为克隆的 0.647 升至完整在线适配的 0.768。CARLA 使用特权 BEV，证据限于仿真。
+    note_en: Predicts 1.6 seconds of latent dynamics from acceleration and steering, penalizes collision risk in MPPI, and replans and adapts the model from simulator feedback. Across 76 CARLA routes and 3 seeds, driving score rises from 0.647 for behavior cloning to 0.768 with full online adaptation. CARLA uses privileged BEV inputs, and evidence is limited to simulation.
+
+  - title: 'VANDERER: Map-Free Exploration using Future-Aware and Visual-Curiosity-Guided Diffusion Policy'
+    short: VANDERER
+    org: New York University
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2606.14879'
+    features: {action: true, realtime: true, closedloop: true}
+    tags: [视觉探索, 路点条件预测, 扩散引导, CARLA]
+    note: 微调 NWM，按候选相对路点预测终态，以视觉新颖度引导扩散策略，约每 2 秒用新观测重规划。五个未见 CARLA 城镇的平均道路覆盖率为 61.0%，NoMaD 为 53.7%。RTX 4070 上以 320×240 图像输入预测六个候选终态用时 0.84 秒。实验使用仿真定位和碰撞后重生。
+    note_en: Fine-tunes NWM to predict terminal states from candidate relative waypoints, guides a diffusion policy with visual novelty, and replans from fresh observations roughly every 2 seconds. Average road coverage across five unseen CARLA towns is 61.0%, versus 53.7% for NoMaD. Six candidate terminal-state predictions take 0.84 seconds on an RTX 4070 with 320×240 images. Evaluation uses simulator localization and respawns after collisions.

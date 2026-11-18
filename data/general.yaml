@@ -1217,3 +1217,18 @@ papers:
     tags: [世界模型评测, 持续性基线, 潜空间预测]
     note: 在 704 段家庭第一视角视频的 27,000 次未来检索试验中，对 5 个冻结世界模型加入同编码器、跳过预测器的持续性对照，区分编码器、近帧相似和预测器的贡献；结论限于被动视频诊断，未验证闭环控制收益。
     note_en: "Adds a matched persistence control using the same encoder but skipping the predictor for 5 frozen world models on 27,000 future-retrieval trials from 704 household egocentric videos, separating encoder quality and temporal persistence from predictor contributions. The findings concern passive-video diagnosis; closed-loop control gains are not evaluated."
+
+  - title: 'LynnReal-Hand: Unlocking World Interaction with Hand Control'
+    short: LynnReal-Hand
+    org: LynnReal AI / 上海创智学院 / 上海交通大学 / 西安交通大学 / 复旦大学
+    org_en: LynnReal AI / Shanghai Innovation Institute / Shanghai Jiao Tong University / Xi’an Jiaotong University / Fudan University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.21479'
+      code: https://github.com/LynnReal-AI/LynnReal
+    features: {action: true, realtime: true}
+    tags: [手部轨迹控制, 相机条件, 流式视频, 因果蒸馏]
+    note: 按外部手部轨迹和相机姿态生成交互视频，在 HandBench 上 Fast 与 Base 的 MANO Dice 分别为 92.49 和 93.02。单张 H200 的 540p 流式配置达到 18.03 FPS，预热后每块平均响应 0.741 秒。实验使用预录控制序列，模型仅保留有界历史，长期记忆和观测反馈仍待验证。
+    note_en: Generates interactive video from externally supplied hand trajectories and camera poses. On HandBench, Fast and Base reach MANO Dice scores of 92.49 and 93.02. The 540p streaming configuration reaches 18.03 FPS on one H200, with a mean warmed chunk response of 0.741 seconds. Experiments use prerecorded controls and bounded history, leaving persistent memory and observation feedback unverified.

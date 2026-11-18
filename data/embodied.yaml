@@ -3377,3 +3377,105 @@ papers:
     tags: [潜动作评测, 离线诊断, 非动作对照, 表征适配]
     note: 在 ALOHA 数据和 ManiSkill3 五项任务上，用留出数据和非动作对照检验五种冻结潜动作表征能否为预测记录动作与物理状态变化提供额外信息。残差适配使冻结 DiLA 世界模型 15 步预测的 LPIPS 点估计从 0.339 降至 0.324。相对原始 DiLA 表征，LASR 差值的配对 95% 置信区间均包含零，实验主要支持离线表征诊断。
     note_en: Uses held-out data and non-action controls on ALOHA data and five ManiSkill3 tasks to test whether five frozen latent-action representations add predictive information about recorded actions and physical state changes. Residual adaptation lowers the 15-step prediction LPIPS point estimate for the frozen DiLA world model from 0.339 to 0.324. Paired 95% confidence intervals for the LASR differences from the original DiLA representation include zero, and the experiments primarily support offline representation diagnostics.
+
+  - title: 'Lazy-MOSAIC: Accelerating Skill-Centric Manipulation Planning with Learned Skill-Effect World Models'
+    short: Lazy-MOSAIC
+    org: Carnegie Mellon University / Technion – Israel Institute of Technology
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.21517'
+    features: {action: true, realtime: true}
+    tags: [技能条件动力学, 终态预测, 惰性搜索, 仿真验证]
+    note: 用深度集成按参数化技能预测成功率、物体和机器人终态，再以物理仿真验证返回计划。八种货架设定中成功 104/160，MOSAIC 为 81/160。RTX 5060 Ti 上 128 个结构化状态提案的预测约需 0.7 毫秒，完整规划耗时远高于预测，真机仅作定性展示。
+    note_en: Uses a deep ensemble to predict success and terminal object and robot states from parameterized skills, then verifies returned plans in physics simulation. It solves 104/160 trials across eight shelf configurations versus 81/160 for MOSAIC. Predicting 128 structured-state proposals takes about 0.7 ms on an RTX 5060 Ti. Full planning takes much longer, and the physical robot evidence is qualitative.
+
+  - title: 'LEON: Operator-Structured Latent Evolution for World Modeling'
+    short: LEON
+    org: 华中科技大学 / Principia AI
+    org_en: Huazhong University of Science and Technology / Principia AI
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2608.27259'
+    features: {closedloop: true}
+    tags: [潜状态转移, 算子结构, 加性残差, 世界动作模型]
+    note: 以条件调制的共享算子与加性残差替换两种世界动作模型的潜状态转移。LIBERO-Plus 在匹配训练、单评估种子下成功率为 83.45%，Transformer 为 79.54%，残差 MLP 为 79.44%。机器人闭环仿真使用策略内部潜变量，外部力条件验证限于合成振子。
+    note_en: Replaces latent transitions in two world-action models with conditionally modulated shared operators and additive residuals. On LIBERO-Plus with matched training and one rollout seed, success is 83.45% versus 79.54% for a Transformer and 79.44% for a residual MLP. Simulated robot feedback uses internally inferred policy latents, and explicit force conditioning is evaluated on a synthetic oscillator.
+
+  - title: 'JEPA4R: Embodied JEPA World Models with 4D Point Planning'
+    short: JEPA4R
+    org: 北京大学 / UC Berkeley BAIR / Brown University / University of Oulu
+    org_en: Peking University / UC Berkeley BAIR / Brown University / University of Oulu
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.19771'
+      project: https://aigeeksgroup.github.io/JEPA4R/
+      code: https://github.com/AIGeeksGroup/JEPA4R
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [动作条件点云预测, JEPA, 四维点云, 真机闭环]
+    note: 从单深度相机点云学习动作条件潜动力学，解码观察 4D 点云预测，并以冻结表征驱动观测反馈策略。OGBench Cube 的 64 回合中，200 步内平均点误差保持在 1.1 cm 以内。所有编码器在 Cube-Quadruple 的成功率均为 0%，真机闭环证据为单机械臂演示。
+    note_en: Learns action-conditioned latent dynamics from single-depth-camera point clouds, decodes predictions into 4D point clouds, and uses frozen representations in an observation-feedback policy. Across 64 OGBench Cube episodes, mean point error stays within 1.1 cm over 200 steps. All encoders score 0% on Cube-Quadruple, and physical closed-loop evidence is limited to single-arm demonstrations.
+
+  - title: 'ODEWorld: A Continuous Predictive Architecture via Physical-Time Flow'
+    short: ODEWorld
+    org: 清华大学智能产业研究院 / UC Berkeley BAIR
+    org_en: Tsinghua University AIR / UC Berkeley BAIR
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2607.27924'
+      project: https://dstate.github.io/odeworld_website/
+      code: https://github.com/Dstate/ODEWorld
+    features: {realtime: true, longhorizon: true}
+    tags: [连续物理时间, 潜速度场, 视频预测, 子目标引导]
+    note: 以初始观测和目标为条件积分潜速度场，为 X-VLA 提供连续子目标。单套双臂真机的四项任务平均成功率由 55% 升至 80%。在单张 A100 的 256×256 LIBERO 预测中，16 帧和 64 帧分别为 33.67 和 13.83 FPS，长程证据限于视频片段。
+    note_en: Integrates a latent velocity field conditioned on initial observations and goals to guide X-VLA with sequential subgoals. Across four tasks on one bimanual robot, mean success rises from 55% to 80%. At 256×256 on one A100, LIBERO prediction reaches 33.67 FPS for 16 frames and 13.83 FPS for 64 frames. Long-horizon evidence is limited to video clips.
+
+  - title: 'ResWAM: Learning What Changes, Not What Stays, for World-Action Models'
+    short: ResWAM
+    org: Michigan State University / Cisco / University of Michigan / IBM Research
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.19559'
+      project: https://chongyu-fan.netlify.app/posts/reswam/
+      code: https://github.com/OPTML-Group/ResWAM
+    features: {closedloop: true}
+    tags: [视觉残差, 联合动作预测, 扩散策略, 观测反馈]
+    note: 联合生成动作和 DINOv3 视觉残差，执行动作块后按新观测重规划。RoboTwin 2.0 的 50 项任务中，匹配消融的残差版成功率为 93.8%，完整未来预测版为 90.9%，移除残差分支为 89.9%。真机证据来自单台 FR3 的三项任务，动作和未来残差由模型共同输出。
+    note_en: Jointly generates actions and DINOv3 visual residuals, then replans from fresh observations after action chunks. On 50 RoboTwin 2.0 tasks, matched ablations yield 93.8% success for residual prediction, 90.9% for full-future prediction, and 89.9% with the residual branch removed. Physical evidence covers three tasks on one FR3, and actions and future residuals are joint outputs.
+
+  - title: 'Frame First, Decode Once: Object-Centric Coordinates and Single-Pass Decoding for System-1 World Models'
+    short: Frame First, Decode Once
+    org: Sigmind.ai
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.18761'
+    features: {action: true}
+    tags: [物体中心坐标, 推动后果预测, 单次解码, 候选动作评分]
+    note: 按候选推动动作预测 10 步物体关键点，以物体初始位姿作为坐标系。ManiSkill3 PushT 上单次解码的决策遗憾为 0.020–0.021，修正后的 10 步 DDIM 为 0.046。证据限于仿真中的离线候选评分，后续消融重复使用了早期设计探索中的测试任务族。
+    note_en: Predicts 10 steps of object keypoints from candidate pushes in the object's initial pose frame. On ManiSkill3 PushT, single-pass decoding yields decision regret of 0.020–0.021, versus 0.046 for corrected 10-step DDIM. Evidence is limited to offline candidate scoring in simulation, and later ablations reuse test families from exploratory design.
+
+  - title: 'WA-JEPA: Goal-Aware Predictive Feedback Action Refinement for a World-Action Model'
+    short: WA-JEPA
+    org: 哈尔滨工业大学 / 安徽工程大学 / 海康威视研究院
+    org_en: Harbin Institute of Technology / Anhui Polytechnic University / Hikvision Research Institute
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.19183'
+      code: https://github.com/Dovisya/WA-JEPA
+    features: {action: true, closedloop: true}
+    tags: [动作条件JEPA, 目标感知反馈, 动作修正, 机器人操作]
+    note: 预测候选动作下的潜在场景和本体感知，用目标差值与场景上下文修正动作，再根据执行后的观测重规划。LIBERO-Goal 成功率为 97±1%，Push-T 最终覆盖率为 71±2%。评估限于仿真，公开代码覆盖基础模型，AP 扩展待发布。
+    note_en: Predicts scene and proprioceptive latents under candidate actions, refines actions using goal discrepancies and scene context, and replans from observations after execution. LIBERO-Goal success is 97±1%, and final Push-T coverage is 71±2%. Evaluation is limited to simulation, and the released code covers the base model while the AP extension is pending.
