@@ -10,7 +10,7 @@
 
 世界模型 (World Model) 通过学习环境的动态表征，实现对未来的预测与想象； 可交互世界模型进一步支持以动作 (action) 为条件的生成与控制， 为自动驾驶和具身智能提供数据引擎、神经仿真器与策略学习基础。 本仓库收录并整理该方向的代表性工作，按应用场景分类， 并标注每篇工作的交互能力维度。
 
-📊 共收录 **465** 篇工作 ｜ 最后更新：2026-11-16
+📊 共收录 **467** 篇工作 ｜ 最后更新：2026-11-18
 
 <p align="center">
   <img src="assets/interactive-world-model1.png" alt="交互式世界模型：智能体与世界模型的闭环交互" width="760">
@@ -32,7 +32,7 @@
 ## 目录
 
 - [自动驾驶 Autonomous Driving](#自动驾驶-autonomous-driving)（142）
-- [具身智能 Embodied AI](#具身智能-embodied-ai)（237）
+- [具身智能 Embodied AI](#具身智能-embodied-ai)（239）
 - [通用 / 游戏 General / Game](#通用--游戏-general--game)（86）
 
 ## 自动驾驶 Autonomous Driving
@@ -207,6 +207,7 @@
 | **Continual WM Bench**: Benchmarking World Models for Continual Learning on Compositional Tasks | arXiv (2026) | Oxford | — | [论文](https://arxiv.org/abs/2609.22055) | 操作世界模型的持续学习基准。课程末尾的新任务由已见任务的动作因素和感知因素重新组合，从而把学得快和会不会复用已学动力学拆开。模块化动力学比常规持续学习方法更平衡复用和遗忘，但没有一种方法把这个问题做完。 |
 | **HIJP**: Beyond Action Prediction: Learning Search-Free Planning in Latent Space | arXiv (2026) | Nanjing University of Science and Technology / University of Oxford / Singapore University of Technology and Design / Adelaide University | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.23615) | 目标条件逆模型与动作条件潜预测交替生成多步计划，测试时不做动作搜索。四项视觉控制、16 个难度组合、各 50 次的总成功率为 86.8%，比最强基线高 4.9 个百分点。去掉转移一致性后，12 个组合的平均成功率从 82.5% 降到 76.0%。只在仿真中验证，规划时程固定。 |
 | **Beyond Ensemble Disagreement: Predictive STL Monitoring of RL Locomotion under Distribution Shift** | arXiv (2026) | Sindh Madressatul Islam University / Shah Abdul Latif University / University of Camerino / Institute of Biophysics CNR / University of Mirpurkhas | 🎮 🔁 | [论文](https://arxiv.org/abs/2611.02218) \| [代码](https://github.com/lakhanqurban/stl-monitor-rl) | 用动作条件世界模型和冻结 PPO 的预测内反馈滚动评估 STL 安全监测；集成分歧不能可靠预测误差或违规，HalfCheetah 上当前状态基线与预测鲁棒度的 AUROC 相差不足 0.03。证据限于两个模拟环境，未验证监测器干预收益或安全保证。 |
+| **LASR**: Beyond Prediction Gain: LASR as a Metric for Action-Grounded Latents in World Models | arXiv (2026) | 清华大学 / 北京交通大学 | — | [论文](https://arxiv.org/abs/2611.17775) | 在 ALOHA 数据和 ManiSkill3 五项任务上，用留出数据和非动作对照检验五种冻结潜动作表征能否为预测记录动作与物理状态变化提供额外信息。残差适配使冻结 DiLA 世界模型 15 步预测的 LPIPS 点估计从 0.339 降至 0.324。相对原始 DiLA 表征，LASR 差值的配对 95% 置信区间均包含零，实验主要支持离线表征诊断。 |
 | **HF-WM**: Beyond Successful Robot Demonstrations: Learning from Human Interactions and Modeling Failure Dynamics | arXiv (2026) | 浙江大学 / 北京中关村学院 / 中国科学技术大学 / 宁波东方理工大学 / 中科院自动化所 | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.13522) \| [项目](https://peiyantu.github.io/HF-WM/) | 以稳定点流联合学习人类与机器人交互，并用动作扰动及GRPO训练失败动力学；六策略各90个匹配实机会话的成功率估计平均绝对误差为2.41个百分点，但评分依赖VLM，闭环增益仅在LIBERO-90验证。 |
 | **Dual-WM**: Beyond a Single Latent Space: A Dual-Latent World Model for Long-Horizon Planning | arXiv (2026) | 南京大学 / 上海交通大学 / 深圳先进技术研究院 / 深圳理工大学 | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2609.37644) \| [代码](https://github.com/DeLin1001/Dual-WM-Official) | 低层潜空间做细粒度动作转移，高层用学到的宏动作做长程子目标。五个目标条件视觉控制任务上，目标偏移 50 步时平均成功率从 75.9% 到 84.4%，100 步时从 61.4% 到 69.5%。偏移 100 步时相对 LeWM 高 30.8 个百分点。 |
 | **CF-JEPA**: Improving Robustness of JEPA World Models via Controllability Factorization | arXiv (2026) | 佐治亚理工学院 / 佐治亚理工研究院 | 🎮 🔁 | [论文](https://arxiv.org/abs/2610.00727) | 把 JEPA 潜空间拆成可控和不可控两部分，规划只用可控部分。两个视觉干扰下，LeWM 在全部任务上坍缩；Reacher 上 SMWM 成功率 0.10，CF-JEPA 为 0.48。干扰再增加时，SMWM 的 PushT 和 TwoRoom 从 0.86、0.98 掉到 0.27、0.46，CF-JEPA 维持 0.57 和 0.82。 |
@@ -338,6 +339,7 @@
 | **QCC-WM**: Linking Macro-State Dynamics and Visual Generation via Quotient Causal Construction | arXiv (2026) | University of Electronic Science and Technology of China / University of Glasgow / Huzhou Maternity & Child Health Care Hospital | 🎮 | [论文](https://arxiv.org/abs/2611.12353) | 学习六维探头位姿变化条件的超声宏状态动力学，以运动传输和空间误差修正生成未来观测；US-VLA 四步 ROI-MSE 从 Direct 的 0.02046 降至 0.01861。物理交互证据限离线预测，16 步仅约 0.533 秒；生成内部回读不构成环境闭环，未验证机器人导航或临床收益。 |
 | **RIWANav**: Recursive World-Action Models with Self-Improvement for Urban Navigation | arXiv (2026) | 上海交通大学 / 北京航空航天大学 / 香港科技大学 / 清华大学 / 得克萨斯大学奥斯汀分校 / IGDL | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.08640) | 导航策略和 Cosmos 世界模型交替更新。UrbanNav 未见场景成功率从冻结世界模型的 80.31% 到 88.25%，SPL 从 76.09% 到 82.59%。同一划分上 NoMaD 为 84.80% 和 79.85%。 |
 | **ReactWorld**: Structuring Interaction Responses for Embodied Video Generation | arXiv (2026) | Huawei Technologies Co., Ltd. / Tongji University / Zhejiang University | — | [论文](https://arxiv.org/abs/2611.06120) \| [项目](https://metaengine-world.github.io/ReactWorld/) | 从初图与任务指令预测参与角色、局部响应强度和二维位移，再以零动态参考增量与时序注意力引导具身视频生成；同数据预算的 Video-FT 对照在 RBench 为 71.94，ReactWorld 为 77.51。仅验证短视频生成，未接入外部动作或策略闭环，二维响应与自动标注仍限制物理可靠性。 |
+| **RB-VLA**: Recursive Belief Vision Language Action Models | IROS (2026) | 印度理工学院马德拉斯分校 | 🔁 | [论文](https://arxiv.org/abs/2602.20659) | 学习 RSSM 式递归信念以预测未来一步和五步的潜观测，并驱动扩散策略闭环执行。仿真遮挡下多阶段抓放成功率为 77.5%，π₀ 为 25.0%。用 100 条真机轨迹微调后，单台 UR5 在 25 次试验中成功率为 68.0%。预测器通过信念接收已执行动作的历史信息。 |
 | **ReCAP**: Remembering What Matters for Long-Horizon Robotic World Models | arXiv (2026) | — | 🎮 ⏳ | [论文](https://arxiv.org/abs/2610.14583) \| [项目](https://alexander-wu.github.io/recap-project-page/) | 冻结自回归动作条件世界模型，保留初始场景锚点和最近完整视觉动作块并移除陈旧生成历史；200 对 BridgeV2 预测中 LPIPS 比 Full Context 低 63.3%。尚未验证闭环控制收益，且组件消融中锚点相对 Recent Only 的 LPIPS AUC 增益不显著。 |
 | **ReWAM**: Rethinking Representations for World-Action Modeling | arXiv (2026) | 华中科技大学 / 地平线 / D-Robotics | 🎮 🔁 | [论文](https://arxiv.org/abs/2609.38163) | 在同一套世界–动作模型里比较表示：没有生成式视频预训练时，原始 DINO 特征在 RoboTwin 2.0 上优于 Video-VAE 潜变量，尽管像素重建更差。ReWAM 把 DINO 特征收成紧凑世界状态，只有动作损失的梯度进入这个瓶颈。RoboTwin 2.0 成功率 93.6%。RoboDojo 上约 600 小时具身预训练，平均分 12.29，成功率 8.28%。 |
 | **ViGAR**: Rethinking World-Action Model for Compositional and In-Context Robotic Manipulation | arXiv (2026) | 北京大学 / AgiBot / CocoMatrix | 🎮 🔁 ⏳ | [论文](https://arxiv.org/abs/2610.02368) \| [项目](https://dagroup-pku.github.io/ViGAR) \| [代码](https://github.com/DAGroup-PKU/ViGAR) | 先预测下一子任务的视觉子目标，再在该子目标条件下同时生成未来画面和动作，两部分共用预训练世界模型。RoboTwin Clean 82.00%、Random 67.02%，平均 74.51%，4D-WAM 平均 61.65%。同一 Cosmos3-Nano 骨干去掉视觉子目标后，Random 为 22.46%。真机是 AgiBot A2 上的五个长程组合任务。 |

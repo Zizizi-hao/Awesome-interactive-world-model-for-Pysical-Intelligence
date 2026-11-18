@@ -3349,3 +3349,31 @@ papers:
     tags: [动作仿射世界模型, 策略修正, 二次规划, 机器人操作]
     note: 用动作仿射的多步几何预测和一次二次规划闭环修正冻结策略；四个仿真操作任务平均成功率从 27.2% 到 59.5%，每步额外修正耗时 3.8 毫秒，不含基础策略采样。评测种子亦用于开发。
     note_en: "Action-affine multi-step geometry prediction and one quadratic program refine a frozen policy in closed loop. Mean success rises from 27.2% to 59.5% across four simulated manipulation tasks, with 3.8 ms of extra refinement per step, excluding base-policy sampling. Evaluation seeds were also used during development."
+
+  - title: 'Recursive Belief Vision Language Action Models'
+    short: RB-VLA
+    org: 印度理工学院马德拉斯分校
+    org_en: Indian Institute of Technology Madras
+    year: 2026
+    venue: IROS
+    category: embodied
+    links:
+      arxiv: '2602.20659'
+    features: {closedloop: true}
+    tags: [递归信念状态, 潜观测预测, 扩散策略, 遮挡操作]
+    note: 学习 RSSM 式递归信念以预测未来一步和五步的潜观测，并驱动扩散策略闭环执行。仿真遮挡下多阶段抓放成功率为 77.5%，π₀ 为 25.0%。用 100 条真机轨迹微调后，单台 UR5 在 25 次试验中成功率为 68.0%。预测器通过信念接收已执行动作的历史信息。
+    note_en: Learns an RSSM-style recursive belief to predict latent observations one and five steps ahead and drive a closed-loop diffusion policy. In simulated occluded multi-stage pick-and-place, success is 77.5% versus 25.0% for π₀. After fine-tuning on 100 real trajectories, success is 68.0% across 25 trials on one UR5. The predictor receives executed-action history through the belief state.
+
+  - title: 'Beyond Prediction Gain: LASR as a Metric for Action-Grounded Latents in World Models'
+    short: LASR
+    org: 清华大学 / 北京交通大学
+    org_en: Tsinghua University / Beijing Jiaotong University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.17775'
+    features: {}
+    tags: [潜动作评测, 离线诊断, 非动作对照, 表征适配]
+    note: 在 ALOHA 数据和 ManiSkill3 五项任务上，用留出数据和非动作对照检验五种冻结潜动作表征能否为预测记录动作与物理状态变化提供额外信息。残差适配使冻结 DiLA 世界模型 15 步预测的 LPIPS 点估计从 0.339 降至 0.324。相对原始 DiLA 表征，LASR 差值的配对 95% 置信区间均包含零，实验主要支持离线表征诊断。
+    note_en: Uses held-out data and non-action controls on ALOHA data and five ManiSkill3 tasks to test whether five frozen latent-action representations add predictive information about recorded actions and physical state changes. Residual adaptation lowers the 15-step prediction LPIPS point estimate for the frozen DiLA world model from 0.339 to 0.324. Paired 95% confidence intervals for the LASR differences from the original DiLA representation include zero, and the experiments primarily support offline representation diagnostics.
