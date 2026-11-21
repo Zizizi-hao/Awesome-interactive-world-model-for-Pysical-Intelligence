@@ -1232,3 +1232,30 @@ papers:
     tags: [手部轨迹控制, 相机条件, 流式视频, 因果蒸馏]
     note: 按外部手部轨迹和相机姿态生成交互视频，在 HandBench 上 Fast 与 Base 的 MANO Dice 分别为 92.49 和 93.02。单张 H200 的 540p 流式配置达到 18.03 FPS，预热后每块平均响应 0.741 秒。实验使用预录控制序列，模型仅保留有界历史，长期记忆和观测反馈仍待验证。
     note_en: Generates interactive video from externally supplied hand trajectories and camera poses. On HandBench, Fast and Base reach MANO Dice scores of 92.49 and 93.02. The 540p streaming configuration reaches 18.03 FPS on one H200, with a mean warmed chunk response of 0.741 seconds. Experiments use prerecorded controls and bounded history, leaving persistent memory and observation feedback unverified.
+
+  - title: 'Inertial Video World Models'
+    short: InertialWorld
+    org: 清华大学 / 中国科学技术大学
+    org_en: Tsinghua University / University of Science and Technology of China
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.22314'
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [视频世界模型, 欧拉网格, 拉格朗日载体, 跨域动作条件预测]
+    note: 用欧拉网格和拉格朗日载体保存场景状态，根据给定动作搬运状态，再以门控机制更新。RT-1 的 35 条可评测轨迹上，64 步 PSNR 比最强基线高 2.36 dB。两项抽屉任务中，闭环策略成功率与真机汇总结果的平均绝对差为 15.1 个百分点。
+    note_en: Maintains scene state in an Eulerian grid and Lagrangian carriers, transports it under supplied actions, and updates it with a learned gate. Across 35 eligible RT-1 trajectories, 64-step PSNR is 2.36 dB above the strongest baseline. On two drawer tasks, closed-loop policy success rates differ from aggregate physical-robot results by 15.1 percentage points on average in absolute terms.
+
+  - title: 'Plausible Videos Can Lead to Poor Decisions: Diagnosing and CURE-ing World Models for Planning'
+    short: CURE
+    org: Cornell University / NYU Grossman School of Medicine
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.22561'
+    features: {action: true}
+    tags: [世界模型规划, 决策遗憾, 不确定性, 离线反事实评估]
+    note: 用证书诊断动作条件视频模型的规划决策，并指导数据重加权、增加滚动采样或补采数据。在不同数据覆盖水平下，跨任务平均决策遗憾比最佳悲观基线低 10–25%。真实视频中未执行动作的结果由独立模型估计。
+    note_en: Uses a certificate to assess planning decisions from action-conditioned video models and guide data reweighting, extra rollouts, or data collection. Mean decision regret across tasks is 10–25% lower than for the best pessimistic baseline across data support levels. A separate model estimates the outcomes of untaken actions in real videos.

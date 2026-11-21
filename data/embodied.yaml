@@ -3479,3 +3479,98 @@ papers:
     tags: [动作条件JEPA, 目标感知反馈, 动作修正, 机器人操作]
     note: 预测候选动作下的潜在场景和本体感知，用目标差值与场景上下文修正动作，再根据执行后的观测重规划。LIBERO-Goal 成功率为 97±1%，Push-T 最终覆盖率为 71±2%。评估限于仿真，公开代码覆盖基础模型，AP 扩展待发布。
     note_en: Predicts scene and proprioceptive latents under candidate actions, refines actions using goal discrepancies and scene context, and replans from observations after execution. LIBERO-Goal success is 97±1%, and final Push-T coverage is 71±2%. Evaluation is limited to simulation, and the released code covers the base model while the AP extension is pending.
+
+  - title: 'Latent Goal Prediction from Language for Model-Based Planning'
+    short: LAGO
+    org: École de technologie supérieure / ILLS, CNRS / Polytechnique Montréal / Mila / Institut Universitaire de France / Sorbonne Université
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2606.20627'
+    features: {action: true, closedloop: true}
+    tags: [动作条件潜动力学, 语言子目标, 模型预测控制, 导航与操作]
+    note: 用共享潜预测器学习动作条件状态转移和语言子目标，并根据新观测重规划。Kingdom 难度 10 的仿真成功率为 84%，用相同示范训练的行为克隆为 30%，后者在最难两档 OGBench Cube 上表现更好。
+    note_en: Learns action-conditioned transitions and language subgoals with a shared latent predictor and replans from fresh observations. At Kingdom difficulty 10, simulation success reaches 84% versus 30% for behavior cloning trained on the same demonstrations, which performs better at the two hardest OGBench Cube levels.
+
+  - title: 'Every Camera Grows Up: Camera-Height Regression in Interactive Video World Models'
+    short: EyeHeight
+    org: 南京大学
+    org_en: Nanjing University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.21782'
+    features: {}
+    tags: [相机高度漂移, 视频世界模型评测, 具身导航, 高度均衡微调]
+    note: 用渲染场景和标定实拍起始视图测量镜头高度漂移。六个开放权重模型从 0.15 m 出发时，各有 0–20% 的视频终点保持在起始高度的 1.3 倍因子范围内。SANA-WM 的高度均衡微调配合关闭引导可改善高度保持率，MUSIQ 下降约 5 点。
+    note_en: Measures camera-height drift using rendered scenes and calibrated real starting views. Across six open-weight models initialized at 0.15 m, 0–20% of clips per model finish within a factor of 1.3 of the starting height. Height-balanced tuning with guidance disabled improves height retention in SANA-WM and costs about 5 MUSIQ points.
+
+  - title: 'DreamFAR: Real-Time and Long-Horizon Interaction with Diverse Objects'
+    short: DreamFAR
+    org: Amazon FAR / Cornell University / University of Maryland, College Park / University of Pennsylvania
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.22001'
+      project: https://amazon-far.github.io/dreamfar/
+      code: https://github.com/amazon-far/dreamfar
+    features: {action: true, realtime: true, closedloop: true, longhorizon: true}
+    tags: [双臂操作, 关节指令条件, 接触记忆, 流式视频仿真]
+    note: 根据预测的接触变化选择记忆关键帧，按关节指令生成双臂操作视频。在 1,000 条 ABC 留出轨迹的 60 秒滚动中，平均 PSNR 为 16.4 dB，优于三种基线。闭环策略评测中，仿真进度偏乐观。
+    note_en: Selects memory keyframes from predicted contact changes and generates bimanual manipulation video from joint commands. Across 60-second rollouts on 1,000 held-out ABC episodes, mean PSNR is 16.4 dB, ahead of three baselines. Simulated progress is optimistic in closed-loop policy evaluation.
+
+  - title: 'FailureGen: Scalable Robot Failure Data Generation with World Models'
+    short: FailureGen
+    org: NVIDIA
+    year: 2026
+    venue: CoRL Workshop
+    category: embodied
+    links:
+      arxiv: '2611.22367'
+      project: https://akul-nv.github.io/failuregen/
+    features: {action: true}
+    tags: [失败数据生成, 动作条件视频, Cosmos, 机器人失败检测]
+    note: 微调动作条件 Cosmos 世界模型，将记录的失败动作迁移到兼容场景。初步工业实验中，加入生成数据后，失败检测平均精度从 0.41 升至 0.51。下游评估使用视频失败检测。
+    note_en: Fine-tunes an action-conditioned Cosmos world model to transfer recorded failure actions to compatible scenes. In a preliminary industrial experiment, adding generated data raises failure-detection average precision from 0.41 to 0.51. Downstream evaluation uses video-based failure detection.
+
+  - title: 'Progress Predicts Policy'
+    org: National University of Singapore
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.22491'
+    features: {action: true, closedloop: true}
+    tags: [动作条件潜动力学, 语言进度场, 梯度读出, 机器人操作]
+    note: 将动作条件潜动力学与语言进度场组合，用梯度和有限差分控制末端与夹爪。LIBERO 成功率为 54.3%，同架构行为克隆为 38.1%，换用 Seer 骨干后两者表现接近。
+    note_en: Combines action-conditioned latent dynamics with a language-conditioned progress field, deriving end-effector and gripper commands from gradients and finite differences. LIBERO success is 54.3% versus 38.1% for same-architecture behavior cloning, with similar results for the two approaches using Seer.
+
+  - title: 'JointGV: Structure-Aware Correction of Visual World Models with Parallel Graph Dynamics for Long-Horizon Modeling'
+    short: JointGV
+    org: 牛津大学 / 电子科技大学 / 蒙纳士大学 / 伦敦大学学院 / 巴斯大学 / 瑞典皇家理工学院 / 剑桥大学
+    org_en: University of Oxford / University of Electronic Science and Technology of China / Monash University / University College London / University of Bath / KTH Royal Institute of Technology / University of Cambridge
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.22543'
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [场景图动力学, 有界残差校正, 视觉预测, 模型预测控制]
+    note: 并行滚动动作条件场景图，为视觉预测提供有界残差校正。真机倒立摆录像的 32 步杆角误差从 12.56° 降至 6.69°（DINO-WM）。仿真 6 秒平衡完成率从 0/50 升至 46/50，真机仍未实现稳定平衡。
+    note_en: Rolls out an action-conditioned scene graph in parallel to add a bounded residual correction to visual predictions. On real-robot pendulum recordings, DINO-WM's 32-step pole-angle error falls from 12.56° to 6.69°. In simulation, 6-second balancing completions rise from 0/50 to 46/50, while stable physical balancing remains unachieved.
+
+  - title: 'Auditing a Learned Simulator for Legged Robots: The Robotic World Model on ANYmal D'
+    org: Independent Researcher
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.23118'
+      code: https://github.com/joyjeet-singh/rwm-robot-level
+    features: {action: true, realtime: true, closedloop: true, longhorizon: true}
+    tags: [学习仿真器审计, ANYmal D, 长时滚动, 策略迁移评估]
+    note: 独立复现 ANYmal D 的 RWM，并在 MuJoCo 中评估由学习仿真器训练的策略。滚动训练在全部 10 个留出片段上改善了 368 步预测，但短期预测更准的 18 个微调模型中有 13 个产出失败策略。实验限于平地小跑仿真。
+    note_en: Independently reproduces the ANYmal D RWM and evaluates policies trained in the learned simulator in MuJoCo. Rollout training improves 368-step prediction on all 10 held-out episodes, yet 13 of 18 fine-tuned models with better short-horizon prediction yield failing policies. Experiments are limited to simulated flat-ground trotting.

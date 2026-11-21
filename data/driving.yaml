@@ -1996,3 +1996,31 @@ papers:
     tags: [视觉探索, 路点条件预测, 扩散引导, CARLA]
     note: 微调 NWM，按候选相对路点预测终态，以视觉新颖度引导扩散策略，约每 2 秒用新观测重规划。五个未见 CARLA 城镇的平均道路覆盖率为 61.0%，NoMaD 为 53.7%。RTX 4070 上以 320×240 图像输入预测六个候选终态用时 0.84 秒。实验使用仿真定位和碰撞后重生。
     note_en: Fine-tunes NWM to predict terminal states from candidate relative waypoints, guides a diffusion policy with visual novelty, and replans from fresh observations roughly every 2 seconds. Average road coverage across five unseen CARLA towns is 61.0%, versus 53.7% for NoMaD. Six candidate terminal-state predictions take 0.84 seconds on an RTX 4070 with 320×240 images. Evaluation uses simulator localization and respawns after collisions.
+
+  - title: 'Making the World React Realistically: A Closed-Loop Interactive World Model for Autonomous Driving'
+    org: 同济大学 / ZERON / 郑州轻工业大学 / 布达佩斯技术与经济大学 / HUN-REN SZTAKI
+    org_en: Tongji University / ZERON / Zhengzhou University of Light Industry / Budapest University of Technology and Economics / HUN-REN SZTAKI
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.22691'
+    features: {action: true, closedloop: true}
+    tags: [反应式交通仿真, 渲染闭环, 车辆资产修复, 长尾场景]
+    note: 在渲染闭环中微调背景车辆策略，并修复 3D 高斯车辆资产、按意图渲染车灯。288 个 NAVSIM 长尾场景的 6 秒回放中，平均交互特征 JS 散度比 World Engine 低 85%，背景车碰撞重叠率仍高于日志参考（9.74% 对 3.50%）。
+    note_en: Fine-tunes background-vehicle policies with rendering in the loop, repairs 3D Gaussian vehicle assets, and renders signal lights from vehicle intent. Across 288 long-tail NAVSIM scenes with 6-second rollouts, mean interaction-feature JS divergence is 85% lower than for World Engine, while background-vehicle collision overlap remains above the log reference (9.74% versus 3.50%).
+
+  - title: 'Learning Agent-Centric Vision-Language-Action World Models for Autonomous Driving'
+    short: AgentWorld
+    org: 上海交通大学
+    org_en: Shanghai Jiao Tong University
+    year: 2026
+    venue: NeurIPS
+    category: driving
+    links:
+      arxiv: '2611.22880'
+      project: https://agentworld-ad.github.io/
+    features: {closedloop: true}
+    tags: [交通参与者表征, 短时轨迹预测, 交互奖励, CARLA]
+    note: 用 3D 几何和短时轨迹监督交通参与者 token，并由辅助预测头提供训练时的交互奖励。VLA 规划器在推理时保留 token、移除预测头。Bench2Drive 的 CARLA 闭环驾驶得分为 81.17，成功率为 61.36%。
+    note_en: Supervises traffic-agent tokens with 3D geometry and short-horizon trajectories and uses an auxiliary predictor for interaction rewards during training. At inference, the VLA planner keeps the tokens and drops the prediction head. Closed-loop Bench2Drive evaluation in CARLA yields a driving score of 81.17 and a 61.36% success rate.
