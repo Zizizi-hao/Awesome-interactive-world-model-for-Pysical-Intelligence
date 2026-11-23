@@ -2024,3 +2024,30 @@ papers:
     tags: [交通参与者表征, 短时轨迹预测, 交互奖励, CARLA]
     note: 用 3D 几何和短时轨迹监督交通参与者 token，并由辅助预测头提供训练时的交互奖励。VLA 规划器在推理时保留 token、移除预测头。Bench2Drive 的 CARLA 闭环驾驶得分为 81.17，成功率为 61.36%。
     note_en: Supervises traffic-agent tokens with 3D geometry and short-horizon trajectories and uses an auxiliary predictor for interaction rewards during training. At inference, the VLA planner keeps the tokens and drops the prediction head. Closed-loop Bench2Drive evaluation in CARLA yields a driving score of 81.17 and a 61.36% success rate.
+
+  - title: 'Efficient World-Model Planning via Physics-Guided Search Distillation'
+    short: PGSD
+    org: 燕山大学 / 小米 / 韩国科学技术院 / 清华大学 / 北京汽车研究总院有限公司
+    org_en: Yanshan University / Xiaomi Corporation / KAIST / Tsinghua University / Beijing Automotive Technology Center Co., Ltd.
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.24171'
+    features: {action: true}
+    tags: [轨迹条件潜特征, 冻结世界模型, 搜索蒸馏, 轨迹修复]
+    note: 复用冻结 WorldDrive 奖励器的轨迹条件未来特征，用地图与车辆跟踪仿真筛选候选并蒸馏净空优先的搜索，每次触发只验证一条修复轨迹。NAVSIM v1 的 PDMS 为 90.97，v2 navhard 的伪仿真 EPDMS 为 38.96。HUGSIM 证据为定性快照。
+    note_en: Reuses trajectory-conditioned future features from the frozen WorldDrive rewarder, using maps and simulated vehicle tracking to screen candidates and distill clearance-aware search. Each trigger verifies one repaired trajectory. NAVSIM v1 PDMS is 90.97 and v2 navhard pseudo-simulation EPDMS is 38.96. HUGSIM evidence consists of qualitative snapshots.
+
+  - title: 'Does the Action Matter? Probing Action-Conditioned Semantic Forecasting as a World Model for Autonomous Driving'
+    org: University of Central Florida
+    year: 2026
+    venue: WACV Workshop
+    category: driving
+    links:
+      arxiv: '2611.24840'
+      code: https://github.com/binayksingh/does-action-matter
+    features: {action: true, realtime: true}
+    tags: [动作干预, 语义分割预测, 自车速度, Cityscapes]
+    note: 按给定自车速度和横摆角速度预测语义分割。Cityscapes 的 0.54 秒预测中，FiLM 使用实际动作比无动作基线高 2.46 个 mIoU 点，打乱动作后比实际动作低 23.17 点。V100 上用 256×512 输入单步预测耗时 20.5 ms。干预衡量动作敏感性，真实替代动作的结果仍待验证。
+    note_en: Forecasts semantic segmentation conditioned on ego speed and yaw rate. On Cityscapes at 0.54 s, FiLM gains 2.46 mIoU points over the no-action baseline with executed actions and loses 23.17 points relative to executed actions when actions are shuffled. A prediction step takes 20.5 ms at 256×512 on a V100. The interventions measure action sensitivity, with real outcomes under alternative actions unverified.

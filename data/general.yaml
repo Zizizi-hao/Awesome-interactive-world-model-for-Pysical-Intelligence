@@ -1259,3 +1259,33 @@ papers:
     tags: [世界模型规划, 决策遗憾, 不确定性, 离线反事实评估]
     note: 用证书诊断动作条件视频模型的规划决策，并指导数据重加权、增加滚动采样或补采数据。在不同数据覆盖水平下，跨任务平均决策遗憾比最佳悲观基线低 10–25%。真实视频中未执行动作的结果由独立模型估计。
     note_en: Uses a certificate to assess planning decisions from action-conditioned video models and guide data reweighting, extra rollouts, or data collection. Mean decision regret across tasks is 10–25% lower than for the best pessimistic baseline across data support levels. A separate model estimates the outcomes of untaken actions in real videos.
+
+  - title: 'Embodied Graph: A Relational World Model for Long-Horizon Tasks'
+    short: Embodied Graph
+    org: 清华大学
+    org_en: Tsinghua University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.24115'
+    features: {action: true, closedloop: true, longhorizon: true}
+    tags: [关系图动力学, 宏动作条件, 分层强化学习, Minecraft]
+    note: 在按任务筛选的实体图上预测给定宏动作下的节点与拓扑变化，并用想象轨迹训练高层策略。Minecraft 训练 500 万环境步后，采钻成功率为 6.94±2.12%，所比基线均为 0%。最长 500 环境步的开环对照衡量各模型误差的相对增长。
+    note_en: Predicts node and topology changes under supplied macro-actions on a task-filtered entity graph and trains a high-level policy on imagined rollouts. After 5 million Minecraft environment steps of training, diamond success is 6.94±2.12%, versus 0% for the compared baselines. Open-loop comparisons through 500 environment steps measure relative error growth within each model.
+
+  - title: 'StrideWorld: Benchmarking Scene Rigidity and Action Consistency in Interactive Video World Model'
+    short: StrideWorld
+    org: 上海交通大学 / 上海人工智能实验室 / 清华大学深圳国际研究生院 / 北京航空航天大学 / 天津大学
+    org_en: Shanghai Jiao Tong University / Shanghai Artificial Intelligence Laboratory / Shenzhen International Graduate School, Tsinghua University / Beihang University / Tianjin University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.24408'
+      code: https://github.com/chuangwang123/strideworld
+      demo: https://huggingface.co/spaces/strideworld-release/strideworld-leaderboard
+    features: {}
+    tags: [相机动作评测, 场景刚性, 步幅标定, 多动作组合]
+    note: 用起始视图真值深度和前几步动作步幅作固定参照，评估 15 个模型生成的 54,600 段视频。场景偏移最高为同路径刚性渲染的 7.3 倍，主评测限于静态场景和局部平面相机运动。
+    note_en: Uses ground-truth depth from the starting view and strides from early action steps as fixed references to evaluate 54,600 videos from 15 models. Scene offsets reach 7.3× those of rigid renderings on the same paths. The main evaluation covers static scenes and local planar camera motion.

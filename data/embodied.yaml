@@ -3574,3 +3574,89 @@ papers:
     tags: [学习仿真器审计, ANYmal D, 长时滚动, 策略迁移评估]
     note: 独立复现 ANYmal D 的 RWM，并在 MuJoCo 中评估由学习仿真器训练的策略。滚动训练在全部 10 个留出片段上改善了 368 步预测，但短期预测更准的 18 个微调模型中有 13 个产出失败策略。实验限于平地小跑仿真。
     note_en: Independently reproduces the ANYmal D RWM and evaluates policies trained in the learned simulator in MuJoCo. Rollout training improves 368-step prediction on all 10 held-out episodes, yet 13 of 18 fine-tuned models with better short-horizon prediction yield failing policies. Experiments are limited to simulated flat-ground trotting.
+
+  - title: 'How Uncertain Is My Action? Self-Correcting Visual Planning with Frozen World Models'
+    short: Actus
+    org: The Ohio State University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.23620'
+    features: {action: true, closedloop: true}
+    tags: [冻结世界模型, 执行偏差估计, 反事实预测, 模型预测控制]
+    note: 将冻结动作条件世界模型的反事实预测与新观测对照，估计执行偏差并在仿真中闭环重规划。注入偏差时，PushT 仿真成功率从 65.0% 升至 86.2%，SO-101 真机开环到达的中位误差从 36–38 mm 降至 3.0–5.5 mm。
+    note_en: Compares counterfactual predictions from a frozen action-conditioned world model with fresh observations to estimate actuation shifts and replan in closed loop in simulation. Under injected shifts, simulated PushT success rises from 65.0% to 86.2%, and median error in open-loop reaches on a physical SO-101 falls from 36–38 mm to 3.0–5.5 mm.
+
+  - title: 'Target-Consistent Action Guidance via Semi-Unbalanced Optimal Transport for Drifting World Models'
+    short: MSA
+    org: 孟加拉国工程技术大学 / 韩国科学技术院
+    org_en: Bangladesh University of Engineering and Technology / KAIST
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.24222'
+    features: {action: true, closedloop: true}
+    tags: [一次生成, 动作条件视频, 半非平衡最优传输, 动作排序]
+    note: 以半非平衡最优传输修正漂移世界模型的训练引导，使预测到达记录目标时引导消失。BridgeV2 打乱动作造成的 PSNR 降幅为 2.401 dB，基线最高为 2.185 dB。Push-T 闭环规划的平均重叠率增益约为一个标准误。
+    note_en: Uses semi-unbalanced optimal transport to correct training guidance for drifting world models so it vanishes at the recorded target. Shuffling actions on BridgeV2 drops PSNR by 2.401 dB, versus at most 2.185 dB for the baselines. The mean overlap gain in closed-loop Push-T planning is about one standard error.
+
+  - title: 'ProbeShare: Probing a Few, Sharing Across Many for Fast World-Model Planning'
+    short: ProbeShare
+    org: 浙江大学 / 西湖大学 / 西南交通大学 / 北京理工大学 / 华中科技大学 / 西北工业大学 / 国防科技大学
+    org_en: Zhejiang University / Westlake University / Southwest Jiaotong University / Beijing Institute of Technology / Huazhong University of Science and Technology / Northwestern Polytechnical University / National University of Defense Technology
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.24229'
+    features: {action: true, closedloop: true}
+    tags: [冻结RoboJEPA, 局部动作探针, 潜特征预测, CEM规划]
+    note: 对少量动作序列运行冻结 RoboJEPA，再按场景与动作几何预测近邻候选的未来特征，并从新观测重规划。RoboCasa 的四个任务各有四组配对起点，A800 上每回合规划比稠密 CEM 快 43.8–128.9 倍，仍耗时 10.8–569.0 秒。
+    note_en: Runs frozen RoboJEPA on a small set of action sequences, predicts nearby candidates' future features from scene context and action geometry, and replans from fresh observations. Across four paired starts per task on four RoboCasa tasks, episode planning on an A800 is 43.8–128.9× faster than dense CEM and still takes 10.8–569.0 seconds.
+
+  - title: 'Risk-Triggered Search: Behavior-Preserving Safe Control'
+    short: RTS
+    org: 浙江大学
+    org_en: Zhejiang University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.24409'
+    features: {action: true, closedloop: true}
+    tags: [冻结INTACT, 动作条件潜状态, 过程风险, 反馈搜索]
+    note: 用冻结 INTACT 的动作条件潜状态序列预测过程风险，超阈值时触发搜索。1,968 条配对仿真轨迹的动作与同一搜索器逐步搜索完全一致，控制器耗时减少 17.71%–70.41%。完整 Cube 和 PushT 测试的安全到达率分别提升 0.40 和 0.04 个百分点。
+    note_en: Predicts process risk using action-conditioned latent sequences from frozen INTACT and triggers search above a threshold. Across 1,968 paired simulated trajectories, actions match those of the same search kernel run at every step, with 17.71%–70.41% lower controller time. Safe arrival improves by 0.40 and 0.04 percentage points on the full Cube and PushT test sets, respectively.
+
+  - title: 'HandWorldBench: A Unified Benchmark for Hand-Centric World Models'
+    short: HandWorldBench
+    org: 中关村学院 / 清华大学 / 天津大学 / Manifold AI / 浙江大学 / 中国科学技术大学
+    org_en: Zhongguancun Academy / Tsinghua University / Tianjin University / Manifold AI / Zhejiang University / University of Science and Technology of China
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.24731'
+      project: https://embodiedcity.github.io/HandWorldBench/
+      code: https://github.com/EmbodiedCity/HandWorldBench.code
+    features: {}
+    tags: [手物交互评测, 灵巧手, 物体状态变化, 状态保持]
+    note: 用 500 个覆盖人手、仿真灵巧手和真机灵巧手的片段比较 11 个模型。Hand2World 的姿态控制得分最高（0.529），物体状态推进与保持得分分别为 0.021 和 0.000。各模型沿用原生输入，评估限于开环视频。
+    note_en: Compares 11 models on 500 clips spanning human, simulated dexterous, and physical dexterous hands. Hand2World leads pose control (0.529) and scores 0.021 for object-state progression and 0.000 for retention. Models use their native inputs, and evaluation is limited to open-loop video.
+
+  - title: 'DiWALI: Diffusion Policy Learning in World Models via Latent Action Inference from Human and Robot Play'
+    short: DiWALI
+    org: University of Freiburg / Technical University of Munich / Toyota Motor Europe / ZUSE School ELIZA
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.24836'
+      project: https://diwali.cs.uni-freiburg.de/
+      code: https://github.com/robot-learning-freiburg/diwali
+    features: {action: true, closedloop: true}
+    tags: [潜动作推断, 人类示范, 动作条件RSSM, 模型内策略学习]
+    note: 从人类和机器人视频推断潜动作以学习世界模型，用带动作标签的机器人数据训练动作解码器，并在模型内用 PPO 微调扩散策略。每项技能使用 50 条人类和 5 条机器人示范时，三项 Franka 真机任务的平均成功率从 53% 升至 70%。
+    note_en: Infers latent actions from human and robot videos to learn a world model, trains the action decoder on action-labeled robot data, and fine-tunes diffusion policies with PPO inside the model. With 50 human and 5 robot demonstrations per skill, mean success across three physical Franka tasks rises from 53% to 70%.
