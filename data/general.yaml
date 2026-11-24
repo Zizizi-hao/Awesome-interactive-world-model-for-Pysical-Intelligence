@@ -1289,3 +1289,16 @@ papers:
     tags: [相机动作评测, 场景刚性, 步幅标定, 多动作组合]
     note: 用起始视图真值深度和前几步动作步幅作固定参照，评估 15 个模型生成的 54,600 段视频。场景偏移最高为同路径刚性渲染的 7.3 倍，主评测限于静态场景和局部平面相机运动。
     note_en: Uses ground-truth depth from the starting view and strides from early action steps as fixed references to evaluate 54,600 videos from 15 models. Scene offsets reach 7.3× those of rigid renderings on the same paths. The main evaluation covers static scenes and local planar camera motion.
+
+  - title: 'PRIO: Pre-trained Representation for Interactive Objects in 4D Worlds'
+    short: PRIO
+    org: University of British Columbia / University of Toronto / Stanford University / Yonsei University / NVIDIA
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.25500'
+    features: {action: true, realtime: true}
+    tags: [物体变形空间, 4D轨迹预训练, 接触仿真, 低维物理求解]
+    note: 从模拟 4D 轨迹学习物体专属的线性变形空间，再由外力驱动低维拉格朗日动力学。单张 GPU 上，含 145,000 个三角面的枕头网格接触仿真耗时 7.6 ms/步。跨方法的动作质量比较采用三个物体的 VLM 评分。
+    note_en: Learns object-specific linear deformation spaces from simulated 4D trajectories and drives reduced Lagrangian dynamics with external forces. Pillow contact on a 145,000-triangle mesh takes 7.6 ms per step on one GPU. The cross-method action-quality comparison uses VLM ratings on three objects.

@@ -3660,3 +3660,114 @@ papers:
     tags: [潜动作推断, 人类示范, 动作条件RSSM, 模型内策略学习]
     note: 从人类和机器人视频推断潜动作以学习世界模型，用带动作标签的机器人数据训练动作解码器，并在模型内用 PPO 微调扩散策略。每项技能使用 50 条人类和 5 条机器人示范时，三项 Franka 真机任务的平均成功率从 53% 升至 70%。
     note_en: Infers latent actions from human and robot videos to learn a world model, trains the action decoder on action-labeled robot data, and fine-tunes diffusion policies with PPO inside the model. With 50 human and 5 robot demonstrations per skill, mean success across three physical Franka tasks rises from 53% to 70%.
+
+  - title: 'When and How Much to Imagine: Adaptive Test-Time Scaling with World Models for Visual Spatial Reasoning'
+    short: AVIC
+    org: University of North Carolina at Chapel Hill / Nanyang Technological University
+    year: 2026
+    venue: NeurIPS
+    category: embodied
+    links:
+      arxiv: '2602.08236'
+      project: https://adaptive-visual-tts.github.io/
+      code: https://github.com/Yui010206/Adaptive-Visual-Imagination-Control
+    features: {action: true, closedloop: true}
+    tags: [视角动作条件, 按需调用世界模型, 空间推理, 视觉语言导航]
+    note: 按需调用冻结的 Stable Virtual Camera，为空间推理生成候选虚拟视角。SAT-Real 上，GPT-4.1 配置相比固定调用的 MindJourney 将准确率从 77.3% 提高到 79.3%，平均调用从 12.34 次降至 0.73 次。R2R 中，GPT-4o MapGPT 的成功率从 36.0% 升至 37.5%，导航仍沿既定图节点进行。
+    note_en: Selectively calls frozen Stable Virtual Camera to generate candidate views for spatial reasoning. On SAT-Real with GPT-4.1, accuracy rises from 77.3% with always-on MindJourney to 79.3%, and mean model calls fall from 12.34 to 0.73. On R2R, GPT-4o MapGPT success rises from 36.0% to 37.5% while navigation continues along the predefined graph.
+
+  - title: 'WEVO: World Model-Enabled VLA Optimization for Whole-Body Loco-Manipulation'
+    short: WEVO
+    org: Amazon / Stanford University / The University of Texas at Austin
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25251'
+      project: https://qianzhong-chen.github.io/wevo.github.io/
+    features: {action: true, closedloop: true}
+    tags: [人形机器人, 全身移动操作, 动作条件视频, 模型内策略学习]
+    note: 用仿真交互和每项任务 20 条自主真机轨迹微调动作条件视频模型，再以生成画面、全身控制和进度奖励闭环后训练策略。Unitree G1 三项任务平均真机成功率从 23.3% 升至 75.0%，用同一批真机轨迹训练的强化学习基线为 48.3%。
+    note_en: Fine-tunes an action-conditioned video model with simulated play and 20 autonomous hardware trajectories per task, then post-trains the policy in a closed loop using generated views, whole-body control, and progress rewards. Mean hardware success across three Unitree G1 tasks rises from 23.3% to 75.0%, versus 48.3% for reinforcement learning on the same hardware trajectories.
+
+  - title: 'MoRE: Mixture-of-Experts for Multi-Physics Robotic World Models'
+    short: MoRE
+    org: University of Illinois Urbana-Champaign / Georgia Institute of Technology / Cornell University
+    year: 2026
+    venue: CoRL
+    category: embodied
+    links:
+      arxiv: '2611.25336'
+      project: https://alwaysleepy.github.io/MoRE-WM-site/
+      code: https://github.com/AlwaySleepy/MoRE-WM
+    features: {action: true, closedloop: true}
+    tags: [多物理动力学, 点云预测, 混合专家, 真机模型预测控制]
+    note: 按给定的末端执行器点云动作预测物体点云，用专用专家分别处理刚体、可变形物体推拉与抓持。真机闭环 MPC 在推箱和可变形玩具姿态匹配中降低了目标倒角距离，建模范围限于单个操纵物体。
+    note_en: Predicts object point clouds from supplied end-effector point-cloud actions, using specialized experts for rigid dynamics, deformable pushing and pulling, and deformable grasping. Closed-loop hardware MPC reduces goal Chamfer distance for box pushing and deformable toy pose matching. Modeling is limited to one manipulated object.
+
+  - title: 'GEMS: Generation and Experience Memory for Subgoal-Guided Long-Horizon World Model Planning'
+    short: GEMS
+    org: University of Minnesota, Twin Cities / Cisco
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25134'
+    features: {action: true, closedloop: true}
+    tags: [冻结LeWM, 子目标生成, 经验检索, 模型预测控制]
+    note: 用带时序的子目标和按距离触发的经验检索引导冻结 LeWM 的动作搜索，每 15 步根据新观测重规划。六项仿真任务或任务套件平均成功率为 71.0%，最强基线为 59.2%。Cube-double 达 17.7%，最强基线为 0.8%。
+    note_en: Uses time-structured subgoals and distance-gated retrieval to guide action search with frozen LeWM, replanning from fresh observations every 15 steps. Mean success over six simulated tasks or task suites is 71.0% versus 59.2% for the strongest baseline. Cube-double reaches 17.7% versus 0.8% for the strongest baseline.
+
+  - title: 'Verify2Act: Critic-Guided Latent World Models for Verifying Language-Conditioned Manipulation Plans'
+    short: Verify2Act
+    org: Oklahoma State University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25243'
+      project: https://verify2act.github.io/
+      code: https://github.com/chrisantuseze/verify2act
+    features: {action: true}
+    tags: [语言技能条件, 视觉潜状态预测, 计划验证, 数字孪生]
+    note: 按候选语言技能预测 DINOv2 特征残差，再用双头评估器筛选操作计划。单台机械臂的六项积木任务中成功 50/60 次，纯 VLM 为 32/60 次。模型在运动学数字孪生中训练，每次真机规划约 24 秒。
+    note_en: Predicts DINOv2 feature residuals under candidate language-specified skills and filters manipulation plans with a two-head critic. On six block tasks with one arm, it succeeds in 50/60 trials versus 32/60 for the VLM alone. The model is trained in a kinematic digital twin, and each hardware planning call takes about 24 seconds.
+
+  - title: 'LATER: Learning Action-Conditioned Temporal Evidence Retrieval for Predictive World Models'
+    short: LATER
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25671'
+    features: {action: true, closedloop: true}
+    tags: [交互记忆, 动作条件检索, CF-JEPA, PushT]
+    note: 将已执行交互写入分区记忆，按当前状态和候选动作检索，想象滚动时保持记忆不变。含视觉干扰的双阶段 PushT 仿真中，终点成功率从 15.5% 升至 25.0%。另一组两种子对照中，沿推动方向的位移平均绝对误差比重建的 CF-JEPA 低 20.2%。
+    note_en: Stores executed interactions in partitioned memory, retrieves them using the current state and candidate action, and holds memory fixed during imagined rollouts. On distracted simulated Two-Stage PushT, terminal success rises from 15.5% to 25.0%. In a separate two-seed comparison, mean absolute displacement error along the push direction is 20.2% lower than reconstructed CF-JEPA.
+
+  - title: 'Point Dynamics as Proxy for Robotic World Models'
+    org: Institute of Foundation Models / Mohamed bin Zayed University of Artificial Intelligence
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25946'
+      project: https://marsaki.github.io/point-dynamics-proxy/
+    features: {action: true}
+    tags: [PointWorld, 三维点运动, 动作条件视频, 物体交互]
+    note: 复用 PointWorld 按机器人动作预测 3D 点运动，再用像素对齐的点运动约束视频生成。相较仅渲染机器人的基线，DROID 上 Wan2.2 和 Ctrl-World 的物体运动误差分别下降 8.6% 和 6.2%，双臂真机的 Wan2.2 实验下降 8.1%。点预测误差会传到视频。
+    note_en: Reuses PointWorld to predict 3D point motion from robot actions, then conditions video generation on pixel-aligned point motion. Relative to robot-only rendering on DROID, object-motion error falls by 8.6% for Wan2.2 and 6.2% for Ctrl-World, with an 8.1% reduction for Wan2.2 on a physical bimanual robot. Point prediction errors can propagate to the video.
+
+  - title: 'Learning What Actions Change: Action Effect Matching for Dynamics-Faithful World Models'
+    short: AFFECT
+    org: KAIST / RLWRLD
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.25980'
+      project: https://periphanes.github.io/affect/
+    features: {action: true, closedloop: true}
+    tags: [随机动作扰动, 动作效应匹配, 视频世界模型, 策略评估]
+    note: 给机器人探索策略注入随机动作扰动，让视频模型匹配记录数据中扰动与视觉特征的关联。DROID 配置下，DreamDojo 的真机与生成滚动策略成功率相关系数从 0.468 升至 0.790，OGBench UR5e 仿真规划成功率从 60.0% 升至 68.3%。学习信号限于固定特征可检测的效应。
+    note_en: Injects random action perturbations into robot play and trains video models to match their associations with recorded visual features. On the DROID setup, DreamDojo's policy-success correlation between hardware and generated rollouts rises from 0.468 to 0.790. Simulated OGBench UR5e planning success rises from 60.0% to 68.3%. The training signal is limited to effects detectable by the fixed features.
