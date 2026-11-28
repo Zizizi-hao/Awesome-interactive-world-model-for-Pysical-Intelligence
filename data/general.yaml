@@ -1302,3 +1302,47 @@ papers:
     tags: [物体变形空间, 4D轨迹预训练, 接触仿真, 低维物理求解]
     note: 从模拟 4D 轨迹学习物体专属的线性变形空间，再由外力驱动低维拉格朗日动力学。单张 GPU 上，含 145,000 个三角面的枕头网格接触仿真耗时 7.6 ms/步。跨方法的动作质量比较采用三个物体的 VLM 评分。
     note_en: Learns object-specific linear deformation spaces from simulated 4D trajectories and drives reduced Lagrangian dynamics with external forces. Pillow contact on a 145,000-triangle mesh takes 7.6 ms per step on one GPU. The cross-method action-quality comparison uses VLM ratings on three objects.
+
+  - title: 'Mind World Models: Joint Learning of Motor EEG Representations and Action-Conditioned World Dynamics'
+    short: MWM
+    org: Yale University / Dartmouth College
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.27029'
+    features: {action: true}
+    tags: [脑电视觉预训练, 潜动作, 人类交互经验, 动作代理预测]
+    note: 用截至当前的脑电编码潜动作，预训练未来视觉特征预测器，再用 IMU 运动代理适配动作接口；只用截至目标帧的 IMU 时，留出被试的 0.2 秒预测 L1 为 0.4677，无脑电预训练对照为 0.4754。尚未验证机器人控制。
+    note_en: 'Pretrains future visual-feature prediction using EEG up to the current frame as latent actions, then adapts the action interface to IMU movement proxies. With IMU windows ending at the target frame, held-out-subject prediction 0.2 seconds ahead has L1 error 0.4677 versus 0.4754 for pretraining without EEG. Robot control is untested.'
+
+  - title: 'Non-penetrating World Models'
+    short: NoPeWorld
+    org: 香港理工大学
+    org_en: The Hong Kong Polytechnic University
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.27963'
+      project: https://nopeworld.github.io/
+      code: https://github.com/yuhangdai427/NoPeWorld
+    features: {action: true, closedloop: true}
+    tags: [碰撞约束, 动作修正, 视频世界模型, 物理一致性]
+    note: 冻结视频 DiT，从隐藏状态预测候选动作的碰撞风险并在逐块生成中修正控制；NoPeBench 六模型的穿透或障碍消失率均值由 74% 降至 16%，但 WorldPlay2 的安全意图综合分下降。
+    note_en: 'Reads collision risk from frozen video-DiT states and corrects controls during chunkwise generation; mean penetration or obstacle-erasure rate across six models on NoPeBench falls from 74% to 16%, but WorldPlay2''s Safe-Intent Score decreases.'
+
+  - title: 'PhysForce: Physics-aware Force Control for Interactive Video World Model'
+    short: PhysForce
+    org: 南京邮电大学 / 清华大学 / GigaAI / 合肥工业大学
+    org_en: Nanjing University of Posts and Telecommunications / Tsinghua University / GigaAI / Hefei University of Technology
+    year: 2026
+    venue: arXiv
+    category: general
+    links:
+      arxiv: '2611.27164'
+      project: https://xuxuancheng0208.github.io/PhysForce_page/
+    features: {action: true}
+    tags: [力条件生成, 物理一致性, 强化学习, 视频世界模型]
+    note: 用不泄露未来轨迹的力编码、局部响应归因和 V-JEPA 奖励强化学习预测受力演化；357 个分布外案例上，方向余弦相似度从 ForcePrompting 的 0.575 升至 0.782。生成仍为二维潜空间的离线推演，未验证在线控制。
+    note_en: 'Combines force encoding without future-trajectory leakage, localized response attribution, and V-JEPA-rewarded reinforcement learning. Directional cosine similarity on 357 out-of-distribution cases rises from ForcePrompting''s 0.575 to 0.782. Generation remains offline in a 2D latent space, without evaluated online control.'

@@ -3771,3 +3771,88 @@ papers:
     tags: [随机动作扰动, 动作效应匹配, 视频世界模型, 策略评估]
     note: 给机器人探索策略注入随机动作扰动，让视频模型匹配记录数据中扰动与视觉特征的关联。DROID 配置下，DreamDojo 的真机与生成滚动策略成功率相关系数从 0.468 升至 0.790，OGBench UR5e 仿真规划成功率从 60.0% 升至 68.3%。学习信号限于固定特征可检测的效应。
     note_en: Injects random action perturbations into robot play and trains video models to match their associations with recorded visual features. On the DROID setup, DreamDojo's policy-success correlation between hardware and generated rollouts rises from 0.468 to 0.790. Simulated OGBench UR5e planning success rises from 60.0% to 68.3%. The training signal is limited to effects detectable by the fixed features.
+
+  - title: 'Learning Interaction Dynamics via Motion-Region Guidance for Robotic Video World Models'
+    short: MoReWorld
+    org: 华南理工大学 / 佛山大学
+    org_en: South China University of Technology / Foshan University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.27344'
+    features: {action: true}
+    tags: [动作条件视频, 运动区域引导, 交互动力学]
+    note: 从历史与外部动作预测运动区域，用区域监督和门控未来特征引导视频生成；含 VLM 判分的 WorldSimProbe 在 RoboTwin 上五项能力均分为 61.21，MVA 为 55.32。证据限仿真交互忠实度，仍有物体形变，未验证闭环策略收益。
+    note_en: 'Predicts motion regions from history and external actions to guide video generation through region supervision and gated future features. The partly VLM-scored five-suite WorldSimProbe average on RoboTwin is 61.21 versus 55.32 for MVA. Evidence concerns simulated interaction faithfulness; object deformation remains and closed-loop policy gains are untested.'
+
+  - title: 'ViewDreamer: A Robot World Model beyond Fixed Camera Setups'
+    short: ViewDreamer
+    org: Meta AI / 帝国理工学院
+    org_en: Meta AI / Imperial College London
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.26981'
+      project: https://matchlab-imperial.github.io/ViewDreamer/
+    features: {action: true, closedloop: true}
+    tags: [多视角世界模型, 共享槽位, 相机泛化, 世界动作模型]
+    note: 以共享槽位连接各视角生成，用跨视角关系监督和视角数量课程适配不同相机配置；世界动作策略在四项 Franka 任务、每项 10 次试验中，平均成功率从 FastWAM-Joint 的 30.0% 升至 67.5%。动作条件预测另有验证，生成器未达到实时。
+    note_en: 'Connects per-view generation through shared slots, cross-view relation supervision, and a view-count curriculum for varying camera setups. Its world-action policy raises mean success from FastWAM-Joint''s 30.0% to 67.5% across four Franka tasks with 10 trials each. Action-conditioned prediction is evaluated separately; the generator is not real-time.'
+
+  - title: 'SOAR: Training-Free Rank-Consistent Rollout Compression for Latent World Model Planning'
+    short: SOAR
+    org: 上海交通大学
+    org_en: Shanghai Jiao Tong University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.27639'
+    features: {action: true, closedloop: true}
+    tags: [冻结世界模型, 推理压缩, 候选排序, 上下文缓存]
+    note: 冻结 JEPA-WM，保留首步完整计算、缓存上下文，再按候选排序一致性选择 token 预算；七任务单 H100 完整规划加速 2.31 倍，平均成功率 49.26%，稠密对照为 48.96%。证据限两帧预测器与排序型 CEM。
+    note_en: 'Compresses frozen JEPA-WM rollouts by preserving the first step, caching context, and selecting token budgets through candidate-ranking agreement. Across seven tasks on one H100, complete planning is 2.31x faster, with 49.26% mean success versus 48.96% for dense planning; evidence is limited to two-frame predictors and rank-based CEM.'
+
+  - title: 'Efficient VLA Reinforcement Learning via Subchunk Rollouts in Latent World Models'
+    short: LS-MBPO
+    org: 南京大学 / Cirquar Technologies
+    org_en: Nanjing University / Cirquar Technologies
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.27645'
+    features: {action: true, closedloop: true}
+    tags: [潜世界模型, 动作子块, 残差策略, 模型强化学习]
+    note: 训练动作条件潜世界模型，以分层递归监督和动作子块想象优化冻结 VLA 的残差策略；同架构 LIBERO Long 消融中成功率为 71.2%，仅递归监督为 68.0%。真机验证仅两项任务、每项 20 次。
+    note_en: 'Trains action-conditioned latent dynamics and improves a frozen VLA through hierarchical recursive supervision and imagined action-subchunk residual learning. In the architecture-matched LIBERO Long ablation, success is 71.2% versus 68.0% with recursive-only supervision; real-robot evaluation covers only two tasks with 20 trials each.'
+
+  - title: 'Latent Space Planning with Sequential Monte Carlo'
+    org: 普渡大学 / 萨尔大学 / Adobe Systems
+    org_en: Purdue University / Saarland University / Adobe Systems
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.26706'
+      code: https://github.com/HrishikeshVish/smcplan
+    features: {action: true}
+    tags: [序贯蒙特卡洛, 潜空间规划, 离线路网, 世界模型复用]
+    note: 复用 DINO-WM 和 LeWM，用序贯蒙特卡洛维护动作序列粒子，并加入离线潜空间路网的 PDE 代价；12 个任务时域设置平均成功率为 79.8%，MPPI 为 72.3%。每次优化迭代均从初态仿真整段计划并按真值成功提前停止，不是反馈重规划。
+    note_en: 'Reuses DINO-WM and LeWM, maintaining action-sequence particles through sequential Monte Carlo and adding a PDE cost over an offline latent roadmap. Mean success across 12 task-horizon settings is 79.8% versus 72.3% for MPPI; every optimization iteration tests the full plan from the initial simulator state and stops on ground-truth success, rather than feedback replanning.'
+
+  - title: 'Ego4Gen: Generating Geometry-Grounded Motion Tokens as a World-Action Interface'
+    short: Ego4Gen
+    org: 哈尔滨工业大学 / 云南民族大学
+    org_en: Harbin Institute of Technology / Yunnan Minzu University
+    year: 2026
+    venue: arXiv
+    category: embodied
+    links:
+      arxiv: '2611.27513'
+    features: {closedloop: true}
+    tags: [4D世界模型, 几何运动表征, 逆动力学, 机器人操作]
+    note: 从单幅图像和文本预测 RGB、点图与场景流，再由 FlowInverse 转为闭环机器人动作；五项 RoboTwin 任务中，加入无动作标签的随机化视频后，Hard 平均成功率从 15.2% 升至 26.4%，Easy 则从 46.6% 降至 37.2%。
+    note_en: 'Predicts RGB, point maps, and scene flow from one image and text, then uses FlowInverse for closed-loop robot actions; adding randomized videos without action labels raises mean Hard success across five RoboTwin tasks from 15.2% to 26.4%, while Easy success falls from 46.6% to 37.2%.'

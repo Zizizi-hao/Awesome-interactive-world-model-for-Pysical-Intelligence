@@ -2051,3 +2051,17 @@ papers:
     tags: [动作干预, 语义分割预测, 自车速度, Cityscapes]
     note: 按给定自车速度和横摆角速度预测语义分割。Cityscapes 的 0.54 秒预测中，FiLM 使用实际动作比无动作基线高 2.46 个 mIoU 点，打乱动作后比实际动作低 23.17 点。V100 上用 256×512 输入单步预测耗时 20.5 ms。干预衡量动作敏感性，真实替代动作的结果仍待验证。
     note_en: Forecasts semantic segmentation conditioned on ego speed and yaw rate. On Cityscapes at 0.54 s, FiLM gains 2.46 mIoU points over the no-action baseline with executed actions and loses 23.17 points relative to executed actions when actions are shuffled. A prediction step takes 20.5 ms at 256×512 on a V100. The interventions measure action sensitivity, with real outcomes under alternative actions unverified.
+
+  - title: 'ReactDrive: Self-Reactive Driving World Model'
+    short: ReactDrive
+    org: Stony Brook University / Bosch Research North America / Bosch Center for Artificial Intelligence
+    year: 2026
+    venue: arXiv
+    category: driving
+    links:
+      arxiv: '2611.27024'
+      project: https://reactdrive.github.io/
+    features: {action: true}
+    tags: [自车动作条件, 周车响应, 联合动态生成, 驾驶数据增强]
+    note: 自车轨迹条件下联合学习周车动态与视频生成，无需指定周车未来轨迹；用等量 500 段生成视频增强 TransFuser 时，NAVSIM PDMS 从真实数据或 Cosmos3 增强的 83.8 升至 85.1。反事实周车响应依赖人评，未验证反馈驾驶。
+    note_en: 'Jointly learns agent dynamics and video generation conditioned on ego trajectories, without prescribed future agent tracks. Augmenting TransFuser with 500 generated videos raises NAVSIM PDMS from 83.8 for real data or equal-size Cosmos3 augmentation to 85.1. Counterfactual agent responses rely on human evaluation; feedback driving is untested.'
