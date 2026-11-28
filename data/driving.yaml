@@ -2065,3 +2065,76 @@ papers:
     tags: [自车动作条件, 周车响应, 联合动态生成, 驾驶数据增强]
     note: 自车轨迹条件下联合学习周车动态与视频生成，无需指定周车未来轨迹；用等量 500 段生成视频增强 TransFuser 时，NAVSIM PDMS 从真实数据或 Cosmos3 增强的 83.8 升至 85.1。反事实周车响应依赖人评，未验证反馈驾驶。
     note_en: 'Jointly learns agent dynamics and video generation conditioned on ego trajectories, without prescribed future agent tracks. Augmenting TransFuser with 500 generated videos raises NAVSIM PDMS from 83.8 for real data or equal-size Cosmos3 augmentation to 85.1. Counterfactual agent responses rely on human evaluation; feedback driving is untested.'
+
+  - title: "Imagine Smarter, Drive Faster: Efficient World Modeling for Decision-Aware Autonomous Driving"
+    short: "FastWorld"
+    org: "北京交通大学 / 大连理工大学 / 南洋理工大学 / 理想汽车"
+    org_en: "Beijing Jiaotong University / Dalian University of Technology / Nanyang Technological University / Li Auto Inc."
+    year: 2026
+    venue: "arXiv"
+    category: "driving"
+    links:
+      arxiv: "2611.28779"
+      code: "https://github.com/MoyangSensei/FastWorld"
+    features: {action: true, realtime: true}
+    tags: ["潜世界模型", "候选轨迹验证", "未来效用", "高效推理"]
+    note: "以紧凑状态的一秒动作条件预测评估候选轨迹；NAVSIM 消融中，用预测未来替代随机张量使 PDMS 从 91.8 升至 92.2。RTX 4090 上完整前向为 132 FPS，16×64 潜状态的预测及效用读出耗时 0.05 毫秒；尚无反馈驾驶评测。"
+    note_en: "Evaluates candidate trajectories with compact one-second action-conditioned prediction. In a NAVSIM ablation, replacing random future tensors with predicted states raises PDMS from 91.8 to 92.2. Full forward throughput is 132 FPS on an RTX 4090; prediction and utility readout over a 16-by-64 latent state take 0.05 ms. Feedback driving is untested."
+
+  - title: "MOVER: Planning Beyond Motion"
+    short: "MOVER"
+    org: "得克萨斯大学奥斯汀分校 / 苏黎世联邦理工学院"
+    org_en: "University of Texas at Austin / ETH Zurich"
+    year: 2026
+    venue: "arXiv"
+    category: "driving"
+    links:
+      arxiv: "2611.30022"
+    features: {closedloop: true}
+    tags: ["残差世界模型", "事件路由", "历史敏感性", "预测规划"]
+    note: "在残差 BEV 世界模型上，以历史遮蔽教师学习互补事件路由，同时修正未来场景和轨迹读出；nuScenes UniAD 协议平均 L2 从 ResWorld 的 0.65 降至 0.55 米。Bench2Drive 三种子相对均匀路由仅增 0.60 驾驶分，置信区间跨零。"
+    note_en: "Adds complementary event routing to a residual BEV world model using a history-occlusion teacher, updating future scenes and trajectory readout. Under the nuScenes UniAD protocol, average L2 falls from ResWorld's 0.65 to 0.55 m. The three-seed Bench2Drive gain over uniform routing is only 0.60 driving-score points, with a confidence interval crossing zero."
+
+  - title: "Write, Evolve, Read: Streaming Cameras into a Persistent World State for 4D Occupancy Forecasting"
+    short: "PersistWorld"
+    org: "吉林大学 / 上海交通大学 / 华中科技大学 / 中国科学院自动化研究所"
+    org_en: "Jilin University / Shanghai Jiao Tong University / Huazhong University of Science and Technology / Institute of Automation, Chinese Academy of Sciences"
+    year: 2026
+    venue: "arXiv"
+    category: "driving"
+    links:
+      arxiv: "2611.30573"
+      project: "https://wangzian828.github.io/PersistWorld/"
+      code: "https://github.com/wangzian828/PersistWorld"
+    features: {action: true, realtime: true, longhorizon: true}
+    tags: ["4D占用预测", "持久世界状态", "流式记忆", "轨迹条件"]
+    note: "将多相机观测写入固定三维状态，并按自车轨迹演化；Occ3D-nuScenes 的 1–8 秒平均 mIoU 为 23.86，SparseWorld-TC 为 19.65。单 A800、256×704 输入下当前及1/2/3秒占用输出为 23.15 FPS；主评测用真值未来姿态，改用规划轨迹仍领先，但无反馈控制验证。"
+    note_en: "Writes multi-camera observations into a fixed 3D state and evolves it under ego trajectories. On Occ3D-nuScenes, mean 1–8-second mIoU is 23.86 versus 19.65 for SparseWorld-TC. Current and 1/2/3-second occupancy outputs run at 23.15 FPS on one A800 with 256-by-704 inputs. Main evaluation uses ground-truth future poses; the lead persists with planned trajectories, but feedback control is untested."
+
+  - title: "Knowing What You Carry: Scalable Physics-Anchored World Models for Robotic Planning with Liquid Payloads"
+    org: "罗切斯特理工学院 / 香港城市大学"
+    org_en: "Rochester Institute of Technology / City University of Hong Kong"
+    year: 2026
+    venue: "arXiv"
+    category: "driving"
+    links:
+      arxiv: "2611.28387"
+    features: {action: true}
+    tags: ["液体载荷", "隐状态估计", "物理残差模型", "候选轨迹安全"]
+    note: "结合液体模态先验、载车历史估计和学习残差预测候选轨迹的载荷响应；标准液罐 60 组单次选轨中，可避免的不安全选择为 0，低阶晃动模型为 14。证据限一辆车的仿真，产生成绩的实现每次决策耗时 404 毫秒。"
+    note_en: "Combines a modal-liquid prior, carrier-history estimation, and learned residuals to predict candidate-plan load responses. Across 60 standard-tank single-selection groups, avoidable unsafe choices fall from 14 for a low-order slosh model to 0. Evidence is limited to one simulated vehicle; the scored implementation takes 404 ms per decision."
+
+  - title: "JEPA-Shield: Safe Diffusion Planning with Latent World Models via Conformal Shielding"
+    short: "JEPA-Shield"
+    org: "密歇根大学 / 伊利诺伊大学厄巴纳香槟分校 / 丰田北美研发"
+    org_en: "University of Michigan / University of Illinois Urbana-Champaign / Toyota Motor North America, Research & Development"
+    year: 2026
+    venue: "arXiv"
+    category: "driving"
+    links:
+      arxiv: "2611.29609"
+      project: "https://www.taekyung.me/jepa-shield"
+    features: {action: true, closedloop: true}
+    tags: ["冻结世界模型", "保形校准", "安全屏蔽", "视觉泊车"]
+    note: "复用冻结 Le-WM，把潜空间预测读成物理运动，以保形不确定性管和备份策略约束候选计划；96 个牵引挂车仿真回合中成功率为 82.3%，去掉屏蔽为 60.4%，未观测到约束违规。理论仅覆盖假设下的计划块边界，不保证连续时间安全。"
+    note_en: "Reuses frozen Le-WM, reads physical motion from latent predictions, and constrains candidate plans with conformal uncertainty tubes and backups. Across 96 simulated tractor-trailer episodes, success is 82.3% versus 60.4% without shielding, with no observed violations. The theorem covers plan-block boundaries under assumptions, not continuous-time safety."

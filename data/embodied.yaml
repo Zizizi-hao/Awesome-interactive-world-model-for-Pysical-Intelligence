@@ -3856,3 +3856,217 @@ papers:
     tags: [4D世界模型, 几何运动表征, 逆动力学, 机器人操作]
     note: 从单幅图像和文本预测 RGB、点图与场景流，再由 FlowInverse 转为闭环机器人动作；五项 RoboTwin 任务中，加入无动作标签的随机化视频后，Hard 平均成功率从 15.2% 升至 26.4%，Easy 则从 46.6% 降至 37.2%。
     note_en: 'Predicts RGB, point maps, and scene flow from one image and text, then uses FlowInverse for closed-loop robot actions; adding randomized videos without action labels raises mean Hard success across five RoboTwin tasks from 15.2% to 26.4%, while Easy success falls from 46.6% to 37.2%.'
+
+  - title: "Can Multimodal Fusion MakeSense for Embodied Vision in Degraded Sensing?"
+    short: "MakeSense"
+    org: "National Cheng Kung University / National Taiwan University / MoonShine Animation Studio / RIKEN Center for Computational Science / The University of Osaka / National Yang Ming Chiao Tung University"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.30836"
+    features: {action: true}
+    tags: ["多模态融合", "传感退化", "潜状态预测", "动作条件"]
+    note: "冻结抗传感退化的融合表征，以动作命令条件训练 JEPA 和 RSSM 预测未来状态；Humanoid-Everyday 一秒预测中，JEPA 的标准化状态 MSE 为 0.40，去除命令后为 0.55。各数据集分别训练，世界模型仅作离线评估，未验证反馈控制。"
+    note_en: "Freezes degradation-aware fused representations and trains command-conditioned JEPA and RSSM predictors. For one-second forecasting on Humanoid-Everyday, JEPA's standardized-state MSE is 0.40 versus 0.55 without commands. Models are trained separately per dataset; world-model evaluation is offline, without feedback-control validation."
+
+  - title: "Detecting Is Not Choosing: What a World Model Needs to Keep a VLA Policy Safe"
+    org: "独立研究者"
+    org_en: "Independent Researcher"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.29553"
+    features: {}
+    tags: ["世界模型评测", "候选动作排序", "安全过滤", "状态误差"]
+    note: "比较精确仿真器和学习模型的候选安全排序，区分跨状态危险检测与同状态选动作；五类候选感知 critic 的 pooled AUROC 为 0.778–0.864，同决策内仅 0.551–0.560。安全收益主要依赖精确状态和回退动作，学习模型结论限单策略数据。"
+    note_en: "Compares candidate safety ranking with exact simulation and learned models, separating pooled danger detection from choosing actions at one state. Five candidate-aware critics reach pooled AUROC of 0.778–0.864 but only 0.551–0.560 within decisions. Safety gains rely heavily on exact state and fallback motions; learned-model findings concern data from one policy."
+
+  - title: "Dynamics Forcing: Mitigating Error Accumulation in Causal Video World Models"
+    short: "Dynamics Forcing"
+    org: "Astronex Robotics / 南京信息工程大学"
+    org_en: "Astronex Robotics / Nanjing University of Information Science and Technology"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.29839"
+    features: {longhorizon: true}
+    tags: ["因果视频预测", "历史扰动", "误差累积", "机器人视频"]
+    note: "用历史加噪、自重采样与联合去噪训练因果视频模型，并把历史和首帧引导移入训练；16段留出视频的12秒滚动中，末段patch相似度从teacher forcing的0.537升至0.595。预测仅由首帧和文本条件化，未验证外部动作控制或策略收益。"
+    note_en: "Trains a causal video model with history noising, self-resampling, joint denoising, and training-time history and first-frame guidance. Over 12-second rollouts on 16 held-out clips, final-segment patch similarity rises from 0.537 with teacher forcing to 0.595. Prediction uses a first frame and text, without evaluated external-action control or policy gains."
+
+  - title: "VeriTouch: Verified Visuo-Tactile World Models that Improve Robot Policy Learning"
+    short: "VeriTouch"
+    org: "浙江大学 / 香港城市大学 / 南洋理工大学 / 慕尼黑工业大学 / 浙大城市学院 / 南京大学 / 中国科学院大学杭州高等研究院"
+    org_en: "Zhejiang University / City University of Hong Kong / Nanyang Technological University / Technical University of Munich / Zhejiang University City College / Nanjing University / Hangzhou Institute for Advanced Study, UCAS"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.30572"
+      project: "https://zjuscl.github.io/veritouch/"
+    features: {closedloop: true}
+    tags: ["视触觉世界模型", "合成示范", "多模态验证", "逆动力学"]
+    note: "从初始图像和文本联合生成双视角视频与触觉形变，验证后用逆动力学标动作；五项真机任务、四策略的平均完成分从19.4%升至33.8%，每任务30次且擦白板计部分分。生成器无动作输入，闭环证据来自增强后策略执行。"
+    note_en: "Jointly generates dual-view video and tactile deformation from initial images and text, verifies trajectories, and labels actions with inverse dynamics. Mean task score across five hardware tasks and four policies rises from 19.4% to 33.8%, with 30 trials per task and partial credit for whiteboard erasing. The generator takes no actions; feedback execution is demonstrated by the augmented policies."
+
+  - title: "WorldWeave: Rethinking Embodied Navigation through Cross-Task World Modeling"
+    short: "WorldWeave"
+    org: "中国科学院自动化研究所 / 中国科学院大学 / HiThink Research / 鹏城实验室"
+    org_en: "Institute of Automation, Chinese Academy of Sciences / University of Chinese Academy of Sciences / HiThink Research / Peng Cheng Laboratory"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.28553"
+    features: {closedloop: true}
+    tags: ["跨任务动力学", "潜动作", "视觉语言导航", "目标跟踪"]
+    note: "用相邻观测学习共享隐动作和前向状态转移，再从已有历史预测隐动作，服务导航和目标跟踪；R2R-CE未见场景成功率从匹配基线46.9%升至54.2%。已做TITA反馈部署，但不接受外给物理动作，歧义目标跟踪的碰撞率仍会上升。"
+    note_en: "Learns shared latent transitions from consecutive observations, then predicts latent actions from available history for navigation and target tracking. R2R-CE unseen-scene success rises from a matched baseline's 46.9% to 54.2%. TITA feedback deployment is demonstrated, but predictions do not take external physical actions and collision rate increases with ambiguous tracking targets."
+
+  - title: "RecallWorld: Episodic Memory for Persistent Embodied Video World Models"
+    short: "RecallWorld"
+    org: "Amazon / 加州大学河滨分校 / 牛津大学 / 马里兰大学帕克分校 / 圣路易斯华盛顿大学 / 佐治亚理工学院 / 伊利诺伊大学厄巴纳香槟分校"
+    org_en: "Amazon / University of California, Riverside / University of Oxford / University of Maryland, College Park / Washington University in St. Louis / Georgia Institute of Technology / University of Illinois Urbana-Champaign"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.28666"
+      project: "https://recallworld.github.io/"
+    features: {action: true, longhorizon: true}
+    tags: ["导航视频生成", "相机运动条件", "空间记忆", "场景重访"]
+    note: "将生成片段联合重建为独立Scenelet，检索并处理可见性以条件化后续相机运动视频；四数据集32秒重访中，完整循环PSNR为19.34，最强对照Spatia为15.46，并评测64秒循环。控制限相机轨迹，静态记忆尚不建模移动物体，也无策略执行验证。"
+    note_en: "Jointly reconstructs generated segments into independent Scenelets and retrieves visibility-resolved memory for camera-conditioned video generation. Across four datasets' 32-second revisits, full-cycle PSNR is 19.34 versus 15.46 for Spatia, with additional 64-second cycle evaluation. Control concerns camera trajectories; static memory does not model moving objects and policy execution is untested."
+
+  - title: "ClothCast: Generative Cloth World Modeling under Partial Observability"
+    short: "ClothCast"
+    org: "明尼苏达大学"
+    org_en: "University of Minnesota"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.29369"
+    features: {action: true}
+    tags: ["布料动力学", "部分可观测", "三维点流", "混合运动先验"]
+    note: "用夹爪刚性运动先验加学习残差预测分层布料点流；50 回合同后处理消融中，几何 Chamfer 误差从仅先验的 21.2 mm 降到 14.5 mm。释放后改用手工沉降，尚未验证反馈控制。"
+    note_en: "Predicts layered cloth point flow with a gripper-driven rigid prior and a learned residual. On 50 episodes with identical post-processing, geometric Chamfer error falls from 21.2 mm for the prior alone to 14.5 mm; motion after release uses hand-designed settling, and feedback control is untested."
+
+  - title: "World Models as Native Latent Action Models"
+    short: "Native LAM / PAWlicy"
+    org: "商汤研究院（新加坡） / 南洋理工大学 S-Lab / ACE Robotics"
+    org_en: "SenseTime Research, Singapore / S-Lab, Nanyang Technological University / ACE Robotics"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.30898"
+      project: "https://pawteam-eai.github.io/native-lam/"
+    features: {action: true, closedloop: true}
+    tags: ["世界模型复用", "潜动作", "视频预训练", "策略迁移"]
+    note: "复用 Kairos 3.1，以共享 DiT 的逆、正动力学模式提取可重放潜动作，再监督 PAWlicy 预训练；RoboTwin 2.0 仅干净示范训练时，平均成功率为 74.02%，匹配过去帧及增强的 π0.5 对照为 68.54%。跨本体重放仍是保持初始几何的定性验证。"
+    note_en: "Reuses Kairos 3.1 in shared-DiT inverse and forward dynamics modes to extract replayable latent actions for PAWlicy pretraining. With clean-only RoboTwin 2.0 training, mean success is 74.02% versus 68.54% for pi0.5 with matched past frames and augmentation; cross-embodiment replay is qualitative and preserves initial geometry."
+
+  - title: "Seeing Together, Acting Apart: Shared Environmental Understanding for Multi-Robot Navigation"
+    short: "SEER"
+    org: "中国科学技术大学 / LeapWing AI / MBZUAI / 上海人工智能实验室 / 斯坦福大学"
+    org_en: "University of Science and Technology of China / LeapWing AI / Mohamed bin Zayed University of Artificial Intelligence / Shanghai AI Laboratory / Stanford University"
+    year: 2026
+    venue: "NeurIPS"
+    category: "embodied"
+    links:
+      arxiv: "2611.30310"
+    features: {action: true, closedloop: true}
+    tags: ["多机器人导航", "共享记忆", "动作条件潜动态", "预测表征"]
+    note: "共享多机器人观测池，检索时空相关上下文并预测候选导航动作的未来潜状态，再给独立策略提供条件 token；Qwen3.5-4B 在 R2R-CE val-unseen 的 SR 从 40.3% 提高到 44.9%。多机器人实验由配对轨迹构造，未覆盖更强的学习式通信对照。"
+    note_en: "Retrieves spatiotemporal context from a shared multi-robot observation pool, predicts future latents for candidate navigation actions, and supplies them as conditioning tokens to independent policies. Qwen3.5-4B improves R2R-CE val-unseen SR from 40.3% to 44.9%; multi-robot tests use paired trajectories and do not cover stronger learned-communication baselines."
+
+  - title: "DexLatentWorld: 3D Cross-Embodiment Latent Action World Models for Zero-Shot Robotic Manipulation"
+    short: "DexLatentWorld"
+    org: "帝国理工学院"
+    org_en: "Imperial College London"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.30907"
+      project: "https://vinaymohan0409.github.io/DexLatentWorld/"
+      code: "https://github.com/VinayMohan0409/DexLatentWorld"
+    features: {action: true, closedloop: true}
+    tags: ["三维潜动作", "跨本体动态", "粒子预测", "几何控制"]
+    note: "从三维观察学习潜动作与粒子动态，用 CEM 搜索后拟合几何运动执行；同模型同预算、每任务 20 次的消融中，抓取为 90%，原生动作搜索为 85%；放置为 60%，学习解码为 80%。灵巧手仿真结果使用任务无关 LoRA 适配。"
+    note_en: "Learns latent actions and particle dynamics from 3D observations, then searches with CEM and executes fitted geometric motion. With the same model and budget over 20 trials per task, grasp success is 90% versus 85% for native-action search, while place success is 60% versus 80% with a learned decoder; dexterous simulation results use task-agnostic LoRA adaptation."
+
+  - title: "Scalable Beckmann Maps Improve One-step Generation"
+    short: "SBM"
+    org: "哈佛大学 / 帝国理工学院 / 纽约大学 / Capital Fund Management"
+    org_en: "Harvard University / Imperial College London / New York University / Capital Fund Management"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.28286"
+      project: "https://tullebulle.github.io/projects/sbm/"
+      code: "https://github.com/shiyiwang958/Scalable-Beckmann-Maps"
+    features: {action: true, realtime: true}
+    tags: ["单步生成", "动作条件视频", "Beckmann映射", "高效世界模型"]
+    note: "将单步 Beckmann 映射用于机器人动作条件未来帧预测，Bridge-V2 LPIPS 为 0.060，DriftWorld 公开对照为 0.091；单 H200、batch 1、256×256 的映射加解码为 20.8 ms/帧，不含历史编码。定量协议每八帧重置真值，未验证闭环控制。"
+    note_en: "Applies one-step Beckmann maps to action-conditioned robot future-frame prediction, with Bridge-V2 LPIPS 0.060 versus DriftWorld reported at 0.091. Map plus decoding takes 20.8 ms/frame on one H200 at batch 1 and 256x256, excluding history encoding; quantitative evaluation resets to ground truth every eight frames, and closed-loop control is untested."
+
+  - title: "PhysPPF: Learning Robotic Manipulation with Past, Present, and Future Physical Representations"
+    short: "PhysPPF"
+    org: "西北工业大学 / 阿里云 / 小米 / 浙江大学"
+    org_en: "Northwestern Polytechnical University / Alibaba Cloud Computing / Xiaomi Inc / Zhejiang University"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.28551"
+    features: {closedloop: true}
+    tags: ["物理表征", "未来状态监督", "历史记忆", "视觉语言动作"]
+    note: "用训练期三维教师监督紧凑物理 token，预测当前和未来状态，再将过去记忆与当前、未来表征注入动作专家；CALVIN 五任务链成功率从 StarVLA 的 58.1% 升至 87.4%。未来预测不以外给动作为条件，证据限仿真。"
+    note_en: "Uses training-only 3D teachers to supervise compact physical tokens, predicts present and future states, and injects past memory plus present and future representations into an action expert. CALVIN five-task-chain success rises from StarVLA's 58.1% to 87.4%. Future prediction is not conditioned on external actions; evidence is simulation-only."
+
+  - title: "AERIN: Aerial Instance Navigation with a Visual World Model"
+    short: "AERIN"
+    org: "Shenzhen Lingtian Zhixing Technology Co., Ltd. / Beijing University of Technology / Fudan University"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.28723"
+    features: {action: true, closedloop: true}
+    tags: ["无人机导航", "目标条件潜状态", "动作条件预测", "观测质量"]
+    note: "把目标局部和场景上下文压成五个槽位，按候选飞行动作预测状态并据观测收益重规划；同一 50 个 UAV 仿真回合中，高质量完成率为 72%，Dense-JEPA 为 40%。地图与资产可跨划分共享，尚无真机验证。"
+    note_en: "Compresses target regions and scene context into five slots, predicts states under candidate flight actions, and replans using observation gains. On the same 50 simulated UAV episodes, high-quality completion reaches 72% versus 40% for Dense-JEPA. Maps and assets may overlap across splits; hardware transfer is untested."
+
+  - title: "Planning in 8 Tokens: A Compact Discrete Tokenizer for Latent World Model"
+    short: "CompACT"
+    org: "KAIST / POSTECH / RLWRLD"
+    year: 2026
+    venue: "CVPR"
+    category: "embodied"
+    links:
+      arxiv: "2603.05438"
+      project: "https://kdwonn.github.io/CompACT/"
+      code: "https://github.com/kdwonn/CompACT"
+    features: {action: true, closedloop: true}
+    tags: ["离散压缩表征", "动作条件世界模型", "潜空间规划", "计算效率"]
+    note: "用冻结视觉特征和生成式解码把每帧压到 8 个离散 token，并在该空间训练动作条件世界模型；RTX 6000 ADA 上，RECON 单次轨迹优化由 SD-VAE 的 178.78 秒降至 4.83 秒，ATE 从 1.262 变为 1.373。闭环操作仅有初步单任务验证，尚非实时规划。"
+    note_en: "Compresses each frame into 8 discrete tokens using frozen visual features and generative decoding, then trains action-conditioned latent dynamics. On an RTX 6000 ADA, RECON trajectory optimization falls from SD-VAE's 178.78 s to 4.83 s while ATE changes from 1.262 to 1.373. Closed-loop manipulation has only preliminary single-task evidence; planning is not real-time."
+
+  - title: "How Latent Transition Geometry Matters for Planning in World Models"
+    org: "萨里大学 / 约克大学"
+    org_en: "University of Surrey / University of York"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.30064"
+    features: {action: true, closedloop: true}
+    tags: ["潜转移几何", "曲率正则", "动作敏感性", "规划机制分析"]
+    note: "固定结构和规划器，用曲率正则及冻结模型的非仿射动作响应干预分析规划；三训练种子的 LeWM 在 Reacher 上由 82.3% 升至 88.0%，但强正则使 PushT 从 94.7% 降至 20.7%。结论限四项仿真控制任务与局部响应分析。"
+    note_en: "Holds architecture and planner fixed while studying curvature regularization and interventions on frozen non-affine action responses. Across three LeWM training seeds, Reacher success rises from 82.3% to 88.0%, while strong regularization lowers PushT from 94.7% to 20.7%. Findings are limited to four simulated control tasks and local-response analysis."

@@ -1346,3 +1346,32 @@ papers:
     tags: [力条件生成, 物理一致性, 强化学习, 视频世界模型]
     note: 用不泄露未来轨迹的力编码、局部响应归因和 V-JEPA 奖励强化学习预测受力演化；357 个分布外案例上，方向余弦相似度从 ForcePrompting 的 0.575 升至 0.782。生成仍为二维潜空间的离线推演，未验证在线控制。
     note_en: 'Combines force encoding without future-trajectory leakage, localized response attribution, and V-JEPA-rewarded reinforcement learning. Directional cosine similarity on 357 out-of-distribution cases rises from ForcePrompting''s 0.575 to 0.782. Generation remains offline in a 2D latent space, without evaluated online control.'
+
+  - title: "AxE: Benchmarking Agent-Environment Generalization of Video World Models via Grounded Events"
+    short: "AxE"
+    org: "北京大学 / Physis / 北京智源人工智能研究院"
+    org_en: "Peking University / Physis / Beijing Academy of Artificial Intelligence"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.30120"
+      project: "https://axebench.github.io/"
+      code: "https://github.com/AxEBench/WM-PerceptHarness"
+    features: {}
+    tags: ["世界模型评测", "条件泛化", "事件对齐", "物理交互"]
+    note: "按八类智能体与环境条件成对评测 20 个视频世界模型，用 VLM 与分割证据比较交互事件；578 对事件的裁判人评一致率为 87%，九模型排序与人评的 Spearman 相关为 0.90。动力学变化仅 10 对，不代表全面动力学泛化验证。"
+    note_en: "Evaluates 20 video world models with paired changes across eight agent and environment factors, using VLM reasoning and segmentation evidence to compare interaction events. The judge agrees with humans on 87% of 578 event pairs, and nine-model rankings have Spearman correlation 0.90 with human rankings. Only 10 pairs vary dynamics, limiting generalization claims."
+
+  - title: "Toward Adversarially Robust World Models"
+    org: "美国东北大学 / 马克斯·普朗克软件系统研究所"
+    org_en: "Northeastern University / Max Planck Institute for Software Systems"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.28345"
+    features: {action: true, closedloop: true}
+    tags: ["世界模型鲁棒性", "观测对抗攻击", "编码器后训练", "鲁棒性代价"]
+    note: "对四类世界模型测试状态幻觉与动力学偏移，并用 FARE 后训练编码器；ε=16/255 时，r2Dreamer reacher 的模型内策略评价误排序率从 90% 降至 15%，但 cartpole 的无攻击仿真控制回报从 863.5 降至 650.7。鲁棒收益伴随任务相关代价。"
+    note_en: "Tests state-hallucination and dynamic-shift attacks on four world-model families and post-trains encoders with FARE. At epsilon=16/255, r2Dreamer reacher policy-misranking attacks in model-based evaluation fall from 90% to 15%, but clean cartpole simulation return drops from 863.5 to 650.7; robustness gains have task-dependent costs."
