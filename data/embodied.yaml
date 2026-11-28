@@ -4070,3 +4070,86 @@ papers:
     tags: ["潜转移几何", "曲率正则", "动作敏感性", "规划机制分析"]
     note: "固定结构和规划器，用曲率正则及冻结模型的非仿射动作响应干预分析规划；三训练种子的 LeWM 在 Reacher 上由 82.3% 升至 88.0%，但强正则使 PushT 从 94.7% 降至 20.7%。结论限四项仿真控制任务与局部响应分析。"
     note_en: "Holds architecture and planner fixed while studying curvature regularization and interventions on frozen non-affine action responses. Across three LeWM training seeds, Reacher success rises from 82.3% to 88.0%, while strong regularization lowers PushT from 94.7% to 20.7%. Findings are limited to four simulated control tasks and local-response analysis."
+
+  - title: "DexWAC: A Unified World-Actor-Critic Model for Dexterous Robot Manipulation"
+    short: "DexWAC"
+    org: "加州大学圣迭戈分校 / EPFL / Galbot / 北京大学 / 清华大学 / 上海期智研究院"
+    org_en: "University of California, San Diego / EPFL / Galbot / Peking University / Tsinghua University / Shanghai Qi Zhi Institute"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.32654"
+    features: {action: true, closedloop: true}
+    tags: ["统一世界动作模型", "动作块末端预测", "价值学习", "想象强化学习"]
+    note: "将动作条件块末端预测与 actor、TD critic 联合预训练，再用短想象 PPO 改进策略；三种子 DexJoCo 八任务平均成功率由 65.50% 升至 67.75%。真机只验证预训练策略，未验证想象优化，且尚未测试大规模机器人预训练。"
+    note_en: "Jointly pretrains action-conditioned chunk-endpoint prediction with an actor and TD critic, then improves the policy with short imagined PPO rollouts. Mean success over eight DexJoCo tasks and three seeds rises from 65.50% to 67.75%. Real robots test only the pretrained policy; imagined improvement is untested on hardware, and large-scale robot pretraining remains untested."
+
+  - title: "Motion Conditioned World Modeling for Embodied Visual Tracking"
+    short: "Motion-Conditioned World Modeling"
+    org: "中国科学院自动化研究所 / 中国科学院大学 / 鹏城实验室"
+    org_en: "Institute of Automation, Chinese Academy of Sciences / University of Chinese Academy of Sciences / Peng Cheng Laboratory"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.32900"
+    features: {action: true, closedloop: true}
+    tags: ["具身视觉跟踪", "概率运动预测", "动作条件潜动态", "预测表征"]
+    note: "以路径–进度联合分布及动作引起的坐标变换条件化下一步语义状态预测；EVT-Bench STT 成功率为 87.9%，仅世界模型消融为 81.6%。未来特征预测用于辅助训练，DT/AT 碰撞率仍高于同规模 BWM，真机仅有定性跟踪。"
+    note_en: "Conditions next-step semantic-state prediction on a joint path–progress distribution and action-induced coordinate transforms. EVT-Bench STT success is 87.9% versus 81.6% for the world-model-only ablation. Future-feature prediction provides auxiliary training; DT/AT collision rates remain above similarly sized BWM, and real-robot tracking is qualitative."
+
+  - title: "RoboProbe: Benchmarking Physical Plausibility of Robot World Models"
+    short: "RoboProbe"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.32152"
+    features: {}
+    tags: ["世界模型评测", "物理合理性", "几何证据", "机器人视频"]
+    note: "融合分割、跟踪、三维几何与定向 VLM 推理，检查五类机器人视频物理违规并审查证据；RP-Bench 五项平均 AUROC 为 0.894，只看采样帧的 Gemini 为 0.828。违规率阈值取自评测集，对真实示范仍有约 8–18% 误报。"
+    note_en: "Combines segmentation, tracking, 3D geometry and targeted VLM reasoning to check five physical violations in robot videos and audit the evidence. Mean AUROC across five RP-Bench metrics is 0.894 versus 0.828 for frames-only Gemini. Violation-rate thresholds are selected on the evaluation set, and real demonstrations still incur about 8–18% false alarms."
+
+  - title: "CriticJEPA: World Models Are Better Critics Than Optimizers"
+    short: "CriticJEPA"
+    org: "清华大学 / 中关村学院 / Manifold AI"
+    org_en: "Tsinghua University / Zhongguancun Academy / Manifold AI"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.32357"
+      project: "https://daybraeklaxry.github.io/criticjepa/"
+    features: {action: true, closedloop: true}
+    tags: ["冻结世界模型", "候选规划", "流匹配提议", "锚定优化"]
+    note: "冻结 H-JEPA，训练目标条件流提议，再逐层预测选优并短程锚定修正；三个独立模型上的 AntMaze 成功率为 89.1%，H-JEPA 为 67.6%。提议网络训练不计入报告的规划成本，证据限仿真。"
+    note_en: "Keeps H-JEPA frozen, trains goal-conditioned flow proposals, and selects candidates with hierarchical rollouts and short anchored refinement. AntMaze success across three independently trained world models is 89.1% versus 67.6% for H-JEPA; proposal-network training is excluded from reported planning cost, and evaluation is simulation-only."
+
+  - title: "Co-DRIS: Physics-Informed Predictive Belief and Variable-Impedance Learning for Reactive Catching under Coupled Uncertainty"
+    short: "Co-DRIS"
+    org: "哈尔滨工业大学"
+    org_en: "Harbin Institute of Technology"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.31843"
+    features: {action: true, closedloop: true}
+    tags: ["混合动态模型", "缺帧预测", "递归信念", "可变阻抗"]
+    note: "用弹道先验与动作条件接触残差修补缺帧，并联合训练 GRU 信念和可变阻抗控制；三种子仿真中，50% 丢帧成功率为 55.4%，未加 SuperMimic 的 Co-DRIS 为 47.2%。未用纯弹道对照隔离学习残差收益，且无真机验证。"
+    note_en: "Repairs dropped observations with a ballistic prior and an action-conditioned contact residual while jointly training GRU belief and variable-impedance control. In three-seed simulation, success under 50% dropout is 55.4% versus 47.2% for Co-DRIS without SuperMimic; no ballistic-only control isolates the learned residual contribution, and hardware validation is absent."
+
+  - title: "DiffGR00T: Execution-Aware Differentiable Training for Humanoid Whole-Body Vision-Language-Action Models"
+    short: "DiffGR00T"
+    org: "上海交通大学"
+    org_en: "Shanghai Jiao Tong University"
+    year: 2026
+    venue: "arXiv"
+    category: "embodied"
+    links:
+      arxiv: "2611.32665"
+    features: {action: true, closedloop: true}
+    tags: ["动作条件身体动态", "可微策略训练", "人形全身控制", "执行监督"]
+    note: "学习动作条件全身执行模型，令执行梯度穿过冻结 SONIC 优化 GR00T 动作头；四个仿真任务每任务 60 次，平均成功率从 59.2% 升至 71.7%。世界模型不显式建模物体或接触，实机仅有真机数据适配后的定性反馈执行。"
+    note_en: "Learns action-conditioned whole-body execution dynamics so execution gradients pass through frozen SONIC into the GR00T action head. Across four simulated tasks with 60 episodes per task, mean success rises from 59.2% to 71.7%; the world model does not explicitly represent objects or contacts, and real-robot feedback execution is qualitative after adaptation with real data."

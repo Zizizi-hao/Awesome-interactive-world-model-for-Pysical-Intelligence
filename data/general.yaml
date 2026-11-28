@@ -1375,3 +1375,63 @@ papers:
     tags: ["世界模型鲁棒性", "观测对抗攻击", "编码器后训练", "鲁棒性代价"]
     note: "对四类世界模型测试状态幻觉与动力学偏移，并用 FARE 后训练编码器；ε=16/255 时，r2Dreamer reacher 的模型内策略评价误排序率从 90% 降至 15%，但 cartpole 的无攻击仿真控制回报从 863.5 降至 650.7。鲁棒收益伴随任务相关代价。"
     note_en: "Tests state-hallucination and dynamic-shift attacks on four world-model families and post-trains encoders with FARE. At epsilon=16/255, r2Dreamer reacher policy-misranking attacks in model-based evaluation fall from 90% to 15%, but clean cartpole simulation return drops from 863.5 to 650.7; robustness gains have task-dependent costs."
+
+  - title: "OmniPersist: Persistent Dynamic World Modeling via Coupled Panoramic Evolution"
+    short: "OmniPersist"
+    org: "新加坡管理大学 / 哈尔滨工业大学 / 福州大学"
+    org_en: "Singapore Management University / Harbin Institute of Technology / Fuzhou University"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.32473"
+      project: "https://omnipersist.github.io/"
+    features: {action: true}
+    tags: ["相机条件视频", "全景动态", "视野外物体", "重访一致性"]
+    note: "用共享视频 DiT 联合预测透视画面与低频全景，通过几何锚定和时序补偿保持视野外动态；300 段留出视频的图生视频评测中，UCPE 重入身份相似度从 0.2097 升至 0.3694。控制限相机，评测约五秒且未验证反馈策略。"
+    note_en: "Jointly predicts perspective video and sparse panoramas with a shared video DiT, geometric anchoring, and temporal compensation for out-of-view dynamics. On 300 held-out clips, UCPE image-to-video re-entry identity similarity rises from 0.2097 to 0.3694. Control concerns the camera; evaluation spans about five seconds without feedback-policy validation."
+
+  - title: "ReJEPA: Bounded Predictive Regulation for Latent World Models"
+    short: "ReJEPA"
+    org: "得克萨斯农工大学 / 伍斯特理工学院 / 日本东北大学 / 密歇根大学 / Bosch Research North America / Bosch Center for AI"
+    org_en: "Texas A&M University / Worcester Polytechnic Institute / Tohoku University / University of Michigan / Bosch Research North America / Bosch Center for AI"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.31910"
+    features: {action: true, closedloop: true}
+    tags: ["潜预测损失", "有界梯度", "表征正则", "世界模型训练"]
+    note: "用 log-cosh 替代潜预测损失，在大误差处限制梯度并保留近零平滑性；三训练种子、每种子 50 回合的 LeWM Cube MPC 成功率从 L2 的 82.67% 升至 88.67%。反馈控制证据限仿真，NAVSIM 结果不代表反应式闭环驾驶。"
+    note_en: "Replaces latent prediction loss with log-cosh, bounding large-error gradients while retaining near-zero smoothness. Across three training seeds and 50 episodes per seed, LeWM Cube MPC success rises from 82.67% with L2 to 88.67%. Feedback-control evidence is simulation-only; NAVSIM results do not establish reactive closed-loop driving."
+
+  - title: "SceneMemBench: A Benchmark for Scene Memory in Interactive Video World Models"
+    short: "SceneMemBench"
+    org: "浙江大学 / 哈尔滨工业大学（深圳） / 理想汽车 / 中国海洋大学"
+    org_en: "Zhejiang University / Harbin Institute of Technology, Shenzhen / Li Auto Inc. / Ocean University of China"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.31803"
+      project: "https://yuheng-si.github.io/SceneMemBench/"
+      code: "https://github.com/Yuheng-Si/SceneMemBench"
+    features: {}
+    tags: ["世界模型评测", "场景记忆", "新视角恢复", "受控续写"]
+    note: "以共同真值历史后的短续写和完整交互滚动，区分已见视角记忆与新视角恢复；全滚动外观裁判与人评的一致率为 77.1%，新视角子集为 70.0%。受控主数据是静态 UE 场景，不评物体动力学。"
+    note_en: "Separates seen-view recall from novel-view recovery using short continuations from shared ground-truth histories and full interaction rollouts. Appearance-judge agreement with human preferences is 77.1% overall and 70.0% on novel views. The main controlled data use static UE scenes and do not evaluate object dynamics."
+
+  - title: "DraftKV: Protecting Persistent Worlds through Hierarchical Streaming Retrieval"
+    short: "DraftKV"
+    org: "浙江大学 / 香港科技大学（广州） / 杜克大学 / 南京大学 / NVIDIA Research"
+    org_en: "Zhejiang University / The Hong Kong University of Science and Technology (Guangzhou) / Duke University / Nanjing University / NVIDIA Research"
+    year: 2026
+    venue: "arXiv"
+    category: "general"
+    links:
+      arxiv: "2611.31944"
+      code: "https://github.com/aim-uofa/DraftKV"
+    features: {action: true, longhorizon: true}
+    tags: ["世界模型复用", "分层KV检索", "流式注意力", "重访一致性"]
+    note: "在已有相机条件视频世界模型上做几何粗筛、相关性细选及 CPU→GPU 流式 KV 读取；480 条 ORBIA 轨迹中，LingBot-14B 的持久性分从 57.72 升至 65.60。定量重访约 22 秒，120 秒实验仅测系统执行，未评反馈策略。"
+    note_en: "Adds geometric grounding, relevance refinement, and streamed CPU-to-GPU KV reads to existing camera-conditioned video world models. Across 480 ORBIA trajectories, LingBot-14B persistence rises from 57.72 to 65.60. Quantitative revisits last about 22 seconds; the 120-second experiment measures system execution, without feedback-policy evaluation."
